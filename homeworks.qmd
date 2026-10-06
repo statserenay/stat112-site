@@ -1,0 +1,12 @@
+---
+title: "Homeworks"
+---
+
+Homework assignments will be posted here as the semester progresses, and
+also on [ODTUClass](https://odtuclass.metu.edu.tr/). Late homeworks are
+not accepted — see the **Syllabus** page for the full policy.
+
+| # | Topic | Assigned | Due |
+|:---:|---|---|---|
+| 1 | TBD | TBD | TBD |
+| 2 | TBD | TBD | TBD |

@@ -1,0 +1,107 @@
+---
+title: "Week 2: Data Types, Chart Selection & Color"
+---
+
+
+## Topics
+- Data description and data types
+- Proper visualization tools for specific data types (bar plot, box-plot, violin plot, histogram, scatter plot, etc.)
+- Color separation, value representation by color, and color palettes
+
+## Notes
+
+**1. Data types**
+
+Before picking a chart, identify what kind of variable you're plotting:
+
+| Type | Definition | Examples |
+|---|---|---|
+| Categorical (nominal) | Unordered categories | Country, gender, product type |
+| Categorical (ordinal) | Ordered categories, no fixed numeric distance | Education level, satisfaction rating |
+| Discrete numeric | Countable numeric values | Number of children, number of defects |
+| Continuous numeric | Measured on a continuum | Height, income, temperature |
+
+Healy opens by stressing that the choice of graph is a claim about what
+*kind* of comparison you want the reader to make, which starts with correctly
+identifying the variable type. *Reference: Healy (2018), Ch. 1, "Look at Data."*
+
+**2. Matching chart type to data type**
+
+| Data relationship | Recommended chart(s) |
+|---|---|
+| One categorical variable — compare amounts across categories | Bar chart |
+| One continuous variable — see the distribution | Histogram, density plot |
+| One continuous variable across groups — compare distributions | Box plot, violin plot |
+| Two continuous variables — see the relationship | Scatter plot |
+| Change over time | Line chart |
+| Part-to-whole | Stacked bar (avoid pie charts for more than 2–3 slices) |
+
+Wilke organizes his entire middle section by exactly this logic —
+"Amounts" (bar charts), "Distributions" (histograms, density plots, box
+plots, violin plots), and "x–y relationships" (scatter plots) each get
+their own chapter, with guidance on when a box plot hides too much (e.g.,
+multimodal distributions) and a violin plot or strip plot is preferable.
+*Reference: Wilke (2019), Ch. 6 "Visualizing Amounts," Ch. 7 "Visualizing Distributions I," Ch. 8 "Visualizing Distributions II," Ch. 12 "Visualizing Associations."*
+
+Yau's *Visualize This* covers the same chart family from a more practical,
+build-it-yourself angle, with worked examples of when a box plot
+oversimplifies compared to a violin plot that shows the full density shape.
+*Reference: Yau (2011), Ch. 3, "Statistical Rules for Visualization" and Ch. 6, "Distributions."*
+
+**3. Color in visualization**
+
+Color can encode three fundamentally different kinds of information, and
+using the wrong palette type for the wrong data is one of the most common
+visualization mistakes:
+
+- **Sequential palettes** — for ordered, continuous data (e.g., low → high income). Uses a single hue that varies in lightness/saturation.
+- **Diverging palettes** — for data with a meaningful midpoint (e.g., temperature anomaly above/below zero). Uses two hues diverging from a neutral center.
+- **Qualitative (categorical) palettes** — for unordered categories (e.g., product type). Uses hues that are perceptually distinct but not ordered.
+
+Wilke devotes a full chapter to this distinction and to designing
+colorblind-safe palettes; Healy makes the same point with ggplot2's
+built-in `viridis` and ColorBrewer scales as concrete examples.
+*References: Wilke (2019), Ch. 4, "Color Scales"; Healy (2018), Ch. 8, "Refine Your Plots" (color section).*
+
+Knaflic adds a complementary, presentation-focused rule: use color
+*sparingly and with intention* — reserve a single saturated accent color
+for the one data point you want the audience to notice, and keep
+everything else in gray. *Reference: Knaflic (2015), Ch. 4, "Focus Your Audience's Attention."*
+
+## Practice Questions
+
+**Multiple Choice**
+1. You want to compare the distribution of exam scores across four sections of a course. Which chart is generally preferable to a box plot if you suspect the scores are bimodal in one section?
+   a) Pie chart  b) Violin plot  c) Bar chart  d) Scatter plot
+   *(Answer: b — a violin plot shows the full density shape, revealing bimodality that a box plot's five-number summary would hide; Wilke, Ch. 8.)*
+
+**True / False**
+2. A diverging color palette is the right choice for encoding an unordered categorical variable like "product type."
+   *(Answer: False — use a qualitative/categorical palette for unordered categories; diverging palettes are for data with a meaningful midpoint; Wilke, Ch. 4.)*
+
+**Matching**
+3. Match each data type to its most appropriate chart:
+   - (a) Relationship between two continuous variables
+   - (b) Distribution of one continuous variable
+   - (c) Comparing totals across categories
+   - (d) Change over time
+   1. Line chart  2. Bar chart  3. Scatter plot  4. Histogram
+   *(Answer: a–3, b–4, c–2, d–1.)*
+
+**Short Answer**
+4. Explain why a sequential color palette would be a poor choice for a map showing which of five unrelated product categories sold best in each region.
+
+**Applied / Discussion**
+5. Pick a dataset with one continuous and one categorical variable (e.g., exam scores by section). Sketch (on paper or in Tableau) both a box plot and a violin plot of the same data. Which reveals more information, and in what situation would you choose the simpler box plot anyway?
+
+## References for Weeks 1–2
+
+- Knaflic, C. N. (2015). *Storytelling with Data: A Data Visualization Guide for Business Professionals.* Wiley.
+- Tufte, E. R. (2001). *The Visual Display of Quantitative Information* (2nd ed.). Graphics Press.
+- Healy, K. (2018). *Data Visualization: A Practical Introduction.* Princeton University Press.
+- Wilke, C. O. (2019). *Fundamentals of Data Visualization.* O'Reilly Media. (Also free online: [clauswilke.com/dataviz](https://clauswilke.com/dataviz/))
+- Yau, N. (2011). *Visualize This: The FlowingData Guide to Design, Visualization, and Statistics.* Wiley.
+
+*Note: chapter numbers above are given for the editions listed in the course
+syllabus — double check against your own copy, since chapter numbering can
+shift slightly between print runs and the free online edition of Wilke.*

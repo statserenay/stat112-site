@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pie-thagoras' Data Panic</title>
+<meta name="description" content="A STAT 112 Recitation 1 arcade game: sort falling data before it hits the floor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: graph-paper notebook. Mascot column left, falling-data arena right, sorting bins under the arena. */
+:root {
+  --paper: #f2f5f8;
+  --grid: rgba(60, 105, 160, 0.13);
+  --grid-strong: rgba(60, 105, 160, 0.24);
+  --ink: #1b2742;
+  --muted: #56637c;
+  --card: #ffffff;
+  --line: #c9d3e1;
+  --hi: #ffd84d;
+  --hi-ink: #1b2742;
+  --pen: #d23f37;
+  --pen-bg: rgba(210, 63, 55, 0.10);
+  --ok: #1d8656;
+  --ok-bg: rgba(29, 134, 86, 0.12);
+  --accent: #2c56c9;
+  --s1: #2c56c9; --s2: #f4a73b; --s3: #e0574b; --s4: #36a074; --s5: #8a5fd1;
+  --shadow: 0 2px 0 rgba(27, 39, 66, 0.12), 0 8px 24px rgba(27, 39, 66, 0.08);
+  --f-display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f2240; --grid: rgba(150, 190, 255, 0.10); --grid-strong: rgba(150, 190, 255, 0.20);
+    --ink: #e7eefc; --muted: #9eb0d0; --card: #17305a; --line: #2e4d80;
+    --hi: #ffd84d; --hi-ink: #1b2742; --pen: #ff7d70; --pen-bg: rgba(255, 125, 112, 0.14);
+    --ok: #5ad69d; --ok-bg: rgba(90, 214, 157, 0.14); --accent: #8fb0ff;
+    --s1: #6f95ff; --s2: #f4b14f; --s3: #ff7568; --s4: #4cc28f; --s5: #a987ec;
+    --shadow: 0 2px 0 rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f2240; --grid: rgba(150, 190, 255, 0.10); --grid-strong: rgba(150, 190, 255, 0.20);
+  --ink: #e7eefc; --muted: #9eb0d0; --card: #17305a; --line: #2e4d80;
+  --hi: #ffd84d; --hi-ink: #1b2742; --pen: #ff7d70; --pen-bg: rgba(255, 125, 112, 0.14);
+  --ok: #5ad69d; --ok-bg: rgba(90, 214, 157, 0.14); --accent: #8fb0ff;
+  --s1: #6f95ff; --s2: #f4b14f; --s3: #ff7568; --s4: #4cc28f; --s5: #a987ec;
+  --shadow: 0 2px 0 rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.45;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 16px 28px; display: grid; gap: 14px; }
+
+/* header */
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; }
+.brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.wordmark { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.5rem, 3.4vw, 2.1rem); letter-spacing: -0.02em; margin: 0; line-height: 1; }
+.wordmark mark { background: linear-gradient(transparent 38%, var(--hi) 38%, var(--hi) 88%, transparent 88%); color: inherit; padding: 0 .12em; }
+.course { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.hud { display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 4px 12px; min-width: 84px; }
+.stat b { display: block; font-family: var(--f-mono); font-size: 1.15rem; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.stat span { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.iconbtn { background: var(--card); border: 1px solid var(--line); color: var(--ink); border-radius: 8px; padding: 0 14px; font: 700 .9rem var(--f-body); cursor: pointer; }
+.iconbtn:hover { border-color: var(--accent); }
+
+/* board */
+.board { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; align-items: start; }
+.side { display: grid; gap: 10px; justify-items: center; position: sticky; top: env(safe-area-inset-top, 0px); }
+.mascot { width: 180px; height: 180px; }
+.mascot.bounce { animation: bounce .45s ease; }
+.mascot.shake { animation: shake .45s ease; }
+@keyframes bounce { 30% { transform: translateY(-10px) scale(1.04); } 60% { transform: translateY(2px); } }
+@keyframes shake { 20%, 60% { transform: translateX(-7px) rotate(-4deg); } 40%, 80% { transform: translateX(7px) rotate(4deg); } }
+.slice { stroke: var(--paper); stroke-width: 2.5; transition: fill .3s, opacity .3s; }
+.slice.gone { fill: transparent !important; stroke: var(--muted); stroke-dasharray: 4 4; stroke-width: 1.5; opacity: .6; }
+.face-eye { fill: #fff; stroke: #1b2742; stroke-width: 2; }
+.face-pupil { fill: #1b2742; }
+.face-line { fill: none; stroke: #1b2742; stroke-width: 3.5; stroke-linecap: round; }
+.bubble {
+  position: relative; background: var(--card); border: 2px solid var(--ink); border-radius: 14px;
+  padding: 10px 12px; font-size: .95rem; font-weight: 700; text-align: center; width: 100%; min-height: 3.4em;
+  display: grid; place-items: center; box-shadow: var(--shadow);
+}
+.bubble::before {
+  content: ""; position: absolute; top: -10px; left: 50%; width: 16px; height: 16px; margin-left: -8px;
+  background: var(--card); border-left: 2px solid var(--ink); border-top: 2px solid var(--ink); transform: rotate(45deg);
+}
+.name { font-family: var(--f-display); font-weight: 800; font-size: 1rem; }
+.lives { font-size: .8rem; color: var(--muted); text-align: center; }
+
+.play { display: grid; gap: 10px; min-width: 0; }
+.arena {
+  position: relative; height: clamp(300px, 52vh, 470px); border: 2px solid var(--ink); border-radius: 12px;
+  background: color-mix(in srgb, var(--card) 55%, transparent); overflow: hidden;
+}
+.floor {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 30px; border-top: 2px dashed var(--pen);
+  background: repeating-linear-gradient(-45deg, var(--pen-bg) 0 8px, transparent 8px 16px);
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--pen); font-weight: 700;
+  display: grid; place-items: center;
+}
+.drop {
+  position: absolute; left: 50%; top: 0; width: min(440px, 88%); transform: translateX(-50%);
+  background: var(--card); border: 2px solid var(--ink); border-radius: 10px; padding: 14px 16px 12px;
+  box-shadow: var(--shadow); font-size: 1.12rem; font-weight: 700; line-height: 1.35; text-align: center;
+  text-wrap: balance; will-change: top;
+}
+.drop .tag { display: block; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.drop.fly { transition: top .35s ease-in, transform .35s ease-in, opacity .35s ease-in; opacity: 0; }
+.drop.right { border-color: var(--ok); background: var(--ok-bg); }
+.drop.wrong { border-color: var(--pen); background: var(--pen-bg); }
+.pop {
+  position: absolute; font-family: var(--f-mono); font-weight: 700; color: var(--ok); font-size: 1.3rem;
+  pointer-events: none; animation: pop 1s ease-out forwards; left: 50%; transform: translateX(-50%);
+}
+@keyframes pop { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 0 -60px; } }
+.streakflash {
+  position: absolute; top: 14px; right: 14px; background: var(--hi); color: var(--hi-ink); font-weight: 800;
+  font-family: var(--f-display); padding: 4px 10px; border-radius: 6px; transform: rotate(3deg);
+  animation: pop 1.6s ease-out forwards;
+}
+
+/* overlays inside the arena */
+.overlay {
+  position: absolute; inset: 0; background: color-mix(in srgb, var(--paper) 92%, transparent);
+  display: grid; place-items: center; padding: 18px; overflow: auto; z-index: 5;
+}
+.panel { max-width: 560px; width: 100%; display: grid; gap: 12px; text-align: center; justify-items: center; }
+.panel h2 { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: -0.02em; margin: 0; line-height: 1.05; text-wrap: balance; }
+.panel p { margin: 0; max-width: 46ch; }
+.eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+.big { font-family: var(--f-mono); font-size: 2.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.verdict-ok { color: var(--ok); }
+.verdict-bad { color: var(--pen); }
+.answerline { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; text-align: left; width: 100%; }
+.answerline strong.hl { background: var(--hi); color: var(--hi-ink); padding: 0 .3em; border-radius: 3px; }
+.go {
+  background: var(--ink); color: var(--paper); border: 0; border-radius: 10px; padding: 12px 26px;
+  font: 800 1.05rem var(--f-display); cursor: pointer; box-shadow: 0 3px 0 var(--accent);
+}
+.go:hover { transform: translateY(-1px); }
+.go:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--accent); }
+.hint { font-size: .8rem; color: var(--muted); }
+kbd { font-family: var(--f-mono); font-size: .78rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--card); }
+.speed { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--card); }
+.speed button { border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--ink); padding: 6px 12px; font: 700 .88rem var(--f-body); cursor: pointer; }
+.speed button:last-child { border-right: 0; }
+.speed button[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+.roundlist { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.chip { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 2px 10px; font-size: .82rem; font-weight: 700; }
+.missed { width: 100%; text-align: left; display: grid; gap: 6px; max-height: 190px; overflow: auto; }
+.missed div { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--pen); border-radius: 6px; padding: 6px 10px; font-size: .88rem; }
+.missed b { color: var(--ok); }
+.rankline { font-family: var(--f-display); font-weight: 800; font-size: 1.3rem; }
+
+/* bins */
+.bins { display: grid; gap: 10px; }
+.bins.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.bins.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.bin {
+  position: relative; border: 2px solid var(--ink); background: var(--card); color: var(--ink); border-radius: 0 0 14px 14px;
+  border-top-width: 5px; padding: 14px 8px 12px; font: 800 1.05rem var(--f-display); cursor: pointer;
+  min-height: 64px; box-shadow: var(--shadow); transition: transform .1s, background-color .15s;
+}
+.bin:hover { transform: translateY(-2px); }
+.bin:focus-visible, .go:focus-visible, .iconbtn:focus-visible, .speed button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.bin .key { position: absolute; top: 6px; left: 8px; font: 700 .7rem var(--f-mono); color: var(--muted); }
+.bin small { display: block; font: 400 .74rem var(--f-body); color: var(--muted); margin-top: 2px; }
+.bin.flash-ok { background: var(--ok-bg); border-color: var(--ok); }
+.bin.flash-bad { background: var(--pen-bg); border-color: var(--pen); }
+.bin.is-answer { background: var(--hi); color: var(--hi-ink); }
+.bin.is-answer small { color: var(--hi-ink); }
+.bin:disabled { cursor: default; opacity: .9; transform: none; }
+
+@media (max-width: 760px) {
+  .board { grid-template-columns: 1fr; }
+  .side { position: static; grid-template-columns: 84px minmax(0, 1fr); justify-items: stretch; align-items: center; gap: 4px 12px; }
+  .mascot { width: 84px; height: 84px; grid-row: span 2; }
+  .bubble { font-size: .86rem; min-height: 0; text-align: left; place-items: center start; }
+  .bubble::before { top: 50%; left: -10px; margin: -8px 0 0; transform: rotate(-45deg); }
+  .name { display: none; }
+  .lives { text-align: left; }
+  .bins.n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .drop { font-size: 1rem; }
+  .stat { min-width: 70px; padding: 3px 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot.bounce, .mascot.shake { animation: none; }
+  .drop.fly { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1 class="wordmark">Data <mark>Panic</mark></h1>
+      <span class="course">STAT 112 · Recitation 1</span>
+    </div>
+    <div class="hud" aria-live="polite">
+      <div class="stat"><span>Score</span><b id="score">0</b></div>
+      <div class="stat"><span>Streak</span><b id="streak">0</b></div>
+      <div class="stat"><span>Round</span><b id="round">–</b></div>
+      <button class="iconbtn" id="pauseBtn" type="button" aria-label="Pause">Pause</button>
+    </div>
+  </header>
+
+  <section class="board">
+    <aside class="side">
+      <svg class="mascot" id="mascot" viewBox="0 0 120 120" role="img" aria-label="Pie-thagoras the pie chart">
+        <g id="slices"></g>
+        <g id="face">
+          <path class="face-line" id="browL" d="M36 40 L50 42"/>
+          <path class="face-line" id="browR" d="M70 42 L84 40"/>
+          <circle class="face-eye" cx="45" cy="53" r="9"/>
+          <circle class="face-eye" cx="75" cy="53" r="9"/>
+          <circle class="face-pupil" id="pupL" cx="46" cy="54" r="4"/>
+          <circle class="face-pupil" id="pupR" cx="76" cy="54" r="4"/>
+          <path class="face-line" id="mouth" d="M46 76 Q60 88 74 76"/>
+        </g>
+      </svg>
+      <div class="name">Pie-thagoras</div>
+      <div class="bubble" id="bubble">Hi! I'm a pie chart. Nobody respects me. Please sort the data before it hits the floor.</div>
+      <div class="lives" id="lives">5 of 5 slices left</div>
+    </aside>
+
+    <div class="play">
+      <div class="arena" id="arena">
+        <div class="drop" id="drop" hidden><span class="tag" id="dropTag">Incoming data</span><span id="dropText"></span></div>
+        <div class="floor">the floor · data that lands here gets dirty</div>
+        <div class="overlay" id="overlay"></div>
+      </div>
+      <div class="bins n2" id="bins"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------------ */
+  /*  CONTENT: edit freely. a = correct bin label, why = short reason.   */
+  /* ------------------------------------------------------------------ */
+  var ROUNDS = [
+    {
+      title: "Census or Sneak Peek?",
+      blurb: "Is the data the whole group of interest, or just part of it?",
+      bins: [["Population", "the whole group"], ["Sample", "a part of it"]],
+      items: [
+        { t: "Tasting one spoonful of soup to decide if the whole pot needs salt", a: "Sample", why: "One spoonful stands in for the whole pot. Classic sample." },
+        { t: "Asking 50 random METU students whether they understand the cafeteria menu", a: "Sample", why: "50 students out of all METU students is a subset." },
+        { t: "A national census that counts every resident of the country", a: "Population", why: "A census measures everyone, so it is the population." },
+        { t: "Recording the grades of every student in this STAT 112 section, to describe this section", a: "Population", why: "The group of interest is this section, and every member is measured." },
+        { t: "Reading 20 Google reviews to judge a döner place", a: "Sample", why: "20 reviews from the many customers, and self-selected ones too." },
+        { t: "Weighing all 3 of your cats to describe your cats", a: "Population", why: "Your cats are the whole group of interest, and all 3 are weighed." },
+        { t: "Testing 40 light bulbs out of a factory's 10,000 to check quality", a: "Sample", why: "40 out of 10,000 is a subset. Testing all of them would destroy the stock!" },
+        { t: "Surveying 1,000 voters before a national election", a: "Sample", why: "1,000 voters represent millions of voters." },
+        { t: "Counting the total number of visitors to a national park in one year", a: "Population", why: "Every visitor that year is counted." }
+      ]
+    },
+    {
+      title: "Words or Numbers?",
+      blurb: "Categories (qualitative) or measurable amounts (quantitative)?",
+      bins: [["Qualitative", "categories / labels"], ["Quantitative", "measurable amounts"]],
+      items: [
+        { t: "Number of glasses of çay you drank before 10 a.m.", a: "Quantitative", why: "A count of glasses is a numerical amount." },
+        { t: "Your student ID number", a: "Qualitative", why: "Trap! It's a number used as a label. Averaging IDs means nothing." },
+        { t: "Your zodiac sign (no judgement)", a: "Qualitative", why: "Twelve categories, no amounts." },
+        { t: "Weight of your backpack on exam day (kg)", a: "Quantitative", why: "Measured on a numeric scale in kg." },
+        { t: "Jersey number of your favourite footballer", a: "Qualitative", why: "Number 10 isn't 'twice' number 5. It's just a label." },
+        { t: "Minutes spent looking for a free seat in the library", a: "Quantitative", why: "Time is a measurable amount." },
+        { t: "Blood type (A, B, AB, 0)", a: "Qualitative", why: "Blood types are categories." },
+        { t: "Phone battery level (%)", a: "Quantitative", why: "A percentage is a numeric measurement." },
+        { t: "Species of fish caught in the river", a: "Qualitative", why: "Species are categories. Straight from the recitation's fish study!" }
+      ]
+    },
+    {
+      title: "Count It or Measure It?",
+      blurb: "Counts are discrete. Measurements on a continuous scale are continuous.",
+      bins: [["Discrete", "you count it"], ["Continuous", "you measure it"]],
+      items: [
+        { t: "Number of times you hit snooze this morning", a: "Discrete", why: "You can snooze 3 or 4 times, never 3.7 times." },
+        { t: "Time to walk from the dorms to the Statistics building", a: "Continuous", why: "Time can take any value: 11.3 min, 11.32 min…" },
+        { t: "Number of stray cats napping on campus", a: "Discrete", why: "Cats are counted in whole numbers, however fluffy." },
+        { t: "Your height (cm)", a: "Continuous", why: "Height is measured and can take any value in a range." },
+        { t: "Number of unread emails in your inbox", a: "Discrete", why: "Emails are counted. Sadly." },
+        { t: "Amount of rain in Ankara today (mm)", a: "Continuous", why: "Rainfall is measured, so it is continuous." },
+        { t: "Number of goals in a derby match", a: "Discrete", why: "Goals are whole numbers." },
+        { t: "Your running speed when someone says 'free food'", a: "Continuous", why: "Speed is measured on a continuous scale." },
+        { t: "Number of students present in class today", a: "Discrete", why: "A count of people is discrete." }
+      ]
+    },
+    {
+      title: "The Scale Showdown",
+      blurb: "Nominal, ordinal, interval or ratio? Look for order, equal steps, and a true zero.",
+      bins: [["Nominal", "labels only"], ["Ordinal", "ordered"], ["Interval", "no true zero"], ["Ratio", "true zero"]],
+      items: [
+        { t: "Döner sauce choice: garlic, spicy or yogurt", a: "Nominal", why: "Sauces are labels with no order, though people will fight about it." },
+        { t: "Spice level: mild, hot, call-an-ambulance", a: "Ordinal", why: "The levels are ordered, but the steps aren't equal or measurable." },
+        { t: "Temperature in Ankara in January (°C)", a: "Interval", why: "0 °C isn't 'no temperature', so 10 °C isn't twice as warm as 5 °C." },
+        { t: "Money left in your wallet at the end of the month (TL)", a: "Ratio", why: "0 TL really means none. A true zero (and a sad one)." },
+        { t: "Finishing place in a race: 1st, 2nd, 3rd", a: "Ordinal", why: "The ranks are ordered, but the gaps between runners differ." },
+        { t: "Calendar year you were born", a: "Interval", why: "Year 0 isn't 'the start of time', so 2000 isn't twice 1000." },
+        { t: "Hours slept the night before the midterm", a: "Ratio", why: "0 hours means no sleep at all. A true zero (and a bad idea)." },
+        { t: "IQ score", a: "Interval", why: "An IQ of 0 doesn't mean 'no intelligence', so ratios aren't meaningful." },
+        { t: "Coffee size: small, medium, large", a: "Ordinal", why: "The sizes are ordered categories." },
+        { t: "Licence plate city code (06 = Ankara, 34 = İstanbul)", a: "Nominal", why: "34 isn't 'more' than 06. The codes are labels." },
+        { t: "Distance to the nearest phone charger (m)", a: "Ratio", why: "0 m means no distance, and 20 m is twice 10 m." },
+        { t: "Blood pressure: normal, pre-hypertensive, hypertensive", a: "Ordinal", why: "These categories have a clear order, so the scale is ordinal, not nominal." }
+      ]
+    },
+    {
+      title: "Boss Round: Parameter or Statistic?",
+      blurb: "Does the number describe the whole population or just a sample?",
+      bins: [["Parameter", "describes the population"], ["Statistic", "describes a sample"]],
+      items: [
+        { t: "48% of 200 surveyed voters plan to vote for the mayoral candidate", a: "Statistic", why: "It's computed from the 200 surveyed voters, a sample. (Lecture example!)" },
+        { t: "38% of 150 students we asked admit they like pie charts", a: "Statistic", why: "It comes from 150 asked students, a sample. Pie-thagoras is touched." },
+        { t: "The true proportion of all METU students who own a laptop", a: "Parameter", why: "It describes the whole population, even if we never know it exactly." },
+        { t: "Mean weight of 10 simits taken from a bakery's 500 simits", a: "Statistic", why: "10 out of 500 simits is a sample." },
+        { t: "Average age of all 25,000 registered voters, from the official register", a: "Parameter", why: "Every member of the population is included." },
+        { t: "Average sleep of the 30 students in our recitation, used to guess all METU students' sleep", a: "Statistic", why: "30 students standing in for all METU students: a sample summary." },
+        { t: "Average monthly entertainment spending of all households in the neighbourhood", a: "Parameter", why: "It describes all households, the population." },
+        { t: "Average test score of 250 students from 5 selected high schools", a: "Statistic", why: "250 sampled students, so it's a statistic. (Recitation Q3!)" }
+      ]
+    }
+  ];
+
+  var SPEEDS = { relaxed: 15000, normal: 10000, chaos: 6000 };
+  var PER_ROUND = 6;
+  var MAX_LIVES = 5;
+
+  var LINES = {
+    ok: ["Statistically significant!", "Zero variance from the truth.", "Nominal? No, phenomenal.", "That answer has a true zero of mistakes.", "Beautiful. I'd draw it as a bar chart. Not a pie chart. Never a pie chart.", "Correct! My slices are tingling.", "You are the population parameter of geniuses."],
+    bad: ["Ouch. That's an outlier.", "That one cost me a slice!", "Even a 3D pie chart is more accurate than that.", "Let's call that a Type I error.", "My slices! My beautiful slices!", "Hmm. Consult the lecture notes, maybe?"],
+    miss: ["It hit the floor. Now it's dirty data!", "Too slow. That's missing data now.", "Splat. Someone has to clean that up in Week 10."],
+    streak: { 3: "Three in a row! Significant!", 5: "Five! p < 0.05!", 8: "Eight!! p < 0.001!", 12: "Twelve!!! Reject the null hypothesis that you're human!" }
+  };
+  var RANKS = [
+    [0, "Raw Data", "Unprocessed, but full of potential."],
+    [1500, "Outlier", "Different. Interesting. Slightly worrying."],
+    [3000, "Sample Mean", "Solid. Representative. Reliable."],
+    [4500, "Confidence Interval", "We are 95% sure you studied."],
+    [6000, "Population Parameter", "The true value. The legend. The one."]
+  ];
+
+  /* ------------------------------------------------------------------ */
+  var $ = function (id) { return document.getElementById(id); };
+  var arena = $("arena"), drop = $("drop"), dropText = $("dropText"), dropTag = $("dropTag");
+  var overlay = $("overlay"), binsEl = $("bins"), bubble = $("bubble"), mascot = $("mascot");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var S = {
+    state: "title", speed: "normal", score: 0, streak: 0, best: 0, lives: MAX_LIVES,
+    round: 0, queue: [], item: null, idxInRound: 0, progress: 0, duration: 10000,
+    paused: false, last: 0, missed: [], answered: 0, correct: 0, binBtns: []
+  };
+
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------- mascot ---------- */
+  var SLICE_COLORS = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)"];
+  function buildSlices() {
+    var g = $("slices"), cx = 60, cy = 60, r = 52, html = "";
+    for (var k = 0; k < MAX_LIVES; k++) {
+      var a0 = (-90 + k * 72) * Math.PI / 180, a1 = (-90 + (k + 1) * 72) * Math.PI / 180;
+      var x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0), x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+      html += '<path class="slice" id="slice' + k + '" style="fill:' + SLICE_COLORS[k] + '" d="M' + cx + " " + cy + " L" + x0.toFixed(2) + " " + y0.toFixed(2) + " A" + r + " " + r + " 0 0 1 " + x1.toFixed(2) + " " + y1.toFixed(2) + ' Z"/>';
+    }
+    g.innerHTML = html;
+  }
+  function drawLives() {
+    for (var k = 0; k < MAX_LIVES; k++) $("slice" + k).classList.toggle("gone", k >= S.lives);
+    $("lives").textContent = S.lives + " of " + MAX_LIVES + " slices left";
+  }
+  var MOODS = {
+    happy:   { mouth: "M46 76 Q60 90 74 76", bl: "M36 40 L50 38", br: "M70 38 L84 40", p: 0 },
+    neutral: { mouth: "M48 79 L72 79", bl: "M36 41 L50 41", br: "M70 41 L84 41", p: 0 },
+    sad:     { mouth: "M46 84 Q60 72 74 84", bl: "M36 38 L50 44", br: "M70 44 L84 38", p: 2 },
+    shock:   { mouth: "M54 80 Q60 70 66 80 Q60 90 54 80", bl: "M36 34 L50 37", br: "M70 37 L84 34", p: -2 }
+  };
+  function mood(m, anim) {
+    var d = MOODS[m];
+    $("mouth").setAttribute("d", d.mouth);
+    $("browL").setAttribute("d", d.bl);
+    $("browR").setAttribute("d", d.br);
+    $("pupL").setAttribute("cy", 54 + d.p);
+    $("pupR").setAttribute("cy", 54 + d.p);
+    if (anim && !reduce) {
+      mascot.classList.remove("bounce", "shake");
+      void mascot.getBoundingClientRect();
+      mascot.classList.add(anim);
+    }
+  }
+  function say(t) { bubble.textContent = t; }
+
+  /* ---------- HUD ---------- */
+  function hud() {
+    $("score").textContent = S.score;
+    $("streak").textContent = S.streak;
+    $("round").textContent = S.state === "title" ? "–" : Math.min(S.round + 1, ROUNDS.length) + "/" + ROUNDS.length;
+    drawLives();
+  }
+
+  /* ---------- bins ---------- */
+  function buildBins(round) {
+    binsEl.className = "bins n" + round.bins.length;
+    binsEl.innerHTML = "";
+    S.binBtns = round.bins.map(function (b, i) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "bin";
+      btn.id = "bin" + i;
+      btn.innerHTML = '<span class="key">' + (i + 1) + "</span>" + esc(b[0]) + "<small>" + esc(b[1]) + "</small>";
+      btn.addEventListener("click", function () { answer(i); });
+      binsEl.appendChild(btn);
+      return btn;
+    });
+  }
+  function clearBins() { S.binBtns.forEach(function (b) { b.classList.remove("flash-ok", "flash-bad", "is-answer"); }); }
+
+  /* ---------- overlays ---------- */
+  function show(html) { overlay.innerHTML = html; overlay.hidden = false; var b = overlay.querySelector("button.go"); if (b) b.focus({ preventScroll: true }); }
+  function hide() { overlay.hidden = true; overlay.innerHTML = ""; }
+
+  function titleScreen() {
+    S.state = "title";
+    drop.hidden = true;
+    buildBins(ROUNDS[0]);
+    S.binBtns.forEach(function (b) { b.disabled = true; });
+    var chips = ROUNDS.map(function (r, i) { return '<span class="chip">' + (i + 1) + ". " + esc(r.title.replace("Boss Round: ", "Boss: ")) + "</span>"; }).join("");
+    show(
+      '<div class="panel">' +
+      '<div class="eyebrow">STAT 112 · Recitation 1 review</div>' +
+      "<h2>Save Pie-thagoras from dirty data!</h2>" +
+      "<p>Data cards fall from the top. Sort each one into the right bin before it hits the floor. Every mistake costs Pie-thagoras a slice. Five slices, five rounds.</p>" +
+      '<div class="roundlist">' + chips + "</div>" +
+      '<div class="speed" role="group" aria-label="Falling speed">' +
+      '<button type="button" data-speed="relaxed">Relaxed</button><button type="button" data-speed="normal">Normal</button><button type="button" data-speed="chaos">Chaos</button></div>' +
+      '<button class="go" id="startBtn" type="button">Start the panic</button>' +
+      '<div class="hint">Keys: <kbd>1</kbd>–<kbd>4</kbd> pick a bin · <kbd>Space</kbd> continue · <kbd>P</kbd> pause</div>' +
+      "</div>"
+    );
+    var sb = overlay.querySelectorAll(".speed button");
+    function mark() { sb.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.speed === S.speed ? "true" : "false"); }); }
+    sb.forEach(function (b) { b.addEventListener("click", function () { S.speed = b.dataset.speed; mark(); }); });
+    mark();
+    $("startBtn").addEventListener("click", newGame);
+    mood("neutral");
+    say("Hi! I'm a pie chart. Nobody respects me. Please sort the data before it hits the floor.");
+    hud();
+  }
+
+  function newGame() {
+    S.score = 0; S.streak = 0; S.best = 0; S.lives = MAX_LIVES; S.round = 0;
+    S.missed = []; S.answered = 0; S.correct = 0; S.paused = false;
+    roundIntro();
+  }
+
+  function roundIntro() {
+    var r = ROUNDS[S.round];
+    S.state = "intro";
+    drop.hidden = true;
+    buildBins(r);
+    S.binBtns.forEach(function (b) { b.disabled = true; });
+    hud();
+    show(
+      '<div class="panel">' +
+      '<div class="eyebrow">Round ' + (S.round + 1) + " of " + ROUNDS.length + "</div>" +
+      "<h2>" + esc(r.title) + "</h2>" +
+      "<p>" + esc(r.blurb) + "</p>" +
+      '<button class="go" id="goBtn" type="button">Go!</button>' +
+      "</div>"
+    );
+    $("goBtn").addEventListener("click", startRound);
+    mood(S.round === ROUNDS.length - 1 ? "shock" : "neutral");
+    say(S.round === ROUNDS.length - 1 ? "Boss round! I'm not nervous. You're nervous." : pick(["Ready? I was born ready. Well, born plotted.", "Here comes more data. Ugh, it never stops.", "Focus! My slices depend on you."]));
+  }
+
+  function startRound() {
+    hide();
+    S.queue = shuffle(ROUNDS[S.round].items).slice(0, PER_ROUND);
+    S.idxInRound = 0;
+    S.binBtns.forEach(function (b) { b.disabled = false; });
+    next();
+  }
+
+  function next() {
+    clearBins();
+    if (S.lives <= 0) return gameOver(false);
+    if (!S.queue.length) {
+      S.round++;
+      if (S.round >= ROUNDS.length) return gameOver(true);
+      return roundIntro();
+    }
+    S.item = S.queue.shift();
+    S.idxInRound++;
+    S.duration = SPEEDS[S.speed] * Math.pow(0.95, S.idxInRound - 1) * Math.pow(0.93, S.round);
+    S.progress = 0;
+    dropText.textContent = S.item.t;
+    dropTag.textContent = "Data card " + S.idxInRound + " of " + PER_ROUND;
+    drop.className = "drop";
+    drop.style.left = "50%";
+    drop.style.transform = "translateX(-50%)";
+    drop.style.top = "0px";
+    drop.hidden = false;
+    S.binBtns.forEach(function (b) { b.disabled = false; });
+    S.state = "falling";
+    S.last = performance.now();
+    if (S.lives <= 2) mood("sad"); else mood("neutral");
+    hud();
+  }
+
+  function loop(ts) {
+    var dt = Math.min(ts - S.last, 100);
+    S.last = ts;
+    if (S.state === "falling" && !S.paused) {
+      S.progress += dt / S.duration;
+      var maxTop = arena.clientHeight - drop.offsetHeight - 32;
+      drop.style.top = Math.max(0, S.progress * maxTop) + "px";
+      if (S.progress >= 1) fail(-1);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function flyTo(i, cls) {
+    drop.classList.add(cls);
+    var bin = S.binBtns[i];
+    if (!bin || reduce) return;
+    var ar = arena.getBoundingClientRect(), br = bin.getBoundingClientRect();
+    var x = br.left + br.width / 2 - ar.left;
+    requestAnimationFrame(function () {
+      drop.classList.add("fly");
+      drop.style.left = x + "px";
+      drop.style.top = (arena.clientHeight - 20) + "px";
+      drop.style.transform = "translateX(-50%) scale(.35)";
+    });
+  }
+
+  function answer(i) {
+    if (S.state !== "falling" || S.paused) return;
+    var r = ROUNDS[S.round];
+    if (!r.bins[i]) return;
+    if (r.bins[i][0] === S.item.a) {
+      S.state = "between";
+      S.answered++; S.correct++;
+      S.streak++; S.best = Math.max(S.best, S.streak);
+      var mult = 1 + Math.min(S.streak - 1, 10) * 0.1;
+      var pts = Math.round((100 + 100 * (1 - S.progress)) * mult);
+      S.score += pts;
+      S.binBtns[i].classList.add("flash-ok");
+      var pop = document.createElement("div");
+      pop.className = "pop";
+      pop.style.top = Math.max(10, parseFloat(drop.style.top) - 10) + "px";
+      pop.textContent = "+" + pts + (mult > 1 ? "  ×" + mult.toFixed(1) : "");
+      arena.appendChild(pop);
+      setTimeout(function () { pop.remove(); }, 1000);
+      if (LINES.streak[S.streak]) {
+        var f = document.createElement("div");
+        f.className = "streakflash";
+        f.textContent = LINES.streak[S.streak];
+        arena.appendChild(f);
+        setTimeout(function () { f.remove(); }, 1600);
+        say(LINES.streak[S.streak]);
+      } else say(pick(LINES.ok));
+      mood("happy", "bounce");
+      flyTo(i, "right");
+      hud();
+      setTimeout(next, reduce ? 500 : 750);
+    } else {
+      fail(i);
+    }
+  }
+
+  function fail(i) {
+    S.state = "explain";
+    S.answered++;
+    S.lives--;
+    S.streak = 0;
+    var r = ROUNDS[S.round];
+    var correctIdx = r.bins.map(function (b) { return b[0]; }).indexOf(S.item.a);
+    if (i >= 0) S.binBtns[i].classList.add("flash-bad");
+    S.binBtns[correctIdx].classList.add("is-answer");
+    S.binBtns.forEach(function (b) { b.disabled = true; });
+    S.missed.push({ t: S.item.t, a: S.item.a, picked: i >= 0 ? r.bins[i][0] : "the floor" });
+    drop.classList.add("wrong");
+    mood(i < 0 ? "shock" : "sad", "shake");
+    say(i < 0 ? pick(LINES.miss) : pick(LINES.bad));
+    hud();
+    var last = S.lives <= 0;
+    show(
+      '<div class="panel">' +
+      '<div class="eyebrow verdict-bad">' + (i < 0 ? "Splat! Too slow" : "Not quite") + "</div>" +
+      '<div class="answerline">“' + esc(S.item.t) + "”<br>is <strong class=\"hl\">" + esc(S.item.a) + "</strong>" + (i >= 0 ? " (you picked " + esc(r.bins[i][0]) + ")" : "") + "</div>" +
+      "<p>" + esc(S.item.why) + "</p>" +
+      '<button class="go" id="nextBtn" type="button">' + (last ? "See the damage" : "Next card") + "</button>" +
+      "</div>"
+    );
+    $("nextBtn").addEventListener("click", function () { hide(); next(); });
+  }
+
+  function gameOver(won) {
+    S.state = "over";
+    drop.hidden = true;
+    S.binBtns.forEach(function (b) { b.disabled = true; });
+    var rank = RANKS[0];
+    RANKS.forEach(function (r) { if (S.score >= r[0]) rank = r; });
+    var acc = S.answered ? Math.round(100 * S.correct / S.answered) : 0;
+    mood(won ? "happy" : "shock", won ? "bounce" : "shake");
+    say(won ? (S.lives === MAX_LIVES ? "Not a single slice lost! I'm a full pie! I feel whole!" : "We made it! I'm a little less pie, but very proud.") : "Pie-thagoras needs to lie down. Horizontally. Like a bar chart.");
+    var missed = S.missed.length
+      ? '<div class="missed">' + S.missed.map(function (m) { return "<div>“" + esc(m.t) + "” → <b>" + esc(m.a) + "</b></div>"; }).join("") + "</div>"
+      : "<p>No mistakes to review. Suspiciously perfect.</p>";
+    show(
+      '<div class="panel">' +
+      '<div class="eyebrow ' + (won ? "verdict-ok" : "verdict-bad") + '">' + (won ? "All rounds cleared" : "Out of slices · round " + (S.round + 1)) + "</div>" +
+      '<div class="big">' + S.score + "</div>" +
+      '<div class="rankline">Rank: ' + esc(rank[1]) + "</div>" +
+      "<p>" + esc(rank[2]) + " Accuracy " + acc + "% · best streak " + S.best + ".</p>" +
+      (S.missed.length ? '<div class="eyebrow">Review these</div>' : "") + missed +
+      '<button class="go" id="againBtn" type="button">Play again</button>' +
+      "</div>"
+    );
+    $("againBtn").addEventListener("click", titleScreen);
+    hud();
+  }
+
+  function togglePause() {
+    if (S.state !== "falling" && !S.paused) return;
+    S.paused = !S.paused;
+    $("pauseBtn").textContent = S.paused ? "Resume" : "Pause";
+    if (S.paused) {
+      show('<div class="panel"><h2>Paused</h2><p>Discuss with your neighbour. The data will wait. Data is patient.</p><button class="go" id="resumeBtn" type="button">Resume</button></div>');
+      $("resumeBtn").addEventListener("click", togglePause);
+      say("Taking a breather. Even pies need breaks.");
+    } else {
+      hide();
+      S.last = performance.now();
+    }
+  }
+  $("pauseBtn").addEventListener("click", togglePause);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+    var k = e.key;
+    if (k === "p" || k === "P" || k === "Escape") { togglePause(); return; }
+    if (S.state === "falling" && !S.paused) {
+      var n = ROUNDS[S.round].bins.length;
+      var map = { "1": 0, "2": 1, "3": 2, "4": 3 };
+      if (n === 2) { map.ArrowLeft = 0; map.ArrowRight = 1; }
+      if (k in map && map[k] < n) { e.preventDefault(); answer(map[k]); }
+      return;
+    }
+    if ((k === " " || k === "Enter") && !overlay.hidden) {
+      var b = overlay.querySelector("button.go");
+      if (b && document.activeElement !== b) { e.preventDefault(); b.click(); }
+    }
+  });
+
+  buildSlices();
+  titleScreen();
+  requestAnimationFrame(function (ts) { S.last = ts; loop(ts); });
+})();
+</script>
+</body>
+</html>

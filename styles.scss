@@ -1,0 +1,119 @@
+/*-- scss:defaults --*/
+
+// Bootstrap/Quarto theme variables — resolved before cosmo's own
+// defaults, so these override the base theme.
+$primary:        #8a2432 !default;  // METU-ish deep red; swap for your color
+$body-bg:        #fbfaf8 !default;
+$body-color:     #1f2328 !default;
+$link-color:     $primary !default;
+
+$font-family-sans-serif: "Source Sans Pro", "Segoe UI", system-ui, sans-serif !default;
+$headings-font-family:   "Source Serif Pro", Georgia, "Times New Roman", serif !default;
+$headings-font-weight:   600 !default;
+
+$navbar-bg:    #1f2328 !default;
+$navbar-fg:    #f2efe9 !default;
+$navbar-hl:    #f6e9ea !default;
+
+/*-- scss:rules --*/
+
+$accent-soft: #f6e9ea;
+$border-col:  #e6e2dc;
+$ink-soft:    #5b6169;
+
+h2 {
+  margin-top: 2.2rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid $accent-soft;
+}
+h3 { color: $primary; }
+
+// ---------- "jolla" about-page photo ----------
+.about-image {
+  border: 4px solid $accent-soft;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+// ---------- Tables ----------
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem 0;
+
+  th {
+    background-color: $primary;
+    color: #fff;
+    text-align: left;
+    padding: 0.6rem 0.9rem;
+    font-weight: 600;
+  }
+  td {
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid $border-col;
+  }
+  tr:nth-child(even) td { background-color: #faf7f4; }
+}
+
+// ---------- Tabset (weekly recitation tabs) ----------
+.panel-tabset {
+  .nav-tabs {
+    border-bottom: 2px solid $border-col;
+    gap: 0.2rem;
+  }
+  .nav-link {
+    border: none;
+    border-radius: 10px 10px 0 0;
+    color: $ink-soft;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+
+    &.active {
+      color: #fff !important;
+      background-color: $primary !important;
+    }
+  }
+  .tab-content {
+    border: 1px solid $border-col;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 1.5rem 1.75rem;
+    background-color: #ffffff;
+  }
+}
+
+// ---------- Code blocks ----------
+pre.sourceCode, div.sourceCode {
+  background-color: #f6f5f2;
+  border: 1px solid $border-col;
+  border-radius: 10px;
+}
+code { color: #7a1f2b; }
+
+// ---------- Footer ----------
+.nav-footer {
+  border-top: 1px solid $border-col;
+  color: $ink-soft;
+  font-size: 0.85rem;
+}
+
+// ---------- Schedule page table ----------
+.schedule-table table {
+  th:first-child, td:first-child {
+    text-align: center;
+    width: 60px;
+    font-weight: 700;
+    color: $primary;
+  }
+}
+
+// ---------- Navbar dropdown menus ----------
+.navbar .dropdown-menu {
+  border: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.navbar .dropdown-item:hover {
+  background-color: $accent-soft;
+  color: $primary;
+}

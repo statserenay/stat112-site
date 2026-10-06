@@ -1,0 +1,90 @@
+---
+title: "Setup"
+---
+
+Install the following tools before the second week of class. If you run
+into trouble, bring your laptop to office hours or a recitation.
+
+## Tableau Public
+
+1. Go to [public.tableau.com](https://public.tableau.com/en-us/s/download) and create a free account.
+2. Download and install **Tableau Public Desktop** for your OS.
+3. Sign in and try opening a sample dataset to confirm it works.
+
+## Flourish
+
+1. Go to [flourish.studio](https://flourish.studio/) and create a free account.
+2. No local installation is needed — Flourish runs in the browser.
+
+## Python
+
+We won't be using Anaconda in this course. You have two good options —
+**Google Colab** (nothing to install, runs in your browser) or **Positron**
+(a local IDE, if you'd rather work offline). Pick whichever suits you.
+
+### Option A: Google Colab (no installation needed)
+
+[Google Colab](https://colab.research.google.com/) runs Python notebooks
+entirely in the browser, with NumPy, Pandas, Matplotlib, and Seaborn
+already installed — nothing to set up locally.
+
+1. Go to [colab.research.google.com](https://colab.research.google.com/) and sign in with a Google account.
+2. Click **New notebook**.
+3. In the first cell, run the check below to confirm the packages are available.
+4. Notebooks save automatically to your Google Drive; use **File → Download** to save a `.ipynb` copy for submission if required.
+
+### Option B: Positron (local install)
+
+[Positron](https://positron.posit.co/) is a free IDE built specifically for
+data science in Python and R (from the makers of RStudio). It's currently
+in public preview and runs fully offline once set up.
+
+**1. Install Python**
+
+- Download the latest Python 3.x installer from [python.org/downloads](https://www.python.org/downloads/).
+- **Windows:** during setup, check **"Add python.exe to PATH"** before clicking Install.
+- **Mac:** run the downloaded `.pkg` installer and follow the prompts.
+- Verify the install by opening a terminal (macOS: Terminal; Windows: Command Prompt or PowerShell) and running:
+
+```bash
+python3 --version
+```
+
+**2. Install the required packages**
+
+From the same terminal:
+
+```bash
+pip install numpy pandas matplotlib seaborn jupyter
+```
+
+(On Windows, use `pip` instead of `pip3` if `pip3` isn't recognized.)
+
+**3. Install Positron**
+
+- **Mac:** go to [positron.posit.co/download.html](https://positron.posit.co/download.html), download the `.dmg` for your chip (Apple Silicon or Intel), open it, and drag **Positron** into your Applications folder.
+- **Windows:** from the same download page, get the `.exe` installer and run it, following the setup wizard.
+- Open Positron, then in the bottom-right interpreter picker, select the Python 3.x you just installed.
+- Open or create a `.py` or `.ipynb` file and run a cell to confirm it works.
+
+### Confirm the core packages are available
+
+Run this in a new Colab cell or Positron notebook/file:
+
+```python
+import numpy, pandas, matplotlib, seaborn
+print("All set!")
+```
+
+## DataCamp
+
+1. Use the course invite link (posted on ODTUClass) to join the class DataCamp group.
+2. DataCamp assignments count for 10% of your grade — check the **Syllabus** page.
+
+## Troubleshooting
+
+- **`python3` / `pip` not recognized on Windows (Positron route):** you likely skipped "Add python.exe to PATH" during install — rerun the Python installer, choose "Modify", and check that box, or reinstall from scratch.
+- **Positron doesn't see your Python packages:** confirm the interpreter selected in the bottom-right of Positron matches the Python you ran `pip install` with (multiple Python installs can conflict).
+- **Colab notebook won't save / lost my work:** make sure you're signed in to a Google account before you start — unsaved, signed-out sessions can be lost when the browser tab closes.
+- **Tableau Public won't open a file:** confirm you downloaded *Tableau Public*, not the paid Tableau Desktop trial — they're different installers.
+- Still stuck? Bring it to office hours or ask during recitation.

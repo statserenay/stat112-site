@@ -1,0 +1,45 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - games-tab/games/
+
+website:
+  title: "STAT 112"
+  open-graph: true
+  page-footer: "Made with ❤️ and Quarto"
+  navbar:
+    left:
+      - text: "Computing"
+        menu:
+          - text: "Setup"
+            href: computing-setup.qmd
+      - text: "Recitations"
+        menu:
+          - text: "All Weeks"
+            href: recitations.qmd
+          - text: "---"
+          - text: "Week 1"
+            href: recitation-week1.qmd
+          - text: "Week 2"
+            href: recitation-week2.qmd
+      - text: "Homeworks"
+        href: homeworks.qmd
+      - text: "Games"
+        href: games-tab/games.qmd
+    right:
+      - text: "Home"
+        href: index.qmd
+      - icon: github
+        href: https://github.com/statserenay
+      - icon: envelope
+        href: mailto:serenay@metu.edu.tr
+
+format:
+  html:
+    theme: [cosmo, styles.scss]
+    toc: false
+    grid:
+      sidebar-width: 0px
+      body-width: 1000px
+      margin-width: 200px
