@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Recitation 1 – STAT 112</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-cb5dfbed247effe3a8e5d83a78596532.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Recitation 1 – STAT 112">
+<meta property="og:description" content="Basic definitions · Data types · Scales of measurement · Displaying categorical data">
+<meta property="og:image" content="images/recitation1/memes/meme-soup.png">
+<meta property="og:site_name" content="STAT 112">
+<meta property="og:image:alt" content="Meme: tasting one spoonful of soup is a sample, the whole pot is the population">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 112</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-computing">    
+        <li>
+    <a class="dropdown-item" href="./computing-setup.html">
+ <span class="dropdown-text">Setup</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-recitations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Recitations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-recitations">    
+        <li>
+    <a class="dropdown-item" href="./recitations.html">
+ <span class="dropdown-text">All Weeks</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="./recitation-week1.html">
+ <span class="dropdown-text">Week 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week2.html">
+ <span class="dropdown-text">Week 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./homeworks.html"> 
+<span class="menu-text">Homeworks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./games-tab/games.html"> 
+<span class="menu-text">Games</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/statserenay"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:serenay@metu.edu.tr"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#how-to-use-this-page" id="toc-how-to-use-this-page" class="nav-link active" data-scroll-target="#how-to-use-this-page">How to use this page</a></li>
+  <li><a href="#part-a-statistics-the-basic-vocabulary" id="toc-part-a-statistics-the-basic-vocabulary" class="nav-link" data-scroll-target="#part-a-statistics-the-basic-vocabulary">Part A — Statistics: the basic vocabulary</a></li>
+  <li><a href="#part-b-data-types-and-scales-of-measurement" id="toc-part-b-data-types-and-scales-of-measurement" class="nav-link" data-scroll-target="#part-b-data-types-and-scales-of-measurement">Part B — Data types and scales of measurement</a></li>
+  <li><a href="#part-c-displaying-categorical-data" id="toc-part-c-displaying-categorical-data" class="nav-link" data-scroll-target="#part-c-displaying-categorical-data">Part C — Displaying categorical data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Recitation 1</h1>
+<p class="subtitle lead">Basic definitions · Data types · Scales of measurement · Displaying categorical data</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="how-to-use-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-page">How to use this page</h2>
+<p>Each question below is interactive. Click an option or type an answer, then press <strong>Check</strong> (or <kbd>Enter</kbd>). The page tells you right away whether the answer is correct. <strong>Show answer</strong> reveals the solution and the explanation, and <strong>Reset</strong> clears the question so you can try it again.</p>
+<div class="quiz-scoreboard">
+<p>Progress</p>
+</div>
+</section>
+<section id="part-a-statistics-the-basic-vocabulary" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-statistics-the-basic-vocabulary">Part A — Statistics: the basic vocabulary</h2>
+<!-- ===================================================================== -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/memes/meme-soup.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Meme: tasting one spoonful of soup is a sample, the whole pot is the population" width="560"></p>
+</figure>
+</div>
+<div class="quiz" type="match">
+<p>Match each <strong>term</strong> on the left with its <strong>definition</strong> on the right.</p>
+<ul>
+<li>Population :: The entire group of individuals or items under study</li>
+<li>Sample :: A subset of the population selected for study</li>
+<li>Variable :: A characteristic or attribute that can vary among individuals or items</li>
+<li>Parameter :: A numerical summary of the entire population</li>
+<li>Statistic :: A numerical summary of a sample</li>
+<li>Data :: Raw facts and figures collected from observations or experiments</li>
+<li>Statistics :: The field of study concerned with collecting, analyzing, presenting and interpreting data</li>
+<li>Experimental unit :: A single subject or object on which the variables are measured</li>
+</ul>
+<div class="explain">
+<p><strong>P</strong>opulation ↔︎ <strong>P</strong>arameter and <strong>S</strong>ample ↔︎ <strong>S</strong>tatistic: the first letters match, which makes the pairs easy to remember. Note the two meanings of <em>statistics</em>: the <strong>field</strong> (Statistics) and the plural of <strong>statistic</strong> (numbers computed from a sample).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Population|Sample">
+<p>Decide whether each scenario describes a <strong>population</strong> or a <strong>sample</strong>.</p>
+<ul>
+<li>Counting the total number of visitors to Yellowstone National Park in a year :: Population</li>
+<li>Surveying a random group of 500 students at a university about their study habits :: Sample</li>
+<li>Collecting data on the types of smartphones owned by <strong>all</strong> residents of a specific city :: Population</li>
+<li>Analyzing online customer reviews of a popular restaurant to understand customer satisfaction :: Sample</li>
+<li>Calculating the average annual income of all individuals in a country based on tax records :: Population</li>
+<li>Testing the battery life of 40 phones taken from a factory’s daily production of 10,000 phones :: Sample</li>
+<li>Recording the final grade of every student enrolled in STAT 112 this semester, to describe this semester’s class :: Population</li>
+</ul>
+<div class="explain">
+<p>Ask yourself: <em>does the data cover every member of the group we want to describe?</em></p>
+<ul>
+<li>The restaurant reviews are a <strong>sample</strong>: only some customers write reviews, and they tend to be the very happy or the very unhappy ones (a <em>self-selected</em> sample).</li>
+<li>The STAT 112 grades are a <strong>population</strong> only because the group of interest is <em>this semester’s class</em>. If we wanted to describe <em>all</em> STAT 112 students over the years, the same data would be a sample.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>A politician is running for mayor in a city with <strong>25,000</strong> registered voters. She surveys <strong>200</strong> registered voters, and <strong>48%</strong> of them say they plan to vote for her.</p>
+<p>The value <strong>48%</strong> is a …</p>
+<ul>
+<li>parameter</li>
+<li>statistic</li>
+<li>population</li>
+<li>variable</li>
+</ul>
+<div class="explain">
+<p>48% describes the <strong>200 surveyed voters</strong> (the sample), so it is a <strong>statistic</strong>.</p>
+<ul>
+<li>Population: the political choices of all 25,000 registered voters</li>
+<li>Sample: the political choices of the 200 voters interviewed</li>
+<li>Variable: the candidate each voter plans to vote for</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="tf" data-answer="true">
+<p>In the same city, if the politician had been able to ask <strong>all 25,000</strong> registered voters and 48% of them supported her, then 48% would be a <strong>parameter</strong>.</p>
+<div class="explain">
+<p><strong>True.</strong> A summary computed from the <em>whole population</em> is a parameter. Whether a number is a parameter or a statistic depends on <strong>who it describes</strong>, not on the number itself.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/memes/meme-sample-swag.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Meme: Pie-thagoras rejects asking all 25,000 voters and approves asking 200 and calling 48% a statistic" width="560"></p>
+</figure>
+</div>
+<div class="quiz" type="fill">
+<p>Fill in the blanks with the correct term.</p>
+<p>The collection of all items of interest in a study is called the <span class="blank" data-answer="population"></span>, and a descriptive measure of it is called a <span class="blank" data-answer="parameter"></span>. A set of data drawn from it is a <span class="blank" data-answer="sample"></span>, and a descriptive measure of that set is called a <span class="blank" data-answer="statistic"></span>. A characteristic of interest that can take different values for different elements is a <span class="blank" data-answer="variable|feature"></span>, and the actual recorded values are the <span class="blank" data-answer="data|data values|observations"></span>.</p>
+<div class="explain">
+<p>These are the five basic definitions from the lecture notes (<em>Basic Definitions</em> slide), plus <strong>data</strong>, which are the actual values of the variables.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="short" data-answer="1500" data-tol="0">
+<p>A survey of METU students records <strong>6 variables</strong> (age, department, GPA, weekly study hours, gender, smoking status) for each of <strong>250 students</strong>.</p>
+<p>How many individual data values does the dataset contain?</p>
+<div class="explain">
+<p>Each student is a <strong>row</strong> (observation) and each variable is a <strong>column</strong>, so the dataset has 250 × 6 = <strong>1,500</strong> data values. This is the same reasoning as the lecture example: 100 individuals × 4 variables = 400 items.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Population|Sample|Variable|Data|Parameter|Statistic|Experimental unit">
+<p>Researchers want to determine the <strong>average test score of high school students in a particular city</strong>. They randomly select <strong>five high schools</strong> in the city and collect the test scores of <strong>50 students from each school</strong>.</p>
+<p>Match each part of the study with the correct term.</p>
+<ul>
+<li>All high school students in the city :: Population</li>
+<li>The 250 selected students (50 from each of the 5 schools) :: Sample</li>
+<li>Test score :: Variable</li>
+<li>The test scores obtained from the 250 students :: Data</li>
+<li>The average test score of all high school students in the city :: Parameter</li>
+<li>The average test score of the 250 selected students :: Statistic</li>
+<li>An individual high school student :: Experimental unit</li>
+</ul>
+<div class="explain">
+<p>The sample size is 5 × 50 = <strong>250 students</strong>. The parameter is unknown, so the researchers use the statistic (the sample average) to estimate it.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-keywords="all households|every household|all the households; 150; entertainment; average|mean">
+<p>A research project investigates the <strong>average monthly spending on entertainment</strong> among households in a suburban neighborhood. The researchers randomly select <strong>150 households</strong> and record their monthly entertainment expenditures in US dollars.</p>
+<p>Write down the <strong>(a)</strong> data, <strong>(b)</strong> a statistic, <strong>(c)</strong> the population, <strong>(d)</strong> the variable, <strong>(e)</strong> the sample, <strong>(f)</strong> the experimental unit, and <strong>(g)</strong> a parameter.</p>
+<div class="explain">
+<ol type="a">
+<li><strong>Data:</strong> the monthly entertainment expenditures (in USD) of the 150 selected households<br>
+</li>
+<li><strong>Statistic:</strong> the average monthly entertainment spending of the 150 selected households<br>
+</li>
+<li><strong>Population:</strong> all households in the suburban neighborhood<br>
+</li>
+<li><strong>Variable:</strong> monthly entertainment expenditure (in USD)<br>
+</li>
+<li><strong>Sample:</strong> the 150 randomly selected households<br>
+</li>
+<li><strong>Experimental unit:</strong> an individual household<br>
+</li>
+<li><strong>Parameter:</strong> the average monthly entertainment spending of <em>all</em> households in the neighborhood</li>
+</ol>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/memes/meme-iceberg.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Meme: iceberg, the pretty chart above water and data cleaning problems below" width="560"></p>
+</figure>
+</div>
+<div class="quiz" type="order">
+<p>Put the <strong>steps of statistical practice</strong> in the correct order.</p>
+<ul>
+<li><strong>Model building:</strong> set clear goals and write the research question</li>
+<li><strong>Data collection:</strong> plan what data to collect and how to collect them</li>
+<li><strong>Data preparation:</strong> identify dirty data, clean them, handle outliers and missing values</li>
+<li><strong>Exploratory data analysis (EDA):</strong> get familiar with the data, mostly using visualizations</li>
+<li><strong>Data analysis:</strong> apply appropriate statistical methods to extract information</li>
+<li><strong>Data interpretation:</strong> interpret the results and draw conclusions</li>
+</ul>
+<div class="explain">
+<p>The research question comes first, because it decides which data are worth collecting. Data preparation often takes <strong>more time than all the other steps combined</strong>, which is why a large part of STAT 112 is about cleaning and tidying data.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Descriptive|Inferential">
+<p>Is each statement an example of <strong>descriptive</strong> or <strong>inferential</strong> statistics?</p>
+<ul>
+<li>The average GPA of the 40 students in our recitation section is 2.85. :: Descriptive</li>
+<li>Based on a survey of 200 voters, we estimate that the candidate will receive between 45% and 51% of all votes in the city. :: Inferential</li>
+<li>A bar chart shows the number of students enrolled in each department of the faculty. :: Descriptive</li>
+<li>A clinical trial with 300 patients concludes that the new drug lowers blood pressure in adults with hypertension. :: Inferential</li>
+<li>60% of the people who answered our survey said they use Instagram every day. :: Descriptive</li>
+</ul>
+<div class="explain">
+<p><strong>Descriptive</strong> statistics <em>summarize and present</em> the data we have, using tables, graphs and numerical measures. <strong>Inferential</strong> statistics use a sample to draw <em>conclusions or make decisions about a larger population</em>. Look for words like <em>estimate</em>, <em>conclude</em>, or a claim about a group bigger than the one that was measured.</p>
+</div>
+</div>
+</section>
+<section id="part-b-data-types-and-scales-of-measurement" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-data-types-and-scales-of-measurement">Part B — Data types and scales of measurement</h2>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Qualitative|Quantitative">
+<p>The U.S. Army Corps of Engineers studied fish in the Tennessee River (Alabama) and three tributary creeks to measure the effects of DDT pollution. For each of the <strong>144 fish</strong> captured, the following variables were recorded. Classify each variable.</p>
+<ul>
+<li>River/creek where the fish was captured :: Qualitative</li>
+<li>Species (channel catfish, largemouth bass, or smallmouth buffalo fish) :: Qualitative</li>
+<li>Length (centimeters) :: Quantitative</li>
+<li>Weight (grams) :: Quantitative</li>
+<li>DDT concentration (parts per million) :: Quantitative</li>
+</ul>
+<div class="explain">
+<p>Length, weight and DDT concentration are measured on a <strong>numerical scale</strong> (cm, g, ppm), so they are <strong>quantitative</strong>. River/creek and species can only be sorted into <strong>categories</strong>, so they are <strong>qualitative</strong> (categorical).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Discrete|Continuous">
+<p>Decide whether each variable is <strong>discrete</strong> or <strong>continuous</strong>.</p>
+<ul>
+<li>Number of students present in class today :: Discrete</li>
+<li>A patient’s body temperature measured with a thermometer :: Continuous</li>
+<li>Time it takes a student to solve a math problem :: Continuous</li>
+<li>Number of accidents per month (can range from 0 to 50) :: Discrete</li>
+<li>Number of website visitors per second :: Discrete</li>
+<li>Amount of rainfall in a day (mm) :: Continuous</li>
+<li>A runner’s speed during a race :: Continuous</li>
+</ul>
+<div class="explain">
+<p><strong>Count it → discrete. Measure it → continuous.</strong> Counts (students, accidents, visitors) can only be whole numbers. Temperature, time, rainfall and speed can take <em>any</em> value in an interval; the number of decimals we record is limited only by the measuring instrument.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/memes/meme-scales.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Meme: levels of measurement enlightenment from nominal to ratio" width="560"></p>
+</figure>
+</div>
+<div class="quiz" type="match">
+<p>Match each <strong>scale of measurement</strong> with its description.</p>
+<ul>
+<li>Nominal :: Categories with no order or ranking, only labels. You can count frequencies and find the mode.</li>
+<li>Ordinal :: Categories with a meaningful order, but the differences between ranks are not equal or measurable. You can rank and find the median.</li>
+<li>Interval :: Numeric with meaningful, equal differences but <strong>no true zero</strong>. You can add and subtract, but “twice as much” is meaningless.</li>
+<li>Ratio :: Numeric with equal intervals <strong>and a true zero</strong> (zero = none). All of +, −, ×, ÷ are meaningful.</li>
+</ul>
+<div class="explain">
+<p>Each scale keeps the properties of the previous one and adds one more: <strong>Nominal</strong> (labels) → <strong>Ordinal</strong> (+ order) → <strong>Interval</strong> (+ equal distances) → <strong>Ratio</strong> (+ a true zero).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Nominal|Ordinal|Interval|Ratio ; Qualitative|Quantitative" data-columns="Scale ; Data type">
+<p>For each scenario, choose the <strong>scale of measurement</strong> and the <strong>type of data</strong>.</p>
+<ul>
+<li>A weather station records daily temperatures in degrees Celsius :: Interval ; Quantitative</li>
+<li>IQ test scores :: Interval ; Quantitative</li>
+<li>A clinic classifies blood pressure as “Normal”, “Pre-hypertensive” or “Hypertensive” :: Ordinal ; Qualitative</li>
+<li>A teacher records students’ scores out of 100 on a math exam :: Interval | Ratio ; Quantitative</li>
+<li>Respondents identify their gender as “Male”, “Female” or “Nonbinary” :: Nominal ; Qualitative</li>
+<li>A car’s odometer records the distance traveled (km) during a road trip :: Ratio ; Quantitative</li>
+<li>Moviegoers rate a film from 1 (terrible) to 5 (excellent) :: Ordinal ; Qualitative</li>
+<li>Students’ letter grades (AA, BA, BB, …) on their transcripts :: Ordinal ; Qualitative</li>
+<li>Number of votes each candidate received in a local election :: Ratio ; Quantitative</li>
+<li>Individuals’ monthly income in Turkish lira :: Ratio ; Quantitative</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Temperature (°C) and IQ are interval:</strong> 0 °C is the freezing point of water, not “no heat”, and an IQ of 0 does not mean “no intelligence”. So 40 °C is <em>not</em> twice as hot as 20 °C.</li>
+<li><strong>Blood pressure categories are ordinal, not nominal:</strong> Normal &lt; Pre-hypertensive &lt; Hypertensive has a clear order.</li>
+<li><strong>The film rating (1–5) is ordinal:</strong> the numbers are labels for ordered categories. The step from 1 to 2 is not necessarily the same “amount” as the step from 4 to 5.</li>
+<li><strong>Exam scores out of 100 are debatable, so both answers are accepted.</strong> The lecture lists SAT-type exam grading as <em>interval</em>, because 0 points does not mean “zero knowledge”. If you think of the score as “number of points earned”, 0 really means none, and the variable is ratio.</li>
+<li><strong>Distance, vote counts and income</strong> have a true zero, so they are ratio.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/memes/meme-celsius.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Meme: 20 °C is not twice as hot as 10 °C because Celsius is an interval scale" width="560"></p>
+</figure>
+</div>
+<div class="quiz" type="classify" data-options="Interval|Ratio">
+<p>A dataset contains the following variables. Is each one measured on an <strong>interval</strong> or a <strong>ratio</strong> scale?</p>
+<ul>
+<li>Body height (cm) :: Ratio</li>
+<li>Temperature (°C) :: Interval</li>
+<li>Age (years) :: Ratio</li>
+<li>Calendar year of birth :: Interval</li>
+<li>Time of day on a 24-hour clock :: Interval</li>
+<li>Weight (kg) :: Ratio</li>
+<li>Monthly income (USD) :: Ratio</li>
+</ul>
+<div class="explain">
+<p>The test: <strong>does 0 mean “none of it”?</strong></p>
+<ul>
+<li>Year 0 does not mean “the beginning of time”, and 00:00 is not “no time”, so calendar year and time of day are <strong>interval</strong>. (The year 2000 is not “twice” the year 1000.)</li>
+<li>0 cm, 0 kg, 0 years and 0 USD all mean “none”, so ratios make sense: 40 kg <em>is</em> twice as heavy as 20 kg.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Nominal|Ordinal|Metric discrete|Metric continuous">
+<p>A dental study records the following variables. Classify each one.</p>
+<ul>
+<li>Number of teeth :: Metric discrete</li>
+<li>Age :: Metric continuous</li>
+<li>Age at last birthday (in years) :: Metric discrete</li>
+<li>Has the patient visited their dentist in the last year? :: Nominal</li>
+<li>Social class :: Ordinal</li>
+<li>Colour of filling material :: Nominal</li>
+<li>Calcium : phosphorus ratio in teeth :: Metric continuous</li>
+<li>Severity of gum disease (none, mild, moderate, severe) :: Ordinal</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Age vs.&nbsp;age at last birthday:</strong> age itself is continuous (time is measured), but “age at last birthday” only takes whole numbers, so it is discrete.</li>
+<li>A <strong>yes/no</strong> variable is nominal (it is also called <em>binary</em>).</li>
+<li>Social class and severity have a natural order, so they are ordinal.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>Which summary is meaningful for <strong>ordinal</strong> data but <strong>not</strong> for <strong>nominal</strong> data?</p>
+<ul>
+<li>Mode</li>
+<li>Median</li>
+<li>Mean</li>
+<li>The ratio of two values</li>
+</ul>
+<div class="explain">
+<p>The <strong>median</strong> needs the values to be <em>ranked</em>, which is possible for ordinal data (e.g.&nbsp;<em>Disagree &lt; Neutral &lt; Agree</em>) but not for nominal data (e.g.&nbsp;eye colour). The <strong>mode</strong> works for both. The <strong>mean</strong> and <strong>ratios</strong> need numeric data with equal distances.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="short" data-answer="ratio|ratio scale|ratio scaled">
+<p>Temperature in <strong>Celsius</strong> is an interval variable. On which scale of measurement is temperature in <strong>Kelvin</strong>?</p>
+<div class="explain">
+<p><strong>Ratio.</strong> 0 K (absolute zero) means a <em>complete absence</em> of thermal energy, so it is a true zero, and 200 K really is twice as much as 100 K. The quantity is the same (temperature), but the scale depends on <strong>how it is measured</strong>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/memes/meme-student-id.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Meme: averaging student ID numbers, which are nominal" width="560"></p>
+</figure>
+</div>
+<div class="quiz" type="classify" data-options="True|False" data-label="True / False set">
+<p>Decide whether each statement is <strong>true</strong> or <strong>false</strong>.</p>
+<ul>
+<li>If we code gender as 0 = male and 1 = female, gender becomes a quantitative variable. :: False</li>
+<li>Every continuous variable is quantitative. :: True</li>
+<li>On an interval scale, 40 °C is twice as hot as 20 °C. :: False</li>
+<li>Ordinal data tell us the order of the categories but not the size of the differences between them. :: True</li>
+<li>Nominal data must be discrete. :: True</li>
+<li>Student ID numbers are ratio-scaled because they are numbers. :: False</li>
+</ul>
+<div class="explain">
+<ul>
+<li>Numbers used as <strong>labels</strong> (0/1 codes, ID numbers, phone numbers, zip codes) have no numerical meaning. They are still <strong>nominal</strong>: averaging student IDs gives nonsense.</li>
+<li>Continuous variables are measured on a numeric scale, so they are always quantitative.</li>
+<li>Nominal categories are separate labels, so you cannot have “half a category”. Nominal data are always discrete.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,c,e">
+<p>Which of the following variables are measured on a <strong>ratio</strong> scale? <em>Select all that apply.</em></p>
+<ul>
+<li>Weight of a newborn baby (kg)</li>
+<li>Temperature in Fahrenheit</li>
+<li>Number of fish in Lake Eymir</li>
+<li>Year of birth</li>
+<li>Time to finish a 100 m race (seconds)</li>
+<li>IQ score</li>
+</ul>
+<div class="explain">
+<p>Weight, number of fish, and race time all have a <strong>true zero</strong> (0 kg, 0 fish, 0 seconds mean “none”), so they are <strong>ratio</strong>. Fahrenheit, year of birth and IQ have an <em>arbitrary</em> zero, so they are <strong>interval</strong>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>A quantitative variable <strong>Age</strong> is recoded into groups: 1 = “0–17”, 2 = “18–34”, 3 = “35–54”, 4 = “55+”.</p>
+<p>What type of variable is the <strong>new, recoded</strong> variable?</p>
+<ul>
+<li>Nominal</li>
+<li>Ordinal</li>
+<li>Interval</li>
+<li>Ratio</li>
+</ul>
+<div class="explain">
+<p>After recoding, the values 1–4 are <strong>ordered categories</strong>. The groups also have unequal widths (18, 17, 20 years and open-ended), so the distance between codes has no meaning. The new variable is <strong>ordinal</strong>. Recoding a quantitative variable into categories always <strong>loses information</strong>: we no longer know the exact age.</p>
+</div>
+</div>
+</section>
+<section id="part-c-displaying-categorical-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-displaying-categorical-data">Part C — Displaying categorical data</h2>
+<!-- ===================================================================== -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/memes/meme-3d-pie.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Meme: a pie chart horrified by a 3D exploded pie chart with 14 slices" width="560"></p>
+</figure>
+</div>
+<div class="quiz" type="classify" data-options="Frequency table|Contingency table|Bar chart|Clustered bar chart|Stacked bar chart|Pie chart|Doughnut chart|Waffle chart|Mosaic plot|Spine plot|Population pyramid" data-label="Name that display">
+<p>Choose the name of each display.</p>
+<ul>
+<li><img src="images/recitation1/chart-frequency-table.png" class="img-fluid"> :: Frequency table</li>
+<li><img src="images/recitation1/chart-contingency-table.png" class="img-fluid"> :: Contingency table</li>
+<li><img src="images/recitation1/chart-bar.png" class="img-fluid"> :: Bar chart</li>
+<li><img src="images/recitation1/chart-clustered-bar.png" class="img-fluid"> :: Clustered bar chart</li>
+<li><img src="images/recitation1/chart-pie.png" class="img-fluid"> :: Pie chart</li>
+<li><img src="images/recitation1/chart-stacked-bar.png" class="img-fluid"> :: Stacked bar chart</li>
+<li><img src="images/recitation1/chart-doughnut.png" class="img-fluid"> :: Doughnut chart</li>
+<li><img src="images/recitation1/chart-mosaic.png" class="img-fluid"> :: Mosaic plot</li>
+<li><img src="images/recitation1/chart-waffle.png" class="img-fluid"> :: Waffle chart</li>
+<li><img src="images/recitation1/chart-spine.jpeg" class="img-fluid"> :: Spine plot | Stacked bar chart</li>
+<li><img src="images/recitation1/chart-pyramid.png" class="img-fluid"> :: Population pyramid</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Clustered</strong> bars put the groups <em>side by side</em>. <strong>Stacked</strong> bars put them <em>on top of each other</em>.</li>
+<li>A <strong>spine plot</strong> is a 100% stacked bar chart in which the <strong>width</strong> of each bar is proportional to the group size. A <strong>mosaic plot</strong> extends this idea to more than two variables.</li>
+<li>A <strong>waffle chart</strong> shows a percentage as filled squares in a 10 × 10 grid (each square = 1%).</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="One variable|Two or more">
+<p>Is each display used for <strong>one</strong> categorical variable, or to show the relationship between <strong>two or more</strong> categorical variables?</p>
+<ul>
+<li>Frequency table :: One variable</li>
+<li>Pie chart :: One variable</li>
+<li>Contingency (two-way) table :: Two or more</li>
+<li>Waffle chart :: One variable</li>
+<li>Clustered bar chart :: Two or more</li>
+<li>Doughnut chart :: One variable</li>
+<li>Mosaic plot :: Two or more</li>
+<li>Bar chart :: One variable</li>
+<li>Spine plot :: Two or more</li>
+</ul>
+<div class="explain">
+<p>To compare two categorical variables you need a display that <strong>crosses</strong> them: a contingency table, or clustered, stacked, spine or mosaic plots. The population pyramid from the previous question also shows <strong>two</strong> variables (age group and sex) as back-to-back bars.</p>
+</div>
+</div>
+<section id="the-student-performance-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="the-student-performance-dataset">The student performance dataset</h3>
+<p>The Center of Assessment and Evaluation wants to study the factors that affect student performance. Information on <strong>110 students</strong> from a high school in Seoul was collected. The first six rows of the data:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/students-data.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+<p><em>Lunch:</em> free/reduced or standard lunch. <em>Test:</em> “completed” if the student completed a test preparation course, otherwise “uncompleted”. <em>Education_Level</em> is the parents’ education level.</p>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Nominal|Ordinal|Quantitative">
+<p>Classify each variable in the dataset.</p>
+<ul>
+<li>Gender :: Nominal</li>
+<li>Education_Level (parents’ education) :: Ordinal</li>
+<li>Lunch :: Nominal</li>
+<li>Test (preparation course) :: Nominal</li>
+<li>Math_score :: Quantitative</li>
+</ul>
+<div class="explain">
+<p>Education level has a natural order: <em>some high school &lt; high school &lt; some college &lt; associate’s &lt; bachelor’s &lt; master’s</em>. That makes it <strong>ordinal</strong>, so a bar chart of it should keep that order rather than sorting the bars alphabetically. Gender, Lunch and Test are labels with no order (<em>Lunch</em> and <em>Test</em> are binary).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Use the frequency table of parents’ education level.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/edu-frequency.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="260"></p>
+</figure>
+</div>
+<p>The total number of students is <em>n</em> = <span class="blank" data-answer="110" data-tol="0"></span>. The most common (modal) education level is <span class="blank" data-answer="associate's degree|associates degree|associate's|associate|associate degree"></span>. The relative frequency of “master’s degree” is 7/110 = <span class="blank" data-answer="0.0636" data-tol="0.0006"></span> (4 decimals), which is about <span class="blank" data-answer="6.36" data-tol="0.1"></span> %.</p>
+<div class="explain">
+<p><em>n</em> = 29 + 10 + 19 + 7 + 23 + 22 = 110. The largest frequency is 29, for <strong>associate’s degree</strong>. The relative frequency of master’s degree is 7/110 ≈ 0.0636, or <strong>6.36%</strong>.</p>
+<p>Interpretation: <em>the parents of 29 students (26.4%) have an associate’s degree, and the parents of 7 students (6.4%) have a master’s degree.</em></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>Here is the relative frequency table and the bar chart of the same variable.</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/recitation1/edu-relfrequency.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/recitation1/edu-bar.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<p>If we re-draw the bar chart using <strong>relative frequencies</strong> instead of counts, how does it change?</p>
+<ul>
+<li>The tallest bar becomes a different category.</li>
+<li>The bars get closer together, because the proportions are all smaller than 1.</li>
+<li>Only the y-axis scale changes. The bars keep exactly the same shape.</li>
+<li>It must be redrawn as a pie chart, because proportions add up to 1.</li>
+</ul>
+<div class="explain">
+<p>Every relative frequency is the count <strong>divided by the same number</strong> (<em>n</em> = 110), so every bar is scaled by the same factor. Only the y-axis labels change, from 0–30 to 0–0.27. Also notice that this chart orders the bars <strong>alphabetically</strong>. Because education level is ordinal, a better chart would order the bars from <em>some high school</em> to <em>master’s degree</em>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/recitation1/test-doughnut.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/recitation1/gender-pie.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<p>Using the charts and <em>n</em> = 110, answer: about <span class="blank" data-answer="38" data-tol="0.5"></span> students <strong>completed</strong> the test preparation course, and about <span class="blank" data-answer="58" data-tol="0.5"></span> students are <strong>male</strong>.</p>
+<div class="explain">
+<ul>
+<li>Completed: 0.345 × 110 = 37.95 ≈ <strong>38</strong> students (so 72 did not complete it)</li>
+<li>Male: 0.527 × 110 = 57.97 ≈ <strong>58</strong> students (and 52 female)</li>
+</ul>
+<p>Charts that show only percentages hide the sample size, so always report <strong>n</strong> alongside the percentages.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-keywords="65.5|65 %|66 %; 34.5|34 %|35 %; 52.7|53 %; 47.3|47 %">
+<p>Write a short <strong>interpretation</strong> (2–3 sentences) of the doughnut chart and the pie chart above.</p>
+<div class="explain">
+<p>The doughnut chart shows that <strong>65.5%</strong> of the students did <strong>not</strong> complete the test preparation course, while <strong>34.5%</strong> completed it. So roughly two out of three students did not take the course. The pie chart shows that <strong>52.7%</strong> of the students in the study are <strong>male</strong> and <strong>47.3%</strong> are <strong>female</strong>, so the sample is fairly balanced by gender.</p>
+<p><em>Watch out:</em> read the labels carefully. The larger (orange) slice is <strong>uncompleted</strong>, not completed.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>The contingency table shows handedness by sex for 100 people.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation1/chart-contingency-table.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="380"></p>
+</figure>
+</div>
+<p>The total number of left-handed people is <span class="blank" data-answer="13" data-tol="0"></span>. The percentage of <strong>males</strong> who are left-handed is <span class="blank" data-answer="17.3" data-tol="0.1"></span> % (1 decimal). The percentage of <strong>left-handed people</strong> who are female is <span class="blank" data-answer="30.8" data-tol="0.1"></span> % (1 decimal).</p>
+<div class="explain">
+<ul>
+<li>Left-handed total: 9 + 4 = 13</li>
+<li>Among <strong>males</strong>: 9 / 52 = 0.173 → <strong>17.3%</strong> (we divide by the <em>row</em> total, 52)</li>
+<li>Among <strong>left-handers</strong>: 4 / 13 = 0.308 → <strong>30.8%</strong> (we divide by the <em>column</em> total, 13)</li>
+</ul>
+<p>The two percentages answer <strong>different questions</strong>, so always ask <em>“percent of what?”</em> For comparison, only 4/48 = 8.3% of females are left-handed, which suggests that left-handedness is more common among males in this group.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>Using the same table, we want to <strong>compare the proportion of left-handed people among males and among females</strong>. Which display is the best choice?</p>
+<ul>
+<li>A pie chart of handedness</li>
+<li>A clustered bar chart of the <strong>counts</strong></li>
+<li>A 100% stacked bar chart (or spine plot) of handedness within each sex</li>
+<li>A frequency table of sex</li>
+</ul>
+<div class="explain">
+<p>To compare <em>proportions within groups</em>, every group should be scaled to 100%. That is exactly what a <strong>100% stacked bar chart / spine plot</strong> does, and a spine plot also shows group size through the bar width. A pie chart and a frequency table each show only <strong>one</strong> variable. A clustered bar chart of counts can mislead when the groups have different sizes.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!--
+  STAT 112 interactive quiz engine
+  ---------------------------------
+  Include in any page with (front matter):
+      format:
+        html:
+          include-after-body: _quiz.html
+
+  Question types (write them as fenced divs in the .qmd):
+    type=mc        one correct option        answer="b"
+    type=ms        select all that apply     answer="a,c,e"
+    type=tf        single true/false         answer="true"
+    type=short     typed answer              answer="ratio|ratio scale"   (add tol="0.5" for numbers)
+    type=fill      inline blanks             []{.blank answer="parameter"}
+    type=match     "term :: definition" list
+    type=classify  "item :: category" list   options="A|B|C"  (several columns: options="A|B ; X|Y" columns="Scale ; Type")
+    type=order     list written in the correct order (shown shuffled)
+    type=open      free text + model answer  keywords="idea one|alt ; idea two"
+  Put explanations / model answers in a nested  ::: explain  div.
+-->
+<style>
+:root {
+  --qz-accent: var(--bs-primary, #2780e3);
+  --qz-border: var(--bs-border-color, #dee2e6);
+  --qz-soft: rgba(127, 127, 127, 0.07);
+  --qz-muted: var(--bs-secondary-color, #6c757d);
+  --qz-ok: #1a7f37;
+  --qz-ok-bg: rgba(26, 127, 55, 0.11);
+  --qz-bad: #c0392b;
+  --qz-bad-bg: rgba(192, 57, 43, 0.10);
+  --qz-partial: #b9770e;
+}
+.qz {
+  position: relative;
+  border: 1px solid var(--qz-border);
+  border-left: 5px solid var(--qz-accent);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.1rem;
+  margin: 1.6rem 0;
+  background: var(--bs-body-bg, #fff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color .2s;
+}
+.qz.qz-correct { border-left-color: var(--qz-ok); }
+.qz.qz-wrong { border-left-color: var(--qz-bad); }
+.qz.qz-partial { border-left-color: var(--qz-partial); }
+.qz > p:last-of-type { margin-bottom: .4rem; }
+.qz-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.qz-num {
+  font-weight: 700; font-size: .85rem; color: #fff; background: var(--qz-accent);
+  border-radius: 6px; padding: .1rem .5rem; font-variant-numeric: tabular-nums;
+}
+.qz-correct .qz-num { background: var(--qz-ok); }
+.qz-wrong .qz-num { background: var(--qz-bad); }
+.qz-partial .qz-num { background: var(--qz-partial); }
+.qz-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--qz-muted); font-weight: 600; }
+.qz img { max-width: 100%; height: auto; }
+
+/* options (mc / ms / tf) */
+.qz-options { display: grid; gap: .5rem; margin: .7rem 0 .2rem; }
+.qz-options.qz-inline { grid-template-columns: repeat(auto-fit, minmax(120px, 200px)); }
+.qz-opt {
+  display: flex; align-items: flex-start; gap: .65rem; width: 100%; text-align: left;
+  border: 1px solid var(--qz-border); background: var(--bs-body-bg, #fff); color: inherit;
+  border-radius: 8px; padding: .55rem .75rem; cursor: pointer; font: inherit; line-height: 1.4;
+  transition: border-color .15s, background-color .15s;
+}
+.qz-opt:hover { border-color: var(--qz-accent); background: var(--qz-soft); }
+.qz-opt:focus-visible { outline: 2px solid var(--qz-accent); outline-offset: 2px; }
+.qz-letter {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--qz-border);
+  display: grid; place-items: center; font-weight: 600; font-size: .8rem;
+}
+.qz-opt-text { flex: 1; padding-top: .05rem; }
+.qz-opt-text p { margin: 0; }
+.qz-opt.is-sel { border-color: var(--qz-accent); box-shadow: inset 0 0 0 1px var(--qz-accent); }
+.qz-opt.is-sel .qz-letter { background: var(--qz-accent); border-color: var(--qz-accent); color: #fff; }
+.qz-opt.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); box-shadow: inset 0 0 0 1px var(--qz-ok); }
+.qz-opt.is-ok .qz-letter { background: var(--qz-ok); border-color: var(--qz-ok); color: #fff; }
+.qz-opt.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); box-shadow: inset 0 0 0 1px var(--qz-bad); }
+.qz-opt.is-bad .qz-letter { background: var(--qz-bad); border-color: var(--qz-bad); color: #fff; }
+.qz-opt.is-missed { border: 1px dashed var(--qz-ok); }
+
+/* controls & feedback */
+.qz-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; align-items: center; }
+.qz-controls .btn { border-radius: 6px; }
+.qz-feedback { margin-top: .65rem; font-weight: 500; padding: .45rem .75rem; border-radius: 6px; }
+.qz-feedback:empty { display: none; }
+.qz-fb-ok { color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-fb-bad { color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fb-partial { color: var(--qz-partial); background: rgba(185, 119, 14, .10); }
+.qz-fb-info { background: var(--qz-soft); }
+.qz-explain {
+  margin-top: .75rem; padding: .75rem 1rem; background: var(--qz-soft);
+  border-radius: 8px; border-left: 3px solid var(--qz-accent);
+}
+.qz-explain > :last-child { margin-bottom: 0; }
+.qz-explain-title { font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); margin-bottom: .35rem; }
+
+/* typed inputs */
+.qz-short { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .6rem; }
+.qz-input { max-width: 24rem; }
+.qz-input.is-ok, .qz-select.is-ok, textarea.is-ok { border-color: var(--qz-ok); background-color: var(--qz-ok-bg); }
+.qz-input.is-bad, .qz-select.is-bad { border-color: var(--qz-bad); background-color: var(--qz-bad-bg); }
+.qz-unit { color: var(--qz-muted); }
+.qz-blank-input {
+  border: 0; border-bottom: 2px solid var(--qz-accent); background: var(--qz-soft); color: inherit;
+  font: inherit; padding: 0 .3rem; margin: 0 .15rem; text-align: center; border-radius: 4px 4px 0 0;
+  min-width: 5ch;
+}
+.qz-blank-input:focus { outline: 2px solid var(--qz-accent); outline-offset: 1px; }
+.qz-blank-input.is-ok { border-bottom-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-blank-input.is-bad { border-bottom-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fill-body { line-height: 2.3; }
+
+/* classify rows */
+.qz-rows { display: grid; gap: .4rem; margin-top: .7rem; }
+.qz-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; align-items: center;
+  padding: .45rem .7rem; border-radius: 8px; background: var(--qz-soft);
+}
+.qz-row-head { background: transparent; padding-top: 0; padding-bottom: 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); font-weight: 600; }
+.qz-row-ctrls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+.qz-row-head .qz-row-ctrls span { min-width: 9rem; text-align: center; }
+.qz-row p { margin: 0; }
+.qz-seg { display: inline-flex; border: 1px solid var(--qz-border); border-radius: 8px; overflow: hidden; background: var(--bs-body-bg, #fff); }
+.qz-seg button {
+  border: 0; border-right: 1px solid var(--qz-border); background: transparent; color: inherit;
+  padding: .3rem .7rem; font: inherit; font-size: .88rem; cursor: pointer; white-space: nowrap;
+}
+.qz-seg button:last-child { border-right: 0; }
+.qz-seg button:hover { background: var(--qz-soft); }
+.qz-seg button[aria-pressed="true"] { background: var(--qz-accent); color: #fff; }
+.qz-seg.is-ok { border-color: var(--qz-ok); box-shadow: 0 0 0 1px var(--qz-ok); }
+.qz-seg.is-ok button[aria-pressed="true"] { background: var(--qz-ok); }
+.qz-seg.is-bad { border-color: var(--qz-bad); box-shadow: 0 0 0 1px var(--qz-bad); }
+.qz-seg.is-bad button[aria-pressed="true"] { background: var(--qz-bad); }
+.qz-select { width: auto; min-width: 9rem; display: inline-block; }
+
+/* image grid (classify with pictures) */
+.qz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .8rem; margin-top: .7rem; }
+.qz-card { border: 1px solid var(--qz-border); border-radius: 8px; padding: .5rem; display: flex; flex-direction: column; gap: .5rem; background: var(--bs-body-bg, #fff); }
+.qz-card-media { height: 170px; display: grid; place-items: center; background: #fff; border-radius: 6px; overflow: hidden; }
+.qz-card-media img { max-height: 166px; max-width: 100%; width: auto; object-fit: contain; }
+.qz-card-media p { margin: 0; }
+.qz-card .qz-select { width: 100%; }
+.qz-card-tag { font-size: .75rem; color: var(--qz-muted); font-weight: 600; }
+
+/* matching */
+.qz-match { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1.25rem; margin-top: .7rem; }
+.qz-match-left { display: grid; gap: .4rem; align-content: start; }
+.qz-match-left .qz-row { grid-template-columns: auto minmax(0, 1fr); }
+.qz-match-left .qz-select { min-width: 4.6rem; }
+.qz-match-right { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; align-content: start; }
+.qz-match-right li { display: flex; gap: .6rem; align-items: flex-start; padding: .45rem .7rem; border: 1px solid var(--qz-border); border-radius: 8px; }
+.qz-match-right li p { margin: 0; }
+
+/* ordering */
+.qz-order { list-style: none; padding: 0; margin: .7rem 0 0; }
+.qz-order li {
+  display: flex; align-items: center; gap: .6rem; padding: .45rem .6rem; margin: .35rem 0;
+  border: 1px solid var(--qz-border); border-radius: 8px; background: var(--bs-body-bg, #fff); cursor: grab;
+}
+.qz-order li.is-drag { opacity: .45; }
+.qz-order li.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-order li.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-order .qz-order-text { flex: 1; }
+.qz-order .qz-order-text p { margin: 0; }
+.qz-move { border: 1px solid var(--qz-border); background: transparent; color: inherit; border-radius: 6px; width: 2rem; height: 2rem; cursor: pointer; line-height: 1; }
+.qz-move:hover { background: var(--qz-soft); }
+
+/* open */
+.qz-open textarea { margin-top: .6rem; }
+.qz-chip { display: inline-block; padding: .05rem .55rem; border-radius: 999px; margin: .15rem .2rem 0 0; font-size: .85rem; font-weight: 500; }
+.qz-chip-ok { background: var(--qz-ok-bg); color: var(--qz-ok); }
+
+/* scoreboard */
+.quiz-scoreboard {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+  padding: .75rem 1rem; border: 1px solid var(--qz-border); border-radius: 10px; background: var(--qz-soft); margin: 1.25rem 0 1.5rem;
+}
+.qz-score-big { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.qz-score-bar { flex: 1 1 160px; height: 8px; background: var(--qz-border); border-radius: 99px; overflow: hidden; min-width: 120px; }
+.qz-score-bar span { display: block; height: 100%; width: 0; background: var(--qz-ok); transition: width .3s; }
+.qz-pill {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 1030; background: var(--bs-body-bg, #fff);
+  border: 1px solid var(--qz-border); border-radius: 999px; padding: .35rem .85rem; font-weight: 600;
+  font-size: .9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); font-variant-numeric: tabular-nums;
+}
+.qz-error { color: var(--qz-bad); font-family: monospace; font-size: .85rem; }
+
+@media (max-width: 700px) {
+  .qz { padding: .85rem .9rem 1rem; }
+  .qz-row { grid-template-columns: 1fr; }
+  .qz-row-ctrls { justify-content: flex-start; }
+  .qz-row-head { display: none; }
+  .qz-match { grid-template-columns: 1fr; }
+  .qz-seg button { padding: .3rem .5rem; font-size: .82rem; }
+}
+@media print {
+  .qz-controls, .qz-pill, .quiz-scoreboard { display: none !important; }
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var LABELS = {
+    mc: "Multiple choice", ms: "Select all that apply", tf: "True / False",
+    short: "Short answer", fill: "Fill in the blanks", match: "Matching",
+    classify: "Classify", order: "Put in order", open: "Open-ended"
+  };
+  var registry = [];
+
+  /* ---------- helpers ---------- */
+  function attr(el, name) {
+    var v = el.getAttribute("data-" + name);
+    if (v === null) v = el.getAttribute(name);
+    return v;
+  }
+  function h(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function btn(label, cls, fn) {
+    var b = h("button", "btn btn-sm " + cls, label);
+    b.type = "button";
+    b.addEventListener("click", fn);
+    return b;
+  }
+  function norm(s) {
+    return String(s == null ? "" : s).toLowerCase()
+      .replace(/ı/g, "i").normalize("NFKD").replace(/[̀-ͯ]/g, "")
+      .replace(/[‘’'`"“”]/g, "")
+      .replace(/[^a-z0-9.%\s-]/g, " ")
+      .replace(/^(a|an|the)\s+/, "")
+      .replace(/\s+/g, " ").trim();
+  }
+  function num(s) {
+    s = String(s == null ? "" : s).trim().replace(/\s/g, "").replace(/%$/, "");
+    if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", ".");
+    var frac = s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+    if (frac) return parseFloat(frac[1]) / parseFloat(frac[2]);
+    if (!/^-?\d*\.?\d+(e-?\d+)?$/i.test(s)) return null;
+    return parseFloat(s);
+  }
+  function alts(spec) {
+    return String(spec == null ? "" : spec).split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function matches(input, spec, tol) {
+    var a = alts(spec);
+    if (tol !== null && tol !== undefined) {
+      var v = num(input), t = parseFloat(tol) || 0;
+      if (v === null) return false;
+      return a.some(function (x) { var y = num(x); return y !== null && Math.abs(v - y) <= t + 1e-9; });
+    }
+    var n = norm(input);
+    return n !== "" && a.some(function (x) { return norm(x) === n; });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function stripTags(html) { var d = h("div", null, html); return d.textContent.trim(); }
+  function unwrapP(html) { return html.trim().replace(/^<p>/, "").replace(/<\/p>$/, ""); }
+  function firstList(q) { return q.querySelector(":scope > ol, :scope > ul"); }
+  function pairs(q) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list of 'item :: answer' lines.");
+    var out = Array.prototype.map.call(list.children, function (li) {
+      var html = li.innerHTML, i = html.lastIndexOf("::");
+      if (i < 0) throw new Error("List item is missing '::' — " + stripTags(html).slice(0, 60));
+      return { html: unwrapP(html.slice(0, i)), answer: stripTags(html.slice(i + 2)) };
+    });
+    list.remove();
+    return out;
+  }
+  function markEl(el, ok) {
+    el.classList.remove("is-ok", "is-bad");
+    if (ok === true) el.classList.add("is-ok");
+    if (ok === false) el.classList.add("is-bad");
+  }
+
+  /* ---------- status + scoreboard ---------- */
+  function setStatus(q, s) {
+    q._status = s;
+    q.classList.remove("qz-correct", "qz-wrong", "qz-partial");
+    if (s) q.classList.add("qz-" + s);
+    updateScore();
+  }
+  function updateScore() {
+    var total = registry.length, correct = 0, tried = 0;
+    registry.forEach(function (q) {
+      if (q._status === "correct") correct++;
+      if (q._status) tried++;
+    });
+    document.querySelectorAll(".qz-score-big").forEach(function (e) { e.textContent = correct + " / " + total + " correct"; });
+    document.querySelectorAll(".qz-score-tried").forEach(function (e) { e.textContent = tried + " attempted"; });
+    document.querySelectorAll(".qz-score-bar span").forEach(function (e) { e.style.width = (total ? 100 * correct / total : 0) + "%"; });
+    var pill = document.querySelector(".qz-pill");
+    if (pill) pill.textContent = "✓ " + correct + " / " + total;
+  }
+  function feedback(p, kind, msg) {
+    p.fb.className = "qz-feedback qz-fb-" + kind;
+    p.fb.innerHTML = msg;
+  }
+  function showExplain(p) { if (p.explain) p.explain.hidden = false; }
+  function clearFb(p) { p.fb.className = "qz-feedback"; p.fb.innerHTML = ""; if (p.explain) p.explain.hidden = true; }
+  function scoreMsg(p, q, ok, total) {
+    if (ok === total) { feedback(p, "ok", "✓ All " + total + " correct!"); setStatus(q, "correct"); showExplain(p); }
+    else if (ok > 0) { feedback(p, "partial", ok + " / " + total + " correct. Fix the red ones and check again."); setStatus(q, "partial"); }
+    else { feedback(p, "bad", "0 / " + total + " correct. Have another go."); setStatus(q, "wrong"); }
+  }
+
+  /* ---------- scaffold ---------- */
+  function scaffold(q, type, n) {
+    q.classList.add("qz", "qz-t-" + type);
+    var explain = q.querySelector(":scope > .explain");
+    if (explain) explain.remove();
+    var head = h("div", "qz-head",
+      '<span class="qz-num">Q' + n + '</span><span class="qz-type">' + (attr(q, "label") || LABELS[type] || type) + "</span>");
+    q.insertBefore(head, q.firstChild);
+    var p = { ui: h("div", "qz-ui"), controls: h("div", "qz-controls"), fb: h("div", "qz-feedback"), explain: explain };
+    p.fb.setAttribute("role", "status");
+    p.fb.setAttribute("aria-live", "polite");
+    q.appendChild(p.ui);
+    q.appendChild(p.controls);
+    q.appendChild(p.fb);
+    if (explain) {
+      explain.classList.add("qz-explain");
+      explain.hidden = true;
+      explain.insertBefore(h("div", "qz-explain-title", type === "open" ? "Model answer" : "Explanation"), explain.firstChild);
+      q.appendChild(explain);
+    }
+    return p;
+  }
+  function standardControls(p, q, check, reveal, reset) {
+    if (check) p.controls.appendChild(btn("Check", "btn-primary", check));
+    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); }));
+    p.controls.appendChild(btn("Reset", "btn-outline-secondary", function () { reset(); clearFb(p); setStatus(q, null); }));
+    q._reset = function () { reset(); clearFb(p); setStatus(q, null); };
+  }
+  function parseIdx(spec, n) {
+    return String(spec || "").split(/[\s,;]+/).filter(Boolean).map(function (t) {
+      if (/^\d+$/.test(t)) return parseInt(t, 10) - 1;
+      return t.toUpperCase().charCodeAt(0) - 65;
+    }).filter(function (i) { return i >= 0 && i < n; });
+  }
+
+  /* ---------- multiple choice / multi-select / true-false ---------- */
+  function buildChoice(q, p, multi, tf) {
+    var items, ans;
+    if (tf) {
+      items = ["True", "False"];
+      var a = norm(attr(q, "answer"));
+      ans = [/^(t|true|yes|dogru)$/.test(a) ? 0 : 1];
+    } else {
+      var list = firstList(q);
+      if (!list) throw new Error("Expected a list of options.");
+      items = Array.prototype.map.call(list.children, function (li) { return unwrapP(li.innerHTML); });
+      list.remove();
+      ans = parseIdx(attr(q, "answer"), items.length);
+      if (!ans.length) throw new Error("answer= is missing or out of range.");
+    }
+    var wrap = h("div", "qz-options" + (tf ? " qz-inline" : ""));
+    var btns = items.map(function (html, i) {
+      var b = h("button", "qz-opt", '<span class="qz-letter">' + (tf ? (i ? "F" : "T") : String.fromCharCode(65 + i)) + '</span><span class="qz-opt-text">' + html + "</span>");
+      b.type = "button";
+      wrap.appendChild(b);
+      return b;
+    });
+    p.ui.appendChild(wrap);
+    function clear() { btns.forEach(function (b) { b.classList.remove("is-ok", "is-bad", "is-sel", "is-missed"); b.setAttribute("aria-pressed", "false"); }); }
+
+    if (!multi) {
+      btns.forEach(function (b, i) {
+        b.addEventListener("click", function () {
+          clear();
+          if (ans.indexOf(i) >= 0) {
+            b.classList.add("is-ok");
+            feedback(p, "ok", "✓ Correct!");
+            setStatus(q, "correct");
+            showExplain(p);
+          } else {
+            b.classList.add("is-bad");
+            feedback(p, "bad", "✗ Not quite. Try another option.");
+            setStatus(q, "wrong");
+          }
+        });
+      });
+      standardControls(p, q, null, function () {
+        clear();
+        ans.forEach(function (i) { btns[i].classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return tf ? items[i] : String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    } else {
+      btns.forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          var on = !b.classList.contains("is-sel");
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          b.classList.toggle("is-sel", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      });
+      standardControls(p, q, function () {
+        var hit = 0, wrong = 0;
+        btns.forEach(function (b, i) {
+          var sel = b.classList.contains("is-sel"), good = ans.indexOf(i) >= 0;
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          if (sel && good) { hit++; b.classList.add("is-ok"); }
+          if (sel && !good) { wrong++; b.classList.add("is-bad"); }
+        });
+        if (hit === ans.length && !wrong) { feedback(p, "ok", "✓ Correct, you found all " + ans.length + "!"); setStatus(q, "correct"); showExplain(p); }
+        else if (hit === 0 && wrong === 0) { feedback(p, "info", "Select at least one option first."); }
+        else {
+          feedback(p, hit ? "partial" : "bad", hit + " of " + ans.length + " correct options selected" + (wrong ? ", " + wrong + " wrong selection" + (wrong > 1 ? "s" : "") : "") + ".");
+          setStatus(q, hit ? "partial" : "wrong");
+        }
+      }, function () {
+        clear();
+        btns.forEach(function (b, i) { if (ans.indexOf(i) >= 0) b.classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    }
+  }
+
+  /* ---------- short answer ---------- */
+  function buildShort(q, p) {
+    var spec = attr(q, "answer"), tol = attr(q, "tol"), unit = attr(q, "unit");
+    if (!spec) throw new Error("answer= is missing.");
+    var row = h("div", "qz-short");
+    var input = h("input", "form-control qz-input");
+    input.type = "text";
+    input.placeholder = attr(q, "placeholder") || (tol !== null ? "Type a number…" : "Type your answer…");
+    input.setAttribute("aria-label", "Your answer");
+    row.appendChild(input);
+    if (unit) row.appendChild(h("span", "qz-unit", unit));
+    p.ui.appendChild(row);
+    function check() {
+      if (!input.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+      var ok = matches(input.value, spec, tol);
+      markEl(input, ok);
+      if (ok) { feedback(p, "ok", "✓ Correct!"); setStatus(q, "correct"); showExplain(p); }
+      else { feedback(p, "bad", "✗ Not quite. Try again" + (tol !== null ? " (check your rounding)." : ".")); setStatus(q, "wrong"); }
+    }
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+    standardControls(p, q, check, function () {
+      feedback(p, "info", "Answer: <strong>" + alts(spec)[0] + (unit ? " " + unit : "") + "</strong>");
+    }, function () { input.value = ""; markEl(input, null); });
+  }
+
+  /* ---------- fill in the blanks ---------- */
+  function buildFill(q, p) {
+    var blanks = Array.prototype.map.call(q.querySelectorAll(".blank"), function (span) {
+      var spec = attr(span, "answer"), tol = attr(span, "tol");
+      var input = h("input", "qz-blank-input");
+      input.type = "text";
+      input.setAttribute("aria-label", "blank");
+      var longest = alts(spec).reduce(function (m, x) { return Math.max(m, x.length); }, 4);
+      input.style.width = Math.min(longest + 3, 28) + "ch";
+      span.innerHTML = "";
+      span.appendChild(input);
+      return { input: input, spec: spec, tol: tol };
+    });
+    if (!blanks.length) throw new Error("No []{.blank answer=...} spans found.");
+    q.querySelectorAll(":scope > p").forEach(function (para) { if (para.querySelector(".blank")) para.classList.add("qz-fill-body"); });
+    function check() {
+      var ok = 0;
+      blanks.forEach(function (b) { var good = matches(b.input.value, b.spec, b.tol); markEl(b.input, good); if (good) ok++; });
+      scoreMsg(p, q, ok, blanks.length);
+    }
+    blanks.forEach(function (b) { b.input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); }); });
+    standardControls(p, q, check, function () {
+      blanks.forEach(function (b) { b.input.value = alts(b.spec)[0]; markEl(b.input, true); });
+      feedback(p, "info", "Answers filled in.");
+    }, function () { blanks.forEach(function (b) { b.input.value = ""; markEl(b.input, null); }); });
+  }
+
+  /* ---------- selectable control (segmented buttons or dropdown) ---------- */
+  function control(options, forceSelect) {
+    var longest = options.reduce(function (m, o) { return Math.max(m, o.length); }, 0);
+    if (!forceSelect && options.length <= 4 && longest <= 18) {
+      var seg = h("div", "qz-seg"), value = null;
+      seg.setAttribute("role", "group");
+      var bs = options.map(function (o) {
+        var b = h("button", null, o);
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () { set(o); markEl(seg, null); });
+        seg.appendChild(b);
+        return b;
+      });
+      function set(v) {
+        value = v;
+        bs.forEach(function (b, i) { b.setAttribute("aria-pressed", options[i] === v ? "true" : "false"); });
+      }
+      return { el: seg, get: function () { return value; }, set: set, mark: function (ok) { markEl(seg, ok); } };
+    }
+    var sel = h("select", "form-select form-select-sm qz-select");
+    sel.appendChild(h("option", null, "— choose —")).value = "";
+    options.forEach(function (o) { var op = h("option", null, o); op.value = o; sel.appendChild(op); });
+    sel.addEventListener("change", function () { markEl(sel, null); });
+    return { el: sel, get: function () { return sel.value || null; }, set: function (v) { sel.value = v == null ? "" : v; }, mark: function (ok) { markEl(sel, ok); } };
+  }
+
+  /* ---------- classify ---------- */
+  function buildClassify(q, p) {
+    var items = pairs(q);
+    var groupsSpec = attr(q, "options");
+    var groups;
+    if (groupsSpec) groups = groupsSpec.split(";").map(function (g) { return alts(g); });
+    else {
+      var seen = [];
+      items.forEach(function (it) { alts(it.answer).forEach(function (a) { if (seen.indexOf(a) < 0) seen.push(a); }); });
+      groups = [seen];
+    }
+    var cols = attr(q, "columns") ? attr(q, "columns").split(";").map(function (s) { return s.trim(); }) : null;
+    var grid = items.some(function (it) { return /<img/i.test(it.html); });
+    var container = h("div", grid ? "qz-grid" : "qz-rows");
+    if (cols && !grid) {
+      var hr = h("div", "qz-row qz-row-head", "<span></span>");
+      var hc = h("div", "qz-row-ctrls");
+      cols.forEach(function (c) { hc.appendChild(h("span", null, c)); });
+      hr.appendChild(hc);
+      container.appendChild(hr);
+    }
+    var rows = items.map(function (it, idx) {
+      var answers = it.answer.split(";").map(function (s) { return s.trim(); });
+      if (answers.length !== groups.length) throw new Error("Item '" + stripTags(it.html).slice(0, 40) + "' needs " + groups.length + " answer(s) separated by ';'.");
+      var ctrls = groups.map(function (g) { return control(g, grid); });
+      var row;
+      if (grid) {
+        row = h("div", "qz-card");
+        row.appendChild(h("div", "qz-card-tag", "Display " + (idx + 1)));
+        row.appendChild(h("div", "qz-card-media", it.html));
+        ctrls.forEach(function (c) { row.appendChild(c.el); });
+      } else {
+        row = h("div", "qz-row", "<div>" + it.html + "</div>");
+        var cw = h("div", "qz-row-ctrls");
+        ctrls.forEach(function (c) { cw.appendChild(c.el); });
+        row.appendChild(cw);
+      }
+      container.appendChild(row);
+      return { ctrls: ctrls, answers: answers };
+    });
+    p.ui.appendChild(container);
+    var total = rows.length * groups.length;
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) {
+        r.ctrls.forEach(function (c, i) {
+          var v = c.get(), good = v !== null && matches(v, r.answers[i]);
+          c.mark(v === null ? false : good);
+          if (good) ok++;
+        });
+      });
+      scoreMsg(p, q, ok, total);
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c, i) { c.set(alts(r.answers[i])[0]); c.mark(true); }); });
+      feedback(p, "info", "Correct answers selected.");
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c) { c.set(null); c.mark(null); }); });
+    });
+  }
+
+  /* ---------- matching ---------- */
+  function buildMatch(q, p) {
+    var items = pairs(q);
+    var rights = [];
+    items.forEach(function (it) { if (rights.indexOf(it.answer) < 0) rights.push(it.answer); });
+    rights = shuffle(rights);
+    var letters = rights.map(function (_, i) { return String.fromCharCode(65 + i); });
+    var wrap = h("div", "qz-match");
+    var left = h("div", "qz-match-left");
+    var right = h("ol", "qz-match-right");
+    rights.forEach(function (r, i) {
+      right.appendChild(h("li", null, '<span class="qz-letter">' + letters[i] + "</span><span>" + r + "</span>"));
+    });
+    var rows = items.map(function (it) {
+      var c = control(letters, true);
+      c.el.setAttribute("aria-label", "Match for " + stripTags(it.html));
+      var row = h("div", "qz-row");
+      row.appendChild(c.el);
+      row.appendChild(h("div", null, it.html));
+      left.appendChild(row);
+      return { c: c, letter: letters[rights.indexOf(it.answer)] };
+    });
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    p.ui.appendChild(wrap);
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) { var v = r.c.get(), good = v === r.letter; r.c.mark(v === null ? false : good); if (good) ok++; });
+      scoreMsg(p, q, ok, rows.length);
+    }, function () {
+      rows.forEach(function (r) { r.c.set(r.letter); r.c.mark(true); });
+      feedback(p, "info", "Answer: " + rows.map(function (r, i) { return (i + 1) + "→" + r.letter; }).join(", "));
+    }, function () { rows.forEach(function (r) { r.c.set(null); r.c.mark(null); }); });
+  }
+
+  /* ---------- ordering ---------- */
+  function buildOrder(q, p) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list written in the correct order.");
+    var items = Array.prototype.map.call(list.children, function (li, i) { return { html: unwrapP(li.innerHTML), idx: i }; });
+    list.remove();
+    var ul = h("ol", "qz-order");
+    var dragged = null;
+    function lis() { return Array.prototype.slice.call(ul.children); }
+    function make(it) {
+      var li = h("li");
+      li.draggable = true;
+      li._idx = it.idx;
+      li.innerHTML = '<span class="qz-letter qz-pos"></span><span class="qz-order-text">' + it.html + "</span>";
+      var up = h("button", "qz-move", "↑"); up.type = "button"; up.setAttribute("aria-label", "Move up");
+      var dn = h("button", "qz-move", "↓"); dn.type = "button"; dn.setAttribute("aria-label", "Move down");
+      up.addEventListener("click", function () { if (li.previousElementSibling) ul.insertBefore(li, li.previousElementSibling); changed(); });
+      dn.addEventListener("click", function () { if (li.nextElementSibling) ul.insertBefore(li.nextElementSibling, li); changed(); });
+      li.appendChild(up); li.appendChild(dn);
+      li.addEventListener("dragstart", function (e) { dragged = li; li.classList.add("is-drag"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", ""); } catch (_) {} });
+      li.addEventListener("dragend", function () { li.classList.remove("is-drag"); dragged = null; changed(); });
+      li.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        if (!dragged || dragged === li) return;
+        var r = li.getBoundingClientRect();
+        ul.insertBefore(dragged, (e.clientY - r.top) > r.height / 2 ? li.nextSibling : li);
+      });
+      return li;
+    }
+    function changed() {
+      lis().forEach(function (li, i) { li.querySelector(".qz-pos").textContent = i + 1; li.classList.remove("is-ok", "is-bad"); });
+    }
+    function fill(order) { ul.innerHTML = ""; order.forEach(function (it) { ul.appendChild(make(it)); }); changed(); }
+    function shuffled() {
+      var s = shuffle(items), tries = 0;
+      while (items.length > 1 && s.every(function (it, i) { return it.idx === i; }) && tries++ < 20) s = shuffle(items);
+      return s;
+    }
+    fill(shuffled());
+    p.ui.appendChild(ul);
+    standardControls(p, q, function () {
+      var ok = 0;
+      lis().forEach(function (li, i) { var good = li._idx === i; markEl(li, good); if (good) ok++; });
+      scoreMsg(p, q, ok, items.length);
+    }, function () {
+      fill(items);
+      lis().forEach(function (li) { markEl(li, true); });
+      feedback(p, "info", "Correct order shown.");
+    }, function () { fill(shuffled()); });
+  }
+
+  /* ---------- open-ended ---------- */
+  function buildOpen(q, p) {
+    var ta = h("textarea", "form-control");
+    ta.rows = parseInt(attr(q, "rows") || "4", 10);
+    ta.placeholder = "Type the class's answer here…";
+    var w = h("div", "qz-open");
+    w.appendChild(ta);
+    p.ui.appendChild(w);
+    var kw = attr(q, "keywords");
+    var groups = kw ? kw.split(";").map(function (g) { return alts(g); }).filter(function (g) { return g.length; }) : [];
+    var check = null;
+    if (groups.length) {
+      check = function () {
+        if (!ta.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+        var text = " " + norm(ta.value) + " ";
+        var found = groups.filter(function (g) { return g.some(function (a) { return text.indexOf(norm(a)) >= 0; }); });
+        var chips = found.map(function (g) { return '<span class="qz-chip qz-chip-ok">✓ ' + g[0] + "</span>"; }).join("");
+        var n = found.length, t = groups.length;
+        if (n === t) { feedback(p, "ok", "All " + t + " key ideas mentioned! " + chips); setStatus(q, "correct"); showExplain(p); }
+        else if (n) { feedback(p, "partial", n + " of " + t + " key ideas found. Something is still missing. " + chips); setStatus(q, "partial"); }
+        else { feedback(p, "bad", "None of the " + t + " key ideas found yet. Think about what the question asks for."); setStatus(q, "wrong"); }
+      };
+    }
+    standardControls(p, q, check, function () { feedback(p, "info", "Compare with the model answer below."); }, function () { ta.value = ""; });
+    if (check) p.controls.firstChild.textContent = "Check key ideas";
+  }
+
+  /* ---------- init ---------- */
+  function init() {
+    var quizzes = document.querySelectorAll("div.quiz");
+    var n = 0;
+    quizzes.forEach(function (q) {
+      var type = (attr(q, "type") || "").toLowerCase();
+      if (!type) Object.keys(LABELS).forEach(function (k) { if (q.classList.contains(k)) type = k; });
+      n++;
+      try {
+        var p = scaffold(q, type, n);
+        if (type === "mc") buildChoice(q, p, false, false);
+        else if (type === "ms") buildChoice(q, p, true, false);
+        else if (type === "tf") buildChoice(q, p, false, true);
+        else if (type === "short") buildShort(q, p);
+        else if (type === "fill") buildFill(q, p);
+        else if (type === "classify") buildClassify(q, p);
+        else if (type === "match") buildMatch(q, p);
+        else if (type === "order") buildOrder(q, p);
+        else if (type === "open") buildOpen(q, p);
+        else throw new Error("Unknown type '" + type + "'.");
+        registry.push(q);
+      } catch (err) {
+        q.appendChild(h("div", "qz-error", "Quiz error: " + err.message));
+        if (window.console) console.error("Quiz Q" + n, err);
+      }
+    });
+    document.querySelectorAll(".quiz-scoreboard").forEach(function (sb) {
+      sb.innerHTML = "";
+      var left = h("div", null, '<div class="qz-score-big"></div><div class="qz-score-tried" style="font-size:.85rem;color:var(--qz-muted)"></div>');
+      var bar = h("div", "qz-score-bar", "<span></span>");
+      sb.appendChild(left);
+      sb.appendChild(bar);
+      sb.appendChild(btn("Reset all", "btn-outline-secondary", function () {
+        if (!window.confirm("Clear every answer on this page?")) return;
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+      }));
+    });
+    if (registry.length && !document.querySelector(".qz-pill")) document.body.appendChild(h("div", "qz-pill"));
+    updateScore();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Made with ❤️ and Quarto</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
