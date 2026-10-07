@@ -35,88 +35,11 @@
     "text": "Part C — Displaying categorical data\n\n\n\n\n\n\n\nChoose the name of each display.\n\n :: Frequency table\n :: Contingency table\n :: Bar chart\n :: Clustered bar chart\n :: Pie chart\n :: Stacked bar chart\n :: Doughnut chart\n :: Mosaic plot\n :: Waffle chart\n :: Spine plot | Stacked bar chart\n :: Population pyramid\n\n\n\nClustered bars put the groups side by side. Stacked bars put them on top of each other.\nA spine plot is a 100% stacked bar chart in which the width of each bar is proportional to the group size. A mosaic plot extends this idea to more than two variables.\nA waffle chart shows a percentage as filled squares in a 10 × 10 grid (each square = 1%).\n\n\n\n\n\nIs each display used for one categorical variable, or to show the relationship between two or more categorical variables?\n\nFrequency table :: One variable\nPie chart :: One variable\nContingency (two-way) table :: Two or more\nWaffle chart :: One variable\nClustered bar chart :: Two or more\nDoughnut chart :: One variable\nMosaic plot :: Two or more\nBar chart :: One variable\nSpine plot :: Two or more\n\n\nTo compare two categorical variables you need a display that crosses them: a contingency table, or clustered, stacked, spine or mosaic plots. The population pyramid from the previous question also shows two variables (age group and sex) as back-to-back bars.\n\n\n\nThe student performance dataset\nThe Center of Assessment and Evaluation wants to study the factors that affect student performance. Information on 110 students from a high school in Seoul was collected. The first six rows of the data:\n\n\n\n\n\nLunch: free/reduced or standard lunch. Test: “completed” if the student completed a test preparation course, otherwise “uncompleted”. Education_Level is the parents’ education level.\n\n\nClassify each variable in the dataset.\n\nGender :: Nominal\nEducation_Level (parents’ education) :: Ordinal\nLunch :: Nominal\nTest (preparation course) :: Nominal\nMath_score :: Quantitative\n\n\nEducation level has a natural order: some high school &lt; high school &lt; some college &lt; associate’s &lt; bachelor’s &lt; master’s. That makes it ordinal, so a bar chart of it should keep that order rather than sorting the bars alphabetically. Gender, Lunch and Test are labels with no order (Lunch and Test are binary).\n\n\n\n\nUse the frequency table of parents’ education level.\n\n\n\n\n\nThe total number of students is n = . The most common (modal) education level is . The relative frequency of “master’s degree” is 7/110 =  (4 decimals), which is about  %.\n\nn = 29 + 10 + 19 + 7 + 23 + 22 = 110. The largest frequency is 29, for associate’s degree. The relative frequency of master’s degree is 7/110 ≈ 0.0636, or 6.36%.\nInterpretation: the parents of 29 students (26.4%) have an associate’s degree, and the parents of 7 students (6.4%) have a master’s degree.\n\n\n\n\nHere is the relative frequency table and the bar chart of the same variable.\n\n\n\n\n\n\n\n\n\n\nIf we re-draw the bar chart using relative frequencies instead of counts, how does it change?\n\nThe tallest bar becomes a different category.\nThe bars get closer together, because the proportions are all smaller than 1.\nOnly the y-axis scale changes. The bars keep exactly the same shape.\nIt must be redrawn as a pie chart, because proportions add up to 1.\n\n\nEvery relative frequency is the count divided by the same number (n = 110), so every bar is scaled by the same factor. Only the y-axis labels change, from 0–30 to 0–0.27. Also notice that this chart orders the bars alphabetically. Because education level is ordinal, a better chart would order the bars from some high school to master’s degree.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing the charts and n = 110, answer: about  students completed the test preparation course, and about  students are male.\n\n\nCompleted: 0.345 × 110 = 37.95 ≈ 38 students (so 72 did not complete it)\nMale: 0.527 × 110 = 57.97 ≈ 58 students (and 52 female)\n\nCharts that show only percentages hide the sample size, so always report n alongside the percentages.\n\n\n\n\nWrite a short interpretation (2–3 sentences) of the doughnut chart and the pie chart above.\n\nThe doughnut chart shows that 65.5% of the students did not complete the test preparation course, while 34.5% completed it. So roughly two out of three students did not take the course. The pie chart shows that 52.7% of the students in the study are male and 47.3% are female, so the sample is fairly balanced by gender.\nWatch out: read the labels carefully. The larger (orange) slice is uncompleted, not completed.\n\n\n\n\nThe contingency table shows handedness by sex for 100 people.\n\n\n\n\n\nThe total number of left-handed people is . The percentage of males who are left-handed is  % (1 decimal). The percentage of left-handed people who are female is  % (1 decimal).\n\n\nLeft-handed total: 9 + 4 = 13\nAmong males: 9 / 52 = 0.173 → 17.3% (we divide by the row total, 52)\nAmong left-handers: 4 / 13 = 0.308 → 30.8% (we divide by the column total, 13)\n\nThe two percentages answer different questions, so always ask “percent of what?” For comparison, only 4/48 = 8.3% of females are left-handed, which suggests that left-handedness is more common among males in this group.\n\n\n\n\nUsing the same table, we want to compare the proportion of left-handed people among males and among females. Which display is the best choice?\n\nA pie chart of handedness\nA clustered bar chart of the counts\nA 100% stacked bar chart (or spine plot) of handedness within each sex\nA frequency table of sex\n\n\nTo compare proportions within groups, every group should be scaled to 100%. That is exactly what a 100% stacked bar chart / spine plot does, and a spine plot also shows group size through the bar width. A pie chart and a frequency table each show only one variable. A clustered bar chart of counts can mislead when the groups have different sizes."
   },
   {
-    "objectID": "recitation-week2.html",
-    "href": "recitation-week2.html",
-    "title": "Week 2: Data Types, Chart Selection & Color",
+    "objectID": "homeworks.html",
+    "href": "homeworks.html",
+    "title": "Homeworks",
     "section": "",
-    "text": "Data description and data types\nProper visualization tools for specific data types (bar plot, box-plot, violin plot, histogram, scatter plot, etc.)\nColor separation, value representation by color, and color palettes"
-  },
-  {
-    "objectID": "recitation-week2.html#topics",
-    "href": "recitation-week2.html#topics",
-    "title": "Week 2: Data Types, Chart Selection & Color",
-    "section": "",
-    "text": "Data description and data types\nProper visualization tools for specific data types (bar plot, box-plot, violin plot, histogram, scatter plot, etc.)\nColor separation, value representation by color, and color palettes"
-  },
-  {
-    "objectID": "recitation-week2.html#notes",
-    "href": "recitation-week2.html#notes",
-    "title": "Week 2: Data Types, Chart Selection & Color",
-    "section": "Notes",
-    "text": "Notes\n1. Data types\nBefore picking a chart, identify what kind of variable you’re plotting:\n\n\n\n\n\n\n\n\nType\nDefinition\nExamples\n\n\n\n\nCategorical (nominal)\nUnordered categories\nCountry, gender, product type\n\n\nCategorical (ordinal)\nOrdered categories, no fixed numeric distance\nEducation level, satisfaction rating\n\n\nDiscrete numeric\nCountable numeric values\nNumber of children, number of defects\n\n\nContinuous numeric\nMeasured on a continuum\nHeight, income, temperature\n\n\n\nHealy opens by stressing that the choice of graph is a claim about what kind of comparison you want the reader to make, which starts with correctly identifying the variable type. Reference: Healy (2018), Ch. 1, “Look at Data.”\n2. Matching chart type to data type\n\n\n\n\n\n\n\nData relationship\nRecommended chart(s)\n\n\n\n\nOne categorical variable — compare amounts across categories\nBar chart\n\n\nOne continuous variable — see the distribution\nHistogram, density plot\n\n\nOne continuous variable across groups — compare distributions\nBox plot, violin plot\n\n\nTwo continuous variables — see the relationship\nScatter plot\n\n\nChange over time\nLine chart\n\n\nPart-to-whole\nStacked bar (avoid pie charts for more than 2–3 slices)\n\n\n\nWilke organizes his entire middle section by exactly this logic — “Amounts” (bar charts), “Distributions” (histograms, density plots, box plots, violin plots), and “x–y relationships” (scatter plots) each get their own chapter, with guidance on when a box plot hides too much (e.g., multimodal distributions) and a violin plot or strip plot is preferable. Reference: Wilke (2019), Ch. 6 “Visualizing Amounts,” Ch. 7 “Visualizing Distributions I,” Ch. 8 “Visualizing Distributions II,” Ch. 12 “Visualizing Associations.”\nYau’s Visualize This covers the same chart family from a more practical, build-it-yourself angle, with worked examples of when a box plot oversimplifies compared to a violin plot that shows the full density shape. Reference: Yau (2011), Ch. 3, “Statistical Rules for Visualization” and Ch. 6, “Distributions.”\n3. Color in visualization\nColor can encode three fundamentally different kinds of information, and using the wrong palette type for the wrong data is one of the most common visualization mistakes:\n\nSequential palettes — for ordered, continuous data (e.g., low → high income). Uses a single hue that varies in lightness/saturation.\nDiverging palettes — for data with a meaningful midpoint (e.g., temperature anomaly above/below zero). Uses two hues diverging from a neutral center.\nQualitative (categorical) palettes — for unordered categories (e.g., product type). Uses hues that are perceptually distinct but not ordered.\n\nWilke devotes a full chapter to this distinction and to designing colorblind-safe palettes; Healy makes the same point with ggplot2’s built-in viridis and ColorBrewer scales as concrete examples. References: Wilke (2019), Ch. 4, “Color Scales”; Healy (2018), Ch. 8, “Refine Your Plots” (color section).\nKnaflic adds a complementary, presentation-focused rule: use color sparingly and with intention — reserve a single saturated accent color for the one data point you want the audience to notice, and keep everything else in gray. Reference: Knaflic (2015), Ch. 4, “Focus Your Audience’s Attention.”"
-  },
-  {
-    "objectID": "recitation-week2.html#practice-questions",
-    "href": "recitation-week2.html#practice-questions",
-    "title": "Week 2: Data Types, Chart Selection & Color",
-    "section": "Practice Questions",
-    "text": "Practice Questions\nMultiple Choice 1. You want to compare the distribution of exam scores across four sections of a course. Which chart is generally preferable to a box plot if you suspect the scores are bimodal in one section? a) Pie chart b) Violin plot c) Bar chart d) Scatter plot (Answer: b — a violin plot shows the full density shape, revealing bimodality that a box plot’s five-number summary would hide; Wilke, Ch. 8.)\nTrue / False 2. A diverging color palette is the right choice for encoding an unordered categorical variable like “product type.” (Answer: False — use a qualitative/categorical palette for unordered categories; diverging palettes are for data with a meaningful midpoint; Wilke, Ch. 4.)\nMatching 3. Match each data type to its most appropriate chart: - (a) Relationship between two continuous variables - (b) Distribution of one continuous variable - (c) Comparing totals across categories - (d) Change over time 1. Line chart 2. Bar chart 3. Scatter plot 4. Histogram (Answer: a–3, b–4, c–2, d–1.)\nShort Answer 4. Explain why a sequential color palette would be a poor choice for a map showing which of five unrelated product categories sold best in each region.\nApplied / Discussion 5. Pick a dataset with one continuous and one categorical variable (e.g., exam scores by section). Sketch (on paper or in Tableau) both a box plot and a violin plot of the same data. Which reveals more information, and in what situation would you choose the simpler box plot anyway?"
-  },
-  {
-    "objectID": "recitation-week2.html#references-for-weeks-12",
-    "href": "recitation-week2.html#references-for-weeks-12",
-    "title": "Week 2: Data Types, Chart Selection & Color",
-    "section": "References for Weeks 1–2",
-    "text": "References for Weeks 1–2\n\nKnaflic, C. N. (2015). Storytelling with Data: A Data Visualization Guide for Business Professionals. Wiley.\nTufte, E. R. (2001). The Visual Display of Quantitative Information (2nd ed.). Graphics Press.\nHealy, K. (2018). Data Visualization: A Practical Introduction. Princeton University Press.\nWilke, C. O. (2019). Fundamentals of Data Visualization. O’Reilly Media. (Also free online: clauswilke.com/dataviz)\nYau, N. (2011). Visualize This: The FlowingData Guide to Design, Visualization, and Statistics. Wiley.\n\nNote: chapter numbers above are given for the editions listed in the course syllabus — double check against your own copy, since chapter numbering can shift slightly between print runs and the free online edition of Wilke."
-  },
-  {
-    "objectID": "computing-setup.html",
-    "href": "computing-setup.html",
-    "title": "Setup",
-    "section": "",
-    "text": "Install the following tools before the second week of class. If you run into trouble, bring your laptop to office hours or a recitation."
-  },
-  {
-    "objectID": "computing-setup.html#tableau-public",
-    "href": "computing-setup.html#tableau-public",
-    "title": "Setup",
-    "section": "Tableau Public",
-    "text": "Tableau Public\n\nGo to public.tableau.com and create a free account.\nDownload and install Tableau Public Desktop for your OS.\nSign in and try opening a sample dataset to confirm it works."
-  },
-  {
-    "objectID": "computing-setup.html#flourish",
-    "href": "computing-setup.html#flourish",
-    "title": "Setup",
-    "section": "Flourish",
-    "text": "Flourish\n\nGo to flourish.studio and create a free account.\nNo local installation is needed — Flourish runs in the browser."
-  },
-  {
-    "objectID": "computing-setup.html#python",
-    "href": "computing-setup.html#python",
-    "title": "Setup",
-    "section": "Python",
-    "text": "Python\nWe won’t be using Anaconda in this course. You have two good options — Google Colab (nothing to install, runs in your browser) or Positron (a local IDE, if you’d rather work offline). Pick whichever suits you.\n\nOption A: Google Colab (no installation needed)\nGoogle Colab runs Python notebooks entirely in the browser, with NumPy, Pandas, Matplotlib, and Seaborn already installed — nothing to set up locally.\n\nGo to colab.research.google.com and sign in with a Google account.\nClick New notebook.\nIn the first cell, run the check below to confirm the packages are available.\nNotebooks save automatically to your Google Drive; use File → Download to save a .ipynb copy for submission if required.\n\n\n\nOption B: Positron (local install)\nPositron is a free IDE built specifically for data science in Python and R (from the makers of RStudio). It’s currently in public preview and runs fully offline once set up.\n1. Install Python\n\nDownload the latest Python 3.x installer from python.org/downloads.\nWindows: during setup, check “Add python.exe to PATH” before clicking Install.\nMac: run the downloaded .pkg installer and follow the prompts.\nVerify the install by opening a terminal (macOS: Terminal; Windows: Command Prompt or PowerShell) and running:\n\npython3 --version\n2. Install the required packages\nFrom the same terminal:\npip install numpy pandas matplotlib seaborn jupyter\n(On Windows, use pip instead of pip3 if pip3 isn’t recognized.)\n3. Install Positron\n\nMac: go to positron.posit.co/download.html, download the .dmg for your chip (Apple Silicon or Intel), open it, and drag Positron into your Applications folder.\nWindows: from the same download page, get the .exe installer and run it, following the setup wizard.\nOpen Positron, then in the bottom-right interpreter picker, select the Python 3.x you just installed.\nOpen or create a .py or .ipynb file and run a cell to confirm it works.\n\n\n\nConfirm the core packages are available\nRun this in a new Colab cell or Positron notebook/file:\nimport numpy, pandas, matplotlib, seaborn\nprint(\"All set!\")"
-  },
-  {
-    "objectID": "computing-setup.html#datacamp",
-    "href": "computing-setup.html#datacamp",
-    "title": "Setup",
-    "section": "DataCamp",
-    "text": "DataCamp\n\nUse the course invite link (posted on ODTUClass) to join the class DataCamp group.\nDataCamp assignments count for 10% of your grade — check the Syllabus page."
-  },
-  {
-    "objectID": "computing-setup.html#troubleshooting",
-    "href": "computing-setup.html#troubleshooting",
-    "title": "Setup",
-    "section": "Troubleshooting",
-    "text": "Troubleshooting\n\npython3 / pip not recognized on Windows (Positron route): you likely skipped “Add python.exe to PATH” during install — rerun the Python installer, choose “Modify”, and check that box, or reinstall from scratch.\nPositron doesn’t see your Python packages: confirm the interpreter selected in the bottom-right of Positron matches the Python you ran pip install with (multiple Python installs can conflict).\nColab notebook won’t save / lost my work: make sure you’re signed in to a Google account before you start — unsaved, signed-out sessions can be lost when the browser tab closes.\nTableau Public won’t open a file: confirm you downloaded Tableau Public, not the paid Tableau Desktop trial — they’re different installers.\nStill stuck? Bring it to office hours or ask during recitation."
-  },
-  {
-    "objectID": "games-tab/games.html",
-    "href": "games-tab/games.html",
-    "title": "Games",
-    "section": "",
-    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n  ?\n  \n    Recitation 2\n    Coming soon\n    A new game will appear here after the next recitation.\n  \n\n\nHow to play in class: open the game on the projector, choose Relaxed speed, and let the class shout the answers. Keys 1–4 pick a bin, Space continues, P pauses."
+    "text": "Homework assignments will be posted here as the semester progresses, and also on ODTUClass. Late homeworks are not accepted — see the Syllabus page for the full policy.\n\n\n\n#\nTopic\nAssigned\nDue\n\n\n\n\n1\nTBD\nTBD\nTBD\n\n\n2\nTBD\nTBD\nTBD"
   },
   {
     "objectID": "index.html",
@@ -147,17 +70,45 @@
     "text": "Contact\n Email: serenay@metu.edu.tr\n Office: Department of Statistics Room No: 234.\n Phone: +90 (312) 210-2979\n GitHub: github.com/statserenay\n LinkedIn: serenay-çakar"
   },
   {
-    "objectID": "homeworks.html",
-    "href": "homeworks.html",
-    "title": "Homeworks",
+    "objectID": "games-tab/games.html",
+    "href": "games-tab/games.html",
+    "title": "Games",
     "section": "",
-    "text": "Homework assignments will be posted here as the semester progresses, and also on ODTUClass. Late homeworks are not accepted — see the Syllabus page for the full policy.\n\n\n\n#\nTopic\nAssigned\nDue\n\n\n\n\n1\nTBD\nTBD\nTBD\n\n\n2\nTBD\nTBD\nTBD"
+    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n  ?\n  \n    Recitation 2\n    Coming soon\n    A new game will appear here after the next recitation."
   },
   {
-    "objectID": "recitations.html",
-    "href": "recitations.html",
-    "title": "Recitation Notes",
+    "objectID": "computing-setup.html",
+    "href": "computing-setup.html",
+    "title": "Setup",
     "section": "",
-    "text": "Use the Recitations dropdown in the navbar above to jump to a specific week, or pick one from the list below.\n\n\n\nWeek\nTopic\n\n\n\n\n1\nIntroduction to Data Visualization & Gestalt Principles\n\n\n2\nData Types, Chart Selection & Color\n\n\n3\nIntroduction to Tableau Public\n\n\n4\nData Manipulation with Tableau\n\n\n5\nTableau Dashboards\n\n\n6\nInteractive Plotting with Flourish\n\n\n7\nData Manipulation with Python (NumPy, Pandas)\n\n\n8\nGrouping and Pivoting with Python\n\n\n9\nData Quality\n\n\n10\nData Cleaning and Tidying\n\n\n11\nMissing and Inconsistent Values in Python\n\n\n12\nVisualizing 1D Distributions with Python\n\n\n13\nVisualizing Multivariate Data with Python\n\n\n14\nPractical Exercises and Real-Life Examples"
+    "text": "We will install the following tools later. If you will run into trouble, you can bring your laptop to office hours or a recitation."
+  },
+  {
+    "objectID": "computing-setup.html#tableau-public",
+    "href": "computing-setup.html#tableau-public",
+    "title": "Setup",
+    "section": "Tableau Public",
+    "text": "Tableau Public\n\nGo to public.tableau.com and create a free account.\nDownload and install Tableau Public Desktop for your OS.\nSign in and try opening a sample dataset to confirm it works."
+  },
+  {
+    "objectID": "computing-setup.html#flourish",
+    "href": "computing-setup.html#flourish",
+    "title": "Setup",
+    "section": "Flourish",
+    "text": "Flourish\n\nGo to flourish.studio and create a free account.\nNo local installation is needed — Flourish runs in the browser."
+  },
+  {
+    "objectID": "computing-setup.html#python",
+    "href": "computing-setup.html#python",
+    "title": "Setup",
+    "section": "Python",
+    "text": "Python\nWe won’t be using Anaconda in this course. You have two good options — Google Colab (nothing to install, runs in your browser) or Positron (a local IDE, if you’d rather work offline). Pick whichever suits you.\n\nOption A: Google Colab (no installation needed)\nGoogle Colab runs Python notebooks entirely in the browser, with NumPy, Pandas, Matplotlib, and Seaborn already installed — nothing to set up locally.\n\nGo to colab.research.google.com and sign in with a Google account.\nClick New notebook.\nIn the first cell, run the check below to confirm the packages are available.\nNotebooks save automatically to your Google Drive; use File → Download to save a .ipynb copy for submission if required.\n\n\n\nOption B: Positron (local install)\nPositron is a free IDE built specifically for data science in Python and R (from the makers of RStudio). It’s currently in public preview and runs fully offline once set up.\n1. Install Python\n\nDownload the latest Python 3.x installer from python.org/downloads.\nWindows: during setup, check “Add python.exe to PATH” before clicking Install.\nMac: run the downloaded .pkg installer and follow the prompts.\nVerify the install by opening a terminal (macOS: Terminal; Windows: Command Prompt or PowerShell) and running:\n\npython3 --version\n2. Install the required packages\nFrom the same terminal:\npip install numpy pandas matplotlib seaborn jupyter\n(On Windows, use pip instead of pip3 if pip3 isn’t recognized.)\n3. Install Positron\n\nMac: go to positron.posit.co/download.html, download the .dmg for your chip (Apple Silicon or Intel), open it, and drag Positron into your Applications folder.\nWindows: from the same download page, get the .exe installer and run it, following the setup wizard.\nOpen Positron, then in the bottom-right interpreter picker, select the Python 3.x you just installed.\nOpen or create a .py or .ipynb file and run a cell to confirm it works.\n\n\n\nConfirm the core packages are available\nRun this in a new Colab cell or Positron notebook/file:\nimport numpy, pandas, matplotlib, seaborn\nprint(\"All set!\")"
+  },
+  {
+    "objectID": "recitation-week2.html",
+    "href": "recitation-week2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Coming soon!"
   }
 ]

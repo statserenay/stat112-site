@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 2: Data Types, Chart Selection &amp; Color – STAT 112</title>
+<title>Week 2 – STAT 112</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Week 2: Data Types, Chart Selection &amp; Color – STAT 112">
+<meta property="og:title" content="Week 2 – STAT 112">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="STAT 112">
 </head>
@@ -113,11 +113,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Recitations</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-recitations">    
-        <li>
-    <a class="dropdown-item" href="./recitations.html">
- <span class="dropdown-text">All Weeks</span></a>
-  </li>  
-        <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="./recitation-week1.html">
  <span class="dropdown-text">Week 1</span></a>
@@ -169,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 2: Data Types, Chart Selection &amp; Color</h1>
+<h1 class="title">Week 2</h1>
 </div>
 
 
@@ -186,127 +181,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="topics" class="level2">
-<h2 class="anchored" data-anchor-id="topics">Topics</h2>
-<ul>
-<li>Data description and data types</li>
-<li>Proper visualization tools for specific data types (bar plot, box-plot, violin plot, histogram, scatter plot, etc.)</li>
-<li>Color separation, value representation by color, and color palettes</li>
-</ul>
-</section>
-<section id="notes" class="level2">
-<h2 class="anchored" data-anchor-id="notes">Notes</h2>
-<p><strong>1. Data types</strong></p>
-<p>Before picking a chart, identify what kind of variable you’re plotting:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>Definition</th>
-<th>Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Categorical (nominal)</td>
-<td>Unordered categories</td>
-<td>Country, gender, product type</td>
-</tr>
-<tr class="even">
-<td>Categorical (ordinal)</td>
-<td>Ordered categories, no fixed numeric distance</td>
-<td>Education level, satisfaction rating</td>
-</tr>
-<tr class="odd">
-<td>Discrete numeric</td>
-<td>Countable numeric values</td>
-<td>Number of children, number of defects</td>
-</tr>
-<tr class="even">
-<td>Continuous numeric</td>
-<td>Measured on a continuum</td>
-<td>Height, income, temperature</td>
-</tr>
-</tbody>
-</table>
-<p>Healy opens by stressing that the choice of graph is a claim about what <em>kind</em> of comparison you want the reader to make, which starts with correctly identifying the variable type. <em>Reference: Healy (2018), Ch. 1, “Look at Data.”</em></p>
-<p><strong>2. Matching chart type to data type</strong></p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Data relationship</th>
-<th>Recommended chart(s)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>One categorical variable — compare amounts across categories</td>
-<td>Bar chart</td>
-</tr>
-<tr class="even">
-<td>One continuous variable — see the distribution</td>
-<td>Histogram, density plot</td>
-</tr>
-<tr class="odd">
-<td>One continuous variable across groups — compare distributions</td>
-<td>Box plot, violin plot</td>
-</tr>
-<tr class="even">
-<td>Two continuous variables — see the relationship</td>
-<td>Scatter plot</td>
-</tr>
-<tr class="odd">
-<td>Change over time</td>
-<td>Line chart</td>
-</tr>
-<tr class="even">
-<td>Part-to-whole</td>
-<td>Stacked bar (avoid pie charts for more than 2–3 slices)</td>
-</tr>
-</tbody>
-</table>
-<p>Wilke organizes his entire middle section by exactly this logic — “Amounts” (bar charts), “Distributions” (histograms, density plots, box plots, violin plots), and “x–y relationships” (scatter plots) each get their own chapter, with guidance on when a box plot hides too much (e.g., multimodal distributions) and a violin plot or strip plot is preferable. <em>Reference: Wilke (2019), Ch. 6 “Visualizing Amounts,” Ch. 7 “Visualizing Distributions I,” Ch. 8 “Visualizing Distributions II,” Ch. 12 “Visualizing Associations.”</em></p>
-<p>Yau’s <em>Visualize This</em> covers the same chart family from a more practical, build-it-yourself angle, with worked examples of when a box plot oversimplifies compared to a violin plot that shows the full density shape. <em>Reference: Yau (2011), Ch. 3, “Statistical Rules for Visualization” and Ch. 6, “Distributions.”</em></p>
-<p><strong>3. Color in visualization</strong></p>
-<p>Color can encode three fundamentally different kinds of information, and using the wrong palette type for the wrong data is one of the most common visualization mistakes:</p>
-<ul>
-<li><strong>Sequential palettes</strong> — for ordered, continuous data (e.g., low → high income). Uses a single hue that varies in lightness/saturation.</li>
-<li><strong>Diverging palettes</strong> — for data with a meaningful midpoint (e.g., temperature anomaly above/below zero). Uses two hues diverging from a neutral center.</li>
-<li><strong>Qualitative (categorical) palettes</strong> — for unordered categories (e.g., product type). Uses hues that are perceptually distinct but not ordered.</li>
-</ul>
-<p>Wilke devotes a full chapter to this distinction and to designing colorblind-safe palettes; Healy makes the same point with ggplot2’s built-in <code>viridis</code> and ColorBrewer scales as concrete examples. <em>References: Wilke (2019), Ch. 4, “Color Scales”; Healy (2018), Ch. 8, “Refine Your Plots” (color section).</em></p>
-<p>Knaflic adds a complementary, presentation-focused rule: use color <em>sparingly and with intention</em> — reserve a single saturated accent color for the one data point you want the audience to notice, and keep everything else in gray. <em>Reference: Knaflic (2015), Ch. 4, “Focus Your Audience’s Attention.”</em></p>
-</section>
-<section id="practice-questions" class="level2">
-<h2 class="anchored" data-anchor-id="practice-questions">Practice Questions</h2>
-<p><strong>Multiple Choice</strong> 1. You want to compare the distribution of exam scores across four sections of a course. Which chart is generally preferable to a box plot if you suspect the scores are bimodal in one section? a) Pie chart b) Violin plot c) Bar chart d) Scatter plot <em>(Answer: b — a violin plot shows the full density shape, revealing bimodality that a box plot’s five-number summary would hide; Wilke, Ch. 8.)</em></p>
-<p><strong>True / False</strong> 2. A diverging color palette is the right choice for encoding an unordered categorical variable like “product type.” <em>(Answer: False — use a qualitative/categorical palette for unordered categories; diverging palettes are for data with a meaningful midpoint; Wilke, Ch. 4.)</em></p>
-<p><strong>Matching</strong> 3. Match each data type to its most appropriate chart: - (a) Relationship between two continuous variables - (b) Distribution of one continuous variable - (c) Comparing totals across categories - (d) Change over time 1. Line chart 2. Bar chart 3. Scatter plot 4. Histogram <em>(Answer: a–3, b–4, c–2, d–1.)</em></p>
-<p><strong>Short Answer</strong> 4. Explain why a sequential color palette would be a poor choice for a map showing which of five unrelated product categories sold best in each region.</p>
-<p><strong>Applied / Discussion</strong> 5. Pick a dataset with one continuous and one categorical variable (e.g., exam scores by section). Sketch (on paper or in Tableau) both a box plot and a violin plot of the same data. Which reveals more information, and in what situation would you choose the simpler box plot anyway?</p>
-</section>
-<section id="references-for-weeks-12" class="level2">
-<h2 class="anchored" data-anchor-id="references-for-weeks-12">References for Weeks 1–2</h2>
-<ul>
-<li>Knaflic, C. N. (2015). <em>Storytelling with Data: A Data Visualization Guide for Business Professionals.</em> Wiley.</li>
-<li>Tufte, E. R. (2001). <em>The Visual Display of Quantitative Information</em> (2nd ed.). Graphics Press.</li>
-<li>Healy, K. (2018). <em>Data Visualization: A Practical Introduction.</em> Princeton University Press.</li>
-<li>Wilke, C. O. (2019). <em>Fundamentals of Data Visualization.</em> O’Reilly Media. (Also free online: <a href="https://clauswilke.com/dataviz/">clauswilke.com/dataviz</a>)</li>
-<li>Yau, N. (2011). <em>Visualize This: The FlowingData Guide to Design, Visualization, and Statistics.</em> Wiley.</li>
-</ul>
-<p><em>Note: chapter numbers above are given for the editions listed in the course syllabus — double check against your own copy, since chapter numbering can shift slightly between print runs and the free online edition of Wilke.</em></p>
+<p>Coming soon!</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -2,30 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://statserenay.github.io/stat112-site/recitation-week1.html</loc>
-    <lastmod>2026-10-07T07:25:27.227Z</lastmod>
-  </url>
-  <url>
-    <loc>https://statserenay.github.io/stat112-site/recitation-week2.html</loc>
-    <lastmod>2026-10-07T07:25:27.227Z</lastmod>
-  </url>
-  <url>
-    <loc>https://statserenay.github.io/stat112-site/computing-setup.html</loc>
-    <lastmod>2026-10-07T07:25:27.222Z</lastmod>
-  </url>
-  <url>
-    <loc>https://statserenay.github.io/stat112-site/games-tab/games.html</loc>
-    <lastmod>2026-10-07T07:25:27.222Z</lastmod>
-  </url>
-  <url>
-    <loc>https://statserenay.github.io/stat112-site/index.html</loc>
-    <lastmod>2026-10-07T07:25:27.227Z</lastmod>
+    <lastmod>2026-10-07T19:32:14.689Z</lastmod>
   </url>
   <url>
     <loc>https://statserenay.github.io/stat112-site/homeworks.html</loc>
-    <lastmod>2026-10-07T07:25:27.223Z</lastmod>
+    <lastmod>2026-10-07T19:32:14.679Z</lastmod>
   </url>
   <url>
-    <loc>https://statserenay.github.io/stat112-site/recitations.html</loc>
-    <lastmod>2026-10-07T07:25:27.227Z</lastmod>
+    <loc>https://statserenay.github.io/stat112-site/index.html</loc>
+    <lastmod>2026-10-07T19:32:14.689Z</lastmod>
+  </url>
+  <url>
+    <loc>https://statserenay.github.io/stat112-site/games-tab/games.html</loc>
+    <lastmod>2026-10-07T19:32:14.678Z</lastmod>
+  </url>
+  <url>
+    <loc>https://statserenay.github.io/stat112-site/computing-setup.html</loc>
+    <lastmod>2026-10-07T19:32:14.678Z</lastmod>
+  </url>
+  <url>
+    <loc>https://statserenay.github.io/stat112-site/recitation-week2.html</loc>
+    <lastmod>2026-10-07T19:32:14.689Z</lastmod>
   </url>
 </urlset>
