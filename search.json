@@ -1,40 +1,5 @@
 [
   {
-    "objectID": "games-tab/games.html",
-    "href": "games-tab/games.html",
-    "title": "Games",
-    "section": "",
-    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n  ?\n  \n    Recitation 2\n    Coming soon\n    A new game will appear here after the next recitation.\n  \n\n\nHow to play in class: open the game on the projector, choose Relaxed speed, and let the class shout the answers. Keys 1–4 pick a bin, Space continues, P pauses."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "STAT 112",
-    "section": "",
-    "text": "Welcome! This site is the resource hub for STAT 112 — Introduction to Data Processing and Visualization at METU."
-  },
-  {
-    "objectID": "index.html#about-this-course",
-    "href": "index.html#about-this-course",
-    "title": "STAT 112",
-    "section": "About This Course",
-    "text": "About This Course\nSTAT 112 introduces the practical side of working with data: how to get it into shape, explore it, and communicate what it shows. The course covers the basic definitions and handling of different data types, and builds hands-on skills in:\n\nData manipulation: indexing, subsetting, reshaping, and transforming datasets\nData cleaning: dealing with common problems such as missing or inconsistent values\nVisualization: choosing and building effective graphs for different kinds of data\nMapping: displaying spatial data on maps\nAnalysis: summarizing and exploring data to answer questions"
-  },
-  {
-    "objectID": "index.html#some-useful-links-for-data-visualization",
-    "href": "index.html#some-useful-links-for-data-visualization",
-    "title": "STAT 112",
-    "section": "Some Useful Links for Data Visualization",
-    "text": "Some Useful Links for Data Visualization\nI will update this list as I discover new resources. Stay tuned!\n\n\n\n\n\n\nNote\n\n\n\nThese resources are curated to supplement the STAT 112: Introduction to Data Processing and Visualization syllabus. They span foundational design theory, color accessibility, Python plotting tools, and interactive dashboards.\n\n\n\nCore Theory & Chart Selection Guides\n\nFundamentals of Data Visualization — Claus O. Wilke’s open-access text on figure design, color selection, and effective visual layout.\nFrom Data to Viz — Interactive decision tree matching chart formats directly to specific variable and data structures.\nThe Data Visualisation Catalogue — A reference guide explaining chart functions, visual caveats, and alternative plot designs.\nData Visualization: A Practical Introduction — Kieran Healy’s online book detailing visual perception, chart rhetoric, and narrative design.\nStorytelling with Data Resources — Practical articles and exercises highlighting cognitive load, focal points, and decluttering.\n\n\n\nColor Systems & Accessibility\n\nColorBrewer 2.0 — Proven qualitative, sequential, and diverging palettes with colorblind-safe filters.\nCoblis (Color Blindness Simulator) — Online image checker to test how figures appear under various color deficiencies (deuteranopia, protanopia, tritanopia).\nAdobe Color Contrast Checker — Tool to evaluate background-to-text and shape contrast ratios against WCAG standards.\n\n\n\nPython Libraries (STAT 112 Curriculum)\n\nPython Graph Gallery — Reproducible examples categorized by plot type, built with Matplotlib and Seaborn.\nSeaborn Documentation & Tutorials — Statistical data visualization API focused on distribution and categorical relationships.\nMatplotlib User Guide — Foundational plotting interface in Python, essential for figure anatomy and custom formatting.\nPandas Visualization Guide — Quick built-in DataFrame plotting methods for exploratory data analysis.\n\n\n\nBI Tools & Interactive Dashboards\n\nTableau Public Resources & Learning — Sample datasets, tutorials, and community dashboards covering sheet design and dashboard actions.\nFlourish Studio Guides — Quick-start walkthroughs for animated charts, hierarchies, and scrollytelling presentations."
-  },
-  {
-    "objectID": "index.html#contact",
-    "href": "index.html#contact",
-    "title": "STAT 112",
-    "section": "Contact",
-    "text": "Contact\n Email: serenay@metu.edu.tr\n Office: Department of Statistics Room No: 234.\n Phone: +90 (312) 210-2979\n GitHub: github.com/statserenay\n LinkedIn: serenay-çakar"
-  },
-  {
     "objectID": "recitation-week1.html",
     "href": "recitation-week1.html",
     "title": "Recitation 1",
@@ -105,13 +70,6 @@
     "text": "References for Weeks 1–2\n\nKnaflic, C. N. (2015). Storytelling with Data: A Data Visualization Guide for Business Professionals. Wiley.\nTufte, E. R. (2001). The Visual Display of Quantitative Information (2nd ed.). Graphics Press.\nHealy, K. (2018). Data Visualization: A Practical Introduction. Princeton University Press.\nWilke, C. O. (2019). Fundamentals of Data Visualization. O’Reilly Media. (Also free online: clauswilke.com/dataviz)\nYau, N. (2011). Visualize This: The FlowingData Guide to Design, Visualization, and Statistics. Wiley.\n\nNote: chapter numbers above are given for the editions listed in the course syllabus — double check against your own copy, since chapter numbering can shift slightly between print runs and the free online edition of Wilke."
   },
   {
-    "objectID": "homeworks.html",
-    "href": "homeworks.html",
-    "title": "Homeworks",
-    "section": "",
-    "text": "Homework assignments will be posted here as the semester progresses, and also on ODTUClass. Late homeworks are not accepted — see the Syllabus page for the full policy.\n\n\n\n#\nTopic\nAssigned\nDue\n\n\n\n\n1\nTBD\nTBD\nTBD\n\n\n2\nTBD\nTBD\nTBD"
-  },
-  {
     "objectID": "computing-setup.html",
     "href": "computing-setup.html",
     "title": "Setup",
@@ -152,6 +110,48 @@
     "title": "Setup",
     "section": "Troubleshooting",
     "text": "Troubleshooting\n\npython3 / pip not recognized on Windows (Positron route): you likely skipped “Add python.exe to PATH” during install — rerun the Python installer, choose “Modify”, and check that box, or reinstall from scratch.\nPositron doesn’t see your Python packages: confirm the interpreter selected in the bottom-right of Positron matches the Python you ran pip install with (multiple Python installs can conflict).\nColab notebook won’t save / lost my work: make sure you’re signed in to a Google account before you start — unsaved, signed-out sessions can be lost when the browser tab closes.\nTableau Public won’t open a file: confirm you downloaded Tableau Public, not the paid Tableau Desktop trial — they’re different installers.\nStill stuck? Bring it to office hours or ask during recitation."
+  },
+  {
+    "objectID": "games-tab/games.html",
+    "href": "games-tab/games.html",
+    "title": "Games",
+    "section": "",
+    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n  ?\n  \n    Recitation 2\n    Coming soon\n    A new game will appear here after the next recitation.\n  \n\n\nHow to play in class: open the game on the projector, choose Relaxed speed, and let the class shout the answers. Keys 1–4 pick a bin, Space continues, P pauses."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "STAT 112",
+    "section": "",
+    "text": "Welcome! This site is the resource hub for STAT 112 — Introduction to Data Processing and Visualization at METU."
+  },
+  {
+    "objectID": "index.html#about-this-course",
+    "href": "index.html#about-this-course",
+    "title": "STAT 112",
+    "section": "About This Course",
+    "text": "About This Course\nSTAT 112 introduces the practical side of working with data: how to get it into shape, explore it, and communicate what it shows. The course covers the basic definitions and handling of different data types, and builds hands-on skills in:\n\nData manipulation: indexing, subsetting, reshaping, and transforming datasets\nData cleaning: dealing with common problems such as missing or inconsistent values\nVisualization: choosing and building effective graphs for different kinds of data\nMapping: displaying spatial data on maps\nAnalysis: summarizing and exploring data to answer questions"
+  },
+  {
+    "objectID": "index.html#some-useful-links-for-data-visualization",
+    "href": "index.html#some-useful-links-for-data-visualization",
+    "title": "STAT 112",
+    "section": "Some Useful Links for Data Visualization",
+    "text": "Some Useful Links for Data Visualization\nI will update this list as I discover new resources. Stay tuned!\n\n\n\n\n\n\nNote\n\n\n\nThese resources are curated to supplement the STAT 112: Introduction to Data Processing and Visualization syllabus. They span foundational design theory, color accessibility, Python plotting tools, and interactive dashboards.\n\n\n\nCore Theory & Chart Selection Guides\n\nFundamentals of Data Visualization — Claus O. Wilke’s open-access text on figure design, color selection, and effective visual layout.\nFrom Data to Viz — Interactive decision tree matching chart formats directly to specific variable and data structures.\nThe Data Visualisation Catalogue — A reference guide explaining chart functions, visual caveats, and alternative plot designs.\nData Visualization: A Practical Introduction — Kieran Healy’s online book detailing visual perception, chart rhetoric, and narrative design.\nStorytelling with Data Resources — Practical articles and exercises highlighting cognitive load, focal points, and decluttering.\n\n\n\nColor Systems & Accessibility\n\nColorBrewer 2.0 — Proven qualitative, sequential, and diverging palettes with colorblind-safe filters.\nCoblis (Color Blindness Simulator) — Online image checker to test how figures appear under various color deficiencies (deuteranopia, protanopia, tritanopia).\nAdobe Color Contrast Checker — Tool to evaluate background-to-text and shape contrast ratios against WCAG standards.\n\n\n\nPython Libraries (STAT 112 Curriculum)\n\nPython Graph Gallery — Reproducible examples categorized by plot type, built with Matplotlib and Seaborn.\nSeaborn Documentation & Tutorials — Statistical data visualization API focused on distribution and categorical relationships.\nMatplotlib User Guide — Foundational plotting interface in Python, essential for figure anatomy and custom formatting.\nPandas Visualization Guide — Quick built-in DataFrame plotting methods for exploratory data analysis.\n\n\n\nBI Tools & Interactive Dashboards\n\nTableau Public Resources & Learning — Sample datasets, tutorials, and community dashboards covering sheet design and dashboard actions.\nFlourish Studio Guides — Quick-start walkthroughs for animated charts, hierarchies, and scrollytelling presentations."
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "STAT 112",
+    "section": "Contact",
+    "text": "Contact\n Email: serenay@metu.edu.tr\n Office: Department of Statistics Room No: 234.\n Phone: +90 (312) 210-2979\n GitHub: github.com/statserenay\n LinkedIn: serenay-çakar"
+  },
+  {
+    "objectID": "homeworks.html",
+    "href": "homeworks.html",
+    "title": "Homeworks",
+    "section": "",
+    "text": "Homework assignments will be posted here as the semester progresses, and also on ODTUClass. Late homeworks are not accepted — see the Syllabus page for the full policy.\n\n\n\n#\nTopic\nAssigned\nDue\n\n\n\n\n1\nTBD\nTBD\nTBD\n\n\n2\nTBD\nTBD\nTBD"
   },
   {
     "objectID": "recitations.html",
