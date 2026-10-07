@@ -2,8 +2,8 @@
 title: "Setup"
 ---
 
-Install the following tools before the second week of class. If you run
-into trouble, bring your laptop to office hours or a recitation.
+We will install the following tools later.  If you will run
+into trouble, you can bring your laptop to office hours or a recitation.
 
 ## Tableau Public
 
@@ -76,15 +76,3 @@ import numpy, pandas, matplotlib, seaborn
 print("All set!")
 ```
 
-## DataCamp
-
-1. Use the course invite link (posted on ODTUClass) to join the class DataCamp group.
-2. DataCamp assignments count for 10% of your grade — check the **Syllabus** page.
-
-## Troubleshooting
-
-- **`python3` / `pip` not recognized on Windows (Positron route):** you likely skipped "Add python.exe to PATH" during install — rerun the Python installer, choose "Modify", and check that box, or reinstall from scratch.
-- **Positron doesn't see your Python packages:** confirm the interpreter selected in the bottom-right of Positron matches the Python you ran `pip install` with (multiple Python installs can conflict).
-- **Colab notebook won't save / lost my work:** make sure you're signed in to a Google account before you start — unsaved, signed-out sessions can be lost when the browser tab closes.
-- **Tableau Public won't open a file:** confirm you downloaded *Tableau Public*, not the paid Tableau Desktop trial — they're different installers.
-- Still stuck? Bring it to office hours or ask during recitation.

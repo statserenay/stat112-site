@@ -16,9 +16,6 @@ website:
             href: computing-setup.qmd
       - text: "Recitations"
         menu:
-          - text: "All Weeks"
-            href: recitations.qmd
-          - text: "---"
           - text: "Week 1"
             href: recitation-week1.qmd
           - text: "Week 2"

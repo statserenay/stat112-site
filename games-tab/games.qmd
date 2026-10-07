@@ -47,4 +47,4 @@ a.game-card:focus-visible { outline: 3px solid var(--bs-primary, #2780e3); outli
 </div>
 ```
 
-**How to play in class:** open the game on the projector, choose *Relaxed* speed, and let the class shout the answers. Keys <kbd>1</kbd>–<kbd>4</kbd> pick a bin, <kbd>Space</kbd> continues, <kbd>P</kbd> pauses.
+
