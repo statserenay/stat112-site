@@ -356,7 +356,6 @@ Decide whether each statement is **true** or **false**.
 - Every continuous variable is quantitative. :: True
 - On an interval scale, 40 °C is twice as hot as 20 °C. :: False
 - Ordinal data tell us the order of the categories but not the size of the differences between them. :: True
-- Nominal data must be discrete. :: True
 - Student ID numbers are ratio-scaled because they are numbers. :: False
 
 ::: explain
