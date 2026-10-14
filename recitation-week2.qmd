@@ -534,7 +534,6 @@ The CV *looks* like the right tool because it is unit-free, **but it only works 
 | Same days in °F | 86 | 7.2 | 8.4% |
 
 Same weather, different CV! Converting both cities to the same unit and then comparing **standard deviations** (or IQRs) is the correct approach.
-*Note:* last year's answer key gave "coefficient of variation" for this question. Use the CV to compare relative spread only for ratio-scale variables with a true zero, such as weights, prices and incomes.
 :::
 ::::
 
