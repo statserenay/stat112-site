@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 2 – STAT 112</title>
+<title>Recitation 2 – STAT 112</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -74,13 +74,46 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Week 2 – STAT 112">
-<meta property="og:description" content="">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Recitation 2 – STAT 112">
+<meta property="og:description" content="Central tendency · Dispersion · Shape · Percentiles &amp; box plots · Graphs for numerical data">
+<meta property="og:image" content="https://statserenay.github.io/stat112-site/recitation2/images/recitation2/meme-means.png">
 <meta property="og:site_name" content="STAT 112">
+<meta property="og:image:alt" content="Comic: the arithmetic mean is scared of outliers, the geometric mean and harmonic mean are scared of zeros.">
+<meta property="og:image:height" content="770">
+<meta property="og:image:width" content="1541">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -131,6 +164,22 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./games-tab/games.html"> 
 <span class="menu-text">Games</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chats-tab/chats.html"> 
+<span class="menu-text">Student Chats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./flashcards.html"> 
+<span class="menu-text">Flashcards</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calculator.html"> 
+<span class="menu-text">Calculator</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ask.html"> 
+<span class="menu-text">Ask a Question</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -158,13 +207,38 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#how-to-use-this-page" id="toc-how-to-use-this-page" class="nav-link active" data-scroll-target="#how-to-use-this-page">How to use this page</a></li>
+  <li><a href="#part-a-the-big-picture" id="toc-part-a-the-big-picture" class="nav-link" data-scroll-target="#part-a-the-big-picture">Part A — The big picture</a></li>
+  <li><a href="#part-b-measures-of-central-tendency" id="toc-part-b-measures-of-central-tendency" class="nav-link" data-scroll-target="#part-b-measures-of-central-tendency">Part B — Measures of central tendency</a>
+  <ul class="collapse">
+  <li><a href="#physicians-and-dentists" id="toc-physicians-and-dentists" class="nav-link" data-scroll-target="#physicians-and-dentists">Physicians and dentists</a></li>
+  <li><a href="#mean-or-median" id="toc-mean-or-median" class="nav-link" data-scroll-target="#mean-or-median">Mean or median?</a></li>
+  <li><a href="#skewness-where-are-the-mean-median-and-mode" id="toc-skewness-where-are-the-mean-median-and-mode" class="nav-link" data-scroll-target="#skewness-where-are-the-mean-median-and-mode">Skewness: where are the mean, median and mode?</a></li>
+  </ul></li>
+  <li><a href="#part-c-measures-of-dispersion" id="toc-part-c-measures-of-dispersion" class="nav-link" data-scroll-target="#part-c-measures-of-dispersion">Part C — Measures of dispersion</a>
+  <ul class="collapse">
+  <li><a href="#law-enforcement-officers" id="toc-law-enforcement-officers" class="nav-link" data-scroll-target="#law-enforcement-officers">Law enforcement officers</a></li>
+  </ul></li>
+  <li><a href="#part-d-shape-the-empirical-rule-and-kurtosis" id="toc-part-d-shape-the-empirical-rule-and-kurtosis" class="nav-link" data-scroll-target="#part-d-shape-the-empirical-rule-and-kurtosis">Part D — Shape: the empirical rule and kurtosis</a></li>
+  <li><a href="#part-e-percentiles-quartiles-and-box-plots" id="toc-part-e-percentiles-quartiles-and-box-plots" class="nav-link" data-scroll-target="#part-e-percentiles-quartiles-and-box-plots">Part E — Percentiles, quartiles and box plots</a>
+  <ul class="collapse">
+  <li><a href="#reading-box-plots" id="toc-reading-box-plots" class="nav-link" data-scroll-target="#reading-box-plots">Reading box plots</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 2</h1>
+<h1 class="title">Recitation 2</h1>
+<p class="subtitle lead">Central tendency · Dispersion · Shape · Percentiles &amp; box plots · Graphs for numerical data</p>
 </div>
 
 
@@ -181,11 +255,1763 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Coming soon!</p>
+<style>
+/* long formulas scroll sideways on phones instead of widening the page */
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+/* the quiz card itself also receives the class "qz-match"; keep it a normal block */
+div.quiz.qz-match { display: block; margin-top: 1.6rem; }
+.qz-match-left mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+</style>
+<section id="how-to-use-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-page">How to use this page</h2>
+<p>Each question below is interactive. Click an option or type an answer, then press <strong>Check</strong> (or <kbd>Enter</kbd>). The page tells you right away whether the answer is correct. <strong>Show answer</strong> reveals the solution and the explanation, and <strong>Reset</strong> clears the question so you can try it again.</p>
+<p>Numbers can be typed with a dot or a comma (<code>3.2</code> or <code>3,2</code>). Unless a question says otherwise, round to <strong>2 decimals</strong>. Keep a calculator nearby!</p>
+<div class="quiz-scoreboard">
+<p>Progress</p>
+</div>
+</section>
+<section id="part-a-the-big-picture" class="level1">
+<h1>Part A — The big picture</h1>
+<p>When we describe a <strong>numerical</strong> variable, we answer three questions:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Family of measures</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Where is the centre of the data?</em></td>
+<td><strong>Central tendency (location)</strong></td>
+<td>mean, median, mode, geometric mean, harmonic mean</td>
+</tr>
+<tr class="even">
+<td><em>How spread out are the values?</em></td>
+<td><strong>Dispersion (variability)</strong></td>
+<td>range, variance, standard deviation, coefficient of variation, IQR</td>
+</tr>
+<tr class="odd">
+<td><em>What does the distribution look like?</em></td>
+<td><strong>Shape</strong></td>
+<td>skewness, kurtosis</td>
+</tr>
+</tbody>
+</table>
+<p>Percentiles and quartiles describe the <strong>position</strong> of a value; the five-number summary and the box plot put centre, spread and shape into one picture.</p>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Central tendency|Dispersion|Shape">
+<p>Sort each measure into the right family.</p>
+<ul>
+<li>Arithmetic mean :: Central tendency</li>
+<li>Range :: Dispersion</li>
+<li>Median :: Central tendency</li>
+<li>Variance :: Dispersion</li>
+<li>Mode :: Central tendency</li>
+<li>Standard deviation :: Dispersion</li>
+<li>Geometric mean :: Central tendency</li>
+<li>Coefficient of variation :: Dispersion</li>
+<li>Harmonic mean :: Central tendency</li>
+<li>Interquartile range (IQR) :: Dispersion</li>
+<li>Skewness :: Shape</li>
+<li>Kurtosis :: Shape</li>
+</ul>
+<div class="explain">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Measures of central tendency</th>
+<th>Measures of dispersion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Arithmetic mean</td>
+<td>1. Range</td>
+</tr>
+<tr class="even">
+<td>2. Median</td>
+<td>2. Variance</td>
+</tr>
+<tr class="odd">
+<td>3. Mode</td>
+<td>3. Standard deviation</td>
+</tr>
+<tr class="even">
+<td>4. Geometric mean</td>
+<td>4. Coefficient of variation</td>
+</tr>
+<tr class="odd">
+<td>5. Harmonic mean</td>
+<td>5. Interquartile range</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6. Percentiles / quartiles (used to build the IQR)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Skewness</strong> (asymmetry) and <strong>kurtosis</strong> (tailedness) describe the <strong>shape</strong> of the distribution.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="match">
+<p>Match each <strong>formula</strong> with the name of the <strong>measure</strong> (sample versions).</p>
+<ul>
+<li><span class="math inline">\(\displaystyle \bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i\)</span> :: Arithmetic mean</li>
+<li><span class="math inline">\(\displaystyle \left(\prod_{i=1}^{n}x_i\right)^{1/n}\)</span> :: Geometric mean</li>
+<li><span class="math inline">\(\displaystyle \frac{n}{\sum_{i=1}^{n} 1/x_i}\)</span> :: Harmonic mean</li>
+<li><span class="math inline">\(\displaystyle \frac{\sum (x_i-\bar{x})^2}{n-1}\)</span> :: Sample variance</li>
+<li><span class="math inline">\(\displaystyle \sqrt{s^2}\)</span> :: Standard deviation</li>
+<li><span class="math inline">\(\displaystyle \frac{s}{\bar{x}}\times 100\%\)</span> :: Coefficient of variation</li>
+<li><span class="math inline">\(Q_3 - Q_1\)</span> :: Interquartile range</li>
+<li><span class="math inline">\(\max - \min\)</span> :: Range</li>
+</ul>
+<div class="explain">
+<p>Keep this as a <strong>formula sheet</strong>. Each formula appears again in the parts below, together with an example.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="b,c">
+<p>Students’ <strong>letter grades</strong> (AA, BA, BB, …, FF) are on an <strong>ordinal</strong> scale. Which measures of central tendency are appropriate? Select all that apply.</p>
+<ul>
+<li>Arithmetic mean</li>
+<li>Median</li>
+<li>Mode</li>
+<li>Geometric mean</li>
+<li>Standard deviation</li>
+</ul>
+<div class="explain">
+<p>For ordinal data we can <strong>count</strong> (mode) and <strong>rank</strong> (median), but the distance between AA and BA is not necessarily the same as between CC and DC, so averaging the categories is not justified. The <strong>standard deviation</strong> is not a measure of central tendency at all; it measures spread.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Scale</th>
+<th style="text-align: center;">Mode</th>
+<th style="text-align: center;">Median</th>
+<th style="text-align: center;">Mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nominal</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr class="even">
+<td>Ordinal</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗ (debated)</td>
+</tr>
+<tr class="odd">
+<td>Interval / Ratio</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="part-b-measures-of-central-tendency" class="level1">
+<h1>Part B — Measures of central tendency</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms and formulas: central tendency
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Arithmetic mean</strong>: the “balance point” of the data. It uses every observation, so it is <strong>sensitive to outliers</strong>. <span class="math display">\[\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i \quad\text{(sample)}\]</span> <span class="math display">\[\mu=\frac{1}{N}\sum_{i=1}^{N}x_i \quad\text{(population)}\]</span></li>
+<li><strong>Median</strong>: the middle value of the <strong>ordered</strong> data. Half of the observations are below it and half are above it. It is <strong>robust</strong> to outliers.
+<ul>
+<li><span class="math inline">\(n\)</span> odd: the <span class="math inline">\(\left(\frac{n+1}{2}\right)\)</span>th ordered value</li>
+<li><span class="math inline">\(n\)</span> even: the average of the <span class="math inline">\(\left(\frac{n}{2}\right)\)</span>th and <span class="math inline">\(\left(\frac{n}{2}+1\right)\)</span>th ordered values</li>
+</ul></li>
+<li><strong>Mode</strong>: the most frequent value. A data set can have no mode, one mode (<em>unimodal</em>) or several modes (<em>bimodal</em>, <em>multimodal</em>).</li>
+<li><strong>Geometric mean (GM)</strong>: for <strong>multiplicative</strong> quantities such as growth rates and returns. All values must be <strong>positive</strong>. <span class="math display">\[GM=\sqrt[n]{x_1x_2\cdots x_n}\quad\Longleftrightarrow\quad \log GM=\frac{1}{n}\sum_{i=1}^{n}\log x_i\]</span></li>
+<li><strong>Harmonic mean (HM)</strong>: for <strong>rates</strong> (km/h, ₺/litre, pages/hour) measured over <strong>equal amounts</strong> of the “per” quantity (equal distances, equal money spent…). All values must be <strong>positive</strong>. <span class="math display">\[HM=\frac{n}{\dfrac{1}{x_1}+\dfrac{1}{x_2}+\cdots+\dfrac{1}{x_n}}\]</span></li>
+<li>For positive data: <span class="math inline">\(\;HM \le GM \le AM\)</span>, with equality only when all values are the same.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/meme-means.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: the arithmetic mean is scared of outliers, the geometric mean and harmonic mean are scared of zeros."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Warm-up with tiny numbers: for the data set <span class="math inline">\(\{2,\ 8\}\)</span>, find</p>
+<p>arithmetic mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="5" data-tol="0.001"></span>, geometric mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="4" data-tol="0.001"></span>, harmonic mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="3.2" data-tol="0.001"></span></p>
+<div class="explain">
+<ul>
+<li><span class="math inline">\(AM = (2+8)/2 = 5\)</span></li>
+<li><span class="math inline">\(GM = \sqrt{2 \times 8} = \sqrt{16} = 4\)</span></li>
+<li><span class="math inline">\(HM = \dfrac{2}{\frac12 + \frac18} = \dfrac{2}{0.625} = 3.2\)</span></li>
+</ul>
+<p>So <span class="math inline">\(HM = 3.2 \;&lt;\; GM = 4 \;&lt;\; AM = 5\)</span>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<section id="physicians-and-dentists" class="level2">
+<h2 class="anchored" data-anchor-id="physicians-and-dentists">Physicians and dentists</h2>
+<p>The table gives the number of <strong>physicians</strong> and <strong>dentists</strong> per 100,000 population for 12 midwestern U.S. states in 2000.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Rate / State</th>
+<th style="text-align: center;">Ohio</th>
+<th style="text-align: center;">Indiana</th>
+<th style="text-align: center;">Illinois</th>
+<th style="text-align: center;">Michigan</th>
+<th style="text-align: center;">Wisconsin</th>
+<th style="text-align: center;">Minnesota</th>
+<th style="text-align: center;">Iowa</th>
+<th style="text-align: center;">Missouri</th>
+<th style="text-align: center;">North Dakota</th>
+<th style="text-align: center;">South Dakota</th>
+<th style="text-align: center;">Nebraska</th>
+<th style="text-align: center;">Kansas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Physicians’ rate</strong></td>
+<td style="text-align: center;">188</td>
+<td style="text-align: center;">146</td>
+<td style="text-align: center;">206</td>
+<td style="text-align: center;">177</td>
+<td style="text-align: center;">177</td>
+<td style="text-align: center;">207</td>
+<td style="text-align: center;">141</td>
+<td style="text-align: center;">186</td>
+<td style="text-align: center;">157</td>
+<td style="text-align: center;">129</td>
+<td style="text-align: center;">162</td>
+<td style="text-align: center;">166</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Dentists’ rate</strong></td>
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">48</td>
+<td style="text-align: center;">61</td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">54</td>
+<td style="text-align: center;">71</td>
+<td style="text-align: center;">52</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For the calculations in the following sections, you can use the <strong>Calculator</strong> tab.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Calculate the <strong>mean</strong>, <strong>median</strong> and <strong>mode</strong> of each rate. Round the means to 2 decimals.</p>
+<p><strong>Physicians:</strong> mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="170.17" data-tol="0.01"></span>, median <span class="math inline">\(=\)</span> <span class="blank" data-answer="171.5" data-tol="0.01"></span>, mode <span class="math inline">\(=\)</span> <span class="blank" data-answer="177" data-tol="0"></span></p>
+<p><strong>Dentists:</strong> mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="59.67" data-tol="0.01"></span>, median <span class="math inline">\(=\)</span> <span class="blank" data-answer="58" data-tol="0.01"></span>, the two modes are <span class="blank" data-answer="55" data-tol="0"></span> and <span class="blank" data-answer="70" data-tol="0"></span></p>
+<div class="explain">
+<p><strong>Physicians.</strong> <span class="math inline">\(\sum x = 2042\)</span>, so <span class="math inline">\(\bar{x} = 2042/12 = 170.17\)</span>. Ordered: 129, 141, 146, 157, 162, <strong>166, 177</strong>, 177, 186, 188, 206, 207. With <span class="math inline">\(n=12\)</span> (even), the median is the average of the 6th and 7th values: <span class="math inline">\((166+177)/2 = 171.5\)</span>. The value 177 appears twice, so the mode is <strong>177</strong>.</p>
+<p><strong>Dentists.</strong> <span class="math inline">\(\sum x = 716\)</span>, so <span class="math inline">\(\bar{x} = 716/12 = 59.67\)</span>. Ordered: 48, 52, 54, 55, 55, <strong>56, 60</strong>, 61, 64, 70, 70, 71. The median is <span class="math inline">\((56+60)/2 = 58\)</span>. Both 55 and 70 appear twice, so the data are <strong>bimodal</strong>: the modes are <strong>55 and 70</strong>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Slightly negatively (left) skewed|Approximately symmetric|Slightly positively (right) skewed">
+<p>Compare the mean and the median you found above. What do they suggest about the shape of each distribution?</p>
+<ul>
+<li>Physicians’ rate (mean 170.17, median 171.5) :: Slightly negatively (left) skewed | Approximately symmetric</li>
+<li>Dentists’ rate (mean 59.67, median 58) :: Slightly positively (right) skewed | Approximately symmetric</li>
+</ul>
+<div class="explain">
+<ul>
+<li>Physicians: mean &lt; median, so there is a slight pull to the <strong>left</strong> (the low values 129 and 141).</li>
+<li>Dentists: mean &gt; median, so there is a slight pull to the <strong>right</strong>.</li>
+</ul>
+<p>In both cases the difference is small (about 1.3 and 1.7 units), so “approximately symmetric” is also a fair answer. With only 12 observations we should not over-interpret small differences.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Now calculate the <strong>geometric mean</strong> and the <strong>harmonic mean</strong> of each rate (2 decimals).<br>
+<em>Tip:</em> for the GM, average the logarithms: <span class="math inline">\(GM = 10^{\frac{1}{n}\sum \log_{10} x_i}\)</span>.</p>
+<p><strong>Physicians:</strong> GM <span class="math inline">\(=\)</span> <span class="blank" data-answer="168.50" data-tol="0.05"></span>, HM <span class="math inline">\(=\)</span> <span class="blank" data-answer="166.81" data-tol="0.05"></span></p>
+<p><strong>Dentists:</strong> GM <span class="math inline">\(=\)</span> <span class="blank" data-answer="59.22" data-tol="0.05"></span>, HM <span class="math inline">\(=\)</span> <span class="blank" data-answer="58.78" data-tol="0.05"></span></p>
+<div class="explain">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">AM</th>
+<th style="text-align: right;">GM</th>
+<th style="text-align: right;">HM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Physicians</td>
+<td style="text-align: right;">170.17</td>
+<td style="text-align: right;">168.50</td>
+<td style="text-align: right;">166.81</td>
+</tr>
+<tr class="even">
+<td>Dentists</td>
+<td style="text-align: right;">59.67</td>
+<td style="text-align: right;">59.22</td>
+<td style="text-align: right;">58.78</td>
+</tr>
+</tbody>
+</table>
+<p>Notice <span class="math inline">\(HM \le GM \le AM\)</span> in both rows. Since these values are fairly close to one another, the three means are also close.</p>
+<p><strong>Physicians, HM:</strong> <span class="math inline">\(\sum 1/x_i = 0.071940\)</span>, so <span class="math inline">\(HM = 12/0.071940 = 166.81\)</span>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="short" data-answer="96" data-tol="0.5" data-unit="km/h">
+<p>Ayşe drives <strong>240 km</strong> from Ankara to Eskişehir at <strong>80 km/h</strong> and returns the same 240 km at <strong>120 km/h</strong>.</p>
+<p>What is her average speed for the whole round trip?</p>
+<div class="explain">
+<p>The tempting answer, <span class="math inline">\((80+120)/2 = 100\)</span> km/h, is <strong>wrong</strong>: she spends <em>more time</em> driving at the slower speed.</p>
+<ul>
+<li>Time: <span class="math inline">\(240/80 = 3\)</span> h, then <span class="math inline">\(240/120 = 2\)</span> h, so 5 h in total.</li>
+<li>Average speed <span class="math inline">\(= \dfrac{\text{total distance}}{\text{total time}} = \dfrac{480}{5} = 96\)</span> km/h.</li>
+</ul>
+<p>This is exactly the <strong>harmonic mean</strong>: <span class="math inline">\(HM = \dfrac{2}{\frac{1}{80}+\frac{1}{120}} = 96\)</span> km/h. Equal <strong>distances</strong>, different <strong>speeds</strong> → harmonic mean.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="short" data-answer="44.44" data-tol="0.02" data-unit="₺ per litre">
+<p>Every week Mert fills up for <strong>exactly ₺1,000</strong>, whatever the price. In week 1 fuel costs <strong>₺40/litre</strong>, in week 2 it costs <strong>₺50/litre</strong>.</p>
+<p>What is the average price he paid per litre over the two weeks?</p>
+<div class="explain">
+<ul>
+<li>Week 1: <span class="math inline">\(1000/40 = 25\)</span> litres. Week 2: <span class="math inline">\(1000/50 = 20\)</span> litres.</li>
+<li>Average price <span class="math inline">\(= \dfrac{\text{total money}}{\text{total litres}} = \dfrac{2000}{45} = 44.44\)</span> ₺ per litre.</li>
+</ul>
+<p>This is the harmonic mean of 40 and 50: <span class="math inline">\(\dfrac{2}{\frac{1}{40}+\frac{1}{50}} = 44.44\)</span>. The <strong>same amount of money</strong> is spent each time, so the “per” quantity (₺) is fixed and the HM is the right mean. (If he had bought the <em>same number of litres</em> each week, the arithmetic mean, ₺45, would be correct.)</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="short" data-answer="10.52" data-tol="0.05" data-unit="% per year">
+<p>An investment fund returned <strong>+20%</strong> in year 1, <strong>−10%</strong> in year 2 and <strong>+25%</strong> in year 3.</p>
+<p>What is the <strong>average annual return</strong> (2 decimals, in %)?</p>
+<div class="explain">
+<p>Returns <strong>multiply</strong>, so convert them to growth factors: 1.20, 0.90, 1.25.</p>
+<p><span class="math display">\[GM = \sqrt[3]{1.20 \times 0.90 \times 1.25} = \sqrt[3]{1.35} = 1.1052\]</span></p>
+<p>so the average return is <strong>10.52% per year</strong>. Check: ₺1,000 × 1.1052³ ≈ ₺1,350, the same as ₺1,000 × 1.20 × 0.90 × 1.25. The arithmetic mean of the returns, <span class="math inline">\((20-10+25)/3 = 11.67\%\)</span>, <strong>overstates</strong> the growth: ₺1,000 × 1.1167³ ≈ ₺1,392. Note that we could not use −10 directly in the GM, because the GM needs positive values. Growth factors solve the problem.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>You are analyzing the speeds of three runners across three segments of a marathon, each having <strong>equal distance</strong>:</p>
+<p>Runner 1: 12, 15, 11 km/h<br>
+Runner 2: 14, 13, 14 km/h<br>
+Runner 3: 10, 16, 12 km/h</p>
+<p>Which type of mean is the most appropriate measure to calculate each runner’s true overall average speed?</p>
+<ul>
+<li>Arithmetic mean</li>
+<li>Geometric mean</li>
+<li>Harmonic mean</li>
+</ul>
+<div class="explain">
+<p>Because speeds are rates (km/h) measured over <strong>equal distances</strong>, the <strong>harmonic mean</strong> is required to obtain the true average speed:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Runner</th>
+<th style="text-align: right;">Arithmetic Mean</th>
+<th style="text-align: right;">Harmonic Mean (True Speed)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Runner 1</td>
+<td style="text-align: right;">12.67 km/h</td>
+<td style="text-align: right;">12.45 km/h</td>
+</tr>
+<tr class="even">
+<td>Runner 2</td>
+<td style="text-align: right;">13.67 km/h</td>
+<td style="text-align: right;">13.65 km/h</td>
+</tr>
+<tr class="odd">
+<td>Runner 3</td>
+<td style="text-align: right;">12.67 km/h</td>
+<td style="text-align: right;">12.20 km/h</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Arithmetic mean|Geometric mean|Harmonic mean">
+<p>Which mean would you use in each situation?</p>
+<ul>
+<li>Average of a student’s five quiz scores :: Arithmetic mean</li>
+<li>Average annual growth of a city’s population, which grew by 3%, 5% and 2% :: Geometric mean</li>
+<li>Average speed of a bus that travels equal distances at 50, 60 and 75 km/h :: Harmonic mean</li>
+<li>Average height of the students in this recitation :: Arithmetic mean</li>
+<li>Average hourly growth factor of a bacteria culture that doubles, then triples, then doubles :: Geometric mean</li>
+<li>Average price per kg of tomatoes when you spend ₺200 each time you go to the bazaar :: Harmonic mean</li>
+<li>Average typing speed (words per minute) over three texts of 500 words each :: Harmonic mean</li>
+<li>Average monthly electricity bill of a household over a year :: Arithmetic mean</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Same type of values that add up</strong> → <strong>arithmetic mean</strong></li>
+<li><strong>Values that multiply</strong> (growth, interest, ratios) → <strong>geometric mean</strong></li>
+<li><strong>Rates over a fixed amount</strong> of the “per” quantity (equal distances, equal money, equal words) → <strong>harmonic mean</strong></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="mean-or-median" class="level2">
+<h2 class="anchored" data-anchor-id="mean-or-median">Mean or median?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/meme-billionaire.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: nine customers in a tea house have similar incomes; after a billionaire walks in, the mean income jumps to millions but the median barely moves."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Nine customers in a <em>çay ocağı</em> have the following monthly incomes (in ₺ thousands):</p>
+<p><span class="math display">\[28,\ 30,\ 32,\ 35,\ 35,\ 38,\ 40,\ 42,\ 45\]</span></p>
+<p><strong>Before:</strong> mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="36.11" data-tol="0.01"></span>, median <span class="math inline">\(=\)</span> <span class="blank" data-answer="35" data-tol="0"></span></p>
+<p>A billionaire earning <strong>₺50,000 thousand</strong> (₺50 million) per month walks in.</p>
+<p><strong>After:</strong> mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="5032.5" data-tol="0.05"></span>, median <span class="math inline">\(=\)</span> <span class="blank" data-answer="36.5" data-tol="0.01"></span>, mode <span class="math inline">\(=\)</span> <span class="blank" data-answer="35" data-tol="0"></span></p>
+<div class="explain">
+<ul>
+<li>Before: <span class="math inline">\(\sum x = 325\)</span>, <span class="math inline">\(\bar{x} = 325/9 = 36.11\)</span>. With <span class="math inline">\(n=9\)</span> the median is the 5th value, <strong>35</strong>.</li>
+<li>After: <span class="math inline">\(\sum x = 50{,}325\)</span>, <span class="math inline">\(\bar{x} = 50{,}325/10 = 5{,}032.5\)</span>, about <strong>139 times</strong> the old mean! With <span class="math inline">\(n=10\)</span> the median is the average of the 5th and 6th values: <span class="math inline">\((35+38)/2 = 36.5\)</span>. The mode is still <strong>35</strong>.</li>
+</ul>
+<p><strong>One</strong> extreme observation moved the mean from 36 to 5,032 but the median only from 35 to 36.5. The median is <strong>robust</strong> (resistant) to outliers; the mean is not.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>You are analyzing the salaries of employees in a company. A few employees, such as the CEO and other top executives, have <strong>extremely high</strong> salaries. Which measure should you use to describe the “typical” salary?</p>
+<ul>
+<li>Mean</li>
+<li>Median</li>
+<li>Mode</li>
+<li>Geometric mean</li>
+<li>Harmonic mean</li>
+</ul>
+<div class="explain">
+<p>The extreme salaries pull the <strong>mean</strong> upwards (positive skew), so most employees earn <em>less</em> than the mean salary. The <strong>median</strong> is not affected by how extreme the top salaries are, so it represents a typical employee better. This is why official statistics usually report <strong>median</strong> income.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="tf" data-answer="true">
+<p>If the instructor adds <strong>5 bonus points</strong> to every student’s exam score, both the mean and the median increase by exactly 5 points.</p>
+<div class="explain">
+<p><strong>True.</strong> Adding a constant shifts every observation, so every measure of <strong>location</strong> (mean, median, mode, quartiles) shifts by the same constant. What about spread? The range, variance, standard deviation and IQR do <strong>not</strong> change, because the distances between the scores stay the same. More about this in Part C.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="tf" data-answer="false">
+<p>The geometric mean of the yearly returns −5%, +10% and +20% can be computed directly as <span class="math inline">\(\sqrt[3]{(-5)\times 10 \times 20}\)</span>.</p>
+<div class="explain">
+<p><strong>False.</strong> The GM is defined only for <strong>positive</strong> values. The product here is negative, and the result has no meaning as an average return. Convert returns to <strong>growth factors</strong> first: 0.95, 1.10, 1.20. Then <span class="math inline">\(GM = \sqrt[3]{0.95 \times 1.10 \times 1.20} = 1.0784\)</span>, an average return of <strong>7.84%</strong> per year.</p>
+</div>
+</div>
+</section>
+<section id="skewness-where-are-the-mean-median-and-mode" class="level2">
+<h2 class="anchored" data-anchor-id="skewness-where-are-the-mean-median-and-mode">Skewness: where are the mean, median and mode?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/skewness.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Three density curves: left-skewed with mean < median < mode, symmetric with all three equal, right-skewed with mode < median < mean."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Positively skewed|Negatively skewed|Approximately symmetric">
+<p>Indicate whether each distribution is <strong>positively</strong> skewed, <strong>negatively</strong> skewed, or approximately <strong>symmetric</strong>.</p>
+<ul>
+<li>Incomes of taxpayers: mean $48,000, median $43,000 :: Positively skewed</li>
+<li>GPAs of all students at a college: mean 3.01, median 3.20 :: Negatively skewed</li>
+<li>Number of “romantic affairs” reported anonymously by young adults: mean 2.6, median 1.9 :: Positively skewed</li>
+<li>Age at death in a developed country: mean 76, median 80 :: Negatively skewed</li>
+<li>Heights of adult women: mean 162 cm, median 162 cm :: Approximately symmetric</li>
+<li>House prices in İstanbul: mean ₺12 million, median ₺7 million :: Positively skewed</li>
+<li>Scores on a very easy 10-point quiz, where most students get 9 or 10 :: Negatively skewed</li>
+<li>Waiting time at a bank: most customers wait a few minutes, a few wait over an hour :: Positively skewed</li>
+</ul>
+<div class="explain">
+<p><strong>Rule of thumb:</strong> the mean is pulled toward the <strong>long tail</strong>.</p>
+<ul>
+<li><strong>Mean &gt; median</strong> → long tail on the right → <strong>positively</strong> (right) skewed. Typical for incomes, prices, waiting times and counts, which cannot go below 0 but can be very large.</li>
+<li><strong>Mean &lt; median</strong> → long tail on the left → <strong>negatively</strong> (left) skewed. Typical for GPAs, easy-exam scores and age at death, which have a natural upper limit.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="part-c-measures-of-dispersion" class="level1">
+<h1>Part C — Measures of dispersion</h1>
+<p>Two classes can both have a mean of 60 on the midterm. In one class everyone scores between 55 and 65; in the other, scores range from 10 to 100. <strong>Central tendency alone is not enough.</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/meme-oven.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: a statistician with his head in an oven and his feet in a freezer says 'On average, I feel totally fine.'"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms and formulas: dispersion
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Range</strong> <span class="math inline">\(= \max - \min\)</span>. Easy to compute, but it uses only the two most extreme values.</li>
+<li><strong>Deviation</strong> of an observation: <span class="math inline">\(x_i-\bar{x}\)</span>. Deviations always sum to <strong>zero</strong>, so we <strong>square</strong> them.</li>
+<li><strong>Variance</strong>: the average squared deviation. <span class="math display">\[\sigma^2=\frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2 \quad\text{(population)}\]</span> <span class="math display">\[s^2=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2 \quad\text{(sample)}\]</span> <strong>Shortcut formula:</strong> <span class="math display">\[s^2=\frac{1}{n-1}\left[\sum x_i^2-\frac{\left(\sum x_i\right)^2}{n}\right]\]</span></li>
+<li><strong>Standard deviation</strong>: <span class="math inline">\(s=\sqrt{s^2}\)</span>. It is in the <strong>same units</strong> as the data, unlike the variance (squared units).</li>
+<li><strong>Coefficient of variation</strong>: <span class="math inline">\(CV=\dfrac{s}{\bar{x}}\times 100\%\)</span>. It is <strong>unit-free</strong>, so it compares the <em>relative</em> spread of variables with different units or very different means. It is meaningful only for <strong>ratio-scale</strong> data with a positive mean.</li>
+<li><strong>Linear transformation</strong> <span class="math inline">\(y = a + bx\)</span>: <span class="math inline">\(\bar{y} = a + b\bar{x}\)</span>, <span class="math inline">\(s_y = |b|\,s_x\)</span> and <span class="math inline">\(s_y^2 = b^2 s_x^2\)</span>. Adding a constant moves the data without changing the spread; multiplying rescales the spread.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/deviations.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Dot plot of 4, 6, 7, 8, 10 with arrows showing deviations from the mean 7; deviations sum to 0 and squared deviations sum to 20."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>A sample of five students reported their hours of sleep last night: <span class="math inline">\(4,\ 6,\ 7,\ 8,\ 10\)</span> (see the figure above).</p>
+<p>Sum of deviations <span class="math inline">\(\sum (x_i-\bar{x}) =\)</span> <span class="blank" data-answer="0" data-tol="0"></span><br>
+Sum of squared deviations <span class="math inline">\(\sum (x_i-\bar{x})^2 =\)</span> <span class="blank" data-answer="20" data-tol="0"></span><br>
+Sample variance <span class="math inline">\(s^2 =\)</span> <span class="blank" data-answer="5" data-tol="0.001"></span><br>
+Sample standard deviation <span class="math inline">\(s =\)</span> <span class="blank" data-answer="2.24" data-tol="0.01"></span> hours<br>
+Coefficient of variation <span class="math inline">\(CV =\)</span> <span class="blank" data-answer="31.94" data-tol="0.06"></span> %<br>
+If these five students were the <strong>whole population</strong>, the variance would be <span class="math inline">\(\sigma^2 =\)</span> <span class="blank" data-answer="4" data-tol="0.001"></span></p>
+<div class="explain">
+<p><span class="math inline">\(\bar{x} = 35/5 = 7\)</span>. Deviations: <span class="math inline">\(-3, -1, 0, +1, +3\)</span>, which sum to <strong>0</strong> (always!). Squared deviations: <span class="math inline">\(9 + 1 + 0 + 1 + 9 = 20\)</span>.</p>
+<ul>
+<li><span class="math inline">\(s^2 = \dfrac{20}{n-1} = \dfrac{20}{4} = 5\)</span> and <span class="math inline">\(s = \sqrt{5} = 2.24\)</span> hours</li>
+<li>Shortcut check: <span class="math inline">\(\sum x^2 = 265\)</span>, so <span class="math inline">\(\dfrac{1}{4}\left[265 - \dfrac{35^2}{5}\right] = \dfrac{265-245}{4} = 5\)</span> ✓</li>
+<li><span class="math inline">\(CV = 2.24/7 \times 100\% = 31.94\%\)</span></li>
+<li>Population version: <span class="math inline">\(\sigma^2 = 20/N = 20/5 = 4\)</span></li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>Why do we divide by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> in the <strong>sample</strong> variance?</p>
+<ul>
+<li>Because one observation is always an outlier and should be removed.</li>
+<li>Because deviations are measured from <span class="math inline">\(\bar{x}\)</span>, which is computed from the same data, so they tend to be a little too small; dividing by <span class="math inline">\(n-1\)</span> corrects this underestimation of <span class="math inline">\(\sigma^2\)</span>.</li>
+<li>Because it makes the variance smaller and therefore easier to interpret.</li>
+<li>It is only a convention: dividing by <span class="math inline">\(n\)</span> or <span class="math inline">\(n-1\)</span> always gives the same result.</li>
+</ul>
+<div class="explain">
+<p>The sample mean <span class="math inline">\(\bar{x}\)</span> sits in the “middle” of <em>this particular</em> sample, so <span class="math inline">\(\sum (x_i-\bar{x})^2\)</span> is on average <strong>smaller</strong> than <span class="math inline">\(\sum (x_i-\mu)^2\)</span> would be. Dividing by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> makes <span class="math inline">\(s^2\)</span> a little larger, which makes it an <strong>unbiased</strong> estimator of <span class="math inline">\(\sigma^2\)</span>. Another way to see it: once <span class="math inline">\(\bar{x}\)</span> is known, only <span class="math inline">\(n-1\)</span> deviations are free to vary, because they must sum to 0. These are the <strong>degrees of freedom</strong>.</p>
+</div>
+</div>
+<section id="law-enforcement-officers" class="level2">
+<h2 class="anchored" data-anchor-id="law-enforcement-officers">Law enforcement officers</h2>
+<p>The yearly numbers of law enforcement officers killed in the United States over 13 years:</p>
+<p><span class="math display">\[164,\ 165,\ 157,\ 164,\ 152,\ 147,\ 148,\ 131,\ 147,\ 155,\ 172,\ 145,\ 160\]</span></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Ordered data: 131, 145, 147, 147, 148, 152, 155, 157, 160, 164, 164, 165, 172</p>
+<p>Mean <span class="math inline">\(\bar{x} =\)</span> <span class="blank" data-answer="154.38" data-tol="0.01"></span><br>
+Sample variance <span class="math inline">\(s^2 =\)</span> <span class="blank" data-answer="119.76" data-tol="0.05"></span><br>
+Standard deviation <span class="math inline">\(s =\)</span> <span class="blank" data-answer="10.94" data-tol="0.01"></span><br>
+Range <span class="math inline">\(=\)</span> <span class="blank" data-answer="41" data-tol="0"></span><br>
+<span class="math inline">\(Q_1 =\)</span> <span class="blank" data-answer="147" data-tol="0"></span>, <span class="math inline">\(\;Q_3 =\)</span> <span class="blank" data-answer="164" data-tol="0"></span>, <span class="math inline">\(\;IQR =\)</span> <span class="blank" data-answer="17" data-tol="0"></span><br>
+Coefficient of variation <span class="math inline">\(=\)</span> <span class="blank" data-answer="7.09" data-tol="0.02"></span> %</p>
+<div class="explain">
+<ul>
+<li><span class="math inline">\(\sum x = 2007\)</span>, so <span class="math inline">\(\bar{x} = 2007/13 = 154.38\)</span>.</li>
+<li><span class="math inline">\(\sum x^2 = 311{,}287\)</span>, so <span class="math display">\[s^2 = \frac{1}{12}\left[311{,}287 - \frac{2007^2}{13}\right] = \frac{1437.08}{12} = 119.76\]</span> and <span class="math inline">\(s = \sqrt{119.76} = 10.94\)</span>.</li>
+<li>Range <span class="math inline">\(= 172 - 131 = 41\)</span>.</li>
+<li><strong>Quartiles</strong> (lecture rule): for <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(np = 13(0.25) = 3.25\)</span>, so we need at least 3.25 values <span class="math inline">\(\le Q_1\)</span> and at least 9.75 values <span class="math inline">\(\ge Q_1\)</span>. That is the <strong>4th</strong> ordered value, <span class="math inline">\(Q_1 = 147\)</span>. For <span class="math inline">\(Q_3\)</span>, <span class="math inline">\(np = 9.75\)</span> gives the <strong>10th</strong> value, <span class="math inline">\(Q_3 = 164\)</span>. So <span class="math inline">\(IQR = 164 - 147 = 17\)</span>.</li>
+<li><span class="math inline">\(CV = 10.94/154.38 \times 100\% = 7.09\%\)</span>. The yearly numbers vary only about 7% around their mean, which is a fairly <strong>stable</strong> series.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>You are analyzing the distribution of income among individuals in two different countries. Which measure should you use to assess the <strong>variability</strong> of income that <strong>excludes the influence of extreme outliers</strong>?</p>
+<ul>
+<li>Range</li>
+<li>Interquartile range (IQR)</li>
+<li>Standard deviation</li>
+<li>Coefficient of variation</li>
+</ul>
+<div class="explain">
+<p>The IQR <span class="math inline">\(= Q_3 - Q_1\)</span> uses only the <strong>middle 50%</strong> of the data, so a few billionaires do not change it. The <strong>range</strong> depends <em>only</em> on the extremes, and the <strong>standard deviation</strong> and <strong>CV</strong> square the deviations, which makes outliers even more influential.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="e">
+<p>During a heatwave, City A records daily temperatures in <strong>°C</strong> and City B records them in <strong>°F</strong>. Which approach gives a <strong>fair comparison</strong> of the day-to-day variability in the two cities?</p>
+<ul>
+<li>Compare the two ranges as they are.</li>
+<li>Compare the two IQRs as they are.</li>
+<li>Compare the two standard deviations as they are.</li>
+<li>Compare the two coefficients of variation.</li>
+<li>Convert both series to the same scale (e.g.&nbsp;°C), then compare their standard deviations.</li>
+</ul>
+<div class="explain">
+<p>The CV <em>looks</em> like the right tool because it is unit-free, <strong>but it only works for ratio-scale data</strong>. Temperature in °C or °F is on an <strong>interval</strong> scale with no true zero, so the CV changes when the scale changes:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: right;">CV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Same days in °C</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">13.3%</td>
+</tr>
+<tr class="even">
+<td>Same days in °F</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">7.2</td>
+<td style="text-align: right;">8.4%</td>
+</tr>
+</tbody>
+</table>
+<p>Same weather, different CV! Converting both cities to the same unit and then comparing <strong>standard deviations</strong> (or IQRs) is the correct approach. <em>Note:</em> last year’s answer key gave “coefficient of variation” for this question. Use the CV to compare relative spread only for ratio-scale variables with a true zero, such as weights, prices and incomes.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>In a hospital, <strong>newborn</strong> weights have mean 3.3 kg and standard deviation 0.5 kg. <strong>Adult men</strong> have mean weight 78 kg and standard deviation 11 kg.</p>
+<p>CV of newborns <span class="math inline">\(=\)</span> <span class="blank" data-answer="15.15" data-tol="0.05"></span> %, CV of adult men <span class="math inline">\(=\)</span> <span class="blank" data-answer="14.10" data-tol="0.05"></span> %.<br>
+Relative to their mean, the weights of <span class="blank" data-answer="newborns|newborn|babies|newborn babies"></span> vary more.</p>
+<div class="explain">
+<ul>
+<li>Newborns: <span class="math inline">\(CV = 0.5/3.3 \times 100\% = 15.15\%\)</span></li>
+<li>Adult men: <span class="math inline">\(CV = 11/78 \times 100\% = 14.10\%\)</span></li>
+</ul>
+<p>The adults’ SD (11 kg) is <strong>22 times</strong> larger than the newborns’ SD (0.5 kg), but their mean is also much larger. <em>Relative</em> to the mean, <strong>newborn</strong> weights are slightly more variable. Comparing SDs directly would be misleading here.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>September daily high temperatures in Ankara have mean <strong>26 °C</strong> and standard deviation <strong>3 °C</strong>. Convert to Fahrenheit using <span class="math inline">\(F = 32 + 1.8\,C\)</span>.</p>
+<p>Mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="78.8" data-tol="0.01"></span> °F, standard deviation <span class="math inline">\(=\)</span> <span class="blank" data-answer="5.4" data-tol="0.01"></span> °F, variance <span class="math inline">\(=\)</span> <span class="blank" data-answer="29.16" data-tol="0.01"></span> °F²</p>
+<div class="explain">
+<p>For <span class="math inline">\(y = a + bx\)</span> with <span class="math inline">\(a = 32\)</span> and <span class="math inline">\(b = 1.8\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\bar{y} = 32 + 1.8(26) = 78.8\)</span> °F, because the mean moves <strong>and</strong> stretches.</li>
+<li><span class="math inline">\(s_y = |1.8| \times 3 = 5.4\)</span> °F, because the “+32” shift does <strong>not</strong> affect the spread.</li>
+<li><span class="math inline">\(s_y^2 = 1.8^2 \times 3^2 = 3.24 \times 9 = 29.16\)</span> °F².</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/meme-squared.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: the variance says the spread is 64 points squared; students are confused; the standard deviation says it is 8 points."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,c,d">
+<p>Which statements about the variance and the standard deviation are <strong>true</strong>? Select all that apply.</p>
+<ul>
+<li>If all observations are equal, the standard deviation is 0.</li>
+<li>The variance can be negative when most observations are below the mean.</li>
+<li>The standard deviation is measured in the same units as the data.</li>
+<li>Multiplying every observation by 3 multiplies the variance by 9.</li>
+<li>Adding 10 to every observation increases the standard deviation by 10.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a. True.</strong> All deviations are 0, so there is no spread.</li>
+<li><strong>b. False.</strong> The variance is an average of <strong>squares</strong>, so it is always <span class="math inline">\(\ge 0\)</span>.</li>
+<li><strong>c.&nbsp;True.</strong> That is why we usually report <span class="math inline">\(s\)</span> rather than <span class="math inline">\(s^2\)</span>.</li>
+<li><strong>d.&nbsp;True.</strong> <span class="math inline">\(s_y^2 = b^2 s_x^2 = 9 s_x^2\)</span>, while the standard deviation is multiplied by 3.</li>
+<li><strong>e. False.</strong> Shifting all values changes nothing about how far they are from one another, so the SD is unchanged.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="part-d-shape-the-empirical-rule-and-kurtosis" class="level1">
+<h1>Part D — Shape: the empirical rule and kurtosis</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms: shape
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Skewness</strong> measures <strong>asymmetry</strong>: which side has the longer tail (see Part B).</li>
+<li><strong>Kurtosis</strong> measures <strong>tailedness</strong>: how heavy the tails are, that is, how prone the distribution is to producing <strong>extreme values</strong>. It is <em>not</em> just “how pointy the peak is”.
+<ul>
+<li>Normal distribution: kurtosis <span class="math inline">\(= 3\)</span>, so <strong>excess kurtosis</strong> <span class="math inline">\(=\)</span> kurtosis <span class="math inline">\(- 3 = 0\)</span> (<strong>mesokurtic</strong>)</li>
+<li>Excess kurtosis <span class="math inline">\(&gt; 0\)</span>: <strong>leptokurtic</strong>, heavy tails, more outliers</li>
+<li>Excess kurtosis <span class="math inline">\(&lt; 0\)</span>: <strong>platykurtic</strong>, light tails, fewer outliers</li>
+</ul></li>
+<li><strong>Empirical rule</strong>: for <strong>mound-shaped</strong> (bell-shaped) data, about <strong>68%</strong> of the observations lie within <span class="math inline">\(\bar{x} \pm s\)</span>, about <strong>95%</strong> within <span class="math inline">\(\bar{x} \pm 2s\)</span>, and about <strong>99.7%</strong> within <span class="math inline">\(\bar{x} \pm 3s\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/kurtosis.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Three distributions with the same mean and variance: a peaked heavy-tailed leptokurtic curve, a normal mesokurtic curve, and a flat platykurtic uniform shape."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Platykurtic|Mesokurtic|Leptokurtic">
+<p>Classify each distribution. <strong>Read carefully:</strong> some values are <em>kurtosis</em> and some are <em>excess kurtosis</em>.</p>
+<ul>
+<li>Excess kurtosis <span class="math inline">\(= -1.2\)</span> :: Platykurtic</li>
+<li>Excess kurtosis <span class="math inline">\(= 0.02\)</span> :: Mesokurtic</li>
+<li>Excess kurtosis <span class="math inline">\(= 3\)</span> :: Leptokurtic</li>
+<li>Kurtosis <span class="math inline">\(= 3\)</span> :: Mesokurtic</li>
+<li>Kurtosis <span class="math inline">\(= 1.8\)</span> :: Platykurtic</li>
+<li>Kurtosis <span class="math inline">\(= 9\)</span> :: Leptokurtic</li>
+<li>Daily stock returns, which have many more extreme crashes and jumps than a normal distribution :: Leptokurtic</li>
+</ul>
+<div class="explain">
+<p>Always check which one is reported: <strong>excess kurtosis <span class="math inline">\(=\)</span> kurtosis <span class="math inline">\(- 3\)</span></strong>.</p>
+<ul>
+<li>Kurtosis 3 means excess 0: <strong>mesokurtic</strong> (normal-like tails).</li>
+<li>Kurtosis 1.8 means excess −1.2: <strong>platykurtic</strong>. This is the uniform distribution!</li>
+<li>Kurtosis 9 means excess 6: <strong>leptokurtic</strong>.</li>
+</ul>
+<p>Financial returns are the classic leptokurtic example: “once-in-a-century” crashes happen far more often than the normal model predicts.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="tf" data-answer="false">
+<p>Kurtosis tells us only how tall and sharp the peak of a distribution is.</p>
+<div class="explain">
+<p><strong>False.</strong> Kurtosis is mainly about the <strong>tails</strong>, that is, about outliers and extreme values. Two distributions can have similar-looking peaks but very different tails, and the tails drive the kurtosis.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/empirical-rule.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Normal curve with shaded bands: about 68% within one standard deviation, 95% within two, 99.7% within three."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Scores on a large STAT 112 midterm are <strong>mound-shaped</strong> with mean <strong>62</strong> and standard deviation <strong>9</strong>. Use the empirical rule.</p>
+<p>About 68% of the scores lie between <span class="blank" data-answer="53" data-tol="0"></span> and <span class="blank" data-answer="71" data-tol="0"></span>.<br>
+About 95% of the scores lie between <span class="blank" data-answer="44" data-tol="0"></span> and <span class="blank" data-answer="80" data-tol="0"></span>.<br>
+About <span class="blank" data-answer="99.7" data-tol="0.05"></span> % of the scores lie between 35 and 89.<br>
+Approximately <span class="blank" data-answer="2.5" data-tol="0.05"></span> % of the students scored <strong>above 80</strong>.<br>
+Approximately <span class="blank" data-answer="34" data-tol="0.5"></span> % of the students scored <strong>between 62 and 71</strong>.</p>
+<div class="explain">
+<ul>
+<li><span class="math inline">\(62 \pm 9 = [53,\ 71]\)</span> contains about 68%</li>
+<li><span class="math inline">\(62 \pm 2(9) = [44,\ 80]\)</span> contains about 95%</li>
+<li><span class="math inline">\(62 \pm 3(9) = [35,\ 89]\)</span> contains about 99.7%</li>
+<li><strong>Above 80:</strong> 5% is outside <span class="math inline">\([44, 80]\)</span>. By symmetry half of that is in the upper tail, so about <strong>2.5%</strong>.</li>
+<li><strong>Between 62 and 71:</strong> half of the central 68%, so about <strong>34%</strong>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-e-percentiles-quartiles-and-box-plots" class="level1">
+<h1>Part E — Percentiles, quartiles and box plots</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms and formulas: position
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>The <span class="math inline">\(p\)</span>th percentile</strong> (<span class="math inline">\(0&lt;p&lt;1\)</span>): a value such that <strong>at least <span class="math inline">\(np\)</span></strong> observations are <span class="math inline">\(\le\)</span> it <strong>and</strong> <strong>at least <span class="math inline">\(n(1-p)\)</span></strong> observations are <span class="math inline">\(\ge\)</span> it.</li>
+<li><strong>Quartiles</strong>: <span class="math inline">\(Q_1\)</span> = 25th percentile, <span class="math inline">\(Q_2\)</span> = median = 50th percentile, <span class="math inline">\(Q_3\)</span> = 75th percentile.</li>
+<li><strong>Five-number summary</strong>: minimum, <span class="math inline">\(Q_1\)</span>, median, <span class="math inline">\(Q_3\)</span>, maximum.</li>
+<li><strong>Interquartile range</strong>: <span class="math inline">\(IQR = Q_3 - Q_1\)</span>, the spread of the middle 50%.</li>
+<li><strong>Fences</strong> for potential outliers: <span class="math display">\[\text{lower fence} = Q_1 - 1.5\,IQR\]</span> <span class="math display">\[\text{upper fence} = Q_3 + 1.5\,IQR\]</span> Observations outside the fences are flagged as <strong>potential outliers</strong>. The whiskers stop at the most extreme observations <strong>inside</strong> the fences.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="match">
+<p><img src="recitation2/images/recitation2/boxplot-anatomy.png" class="img-fluid" alt="Box plot with numbered labels 1 to 10."></p>
+<p>Match each numbered label in the box plot with what it shows.</p>
+<ul>
+<li>Label 1 :: A potential outlier below the lower fence</li>
+<li>Label 2 :: End of the lower whisker: the smallest observation inside the fences</li>
+<li>Label 3 :: First quartile, Q1 (25th percentile)</li>
+<li>Label 4 :: Median, Q2 (50th percentile)</li>
+<li>Label 5 :: Third quartile, Q3 (75th percentile)</li>
+<li>Label 6 :: End of the upper whisker: the largest observation inside the fences</li>
+<li>Label 7 :: Potential outliers above the upper fence</li>
+<li>Label 8 :: Interquartile range, the width of the box: Q3 − Q1</li>
+<li>Label 9 :: Lower fence: Q1 − 1.5 × IQR (not drawn on most box plots)</li>
+<li>Label 10 :: Upper fence: Q3 + 1.5 × IQR (not drawn on most box plots)</li>
+</ul>
+<div class="explain">
+<ul>
+<li>The <strong>box</strong> holds the middle 50% of the data, and the line inside is the median.</li>
+<li>The <strong>whiskers</strong> do <em>not</em> necessarily reach the minimum and maximum. They stop at the last observation inside the fences, and anything beyond is plotted as a separate point.</li>
+<li>When there are no outliers, the whisker ends <strong>are</strong> the minimum and the maximum.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>The one-way commute times (minutes) of 15 METU students, already ordered:</p>
+<p><span class="math display">\[12,\ 15,\ 18,\ 20,\ 22,\ 22,\ 25,\ 27,\ 30,\ 31,\ 35,\ 38,\ 40,\ 45,\ 95\]</span></p>
+<p>Median <span class="math inline">\(=\)</span> <span class="blank" data-answer="27" data-tol="0"></span>, <span class="math inline">\(\;Q_1 =\)</span> <span class="blank" data-answer="20" data-tol="0"></span>, <span class="math inline">\(\;Q_3 =\)</span> <span class="blank" data-answer="38" data-tol="0"></span>, <span class="math inline">\(\;IQR =\)</span> <span class="blank" data-answer="18" data-tol="0"></span><br>
+Lower fence <span class="math inline">\(=\)</span> <span class="blank" data-answer="-7" data-tol="0"></span>, upper fence <span class="math inline">\(=\)</span> <span class="blank" data-answer="65" data-tol="0"></span><br>
+The potential outlier is <span class="blank" data-answer="95" data-tol="0"></span> minutes, so the upper whisker ends at <span class="blank" data-answer="45" data-tol="0"></span>.<br>
+The 90th percentile is <span class="blank" data-answer="45" data-tol="0"></span> minutes.<br>
+The mean is <span class="blank" data-answer="31.67" data-tol="0.01"></span>, which is larger than the median, so the distribution is <span class="blank" data-answer="positively skewed|right skewed|skewed to the right|positive|right|positively|right-skewed"></span>.</p>
+<div class="explain">
+<ul>
+<li><span class="math inline">\(n = 15\)</span>, so the median is the <span class="math inline">\(\frac{15+1}{2} = 8\)</span>th value: <strong>27</strong>.</li>
+<li><span class="math inline">\(Q_1\)</span>: <span class="math inline">\(np = 15(0.25) = 3.75\)</span>, so we need ≥ 3.75 values below it and ≥ 11.25 values above it. That is the <strong>4th</strong> value, <strong>20</strong>.</li>
+<li><span class="math inline">\(Q_3\)</span>: <span class="math inline">\(np = 11.25\)</span> gives the <strong>12th</strong> value, <strong>38</strong>.</li>
+<li><span class="math inline">\(IQR = 38 - 20 = 18\)</span> and <span class="math inline">\(1.5 \times IQR = 27\)</span>.</li>
+<li>Fences: <span class="math inline">\(20 - 27 = -7\)</span> and <span class="math inline">\(38 + 27 = 65\)</span>. Only <strong>95</strong> is outside, so it is a potential outlier. The upper whisker stops at <strong>45</strong>, the largest value inside the fences.</li>
+<li><span class="math inline">\(P_{90}\)</span>: <span class="math inline">\(np = 13.5\)</span>, so we need ≥ 13.5 values below it and ≥ 1.5 above it. That is the <strong>14th</strong> value, <strong>45</strong>.</li>
+<li><span class="math inline">\(\bar{x} = 475/15 = 31.67 &gt; 27\)</span>: the student with a 95-minute commute pulls the mean to the right, so the distribution is <strong>positively skewed</strong>.</li>
+</ul>
+<p><img src="recitation2/images/recitation2/commute-box.png" class="img-fluid" alt="Box plot of commute times: box from 20 to 38, median 27, whiskers from 12 to 45, outlier at 95, fences at -7 and 65."></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>Your university entrance exam result places you at the <strong>85th percentile</strong>. What does this mean?</p>
+<ul>
+<li>You answered 85% of the questions correctly.</li>
+<li>Your score is 85 out of 100.</li>
+<li>About 85% of the test takers scored at or below your score, and about 15% scored at or above it.</li>
+<li>Only 85 people scored higher than you.</li>
+</ul>
+<div class="explain">
+<p>A percentile describes your <strong>position relative to the other test takers</strong>, not the percentage of questions you answered correctly. At the 85th percentile, you did as well as or better than about 85% of the group.</p>
+</div>
+</div>
+<section id="reading-box-plots" class="level2">
+<h2 class="anchored" data-anchor-id="reading-box-plots">Reading box plots</h2>
+<p>A market researcher studies the <strong>annual revenue</strong> of the stores of a retail chain.</p>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/revenue-box.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Box plot of annual store revenue." width="340"></p>
+</figure>
+</div>
+<p>Read the box plot (in millions of ₺; approximate values are fine).</p>
+<p>Median ≈ <span class="blank" data-answer="1.1" data-tol="0.06"></span> M, <span class="math inline">\(\;Q_1\)</span> ≈ <span class="blank" data-answer="0.88" data-tol="0.06"></span> M, <span class="math inline">\(\;Q_3\)</span> ≈ <span class="blank" data-answer="1.38" data-tol="0.06"></span> M, <span class="math inline">\(\;IQR\)</span> ≈ <span class="blank" data-answer="0.5" data-tol="0.07"></span> M<br>
+Number of stores flagged as potential outliers: <span class="blank" data-answer="4" data-tol="0"></span></p>
+<div class="explain">
+<ul>
+<li>The box runs from about <strong>0.88 M</strong> (<span class="math inline">\(Q_1\)</span>) to about <strong>1.38 M</strong> (<span class="math inline">\(Q_3\)</span>), so <span class="math inline">\(IQR \approx 0.5\)</span> M. The median line is at about <strong>1.1 M</strong>.</li>
+<li>Fences: <span class="math inline">\(0.88 - 1.5(0.5) \approx 0.13\)</span> M and <span class="math inline">\(1.38 + 1.5(0.5) \approx 2.13\)</span> M.</li>
+<li><strong>Four</strong> stores lie outside: two low (about 0.13 M and 0) and two high (about 2.15 M and 2.6 M).</li>
+<li>The median is close to the centre of the box and the whiskers have similar lengths, so the distribution is roughly <strong>symmetric</strong>, apart from a few unusual stores.</li>
+<li>A store with <strong>zero</strong> revenue deserves a closer look. Was it newly opened, closed for renovation, or is it a data-entry error?</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-keywords="1.1|median; outlier|unusual|extreme; middle 50|Q1|Q3|IQR|box; symmetric|skew">
+<p>Write a 2–3 sentence interpretation of the single <strong>revenue</strong> box plot above, as you would write it in a report for the store manager.</p>
+<div class="explain">
+<p><strong>Model answer:</strong> The median annual revenue is about ₺1.1 million, so half of the stores earn less than this and half earn more. The middle 50% of stores earn between roughly ₺0.9 and ₺1.4 million (IQR ≈ ₺0.5 million), and the distribution is roughly symmetric. Four stores are potential outliers: two earn unusually little (one about ₺0) and two earn unusually much (up to about ₺2.6 million). These four should be investigated.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,d,f">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/revenue-box-region.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Side-by-side box plots of store revenue for Bay Area, Central, Northern and Southern regions." width="420"></p>
+</figure>
+</div>
+<p>The same stores, now split by <strong>region</strong>. Which statements are supported by the plot? Select all that apply.</p>
+<ul>
+<li>The median revenue is roughly the same (about 1.1 M) in all four regions.</li>
+<li>Every region has at least one store flagged as a potential outlier.</li>
+<li>The Southern region’s median revenue is clearly the highest.</li>
+<li>Between the whisker ends, the Southern region shows the widest spread.</li>
+<li>The Central region has a store with revenue above 2.5 M.</li>
+<li>The Bay Area has potential outliers on both the low and the high side.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a. True.</strong> All the median lines are close to 1.1 M.</li>
+<li><strong>b. True.</strong> Each region has points beyond its whiskers.</li>
+<li><strong>c.&nbsp;False.</strong> The Northern median is, if anything, slightly higher, and the differences are tiny.</li>
+<li><strong>d.&nbsp;True.</strong> The Southern whiskers run from about 0.1 M to 2.1 M.</li>
+<li><strong>e. False.</strong> Central’s highest point is about 2.2 M.</li>
+<li><strong>f.&nbsp;True.</strong> It has a store near 0 and two above 2.2 M.</li>
+</ul>
+<p><strong>Overall:</strong> region does not seem to make much difference to typical revenue. The boxes overlap almost completely.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Symmetric|Positively skewed|Negatively skewed">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/three-distributions.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Three histograms, each with its box plot below."></p>
+</figure>
+</div>
+<p>Describe the distribution in each panel.</p>
+<ul>
+<li>Left panel :: Symmetric</li>
+<li>Middle panel :: Positively skewed</li>
+<li>Right panel :: Negatively skewed</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Left:</strong> the median is in the middle of the box and the whiskers are equal: <strong>symmetric</strong>.</li>
+<li><strong>Middle:</strong> the long tail is on the right; the median is closer to <span class="math inline">\(Q_1\)</span> and the right whisker is longer: <strong>positively (right) skewed</strong>.</li>
+<li><strong>Right:</strong> the mirror image, with a long tail on the left; the median is closer to <span class="math inline">\(Q_3\)</span>: <strong>negatively (left) skewed</strong>.</li>
+</ul>
+<p><strong>Box plot shortcut:</strong> the longer whisker and the larger half of the box point toward the tail.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Box plot 1|Box plot 2|Box plot 3|Box plot 4" data-label="Match histogram to box plot">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation2/images/recitation2/hist-box-match.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Four histograms labelled A to D and four box plots labelled 1 to 4 in a different order."></p>
+</figure>
+</div>
+<p>Each histogram shows the same data as one of the box plots. Which box plot belongs to each histogram?</p>
+<ul>
+<li>Histogram A :: Box plot 3</li>
+<li>Histogram B :: Box plot 4</li>
+<li>Histogram C :: Box plot 1</li>
+<li>Histogram D :: Box plot 2</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>A (right-skewed)</strong> → <strong>Box plot 3</strong>: the median sits near the left of the box, there is a long right whisker, and the high values are flagged as outliers.</li>
+<li><strong>B (symmetric, bell-shaped)</strong> → <strong>Box plot 4</strong>: a narrow box in the centre with balanced whiskers. Most data are near the middle, so the IQR is small.</li>
+<li><strong>C (left-skewed)</strong> → <strong>Box plot 1</strong>: the mirror image of box plot 3.</li>
+<li><strong>D (flat, uniform)</strong> → <strong>Box plot 2</strong>: a very <strong>wide</strong> box, because the values are spread evenly, and a median exactly in the middle.</li>
+</ul>
+<p>Box plots 2 and 4 are both symmetric. The <strong>width of the box</strong> (the IQR) tells them apart.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="order">
+<p>Put the steps for constructing a box plot by hand in the correct order.</p>
+<ul>
+<li>Sort the data from smallest to largest</li>
+<li>Find the median, <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span></li>
+<li>Compute <span class="math inline">\(IQR = Q_3 - Q_1\)</span></li>
+<li>Compute the fences <span class="math inline">\(Q_1 - 1.5\,IQR\)</span> and <span class="math inline">\(Q_3 + 1.5\,IQR\)</span></li>
+<li>Flag the observations outside the fences as potential outliers</li>
+<li>Draw the box from <span class="math inline">\(Q_1\)</span> to <span class="math inline">\(Q_3\)</span> with a line at the median</li>
+<li>Draw the whiskers to the most extreme observations inside the fences and plot the outliers as points</li>
+</ul>
+<div class="explain">
+<p>You need the quartiles before the IQR, the IQR before the fences, and the fences before you know <strong>where the whiskers stop</strong>.</p>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
+<!--
+  STAT 112 interactive quiz engine
+  ---------------------------------
+  Include in any page with (front matter):
+      format:
+        html:
+          include-after-body: _quiz.html
+
+  Question types (write them as fenced divs in the .qmd):
+    type=mc        one correct option        answer="b"
+    type=ms        select all that apply     answer="a,c,e"
+    type=tf        single true/false         answer="true"
+    type=short     typed answer              answer="ratio|ratio scale"   (add tol="0.5" for numbers)
+    type=fill      inline blanks             []{.blank answer="parameter"}
+    type=match     "term :: definition" list
+    type=classify  "item :: category" list   options="A|B|C"  (several columns: options="A|B ; X|Y" columns="Scale ; Type")
+    type=order     list written in the correct order (shown shuffled)
+    type=open      free text + model answer  keywords="idea one|alt ; idea two"
+  Put explanations / model answers in a nested  ::: explain  div.
+-->
+<style>
+:root {
+  --qz-accent: var(--bs-primary, #2780e3);
+  --qz-border: var(--bs-border-color, #dee2e6);
+  --qz-soft: rgba(127, 127, 127, 0.07);
+  --qz-muted: var(--bs-secondary-color, #6c757d);
+  --qz-ok: #1a7f37;
+  --qz-ok-bg: rgba(26, 127, 55, 0.11);
+  --qz-bad: #c0392b;
+  --qz-bad-bg: rgba(192, 57, 43, 0.10);
+  --qz-partial: #b9770e;
+}
+.qz {
+  position: relative;
+  border: 1px solid var(--qz-border);
+  border-left: 5px solid var(--qz-accent);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.1rem;
+  margin: 1.6rem 0;
+  background: var(--bs-body-bg, #fff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color .2s;
+}
+.qz.qz-correct { border-left-color: var(--qz-ok); }
+.qz.qz-wrong { border-left-color: var(--qz-bad); }
+.qz.qz-partial { border-left-color: var(--qz-partial); }
+.qz > p:last-of-type { margin-bottom: .4rem; }
+.qz-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.qz-num {
+  font-weight: 700; font-size: .85rem; color: #fff; background: var(--qz-accent);
+  border-radius: 6px; padding: .1rem .5rem; font-variant-numeric: tabular-nums;
+}
+.qz-correct .qz-num { background: var(--qz-ok); }
+.qz-wrong .qz-num { background: var(--qz-bad); }
+.qz-partial .qz-num { background: var(--qz-partial); }
+.qz-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--qz-muted); font-weight: 600; }
+.qz img { max-width: 100%; height: auto; }
+
+/* options (mc / ms / tf) */
+.qz-options { display: grid; gap: .5rem; margin: .7rem 0 .2rem; }
+.qz-options.qz-inline { grid-template-columns: repeat(auto-fit, minmax(120px, 200px)); }
+.qz-opt {
+  display: flex; align-items: flex-start; gap: .65rem; width: 100%; text-align: left;
+  border: 1px solid var(--qz-border); background: var(--bs-body-bg, #fff); color: inherit;
+  border-radius: 8px; padding: .55rem .75rem; cursor: pointer; font: inherit; line-height: 1.4;
+  transition: border-color .15s, background-color .15s;
+}
+.qz-opt:hover { border-color: var(--qz-accent); background: var(--qz-soft); }
+.qz-opt:focus-visible { outline: 2px solid var(--qz-accent); outline-offset: 2px; }
+.qz-letter {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--qz-border);
+  display: grid; place-items: center; font-weight: 600; font-size: .8rem;
+}
+.qz-opt-text { flex: 1; padding-top: .05rem; }
+.qz-opt-text p { margin: 0; }
+.qz-opt.is-sel { border-color: var(--qz-accent); box-shadow: inset 0 0 0 1px var(--qz-accent); }
+.qz-opt.is-sel .qz-letter { background: var(--qz-accent); border-color: var(--qz-accent); color: #fff; }
+.qz-opt.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); box-shadow: inset 0 0 0 1px var(--qz-ok); }
+.qz-opt.is-ok .qz-letter { background: var(--qz-ok); border-color: var(--qz-ok); color: #fff; }
+.qz-opt.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); box-shadow: inset 0 0 0 1px var(--qz-bad); }
+.qz-opt.is-bad .qz-letter { background: var(--qz-bad); border-color: var(--qz-bad); color: #fff; }
+.qz-opt.is-missed { border: 1px dashed var(--qz-ok); }
+
+/* controls & feedback */
+.qz-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; align-items: center; }
+.qz-controls .btn { border-radius: 6px; }
+.qz-feedback { margin-top: .65rem; font-weight: 500; padding: .45rem .75rem; border-radius: 6px; }
+.qz-feedback:empty { display: none; }
+.qz-fb-ok { color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-fb-bad { color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fb-partial { color: var(--qz-partial); background: rgba(185, 119, 14, .10); }
+.qz-fb-info { background: var(--qz-soft); }
+.qz-explain {
+  margin-top: .75rem; padding: .75rem 1rem; background: var(--qz-soft);
+  border-radius: 8px; border-left: 3px solid var(--qz-accent);
+}
+.qz-explain > :last-child { margin-bottom: 0; }
+.qz-explain-title { font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); margin-bottom: .35rem; }
+
+/* typed inputs */
+.qz-short { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .6rem; }
+.qz-input { max-width: 24rem; }
+.qz-input.is-ok, .qz-select.is-ok, textarea.is-ok { border-color: var(--qz-ok); background-color: var(--qz-ok-bg); }
+.qz-input.is-bad, .qz-select.is-bad { border-color: var(--qz-bad); background-color: var(--qz-bad-bg); }
+.qz-unit { color: var(--qz-muted); }
+.qz-blank-input {
+  border: 0; border-bottom: 2px solid var(--qz-accent); background: var(--qz-soft); color: inherit;
+  font: inherit; padding: 0 .3rem; margin: 0 .15rem; text-align: center; border-radius: 4px 4px 0 0;
+  min-width: 5ch;
+}
+.qz-blank-input:focus { outline: 2px solid var(--qz-accent); outline-offset: 1px; }
+.qz-blank-input.is-ok { border-bottom-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-blank-input.is-bad { border-bottom-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fill-body { line-height: 2.3; }
+
+/* classify rows */
+.qz-rows { display: grid; gap: .4rem; margin-top: .7rem; }
+.qz-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; align-items: center;
+  padding: .45rem .7rem; border-radius: 8px; background: var(--qz-soft);
+}
+.qz-row-head { background: transparent; padding-top: 0; padding-bottom: 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); font-weight: 600; }
+.qz-row-ctrls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+.qz-row-head .qz-row-ctrls span { min-width: 9rem; text-align: center; }
+.qz-row p { margin: 0; }
+.qz-seg { display: inline-flex; border: 1px solid var(--qz-border); border-radius: 8px; overflow: hidden; background: var(--bs-body-bg, #fff); }
+.qz-seg button {
+  border: 0; border-right: 1px solid var(--qz-border); background: transparent; color: inherit;
+  padding: .3rem .7rem; font: inherit; font-size: .88rem; cursor: pointer; white-space: nowrap;
+}
+.qz-seg button:last-child { border-right: 0; }
+.qz-seg button:hover { background: var(--qz-soft); }
+.qz-seg button[aria-pressed="true"] { background: var(--qz-accent); color: #fff; }
+.qz-seg.is-ok { border-color: var(--qz-ok); box-shadow: 0 0 0 1px var(--qz-ok); }
+.qz-seg.is-ok button[aria-pressed="true"] { background: var(--qz-ok); }
+.qz-seg.is-bad { border-color: var(--qz-bad); box-shadow: 0 0 0 1px var(--qz-bad); }
+.qz-seg.is-bad button[aria-pressed="true"] { background: var(--qz-bad); }
+.qz-select { width: auto; min-width: 9rem; display: inline-block; }
+
+/* image grid (classify with pictures) */
+.qz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .8rem; margin-top: .7rem; }
+.qz-card { border: 1px solid var(--qz-border); border-radius: 8px; padding: .5rem; display: flex; flex-direction: column; gap: .5rem; background: var(--bs-body-bg, #fff); }
+.qz-card-media { height: 170px; display: grid; place-items: center; background: #fff; border-radius: 6px; overflow: hidden; }
+.qz-card-media img { max-height: 166px; max-width: 100%; width: auto; object-fit: contain; }
+.qz-card-media p { margin: 0; }
+.qz-card .qz-select { width: 100%; }
+.qz-card-tag { font-size: .75rem; color: var(--qz-muted); font-weight: 600; }
+
+/* matching */
+.qz-match { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1.25rem; margin-top: .7rem; }
+.qz-match-left { display: grid; gap: .4rem; align-content: start; }
+.qz-match-left .qz-row { grid-template-columns: auto minmax(0, 1fr); }
+.qz-match-left .qz-select { min-width: 4.6rem; }
+.qz-match-right { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; align-content: start; }
+.qz-match-right li { display: flex; gap: .6rem; align-items: flex-start; padding: .45rem .7rem; border: 1px solid var(--qz-border); border-radius: 8px; }
+.qz-match-right li p { margin: 0; }
+
+/* ordering */
+.qz-order { list-style: none; padding: 0; margin: .7rem 0 0; }
+.qz-order li {
+  display: flex; align-items: center; gap: .6rem; padding: .45rem .6rem; margin: .35rem 0;
+  border: 1px solid var(--qz-border); border-radius: 8px; background: var(--bs-body-bg, #fff); cursor: grab;
+}
+.qz-order li.is-drag { opacity: .45; }
+.qz-order li.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-order li.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-order .qz-order-text { flex: 1; }
+.qz-order .qz-order-text p { margin: 0; }
+.qz-move { border: 1px solid var(--qz-border); background: transparent; color: inherit; border-radius: 6px; width: 2rem; height: 2rem; cursor: pointer; line-height: 1; }
+.qz-move:hover { background: var(--qz-soft); }
+
+/* open */
+.qz-open textarea { margin-top: .6rem; }
+.qz-chip { display: inline-block; padding: .05rem .55rem; border-radius: 999px; margin: .15rem .2rem 0 0; font-size: .85rem; font-weight: 500; }
+.qz-chip-ok { background: var(--qz-ok-bg); color: var(--qz-ok); }
+
+/* scoreboard */
+.quiz-scoreboard {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+  padding: .75rem 1rem; border: 1px solid var(--qz-border); border-radius: 10px; background: var(--qz-soft); margin: 1.25rem 0 1.5rem;
+}
+.qz-score-big { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.qz-score-bar { flex: 1 1 160px; height: 8px; background: var(--qz-border); border-radius: 99px; overflow: hidden; min-width: 120px; }
+.qz-score-bar span { display: block; height: 100%; width: 0; background: var(--qz-ok); transition: width .3s; }
+.qz-pill {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 1030; background: var(--bs-body-bg, #fff);
+  border: 1px solid var(--qz-border); border-radius: 999px; padding: .35rem .85rem; font-weight: 600;
+  font-size: .9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); font-variant-numeric: tabular-nums;
+}
+.qz-error { color: var(--qz-bad); font-family: monospace; font-size: .85rem; }
+
+@media (max-width: 700px) {
+  .qz { padding: .85rem .9rem 1rem; }
+  .qz-row { grid-template-columns: 1fr; }
+  .qz-row-ctrls { justify-content: flex-start; }
+  .qz-row-head { display: none; }
+  .qz-match { grid-template-columns: 1fr; }
+  .qz-seg button { padding: .3rem .5rem; font-size: .82rem; }
+}
+@media print {
+  .qz-controls, .qz-pill, .quiz-scoreboard { display: none !important; }
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var LABELS = {
+    mc: "Multiple choice", ms: "Select all that apply", tf: "True / False",
+    short: "Short answer", fill: "Fill in the blanks", match: "Matching",
+    classify: "Classify", order: "Put in order", open: "Open-ended"
+  };
+  var registry = [];
+
+  /* ---------- helpers ---------- */
+  function attr(el, name) {
+    var v = el.getAttribute("data-" + name);
+    if (v === null) v = el.getAttribute(name);
+    return v;
+  }
+  function h(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function btn(label, cls, fn) {
+    var b = h("button", "btn btn-sm " + cls, label);
+    b.type = "button";
+    b.addEventListener("click", fn);
+    return b;
+  }
+  function norm(s) {
+    return String(s == null ? "" : s).toLowerCase()
+      .replace(/ı/g, "i").normalize("NFKD").replace(/[̀-ͯ]/g, "")
+      .replace(/[‘’'`"“”]/g, "")
+      .replace(/[^a-z0-9.%\s-]/g, " ")
+      .replace(/^(a|an|the)\s+/, "")
+      .replace(/\s+/g, " ").trim();
+  }
+  function num(s) {
+    s = String(s == null ? "" : s).trim().replace(/\s/g, "").replace(/%$/, "");
+    if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", ".");
+    var frac = s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+    if (frac) return parseFloat(frac[1]) / parseFloat(frac[2]);
+    if (!/^-?\d*\.?\d+(e-?\d+)?$/i.test(s)) return null;
+    return parseFloat(s);
+  }
+  function alts(spec) {
+    return String(spec == null ? "" : spec).split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function matches(input, spec, tol) {
+    var a = alts(spec);
+    if (tol !== null && tol !== undefined) {
+      var v = num(input), t = parseFloat(tol) || 0;
+      if (v === null) return false;
+      return a.some(function (x) { var y = num(x); return y !== null && Math.abs(v - y) <= t + 1e-9; });
+    }
+    var n = norm(input);
+    return n !== "" && a.some(function (x) { return norm(x) === n; });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function stripTags(html) { var d = h("div", null, html); return d.textContent.trim(); }
+  function unwrapP(html) { return html.trim().replace(/^<p>/, "").replace(/<\/p>$/, ""); }
+  function firstList(q) { return q.querySelector(":scope > ol, :scope > ul"); }
+  function pairs(q) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list of 'item :: answer' lines.");
+    var out = Array.prototype.map.call(list.children, function (li) {
+      var html = li.innerHTML, i = html.lastIndexOf("::");
+      if (i < 0) throw new Error("List item is missing '::' — " + stripTags(html).slice(0, 60));
+      return { html: unwrapP(html.slice(0, i)), answer: stripTags(html.slice(i + 2)) };
+    });
+    list.remove();
+    return out;
+  }
+  function markEl(el, ok) {
+    el.classList.remove("is-ok", "is-bad");
+    if (ok === true) el.classList.add("is-ok");
+    if (ok === false) el.classList.add("is-bad");
+  }
+
+  /* ---------- status + scoreboard ---------- */
+  function setStatus(q, s) {
+    q._status = s;
+    q.classList.remove("qz-correct", "qz-wrong", "qz-partial");
+    if (s) q.classList.add("qz-" + s);
+    updateScore();
+  }
+  function updateScore() {
+    var total = registry.length, correct = 0, tried = 0;
+    registry.forEach(function (q) {
+      if (q._status === "correct") correct++;
+      if (q._status) tried++;
+    });
+    document.querySelectorAll(".qz-score-big").forEach(function (e) { e.textContent = correct + " / " + total + " correct"; });
+    document.querySelectorAll(".qz-score-tried").forEach(function (e) { e.textContent = tried + " attempted"; });
+    document.querySelectorAll(".qz-score-bar span").forEach(function (e) { e.style.width = (total ? 100 * correct / total : 0) + "%"; });
+    var pill = document.querySelector(".qz-pill");
+    if (pill) pill.textContent = "✓ " + correct + " / " + total;
+  }
+  function feedback(p, kind, msg) {
+    p.fb.className = "qz-feedback qz-fb-" + kind;
+    p.fb.innerHTML = msg;
+  }
+  function showExplain(p) { if (p.explain) p.explain.hidden = false; }
+  function clearFb(p) { p.fb.className = "qz-feedback"; p.fb.innerHTML = ""; if (p.explain) p.explain.hidden = true; }
+  function scoreMsg(p, q, ok, total) {
+    if (ok === total) { feedback(p, "ok", "✓ All " + total + " correct!"); setStatus(q, "correct"); showExplain(p); }
+    else if (ok > 0) { feedback(p, "partial", ok + " / " + total + " correct. Fix the red ones and check again."); setStatus(q, "partial"); }
+    else { feedback(p, "bad", "0 / " + total + " correct. Have another go."); setStatus(q, "wrong"); }
+  }
+
+  /* ---------- scaffold ---------- */
+  function scaffold(q, type, n) {
+    q.classList.add("qz", "qz-t-" + type);
+    var explain = q.querySelector(":scope > .explain");
+    if (explain) explain.remove();
+    var head = h("div", "qz-head",
+      '<span class="qz-num">Q' + n + '</span><span class="qz-type">' + (attr(q, "label") || LABELS[type] || type) + "</span>");
+    q.insertBefore(head, q.firstChild);
+    var p = { ui: h("div", "qz-ui"), controls: h("div", "qz-controls"), fb: h("div", "qz-feedback"), explain: explain };
+    p.fb.setAttribute("role", "status");
+    p.fb.setAttribute("aria-live", "polite");
+    q.appendChild(p.ui);
+    q.appendChild(p.controls);
+    q.appendChild(p.fb);
+    if (explain) {
+      explain.classList.add("qz-explain");
+      explain.hidden = true;
+      explain.insertBefore(h("div", "qz-explain-title", type === "open" ? "Model answer" : "Explanation"), explain.firstChild);
+      q.appendChild(explain);
+    }
+    return p;
+  }
+  function standardControls(p, q, check, reveal, reset) {
+    if (check) p.controls.appendChild(btn("Check", "btn-primary", check));
+    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); }));
+    p.controls.appendChild(btn("Reset", "btn-outline-secondary", function () { reset(); clearFb(p); setStatus(q, null); }));
+    q._reset = function () { reset(); clearFb(p); setStatus(q, null); };
+  }
+  function parseIdx(spec, n) {
+    return String(spec || "").split(/[\s,;]+/).filter(Boolean).map(function (t) {
+      if (/^\d+$/.test(t)) return parseInt(t, 10) - 1;
+      return t.toUpperCase().charCodeAt(0) - 65;
+    }).filter(function (i) { return i >= 0 && i < n; });
+  }
+
+  /* ---------- multiple choice / multi-select / true-false ---------- */
+  function buildChoice(q, p, multi, tf) {
+    var items, ans;
+    if (tf) {
+      items = ["True", "False"];
+      var a = norm(attr(q, "answer"));
+      ans = [/^(t|true|yes|dogru)$/.test(a) ? 0 : 1];
+    } else {
+      var list = firstList(q);
+      if (!list) throw new Error("Expected a list of options.");
+      items = Array.prototype.map.call(list.children, function (li) { return unwrapP(li.innerHTML); });
+      list.remove();
+      ans = parseIdx(attr(q, "answer"), items.length);
+      if (!ans.length) throw new Error("answer= is missing or out of range.");
+    }
+    var wrap = h("div", "qz-options" + (tf ? " qz-inline" : ""));
+    var btns = items.map(function (html, i) {
+      var b = h("button", "qz-opt", '<span class="qz-letter">' + (tf ? (i ? "F" : "T") : String.fromCharCode(65 + i)) + '</span><span class="qz-opt-text">' + html + "</span>");
+      b.type = "button";
+      wrap.appendChild(b);
+      return b;
+    });
+    p.ui.appendChild(wrap);
+    function clear() { btns.forEach(function (b) { b.classList.remove("is-ok", "is-bad", "is-sel", "is-missed"); b.setAttribute("aria-pressed", "false"); }); }
+
+    if (!multi) {
+      btns.forEach(function (b, i) {
+        b.addEventListener("click", function () {
+          clear();
+          if (ans.indexOf(i) >= 0) {
+            b.classList.add("is-ok");
+            feedback(p, "ok", "✓ Correct!");
+            setStatus(q, "correct");
+            showExplain(p);
+          } else {
+            b.classList.add("is-bad");
+            feedback(p, "bad", "✗ Not quite. Try another option.");
+            setStatus(q, "wrong");
+          }
+        });
+      });
+      standardControls(p, q, null, function () {
+        clear();
+        ans.forEach(function (i) { btns[i].classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return tf ? items[i] : String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    } else {
+      btns.forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          var on = !b.classList.contains("is-sel");
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          b.classList.toggle("is-sel", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      });
+      standardControls(p, q, function () {
+        var hit = 0, wrong = 0;
+        btns.forEach(function (b, i) {
+          var sel = b.classList.contains("is-sel"), good = ans.indexOf(i) >= 0;
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          if (sel && good) { hit++; b.classList.add("is-ok"); }
+          if (sel && !good) { wrong++; b.classList.add("is-bad"); }
+        });
+        if (hit === ans.length && !wrong) { feedback(p, "ok", "✓ Correct, you found all " + ans.length + "!"); setStatus(q, "correct"); showExplain(p); }
+        else if (hit === 0 && wrong === 0) { feedback(p, "info", "Select at least one option first."); }
+        else {
+          feedback(p, hit ? "partial" : "bad", hit + " of " + ans.length + " correct options selected" + (wrong ? ", " + wrong + " wrong selection" + (wrong > 1 ? "s" : "") : "") + ".");
+          setStatus(q, hit ? "partial" : "wrong");
+        }
+      }, function () {
+        clear();
+        btns.forEach(function (b, i) { if (ans.indexOf(i) >= 0) b.classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    }
+  }
+
+  /* ---------- short answer ---------- */
+  function buildShort(q, p) {
+    var spec = attr(q, "answer"), tol = attr(q, "tol"), unit = attr(q, "unit");
+    if (!spec) throw new Error("answer= is missing.");
+    var row = h("div", "qz-short");
+    var input = h("input", "form-control qz-input");
+    input.type = "text";
+    input.placeholder = attr(q, "placeholder") || (tol !== null ? "Type a number…" : "Type your answer…");
+    input.setAttribute("aria-label", "Your answer");
+    row.appendChild(input);
+    if (unit) row.appendChild(h("span", "qz-unit", unit));
+    p.ui.appendChild(row);
+    function check() {
+      if (!input.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+      var ok = matches(input.value, spec, tol);
+      markEl(input, ok);
+      if (ok) { feedback(p, "ok", "✓ Correct!"); setStatus(q, "correct"); showExplain(p); }
+      else { feedback(p, "bad", "✗ Not quite. Try again" + (tol !== null ? " (check your rounding)." : ".")); setStatus(q, "wrong"); }
+    }
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+    standardControls(p, q, check, function () {
+      feedback(p, "info", "Answer: <strong>" + alts(spec)[0] + (unit ? " " + unit : "") + "</strong>");
+    }, function () { input.value = ""; markEl(input, null); });
+  }
+
+  /* ---------- fill in the blanks ---------- */
+  function buildFill(q, p) {
+    var blanks = Array.prototype.map.call(q.querySelectorAll(".blank"), function (span) {
+      var spec = attr(span, "answer"), tol = attr(span, "tol");
+      var input = h("input", "qz-blank-input");
+      input.type = "text";
+      input.setAttribute("aria-label", "blank");
+      var longest = alts(spec).reduce(function (m, x) { return Math.max(m, x.length); }, 4);
+      input.style.width = Math.min(longest + 3, 28) + "ch";
+      span.innerHTML = "";
+      span.appendChild(input);
+      return { input: input, spec: spec, tol: tol };
+    });
+    if (!blanks.length) throw new Error("No []{.blank answer=...} spans found.");
+    q.querySelectorAll(":scope > p").forEach(function (para) { if (para.querySelector(".blank")) para.classList.add("qz-fill-body"); });
+    function check() {
+      var ok = 0;
+      blanks.forEach(function (b) { var good = matches(b.input.value, b.spec, b.tol); markEl(b.input, good); if (good) ok++; });
+      scoreMsg(p, q, ok, blanks.length);
+    }
+    blanks.forEach(function (b) { b.input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); }); });
+    standardControls(p, q, check, function () {
+      blanks.forEach(function (b) { b.input.value = alts(b.spec)[0]; markEl(b.input, true); });
+      feedback(p, "info", "Answers filled in.");
+    }, function () { blanks.forEach(function (b) { b.input.value = ""; markEl(b.input, null); }); });
+  }
+
+  /* ---------- selectable control (segmented buttons or dropdown) ---------- */
+  function control(options, forceSelect) {
+    var longest = options.reduce(function (m, o) { return Math.max(m, o.length); }, 0);
+    if (!forceSelect && options.length <= 4 && longest <= 18) {
+      var seg = h("div", "qz-seg"), value = null;
+      seg.setAttribute("role", "group");
+      var bs = options.map(function (o) {
+        var b = h("button", null, o);
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () { set(o); markEl(seg, null); });
+        seg.appendChild(b);
+        return b;
+      });
+      function set(v) {
+        value = v;
+        bs.forEach(function (b, i) { b.setAttribute("aria-pressed", options[i] === v ? "true" : "false"); });
+      }
+      return { el: seg, get: function () { return value; }, set: set, mark: function (ok) { markEl(seg, ok); } };
+    }
+    var sel = h("select", "form-select form-select-sm qz-select");
+    sel.appendChild(h("option", null, "— choose —")).value = "";
+    options.forEach(function (o) { var op = h("option", null, o); op.value = o; sel.appendChild(op); });
+    sel.addEventListener("change", function () { markEl(sel, null); });
+    return { el: sel, get: function () { return sel.value || null; }, set: function (v) { sel.value = v == null ? "" : v; }, mark: function (ok) { markEl(sel, ok); } };
+  }
+
+  /* ---------- classify ---------- */
+  function buildClassify(q, p) {
+    var items = pairs(q);
+    var groupsSpec = attr(q, "options");
+    var groups;
+    if (groupsSpec) groups = groupsSpec.split(";").map(function (g) { return alts(g); });
+    else {
+      var seen = [];
+      items.forEach(function (it) { alts(it.answer).forEach(function (a) { if (seen.indexOf(a) < 0) seen.push(a); }); });
+      groups = [seen];
+    }
+    var cols = attr(q, "columns") ? attr(q, "columns").split(";").map(function (s) { return s.trim(); }) : null;
+    var grid = items.some(function (it) { return /<img/i.test(it.html); });
+    var container = h("div", grid ? "qz-grid" : "qz-rows");
+    if (cols && !grid) {
+      var hr = h("div", "qz-row qz-row-head", "<span></span>");
+      var hc = h("div", "qz-row-ctrls");
+      cols.forEach(function (c) { hc.appendChild(h("span", null, c)); });
+      hr.appendChild(hc);
+      container.appendChild(hr);
+    }
+    var rows = items.map(function (it, idx) {
+      var answers = it.answer.split(";").map(function (s) { return s.trim(); });
+      if (answers.length !== groups.length) throw new Error("Item '" + stripTags(it.html).slice(0, 40) + "' needs " + groups.length + " answer(s) separated by ';'.");
+      var ctrls = groups.map(function (g) { return control(g, grid); });
+      var row;
+      if (grid) {
+        row = h("div", "qz-card");
+        row.appendChild(h("div", "qz-card-tag", "Display " + (idx + 1)));
+        row.appendChild(h("div", "qz-card-media", it.html));
+        ctrls.forEach(function (c) { row.appendChild(c.el); });
+      } else {
+        row = h("div", "qz-row", "<div>" + it.html + "</div>");
+        var cw = h("div", "qz-row-ctrls");
+        ctrls.forEach(function (c) { cw.appendChild(c.el); });
+        row.appendChild(cw);
+      }
+      container.appendChild(row);
+      return { ctrls: ctrls, answers: answers };
+    });
+    p.ui.appendChild(container);
+    var total = rows.length * groups.length;
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) {
+        r.ctrls.forEach(function (c, i) {
+          var v = c.get(), good = v !== null && matches(v, r.answers[i]);
+          c.mark(v === null ? false : good);
+          if (good) ok++;
+        });
+      });
+      scoreMsg(p, q, ok, total);
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c, i) { c.set(alts(r.answers[i])[0]); c.mark(true); }); });
+      feedback(p, "info", "Correct answers selected.");
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c) { c.set(null); c.mark(null); }); });
+    });
+  }
+
+  /* ---------- matching ---------- */
+  function buildMatch(q, p) {
+    var items = pairs(q);
+    var rights = [];
+    items.forEach(function (it) { if (rights.indexOf(it.answer) < 0) rights.push(it.answer); });
+    rights = shuffle(rights);
+    var letters = rights.map(function (_, i) { return String.fromCharCode(65 + i); });
+    var wrap = h("div", "qz-match");
+    var left = h("div", "qz-match-left");
+    var right = h("ol", "qz-match-right");
+    rights.forEach(function (r, i) {
+      right.appendChild(h("li", null, '<span class="qz-letter">' + letters[i] + "</span><span>" + r + "</span>"));
+    });
+    var rows = items.map(function (it) {
+      var c = control(letters, true);
+      c.el.setAttribute("aria-label", "Match for " + stripTags(it.html));
+      var row = h("div", "qz-row");
+      row.appendChild(c.el);
+      row.appendChild(h("div", null, it.html));
+      left.appendChild(row);
+      return { c: c, letter: letters[rights.indexOf(it.answer)] };
+    });
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    p.ui.appendChild(wrap);
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) { var v = r.c.get(), good = v === r.letter; r.c.mark(v === null ? false : good); if (good) ok++; });
+      scoreMsg(p, q, ok, rows.length);
+    }, function () {
+      rows.forEach(function (r) { r.c.set(r.letter); r.c.mark(true); });
+      feedback(p, "info", "Answer: " + rows.map(function (r, i) { return (i + 1) + "→" + r.letter; }).join(", "));
+    }, function () { rows.forEach(function (r) { r.c.set(null); r.c.mark(null); }); });
+  }
+
+  /* ---------- ordering ---------- */
+  function buildOrder(q, p) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list written in the correct order.");
+    var items = Array.prototype.map.call(list.children, function (li, i) { return { html: unwrapP(li.innerHTML), idx: i }; });
+    list.remove();
+    var ul = h("ol", "qz-order");
+    var dragged = null;
+    function lis() { return Array.prototype.slice.call(ul.children); }
+    function make(it) {
+      var li = h("li");
+      li.draggable = true;
+      li._idx = it.idx;
+      li.innerHTML = '<span class="qz-letter qz-pos"></span><span class="qz-order-text">' + it.html + "</span>";
+      var up = h("button", "qz-move", "↑"); up.type = "button"; up.setAttribute("aria-label", "Move up");
+      var dn = h("button", "qz-move", "↓"); dn.type = "button"; dn.setAttribute("aria-label", "Move down");
+      up.addEventListener("click", function () { if (li.previousElementSibling) ul.insertBefore(li, li.previousElementSibling); changed(); });
+      dn.addEventListener("click", function () { if (li.nextElementSibling) ul.insertBefore(li.nextElementSibling, li); changed(); });
+      li.appendChild(up); li.appendChild(dn);
+      li.addEventListener("dragstart", function (e) { dragged = li; li.classList.add("is-drag"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", ""); } catch (_) {} });
+      li.addEventListener("dragend", function () { li.classList.remove("is-drag"); dragged = null; changed(); });
+      li.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        if (!dragged || dragged === li) return;
+        var r = li.getBoundingClientRect();
+        ul.insertBefore(dragged, (e.clientY - r.top) > r.height / 2 ? li.nextSibling : li);
+      });
+      return li;
+    }
+    function changed() {
+      lis().forEach(function (li, i) { li.querySelector(".qz-pos").textContent = i + 1; li.classList.remove("is-ok", "is-bad"); });
+    }
+    function fill(order) { ul.innerHTML = ""; order.forEach(function (it) { ul.appendChild(make(it)); }); changed(); }
+    function shuffled() {
+      var s = shuffle(items), tries = 0;
+      while (items.length > 1 && s.every(function (it, i) { return it.idx === i; }) && tries++ < 20) s = shuffle(items);
+      return s;
+    }
+    fill(shuffled());
+    p.ui.appendChild(ul);
+    standardControls(p, q, function () {
+      var ok = 0;
+      lis().forEach(function (li, i) { var good = li._idx === i; markEl(li, good); if (good) ok++; });
+      scoreMsg(p, q, ok, items.length);
+    }, function () {
+      fill(items);
+      lis().forEach(function (li) { markEl(li, true); });
+      feedback(p, "info", "Correct order shown.");
+    }, function () { fill(shuffled()); });
+  }
+
+  /* ---------- open-ended ---------- */
+  function buildOpen(q, p) {
+    var ta = h("textarea", "form-control");
+    ta.rows = parseInt(attr(q, "rows") || "4", 10);
+    ta.placeholder = "Type the class's answer here…";
+    var w = h("div", "qz-open");
+    w.appendChild(ta);
+    p.ui.appendChild(w);
+    var kw = attr(q, "keywords");
+    var groups = kw ? kw.split(";").map(function (g) { return alts(g); }).filter(function (g) { return g.length; }) : [];
+    var check = null;
+    if (groups.length) {
+      check = function () {
+        if (!ta.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+        var text = " " + norm(ta.value) + " ";
+        var found = groups.filter(function (g) { return g.some(function (a) { return text.indexOf(norm(a)) >= 0; }); });
+        var chips = found.map(function (g) { return '<span class="qz-chip qz-chip-ok">✓ ' + g[0] + "</span>"; }).join("");
+        var n = found.length, t = groups.length;
+        if (n === t) { feedback(p, "ok", "All " + t + " key ideas mentioned! " + chips); setStatus(q, "correct"); showExplain(p); }
+        else if (n) { feedback(p, "partial", n + " of " + t + " key ideas found. Something is still missing. " + chips); setStatus(q, "partial"); }
+        else { feedback(p, "bad", "None of the " + t + " key ideas found yet. Think about what the question asks for."); setStatus(q, "wrong"); }
+      };
+    }
+    standardControls(p, q, check, function () { feedback(p, "info", "Compare with the model answer below."); }, function () { ta.value = ""; });
+    if (check) p.controls.firstChild.textContent = "Check key ideas";
+  }
+
+  /* ---------- init ---------- */
+  function init() {
+    var quizzes = document.querySelectorAll("div.quiz");
+    var n = 0;
+    quizzes.forEach(function (q) {
+      var type = (attr(q, "type") || "").toLowerCase();
+      if (!type) Object.keys(LABELS).forEach(function (k) { if (q.classList.contains(k)) type = k; });
+      n++;
+      try {
+        var p = scaffold(q, type, n);
+        if (type === "mc") buildChoice(q, p, false, false);
+        else if (type === "ms") buildChoice(q, p, true, false);
+        else if (type === "tf") buildChoice(q, p, false, true);
+        else if (type === "short") buildShort(q, p);
+        else if (type === "fill") buildFill(q, p);
+        else if (type === "classify") buildClassify(q, p);
+        else if (type === "match") buildMatch(q, p);
+        else if (type === "order") buildOrder(q, p);
+        else if (type === "open") buildOpen(q, p);
+        else throw new Error("Unknown type '" + type + "'.");
+        registry.push(q);
+      } catch (err) {
+        q.appendChild(h("div", "qz-error", "Quiz error: " + err.message));
+        if (window.console) console.error("Quiz Q" + n, err);
+      }
+    });
+    document.querySelectorAll(".quiz-scoreboard").forEach(function (sb) {
+      sb.innerHTML = "";
+      var left = h("div", null, '<div class="qz-score-big"></div><div class="qz-score-tried" style="font-size:.85rem;color:var(--qz-muted)"></div>');
+      var bar = h("div", "qz-score-bar", "<span></span>");
+      sb.appendChild(left);
+      sb.appendChild(bar);
+      sb.appendChild(btn("Reset all", "btn-outline-secondary", function () {
+        if (!window.confirm("Clear every answer on this page?")) return;
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+      }));
+    });
+    if (registry.length && !document.querySelector(".qz-pill")) document.body.appendChild(h("div", "qz-pill"));
+    updateScore();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -593,7 +2419,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Made with ❤️ and Quarto</p>
+<p>Made with ❤️ and Quarto · Emoji graphics: Twemoji (CC-BY 4.0)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
