@@ -1,6 +1,6 @@
 ---
 title: "Recitation 2"
-subtitle: "Central tendency · Dispersion · Shape · Percentiles & box plots · Graphs for numerical data"
+subtitle: "Central tendency · Dispersion · Shape · Percentiles & box plots"
 toc: true
 toc-depth: 2
 format:
