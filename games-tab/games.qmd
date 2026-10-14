@@ -36,15 +36,23 @@ a.game-card:focus-visible { outline: 3px solid var(--bs-primary, #2780e3); outli
     <span class="game-play">Play now →</span>
   </div>
 </a>
-<div class="game-card soon" aria-disabled="true">
-  <div class="game-thumb">?</div>
-  <div class="game-body">
-    <span class="game-tag">Recitation 2</span>
-    <h3 class="game-title">Coming soon</h3>
-    <p class="game-desc">A new game will appear here after the next recitation.</p>
-  </div>
-</div>
-</div>
+   <a class="game-card" href="games/outlier-vault.html" target="_blank" rel="noopener">
+     <div class="game-thumb"><img src="images/games/outlier-vault.png" alt="Screenshot of Dr. Outlier's Vault"></div>
+     <div class="game-body">
+       <span class="game-tag">Recitation 2</span>
+       <h3 class="game-title">Dr. Outlier's Vault</h3>
+       <p class="game-desc">Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.</p>
+       <span class="game-play">Play now →</span>
+     </div>
+   </a>
+   <div class="game-card soon" aria-disabled="true">
+     <div class="game-thumb">?</div>
+     <div class="game-body">
+       <span class="game-tag">Recitation 3</span>
+       <h3 class="game-title">Coming soon</h3>
+       <p class="game-desc">A new game will appear here after the next recitation.</p>
+     </div>
+   </div>
 ```
 
 

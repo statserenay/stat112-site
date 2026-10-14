@@ -1,0 +1,27 @@
+---
+title: "Ask a Question"
+subtitle: "Stuck on a recitation question, a formula or a homework step? Post it here."
+---
+
+::: {.callout-tip appearance="simple"}
+## How it works
+
+- **Post your question** with the **+** button. You can post anonymously, and no account is needed.
+- **Say where it comes from**, e.g. *"Recitation 2, Q20: how do I find Q1?"*. Questions with a clear reference get faster answers.
+- **You can attach one clear photo** of your working (no PDFs or long files).
+- **Check first** whether someone has already asked the same thing. If so, add a ❤️ instead of posting again.
+- **Answers** appear as comments under each question, usually within a day or two.
+- Everything here is **public** to everyone with the site link. Don't write your name, student number or any personal information.
+:::
+
+```{=html}
+<div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:12px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/s024h7h1xhh1nt9nxpx0" title="STAT 112 question wall" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p></div>
+
+<style>
+  /* make the embedded wall tall enough on laptops and phones */
+  .padlet-embed iframe { height: 760px !important; }
+  @media (max-width: 600px) { .padlet-embed iframe { height: 640px !important; } }
+</style>
+```
+
+<p style="font-size:.9rem;color:#6c757d;margin-top:1rem">The wall doesn't load? <a href="https://padlet.com/embed/s024h7h1xhh1nt9nxpx0" target="_blank" rel="noopener">Open it in a new tab</a>, or send your question by e-mail to <a href="mailto:serenay@metu.edu.tr">serenay@metu.edu.tr</a>.</p>

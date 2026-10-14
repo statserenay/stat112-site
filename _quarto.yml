@@ -7,7 +7,7 @@ project:
 website:
   title: "STAT 112"
   open-graph: true
-  page-footer: "Made with ❤️ and Quarto"
+  page-footer: "Made with ❤️ and Quarto · Emoji graphics: Twemoji (CC-BY 4.0)"
   navbar:
     left:
       - text: "Computing"
@@ -24,6 +24,14 @@ website:
         href: homeworks.qmd
       - text: "Games"
         href: games-tab/games.qmd
+      - text: "Student Chats"
+        href: chats-tab/chats.qmd
+      - text: "Flashcards"
+        href: flashcards.qmd
+      - text: "Calculator"
+        href: calculator.qmd
+      - text: "Ask a Question"
+        href: ask.qmd
     right:
       - text: "Home"
         href: index.qmd

@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Outlier's Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #e8ecf0;
+  --panel: #f7f9fa;
+  --ink: #1d2733;
+  --ink-2: #4a5866;
+  --steel: #3c4a5a;
+  --steel-2: #6b7a8b;
+  --steel-3: #a9b4bf;
+  --brass: #c99a2e;
+  --brass-2: #f0d48a;
+  --teal: #138a7a;
+  --teal-bg: #d9f0ec;
+  --alarm: #c8372d;
+  --alarm-bg: #f8e0dd;
+  --line: #cfd6dd;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, rgba(60, 74, 90, .13) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink); font: 17px/1.5 var(--body);
+}
+button { font: inherit; }
+kbd { font: 600 .8em var(--body); border: 1px solid var(--steel-3); border-bottom-width: 2px; border-radius: 4px; padding: 0 .35em; background: #fff; }
+
+/* ---------- top bar ---------- */
+.bar {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  padding: .7rem 1.25rem; background: var(--steel); color: #fff;
+}
+.bar h1 { font: 800 1.35rem/1 var(--display); margin: 0; letter-spacing: -.01em; }
+.bar h1 span { color: var(--brass-2); }
+.bar .meta { margin-left: auto; display: flex; gap: 1.2rem; align-items: center; font-variant-numeric: tabular-nums; }
+.stat { display: flex; flex-direction: column; line-height: 1.1; }
+.stat small { color: var(--steel-3); font-size: .72rem; }
+.stat b { font: 700 1.15rem var(--display); }
+.bar button {
+  background: transparent; color: #fff; border: 1px solid var(--steel-3); border-radius: 8px;
+  padding: .3rem .75rem; cursor: pointer; font-size: .85rem;
+}
+.bar button:hover { background: rgba(255, 255, 255, .1); }
+
+/* ---------- layout ---------- */
+.stage {
+  display: grid; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); gap: 1.5rem;
+  max-width: 1180px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; align-items: start;
+}
+.left { position: sticky; top: 1rem; }
+
+/* ---------- vault ---------- */
+.vault-wrap { position: relative; }
+#vault { width: 100%; height: auto; display: block; overflow: visible; }
+.bolt { transition: transform .55s cubic-bezier(.5, -0.4, .3, 1.4); }
+.bolt.open { transform: translate(var(--dx), var(--dy)); }
+.lamp { transition: fill .3s; }
+#door { transform-origin: 30px 200px; transition: transform 1.4s cubic-bezier(.6, 0, .2, 1) .5s; }
+.swing #door { transform: translateX(-6px) scaleX(.14); }
+#wheel { transform-origin: 200px 200px; transition: transform 1s ease-in-out; }
+.swing #wheel { transform: rotate(270deg); }
+
+.villain { display: flex; gap: .75rem; align-items: flex-start; margin-top: 1rem; }
+.villain svg { flex: none; width: 74px; height: 74px; }
+.bubble {
+  position: relative; background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+  padding: .6rem .8rem; font-size: .95rem; min-height: 3.2rem;
+}
+.bubble::before {
+  content: ""; position: absolute; left: -10px; top: 18px; border: 8px solid transparent;
+  border-right-color: var(--ink); border-left: 0;
+}
+.bubble b { color: var(--alarm); }
+
+/* ---------- lock panel ---------- */
+.panel {
+  background: var(--panel); border: 2px solid var(--steel); border-radius: 18px; padding: 1.25rem 1.4rem 1.4rem;
+  box-shadow: 0 6px 0 var(--steel);
+}
+.lockhead { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; margin-bottom: .2rem; }
+.lockno {
+  font: 800 .95rem var(--display); color: var(--brass); background: var(--steel); border-radius: 999px;
+  padding: .15rem .7rem;
+}
+.panel h2 { font: 800 1.6rem/1.15 var(--display); margin: 0; letter-spacing: -.01em; }
+.topic { color: var(--ink-2); font-size: .92rem; margin: .1rem 0 .9rem; }
+.story { margin: 0 0 1rem; max-width: 62ch; }
+.data {
+  display: flex; flex-wrap: wrap; gap: .45rem; margin: .4rem 0 1rem; padding: 0; list-style: none;
+}
+.chip {
+  min-width: 3.1rem; text-align: center; padding: .35rem .6rem; border-radius: 10px; background: #fff;
+  border: 2px solid var(--steel-3); font: 700 1.15rem var(--display); font-variant-numeric: tabular-nums;
+}
+button.chip { cursor: pointer; }
+button.chip:hover { border-color: var(--steel); }
+button.chip[aria-pressed="true"] { border-color: var(--alarm); background: var(--alarm-bg); color: var(--alarm); }
+button.chip.right { border-color: var(--teal); background: var(--teal-bg); color: var(--teal); }
+
+.answer { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: .3rem 0 .2rem; }
+.answer label { font-weight: 700; }
+.answer input[type="text"] {
+  width: 9rem; padding: .5rem .7rem; border: 2px solid var(--steel-3); border-radius: 10px;
+  font: 700 1.2rem var(--display); background: #fff; color: var(--ink);
+}
+.answer input[type="text"]:focus { outline: none; border-color: var(--brass); box-shadow: 0 0 0 3px rgba(201, 154, 46, .3); }
+.choices { display: flex; flex-wrap: wrap; gap: .5rem; margin: .2rem 0 .9rem; }
+.choice {
+  border: 2px solid var(--steel-3); background: #fff; border-radius: 10px; padding: .45rem .9rem; cursor: pointer;
+  font-weight: 700; color: var(--ink);
+}
+.choice:hover { border-color: var(--steel); }
+.choice[aria-pressed="true"] { border-color: var(--steel); background: var(--steel); color: #fff; }
+
+.actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.btn {
+  border: 2px solid var(--steel); background: #fff; color: var(--steel); border-radius: 10px;
+  padding: .55rem 1rem; font-weight: 700; cursor: pointer;
+}
+.btn:hover { background: #eef1f4; }
+.btn.main { background: var(--brass); border-color: #8f6b17; color: var(--ink); box-shadow: 0 3px 0 #8f6b17; }
+.btn.main:hover { background: #d8aa3d; }
+.btn.main:active { transform: translateY(2px); box-shadow: 0 1px 0 #8f6b17; }
+.btn[hidden] { display: none; }
+:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+
+.fb { margin-top: 1rem; padding: .7rem .9rem; border-radius: 12px; font-weight: 700; }
+.fb:empty { display: none; }
+.fb.ok { background: var(--teal-bg); color: var(--teal); }
+.fb.bad { background: var(--alarm-bg); color: var(--alarm); }
+.fb.info { background: #fff6dc; color: #6d5210; }
+.explain { margin-top: .9rem; padding: .9rem 1rem; border-left: 4px solid var(--teal); background: #fff; border-radius: 0 12px 12px 0; }
+.explain[hidden] { display: none; }
+.explain p { margin: .3rem 0; }
+.explain .calc { font-variant-numeric: tabular-nums; }
+.hintbox { margin-top: .9rem; padding: .75rem .95rem; border: 2px dashed var(--brass); border-radius: 12px; background: #fffaf0; }
+.hintbox[hidden] { display: none; }
+.shake { animation: shake .35s; }
+@keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+/* ---------- puzzle visuals ---------- */
+.beam-svg, .hist-svg, .box-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.hist-svg { max-height: 210px; }
+.beam-group { transition: transform 1.1s cubic-bezier(.3, 1.6, .5, 1); }
+.slider { width: 100%; margin: .2rem 0 .4rem; accent-color: var(--brass); height: 2rem; }
+.boxopts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; margin: .4rem 0 .4rem; }
+.boxopt {
+  border: 2px solid var(--steel-3); border-radius: 12px; background: #fff; padding: .4rem .5rem .2rem; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; font-weight: 700; color: var(--ink);
+}
+.boxopt[aria-pressed="true"] { border-color: var(--steel); box-shadow: 0 0 0 3px var(--steel) inset; }
+.figure { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .5rem; margin: .3rem 0 .6rem; }
+
+/* ---------- overlays ---------- */
+.overlay {
+  position: fixed; inset: 0; background: rgba(29, 39, 51, .55); display: grid; place-items: center; padding: 1rem; z-index: 10;
+}
+.overlay[hidden] { display: none; }
+.card {
+  background: var(--panel); border: 2px solid var(--steel); border-radius: 20px; max-width: 640px; width: 100%;
+  padding: 1.6rem 1.7rem; box-shadow: 0 8px 0 var(--steel); max-height: 92vh; overflow: auto;
+}
+.card h2 { font: 800 2rem/1.1 var(--display); margin: 0 0 .6rem; letter-spacing: -.015em; }
+.card p { margin: .5rem 0; }
+.card ol { padding-left: 1.3rem; margin: .6rem 0; }
+.card li { margin: .2rem 0; }
+.rules { color: var(--ink-2); font-size: .92rem; }
+.rank { font: 800 1.5rem var(--display); color: var(--teal); margin: .2rem 0; }
+.bigtime { font: 800 3rem/1 var(--display); font-variant-numeric: tabular-nums; margin: .4rem 0; }
+.recap { width: 100%; border-collapse: collapse; margin: .6rem 0; font-size: .92rem; }
+.recap td { padding: .3rem .4rem; border-bottom: 1px solid var(--line); }
+.recap td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 820px) {
+  .stage { grid-template-columns: 1fr; padding: 1rem .9rem 2rem; gap: 1rem; }
+  .left { position: static; display: grid; grid-template-columns: 120px 1fr; gap: .8rem; align-items: center; }
+  .villain { margin-top: 0; }
+  .villain svg { width: 54px; height: 54px; }
+  .bar { padding: .6rem .9rem; gap: .5rem; }
+  .bar .meta { gap: .8rem; margin-left: 0; width: 100%; justify-content: space-between; }
+  .panel { padding: 1rem 1rem 1.2rem; }
+  .panel h2 { font-size: 1.35rem; }
+  .card { padding: 1.2rem 1.1rem; }
+  .card h2 { font-size: 1.6rem; }
+  .boxopts { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <h1>Dr. Outlier's <span>Vault</span></h1>
+  <div class="meta">
+    <div class="stat"><small>Escape time</small><b id="clock">0:00</b></div>
+    <div class="stat"><small>Penalty</small><b id="pen">+0:00</b></div>
+    <div class="stat"><small>Locks open</small><b id="opened">0 / 6</b></div>
+    <button type="button" id="restart">Restart</button>
+  </div>
+</header>
+
+<main class="stage">
+  <div class="left">
+    <div class="vault-wrap">
+      <svg id="vault" viewBox="0 0 400 400" aria-hidden="true">
+        <!-- dark room behind the door -->
+        <circle cx="200" cy="200" r="168" fill="#1d2733"/>
+        <g id="treasure" opacity="0">
+          <text x="200" y="190" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" fill="#f0d48a">x̄ = freedom</text>
+          <text x="200" y="225" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="16" fill="#a9b4bf">you escaped</text>
+        </g>
+        <g id="door">
+          <g id="bolts"></g>
+          <circle cx="200" cy="200" r="160" fill="#6b7a8b" stroke="#3c4a5a" stroke-width="8"/>
+          <circle cx="200" cy="200" r="138" fill="none" stroke="#a9b4bf" stroke-width="3" stroke-dasharray="2 9"/>
+          <circle cx="200" cy="200" r="118" fill="#7d8b9b" stroke="#3c4a5a" stroke-width="4"/>
+          <g id="lamps"></g>
+          <g id="wheel">
+            <circle cx="200" cy="200" r="58" fill="none" stroke="#c99a2e" stroke-width="10"/>
+            <g stroke="#c99a2e" stroke-width="10" stroke-linecap="round">
+              <line x1="200" y1="128" x2="200" y2="272"/>
+              <line x1="128" y1="200" x2="272" y2="200"/>
+              <line x1="149" y1="149" x2="251" y2="251"/>
+              <line x1="251" y1="149" x2="149" y2="251"/>
+            </g>
+            <circle cx="200" cy="200" r="22" fill="#f0d48a" stroke="#8f6b17" stroke-width="4"/>
+            <text x="200" y="208" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="22" fill="#3c4a5a">σ</text>
+          </g>
+          <rect x="22" y="170" width="16" height="60" rx="5" fill="#3c4a5a"/>
+        </g>
+      </svg>
+    </div>
+    <div class="villain">
+      <svg viewBox="0 0 80 80" aria-hidden="true">
+        <circle cx="40" cy="44" r="30" fill="#c8372d" stroke="#1d2733" stroke-width="3"/>
+        <rect x="22" y="4" width="36" height="14" rx="2" fill="#1d2733"/>
+        <rect x="14" y="16" width="52" height="5" rx="2" fill="#1d2733"/>
+        <circle cx="30" cy="38" r="4" fill="#1d2733"/>
+        <circle cx="51" cy="38" r="7" fill="#fff" stroke="#1d2733" stroke-width="3"/>
+        <circle cx="51" cy="38" r="3" fill="#1d2733"/>
+        <line x1="58" y1="42" x2="62" y2="62" stroke="#1d2733" stroke-width="2"/>
+        <path d="M26 55 q7 -7 14 0 q7 -7 14 0" fill="none" stroke="#1d2733" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <div class="bubble" id="say" aria-live="polite">Welcome to my vault. Nobody escapes. I'm 1.5 IQRs above everyone else!</div>
+    </div>
+  </div>
+
+  <section class="panel" id="panel" aria-live="polite"></section>
+</main>
+
+<div class="overlay" id="overlay"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ================================================================
+     Dr. Outlier's Vault: STAT 112 Recitation 2 review
+     Six locks, new random numbers every game.
+     Wrong answer: +30 s.  Hint: +60 s.  Show solution: +120 s.
+     ================================================================ */
+  var PEN_WRONG = 30, PEN_HINT = 60, PEN_SOLVE = 120;
+  var RANKS = [
+    [420, "The Median", "Unbothered. Robust. Iconic. Nothing extreme can shake you."],
+    [660, "The Interquartile Range", "You ignore the noise and focus on the middle 50%. Very professional."],
+    [960, "The Standard Deviation", "Solid and dependable, if a little sensitive to drama."],
+    [1320, "The Range", "You got out, but only the extremes noticed."],
+    [Infinity, "A Potential Outlier", "Dr. Outlier wants you on his team. Play again and prove him wrong!"]
+  ];
+  var TAUNTS = {
+    start: ["Six locks. Six measures. Zero chance.", "My vault is skewed in my favour.", "I hope you brought a calculator. I ate mine."],
+    wrong: ["Ha! That answer is further from the truth than I am from Q3.", "Wrong! Have 30 seconds of penalty, squared.", "Your answer has high variance and low accuracy.", "Incorrect. Even the mode knew that.", "Did you just average the categories? I'm telling the lecturer."],
+    right: ["No! Not lock {n}!", "Hmph. Beginner's luck has small sample size.", "Fine. But the next lock is leptokurtic.", "Lucky guess. Probably."],
+    hint: ["A hint? How very… mean of you.", "Taking hints? That's +60 seconds, pal."],
+    solve: ["Peeking at the solution? Your rank is dropping like a left tail."]
+  };
+
+  /* ---------------- helpers ---------------- */
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, attrs, html) {
+    var e = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      if (k === "class") e.className = attrs[k]; else if (k === "text") e.textContent = attrs[k]; else e.setAttribute(k, attrs[k]);
+    });
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function ri(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function sum(a) { return a.reduce(function (s, x) { return s + x; }, 0); }
+  function sorted(a) { return a.slice().sort(function (x, y) { return x - y; }); }
+  function r2(x) { return Math.round(x * 100) / 100; }
+  function fmt(x) { var v = r2(x); return (Math.abs(v - Math.round(v)) < 1e-9 ? String(Math.round(v)) : v.toFixed(2).replace(/0$/, "")).replace("-", "−"); }
+  function num(s) {
+    s = String(s || "").trim().replace(/\s/g, "").replace(/[−–]/g, "-").replace(/%$/, "");
+    if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", ".");
+    if (!/^-?\d*\.?\d+$/.test(s)) return null;
+    return parseFloat(s);
+  }
+  function mmss(t) { t = Math.max(0, Math.round(t)); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); }
+  function say(kind, n) { var s = pick(TAUNTS[kind]).replace("{n}", n); $("say").innerHTML = s; }
+  // lecture rule: p-th percentile = value with at least np obs <= it and at least n(1-p) obs >= it
+  function pct(sortedArr, p) {
+    var n = sortedArr.length, np = n * p;
+    if (Math.abs(np - Math.round(np)) < 1e-9) return (sortedArr[np - 1] + sortedArr[np]) / 2;
+    return sortedArr[Math.ceil(np) - 1];
+  }
+
+  /* ---------------- state ---------------- */
+  var S, timer;
+  function fresh() {
+    return { lock: 0, t0: 0, elapsed: 0, running: false, pen: 0, wrong: 0, hints: 0, solves: 0, opened: 0, log: [], locks: makeLocks() };
+  }
+
+  /* ---------------- puzzle generators ---------------- */
+  function makeLocks() { return [lockMean(), lockMedian(), lockOutlier(), lockWhichMean(), lockSpread(), lockShape()]; }
+
+  // 1. Balance beam: the mean is the balance point
+  function lockMean() {
+    var n = 7, d;
+    do {
+      d = []; for (var i = 0; i < n - 1; i++) d.push(ri(1, 9));
+      d.push(ri(10, 14));                                   // one heavier value far to the right
+    } while (Math.abs(sum(d) / n - sorted(d)[3]) < 0.6);    // make mean and median clearly different
+    return { kind: "beam", data: shuffle(d), mean: sum(d) / n, median: sorted(d)[3] };
+  }
+
+  // 2. Median keypad (even n)
+  function lockMedian() {
+    var d = [], seen = {};
+    while (d.length < 8) { var v = ri(11, 69); if (!seen[v]) { seen[v] = 1; d.push(v); } }
+    var s = sorted(d);
+    if ((s[3] + s[4]) % 2 === 1 && Math.random() < .5) d[d.indexOf(s[4])] = s[4] + 1; // sometimes a .5, sometimes whole
+    s = sorted(d);
+    return { kind: "median", data: d, s: s, ans: (s[3] + s[4]) / 2 };
+  }
+
+  // 3. Laser grid: click every potential outlier (n = 11)
+  function lockOutlier() {
+    var tries = 0;
+    while (tries++ < 500) {
+      var base = ri(40, 60), d = [];
+      for (var i = 0; i < 9; i++) d.push(base + ri(-8, 8));
+      var mode = ri(0, 2);
+      if (mode === 0) { d.push(base + ri(30, 45)); d.push(base - ri(9, 12)); }        // one high outlier + a near miss
+      else if (mode === 1) { d.push(base - ri(28, 36)); d.push(base + ri(9, 12)); }   // one low outlier + a near miss
+      else { d.push(base + ri(30, 40)); d.push(base - ri(26, 34)); }                   // one on each side
+      var s = sorted(d), q1 = pct(s, .25), q3 = pct(s, .75), iqr = q3 - q1;
+      if (iqr < 6) continue;
+      var lf = q1 - 1.5 * iqr, uf = q3 + 1.5 * iqr;
+      var outs = s.filter(function (x) { return x < lf || x > uf; });
+      var nearMiss = s.filter(function (x) { return (x >= lf && x < lf + 4) || (x <= uf && x > uf - 4); });
+      var uniq = {}; d.forEach(function (x) { uniq[x] = (uniq[x] || 0) + 1; });
+      var dupOut = outs.some(function (x) { return uniq[x] > 1; });
+      if (outs.length >= 1 && outs.length <= 2 && !dupOut && !nearMiss.length) {
+        return { kind: "outlier", data: shuffle(d), s: s, q1: q1, q3: q3, iqr: iqr, lf: lf, uf: uf, outs: outs };
+      }
+    }
+    var fb = [38, 41, 44, 45, 47, 48, 50, 52, 55, 57, 92]; // fallback, verified: Q1 44, Q3 55, fences 27.5 / 71.5
+    return { kind: "outlier", data: shuffle(fb), s: fb, q1: 44, q3: 55, iqr: 11, lf: 27.5, uf: 71.5, outs: [92] };
+  }
+
+  // 4. Which mean? choose the right one, then compute it
+  function lockWhichMean() {
+    var type = pick(["HM", "GM", "AM"]), story, vals, ans, unit;
+    if (type === "HM") {
+      var sp = pick([[30, 60], [40, 60], [60, 90], [20, 30, 60], [30, 45, 90], [40, 120]]);
+      var dist = pick([12, 18, 24, 36]);
+      vals = sp;
+      story = "A delivery drone flies " + sp.length + " legs of exactly <b>" + dist + " km</b> each, at <b>" +
+        sp.join(", ").replace(/, ([^,]*)$/, " and $1") + " km/h</b>. What is its average speed over the whole trip?";
+      ans = sp.length / sum(sp.map(function (x) { return 1 / x; })); unit = "km/h";
+    } else if (type === "GM") {
+      var g = pick([[2, 8], [3, 12], [2, 4, 8], [3, 9, 27], [4, 6, 9], [2, 18]]);
+      vals = g;
+      story = "A STAT 112 meme page's followers were <b>multiplied by " + g.join(", then by ") +
+        "</b> over " + g.length + " consecutive months. What is the average monthly growth <b>factor</b>?";
+      ans = Math.pow(g.reduce(function (p, x) { return p * x; }, 1), 1 / g.length); unit = "×";
+    } else {
+      var q = []; for (var i = 0; i < 5; i++) q.push(ri(55, 95));
+      vals = q;
+      story = "Elif's five STAT 112 quiz scores are <b>" + q.join(", ") + "</b>. What is her average quiz score?";
+      ans = sum(q) / 5; unit = "points";
+    }
+    return { kind: "which", type: type, vals: vals, story: story, ans: ans, unit: unit };
+  }
+
+  // 5. Spread code: sample standard deviation of 5 values
+  function lockSpread() {
+    var m = ri(12, 30), dev;
+    do {
+      dev = [ri(-6, 6), ri(-6, 6), ri(-6, 6), ri(-6, 6)];
+      dev.push(-sum(dev));
+    } while (Math.abs(dev[4]) > 8 || sum(dev.map(function (x) { return x * x; })) < 16);
+    var d = shuffle(dev.map(function (x) { return m + x; }));
+    var ss = sum(dev.map(function (x) { return x * x; }));
+    return { kind: "spread", data: d, mean: m, ss: ss, s2: ss / 4, s: Math.sqrt(ss / 4) };
+  }
+
+  // 6. Shape scanner: match the histogram with its box plot
+  var SHAPES = {
+    right: { name: "positively (right) skewed", bars: [7, 10, 8, 6, 4, 3, 2, 1, 1], box: [0, 1.2, 2.2, 3.9, 8.4], meanVsMed: "mean > median" },
+    left: { name: "negatively (left) skewed", bars: [1, 1, 2, 3, 4, 6, 8, 10, 7], box: [0.6, 5.1, 6.8, 7.8, 9], meanVsMed: "mean < median" },
+    sym: { name: "symmetric and mound-shaped", bars: [1, 2, 5, 8, 10, 8, 5, 2, 1], box: [0.4, 3.4, 4.5, 5.6, 8.6], meanVsMed: "mean ≈ median" },
+    uni: { name: "flat (uniform)", bars: [6, 6, 6, 6, 6, 6, 6, 6, 6], box: [0, 2.25, 4.5, 6.75, 9], meanVsMed: "mean ≈ median" }
+  };
+  function lockShape() {
+    var keys = Object.keys(SHAPES), truth = pick(keys);
+    var others = shuffle(keys.filter(function (k) { return k !== truth; })).slice(0, 2);
+    var opts = shuffle([truth].concat(others));
+    return { kind: "shape", truth: truth, opts: opts };
+  }
+
+  /* ---------------- vault drawing ---------------- */
+  function drawVault() {
+    var bolts = $("bolts"), lamps = $("lamps");
+    bolts.innerHTML = ""; lamps.innerHTML = "";
+    for (var i = 0; i < 6; i++) {
+      var a = (-90 + i * 60) * Math.PI / 180;
+      var cx = 200 + Math.cos(a) * 160, cy = 200 + Math.sin(a) * 160;
+      var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      g.setAttribute("class", "bolt"); g.id = "bolt" + i;
+      g.style.setProperty("--dx", (-Math.cos(a) * 34).toFixed(1) + "px");
+      g.style.setProperty("--dy", (-Math.sin(a) * 34).toFixed(1) + "px");
+      g.innerHTML = '<rect x="-14" y="-24" width="28" height="48" rx="6" fill="#c99a2e" stroke="#8f6b17" stroke-width="3" transform="translate(' + cx.toFixed(1) + " " + cy.toFixed(1) + ") rotate(" + (i * 60) + ')"/>';
+      bolts.appendChild(g);
+      var lx = 200 + Math.cos(a) * 92, ly = 200 + Math.sin(a) * 92;
+      lamps.insertAdjacentHTML("beforeend",
+        '<circle class="lamp" id="lamp' + i + '" cx="' + lx.toFixed(1) + '" cy="' + ly.toFixed(1) + '" r="11" fill="#c8372d" stroke="#1d2733" stroke-width="3"/>' +
+        '<text x="' + lx.toFixed(1) + '" y="' + (ly + 5).toFixed(1) + '" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="13" fill="#fff">' + (i + 1) + "</text>");
+    }
+    document.querySelector(".vault-wrap").classList.remove("swing");
+    $("treasure").setAttribute("opacity", "0");
+  }
+  function openBolt(i) {
+    $("bolt" + i).classList.add("open");
+    $("lamp" + i).setAttribute("fill", "#138a7a");
+  }
+
+  /* ---------------- clock ---------------- */
+  function now() { return S.elapsed + (S.running ? (Date.now() - S.t0) / 1000 : 0); }
+  function tick() {
+    $("clock").textContent = mmss(now() + S.pen);
+    $("pen").textContent = "+" + mmss(S.pen);
+    $("opened").textContent = S.opened + " / 6";
+  }
+  function run() { if (!S.running) { S.t0 = Date.now(); S.running = true; } }
+  function stop() { if (S.running) { S.elapsed += (Date.now() - S.t0) / 1000; S.running = false; } }
+  function penalty(sec) { S.pen += sec; tick(); }
+
+  /* ---------------- lock UI ---------------- */
+  var TITLES = [
+    ["The Balance Beam", "Arithmetic mean as the balance point"],
+    ["The Median Keypad", "Median of an even number of observations"],
+    ["The Laser Grid", "Quartiles, IQR and the 1.5 × IQR fences"],
+    ["The Right Mean", "Arithmetic, geometric or harmonic mean?"],
+    ["The Spread Code", "Sample variance and standard deviation"],
+    ["The Shape Scanner", "Histograms, box plots and skewness"]
+  ];
+  var cur; // current lock runtime: { check(), hint, solution(), solved }
+
+  function renderLock() {
+    var i = S.lock, L = S.locks[i], p = $("panel");
+    p.innerHTML = "";
+    var head = el("div", { class: "lockhead" });
+    head.appendChild(el("span", { class: "lockno", text: "Lock " + (i + 1) + " of 6" }));
+    head.appendChild(el("h2", { text: TITLES[i][0] }));
+    p.appendChild(head);
+    p.appendChild(el("p", { class: "topic", text: TITLES[i][1] }));
+    var body = el("div"); p.appendChild(body);
+
+    var actions = el("div", { class: "actions" });
+    var submit = el("button", { class: "btn main", type: "button", text: "Try the code" });
+    var hintBtn = el("button", { class: "btn", type: "button", text: "Hint (+1:00)" });
+    var solveBtn = el("button", { class: "btn", type: "button", text: "Show solution (+2:00)" });
+    var nextBtn = el("button", { class: "btn main", type: "button", text: i === 5 ? "Open the vault" : "Go to lock " + (i + 2) });
+    solveBtn.hidden = true; nextBtn.hidden = true;
+    actions.appendChild(submit); actions.appendChild(hintBtn); actions.appendChild(solveBtn); actions.appendChild(nextBtn);
+    var fb = el("div", { class: "fb", role: "status" });
+    var hint = el("div", { class: "hintbox" }); hint.hidden = true;
+    var exp = el("div", { class: "explain" }); exp.hidden = true;
+    p.appendChild(actions); p.appendChild(fb); p.appendChild(hint); p.appendChild(exp);
+
+    var tries = 0;
+    cur = { solved: false };
+    var builder = { beam: buildBeam, median: buildMedian, outlier: buildOutlier, which: buildWhich, spread: buildSpread, shape: buildShape }[L.kind];
+    var api = builder(L, body, submit);
+    hint.innerHTML = "<b>Hint.</b> " + api.hint;
+
+    function finish(byForce) {
+      cur.solved = true;
+      submit.hidden = true; hintBtn.hidden = true; solveBtn.hidden = true; nextBtn.hidden = false;
+      exp.innerHTML = api.explain(); exp.hidden = false;
+      if (api.lock) api.lock();
+      S.opened++; openBolt(i); tick();
+      S.log.push({ title: TITLES[i][0], tries: tries, forced: byForce });
+      if (byForce) { fb.className = "fb info"; fb.textContent = "Solution shown. Lock " + (i + 1) + " is open, but Dr. Outlier is smirking."; say("solve"); }
+      else { fb.className = "fb ok"; fb.textContent = "✓ Click-clunk! Lock " + (i + 1) + " is open."; say("right", i + 1); }
+      nextBtn.focus();
+    }
+    submit.addEventListener("click", function () {
+      var r = api.check();
+      if (r === null) { fb.className = "fb info"; fb.textContent = api.empty || "Enter an answer first."; return; }
+      if (r === true) { finish(false); return; }
+      tries++; S.wrong++; penalty(PEN_WRONG);
+      fb.className = "fb bad"; fb.textContent = (typeof r === "string" ? r : "✗ Wrong code. +0:30 penalty. Try again.");
+      p.classList.remove("shake"); void p.offsetWidth; p.classList.add("shake");
+      say("wrong");
+      if (tries >= 2) solveBtn.hidden = false;
+    });
+    hintBtn.addEventListener("click", function () {
+      if (!hint.hidden) return;
+      hint.hidden = false; S.hints++; penalty(PEN_HINT); hintBtn.disabled = true; say("hint");
+    });
+    solveBtn.addEventListener("click", function () {
+      S.solves++; penalty(PEN_SOLVE);
+      if (api.reveal) api.reveal();
+      finish(true);
+    });
+    nextBtn.addEventListener("click", function () {
+      if (i === 5) { win(); return; }
+      S.lock++; renderLock();
+      var f = $("panel").querySelector("input, button.chip, .choice, .boxopt"); if (f) f.focus();
+    });
+    p.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && e.target.tagName === "INPUT" && !cur.solved) { e.preventDefault(); submit.click(); }
+    });
+  }
+
+  function numberInput(parent, label, unit) {
+    var row = el("div", { class: "answer" });
+    var id = "in" + Math.random().toString(36).slice(2, 7);
+    row.appendChild(el("label", { for: id, text: label }));
+    var inp = el("input", { type: "text", id: id, inputmode: "decimal", autocomplete: "off" });
+    row.appendChild(inp);
+    if (unit) row.appendChild(el("span", { text: unit }));
+    parent.appendChild(row);
+    return inp;
+  }
+
+  /* ---------- 1. beam ---------- */
+  function buildBeam(L, body, submit) {
+    submit.textContent = "Release the beam";
+    body.appendChild(el("p", { class: "story" }, "Seven equal weights sit on a beam at the positions below. Slide the <b>pivot</b> to the point where the beam will balance, then release it. Get within <b>0.2</b> of the balance point to open the lock."));
+    var W = 600, H = 220, x0 = 40, x1 = 560, lo = 0, hi = 15;
+    function X(v) { return x0 + (v - lo) / (hi - lo) * (x1 - x0); }
+    var counts = {}, dots = "";
+    L.data.forEach(function (v) {
+      counts[v] = (counts[v] || 0) + 1;
+      dots += '<circle cx="' + X(v) + '" cy="' + (112 - counts[v] * 22) + '" r="10" fill="#2a78d6" stroke="#1d2733" stroke-width="2"/>';
+    });
+    var ticks = "";
+    for (var t = lo; t <= hi; t++) ticks += '<line x1="' + X(t) + '" y1="118" x2="' + X(t) + '" y2="' + (t % 5 ? 124 : 128) + '" stroke="#1d2733" stroke-width="1.5"/>' +
+      (t % 1 === 0 ? '<text x="' + X(t) + '" y="142" text-anchor="middle" font-size="13" font-family="Atkinson Hyperlegible, sans-serif" fill="#4a5866">' + t + "</text>" : "");
+    var fig = el("div", { class: "figure" });
+    fig.innerHTML = '<svg class="beam-svg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Beam with weights at ' + L.data.join(", ") + '">' +
+      '<g class="beam-group" id="beamg"><rect x="' + (x0 - 14) + '" y="112" width="' + (x1 - x0 + 28) + '" height="8" rx="3" fill="#3c4a5a"/>' + dots + ticks + "</g>" +
+      '<g id="pivot"><polygon points="0,120 -16,150 16,150" fill="#c99a2e" stroke="#8f6b17" stroke-width="3"/><rect x="-60" y="150" width="120" height="10" rx="3" fill="#a9b4bf"/></g>' +
+      '<text id="pivlab" x="0" y="190" text-anchor="middle" font-size="16" font-weight="700" font-family="Bricolage Grotesque, sans-serif" fill="#1d2733"></text></svg>';
+    body.appendChild(fig);
+    var lab = el("label", { for: "piv", text: "Pivot position" }); lab.style.fontWeight = "700";
+    body.appendChild(lab);
+    var slider = el("input", { type: "range", id: "piv", class: "slider", min: "0", max: "15", step: "0.1", value: "7.5" });
+    body.appendChild(slider);
+    var g = fig.querySelector("#beamg"), piv = fig.querySelector("#pivot"), pl = fig.querySelector("#pivlab");
+    function place() {
+      var v = parseFloat(slider.value);
+      piv.setAttribute("transform", "translate(" + X(v) + " 0)");
+      pl.setAttribute("x", X(v)); pl.textContent = "pivot at " + v.toFixed(1);
+      g.style.transform = "rotate(0deg)";
+    }
+    slider.addEventListener("input", place); place();
+    return {
+      hint: "The balance point of equal weights is the <b>arithmetic mean</b>: add the positions and divide by 7. Notice that one weight sits far to the right.",
+      check: function () {
+        var v = parseFloat(slider.value), diff = L.mean - v;
+        var ang = Math.max(-7, Math.min(7, diff * 2));
+        g.style.transformOrigin = X(v) + "px 116px";
+        g.style.transform = "rotate(" + (Math.abs(diff) <= 0.2 ? 0 : ang) + "deg)";
+        if (Math.abs(diff) <= 0.2) return true;
+        return "✗ The beam tips to the " + (diff > 0 ? "right" : "left") + ". Move the pivot " + (diff > 0 ? "right" : "left") + ". +0:30 penalty.";
+      },
+      reveal: function () { slider.value = L.mean.toFixed(1); place(); },
+      lock: function () { slider.disabled = true; },
+      explain: function () {
+        var s = sorted(L.data);
+        return "<p class='calc'>x̄ = (" + L.data.join(" + ") + ") / 7 = " + sum(L.data) + " / 7 = <b>" + fmt(L.mean) + "</b></p>" +
+          "<p>The mean is the <b>balance point</b> of the data. The heavy weight at " + s[6] + " pulls it to the right: the median is only <b>" + L.median +
+          "</b> (the 4th of " + s.join(", ") + "). One far-away value moves the mean but not the median.</p>";
+      }
+    };
+  }
+
+  /* ---------- 2. median ---------- */
+  function buildMedian(L, body) {
+    body.appendChild(el("p", { class: "story" }, "The keypad shows the number of minutes 8 students spent on the STAT 112 homework. The door code is their <b>median</b>."));
+    var ul = el("ul", { class: "data" }); L.data.forEach(function (v) { ul.appendChild(el("li", { class: "chip", text: v })); }); body.appendChild(ul);
+    var inp = numberInput(body, "Median =", "minutes");
+    return {
+      hint: "First <b>sort</b> the data. With n = 8 (even), the median is the average of the 4th and 5th ordered values.",
+      check: function () { var v = num(inp.value); if (v === null) return null; return Math.abs(v - L.ans) < 0.001; },
+      reveal: function () { inp.value = fmt(L.ans); },
+      lock: function () { inp.disabled = true; },
+      explain: function () {
+        return "<p class='calc'>Sorted: " + L.s.map(function (v, k) { return k === 3 || k === 4 ? "<b>" + v + "</b>" : v; }).join(", ") + "</p>" +
+          "<p class='calc'>Median = (" + L.s[3] + " + " + L.s[4] + ") / 2 = <b>" + fmt(L.ans) + "</b> minutes</p>" +
+          "<p>Half of the students spent less than this, half spent more. Never take the middle of the <i>unsorted</i> list!</p>";
+      }
+    };
+  }
+
+  /* ---------- 3. outlier ---------- */
+  function buildOutlier(L, body) {
+    body.appendChild(el("p", { class: "story" }, "The laser grid will only switch off if you tag <b>every potential outlier</b>, and nothing else. These are the daily step counts (in hundreds) of 11 guards. Click the values that lie outside the <b>1.5 × IQR fences</b>."));
+    var ul = el("div", { class: "data", role: "group", "aria-label": "Values" });
+    var chips = L.data.map(function (v) {
+      var b = el("button", { class: "chip", type: "button", "aria-pressed": "false", text: v });
+      b.addEventListener("click", function () { if (!cur.solved) b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"); });
+      ul.appendChild(b); return b;
+    });
+    body.appendChild(ul);
+    return {
+      empty: "Tag at least one value first.",
+      hint: "Sort the 11 values. Q1 is the <b>3rd</b> value (np = 11 × 0.25 = 2.75, round up) and Q3 is the <b>9th</b> (np = 8.25). Then IQR = Q3 − Q1, and the fences are Q1 − 1.5·IQR and Q3 + 1.5·IQR.",
+      check: function () {
+        var sel = chips.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; }).map(function (c) { return +c.textContent; });
+        if (!sel.length) return null;
+        var want = L.outs.slice().sort(), got = sel.slice().sort();
+        if (want.length === got.length && want.every(function (v, k) { return v === got[k]; })) return true;
+        var extra = got.filter(function (v) { return want.indexOf(v) < 0; }).length, miss = want.filter(function (v) { return got.indexOf(v) < 0; }).length;
+        return "✗ Lasers still on: " + (extra ? extra + " tagged value" + (extra > 1 ? "s are" : " is") + " inside the fences" : "") + (extra && miss ? " and " : "") + (miss ? miss + " outlier" + (miss > 1 ? "s are" : " is") + " still untagged" : "") + ". +0:30 penalty.";
+      },
+      reveal: function () { chips.forEach(function (c) { c.setAttribute("aria-pressed", L.outs.indexOf(+c.textContent) >= 0 ? "true" : "false"); }); },
+      lock: function () { chips.forEach(function (c) { if (L.outs.indexOf(+c.textContent) >= 0) c.classList.add("right"); c.setAttribute("aria-pressed", "false"); c.disabled = true; }); },
+      explain: function () {
+        return "<p class='calc'>Sorted: " + L.s.join(", ") + "</p>" +
+          "<p class='calc'>Q1 = " + fmt(L.q1) + ", Q3 = " + fmt(L.q3) + ", IQR = " + fmt(L.iqr) + ", 1.5 × IQR = " + fmt(1.5 * L.iqr) + "</p>" +
+          "<p class='calc'>Fences: " + fmt(L.q1) + " − " + fmt(1.5 * L.iqr) + " = <b>" + fmt(L.lf) + "</b> and " + fmt(L.q3) + " + " + fmt(1.5 * L.iqr) + " = <b>" + fmt(L.uf) + "</b></p>" +
+          "<p>Potential outlier" + (L.outs.length > 1 ? "s" : "") + ": <b>" + L.outs.join(" and ") + "</b>. In a box plot " + (L.outs.length > 1 ? "they are" : "it is") + " drawn as a separate point, and the whisker stops at the last value inside the fences.</p>";
+      }
+    };
+  }
+
+  /* ---------- 4. which mean ---------- */
+  function buildWhich(L, body) {
+    body.appendChild(el("p", { class: "story" }, L.story));
+    body.appendChild(el("p", { class: "story", style: "margin-bottom:.4rem" }, "<b>Step 1.</b> Which mean fits this situation?"));
+    var wrap = el("div", { class: "choices", role: "group", "aria-label": "Type of mean" }), chosen = null;
+    var names = { AM: "Arithmetic mean", GM: "Geometric mean", HM: "Harmonic mean" };
+    var btns = ["AM", "GM", "HM"].map(function (k) {
+      var b = el("button", { class: "choice", type: "button", "aria-pressed": "false", text: names[k] });
+      b.addEventListener("click", function () { if (cur.solved) return; chosen = k; btns.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); });
+      wrap.appendChild(b); return b;
+    });
+    body.appendChild(wrap);
+    body.appendChild(el("p", { class: "story", style: "margin-bottom:.2rem" }, "<b>Step 2.</b> Compute it (2 decimals)."));
+    var inp = numberInput(body, "Answer =", L.unit);
+    var why = {
+      HM: "Speeds are <b>rates</b> over <b>equal distances</b>, so the drone spends more time at the slow speed. Use the <b>harmonic mean</b>.",
+      GM: "The followers were <b>multiplied</b>, so the right average is the one that gives the same total growth when multiplied: the <b>geometric mean</b>.",
+      AM: "Quiz scores are ordinary values that add up, so the <b>arithmetic mean</b> is the right summary."
+    };
+    return {
+      empty: "Pick a mean in step 1 and type a number in step 2.",
+      hint: "Rates (km/h) over equal distances → harmonic. Things that multiply (growth factors) → geometric. Ordinary values → arithmetic. HM = n / Σ(1/x), GM = ⁿ√(x₁·x₂·…·xₙ).",
+      check: function () {
+        var v = num(inp.value); if (!chosen || v === null) return null;
+        if (chosen !== L.type) return "✗ Wrong type of mean. Think about what kind of numbers these are. +0:30 penalty.";
+        return Math.abs(v - L.ans) <= 0.011 ? true : "✗ Right mean, wrong value. Check your arithmetic. +0:30 penalty.";
+      },
+      reveal: function () { chosen = L.type; btns.forEach(function (x, k) { x.setAttribute("aria-pressed", ["AM", "GM", "HM"][k] === L.type ? "true" : "false"); }); inp.value = fmt(L.ans); },
+      lock: function () { inp.disabled = true; btns.forEach(function (b) { b.disabled = true; }); },
+      explain: function () {
+        var calc;
+        if (L.type === "HM") calc = "HM = " + L.vals.length + " / (" + L.vals.map(function (x) { return "1/" + x; }).join(" + ") + ") = <b>" + fmt(L.ans) + " km/h</b>. (The arithmetic mean, " + fmt(sum(L.vals) / L.vals.length) + " km/h, would be too high.)";
+        else if (L.type === "GM") calc = "GM = " + (L.vals.length === 2 ? "√" : "∛") + "(" + L.vals.join(" × ") + ") = " + (L.vals.length === 2 ? "√" : "∛") + L.vals.reduce(function (p, x) { return p * x; }, 1) + " = <b>" + fmt(L.ans) + "</b>. Check: " + fmt(L.ans) + "^" + L.vals.length + " = " + L.vals.reduce(function (p, x) { return p * x; }, 1) + ". (The arithmetic mean, " + fmt(sum(L.vals) / L.vals.length) + ", overstates the growth.)";
+        else calc = "x̄ = (" + L.vals.join(" + ") + ") / 5 = " + sum(L.vals) + " / 5 = <b>" + fmt(L.ans) + "</b> points.";
+        return "<p>" + why[L.type] + "</p><p class='calc'>" + calc + "</p>";
+      }
+    };
+  }
+
+  /* ---------- 5. spread ---------- */
+  function buildSpread(L, body) {
+    body.appendChild(el("p", { class: "story" }, "The vault's thermostat logged these 5 temperatures (°C) during the night. The code is the <b>sample standard deviation</b> <i>s</i>, rounded to 2 decimals."));
+    var ul = el("ul", { class: "data" }); L.data.forEach(function (v) { ul.appendChild(el("li", { class: "chip", text: v })); }); body.appendChild(ul);
+    var inp = numberInput(body, "s =", "°C");
+    return {
+      hint: "Find x̄ first (it is a whole number here). Square each deviation (x − x̄), add them up, divide by <b>n − 1 = 4</b> to get s², then take the square root.",
+      check: function () {
+        var v = num(inp.value); if (v === null) return null;
+        if (Math.abs(v - L.s) <= 0.011) return true;
+        if (Math.abs(v - L.s2) <= 0.011) return "✗ That is the variance s². The code needs the standard deviation, so take the square root! +0:30 penalty.";
+        if (Math.abs(v - Math.sqrt(L.ss / 5)) <= 0.011) return "✗ Close! You divided by n = 5. For a sample, divide by n − 1 = 4. +0:30 penalty.";
+        return false;
+      },
+      reveal: function () { inp.value = L.s.toFixed(2); },
+      lock: function () { inp.disabled = true; },
+      explain: function () {
+        var dev = L.data.map(function (x) { return x - L.mean; });
+        return "<p class='calc'>x̄ = " + sum(L.data) + " / 5 = <b>" + L.mean + "</b></p>" +
+          "<p class='calc'>Deviations: " + dev.map(fmt).join(", ") + " (they sum to 0)</p>" +
+          "<p class='calc'>Squares: " + dev.map(function (d) { return d * d; }).join(" + ") + " = " + L.ss + "</p>" +
+          "<p class='calc'>s² = " + L.ss + " / 4 = " + fmt(L.s2) + " °C², so s = √" + fmt(L.s2) + " = <b>" + L.s.toFixed(2) + " °C</b></p>" +
+          "<p>The variance is in squared units (°C²); the standard deviation brings us back to °C.</p>";
+      }
+    };
+  }
+
+  /* ---------- 6. shape ---------- */
+  function histSVG(bars) {
+    var W = 360, H = 170, bw = 34, x0 = 27, mx = Math.max.apply(null, bars), out = "";
+    bars.forEach(function (b, k) {
+      var h = b / mx * 120;
+      out += '<rect x="' + (x0 + k * bw) + '" y="' + (145 - h) + '" width="' + (bw - 3) + '" height="' + h + '" rx="3" fill="#2a78d6"/>';
+    });
+    return '<svg class="hist-svg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Histogram"><line x1="20" y1="146" x2="340" y2="146" stroke="#1d2733" stroke-width="2"/>' + out + "</svg>";
+  }
+  function boxSVG(f) {
+    var x = function (v) { return 18 + v / 9 * 164; };
+    return '<svg class="box-svg" viewBox="0 0 200 70" aria-hidden="true">' +
+      '<line x1="' + x(f[0]) + '" y1="35" x2="' + x(f[1]) + '" y2="35" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + x(f[3]) + '" y1="35" x2="' + x(f[4]) + '" y2="35" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + x(f[0]) + '" y1="25" x2="' + x(f[0]) + '" y2="45" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + x(f[4]) + '" y1="25" x2="' + x(f[4]) + '" y2="45" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<rect x="' + x(f[1]) + '" y="17" width="' + (x(f[3]) - x(f[1])) + '" height="36" rx="3" fill="#f0d48a" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + x(f[2]) + '" y1="17" x2="' + x(f[2]) + '" y2="53" stroke="#c8372d" stroke-width="4"/></svg>';
+  }
+  function buildShape(L, body) {
+    var T = SHAPES[L.truth];
+    body.appendChild(el("p", { class: "story" }, "The last scanner shows a histogram. Pick the <b>box plot</b> of the same data, and say how the mean and median compare."));
+    var fig = el("div", { class: "figure" }); fig.innerHTML = histSVG(T.bars); body.appendChild(fig);
+    var grid = el("div", { class: "boxopts", role: "group", "aria-label": "Box plot options" }), chosen = null;
+    var btns = L.opts.map(function (k, idx) {
+      var b = el("button", { class: "boxopt", type: "button", "aria-pressed": "false" }, boxSVG(SHAPES[k].box) + "<span>Box plot " + "ABC"[idx] + "</span>");
+      b.setAttribute("aria-label", "Box plot " + "ABC"[idx]);
+      b.addEventListener("click", function () { if (cur.solved) return; chosen = k; btns.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); });
+      grid.appendChild(b); return b;
+    });
+    body.appendChild(grid);
+    body.appendChild(el("p", { class: "story", style: "margin:.6rem 0 .3rem" }, "For this distribution…"));
+    var mv = el("div", { class: "choices", role: "group", "aria-label": "Mean versus median" }), mchosen = null;
+    var opts = ["mean > median", "mean < median", "mean ≈ median"];
+    var mb = opts.map(function (t) {
+      var b = el("button", { class: "choice", type: "button", "aria-pressed": "false", text: t });
+      b.addEventListener("click", function () { if (cur.solved) return; mchosen = t; mb.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); });
+      mv.appendChild(b); return b;
+    });
+    body.appendChild(mv);
+    return {
+      empty: "Pick a box plot and a mean/median option.",
+      hint: "The longer whisker and the longer half of the box point toward the <b>tail</b>. The mean is pulled toward the tail, the median is not.",
+      check: function () {
+        if (!chosen || !mchosen) return null;
+        if (chosen !== L.truth) return "✗ That box plot doesn't match the histogram. Look at where the tail is. +0:30 penalty.";
+        return mchosen === T.meanVsMed ? true : "✗ Right box plot, but check how the mean and median compare. +0:30 penalty.";
+      },
+      reveal: function () {
+        chosen = L.truth; mchosen = T.meanVsMed;
+        btns.forEach(function (b, idx) { b.setAttribute("aria-pressed", L.opts[idx] === L.truth ? "true" : "false"); });
+        mb.forEach(function (b) { b.setAttribute("aria-pressed", b.textContent === T.meanVsMed ? "true" : "false"); });
+      },
+      lock: function () { btns.concat(mb).forEach(function (b) { b.disabled = true; }); },
+      explain: function () {
+        var extra = {
+          right: "The long tail is on the right: the right whisker is long and the median sits close to Q1. The few large values pull the mean up, so <b>mean > median</b>.",
+          left: "The long tail is on the left: the left whisker is long and the median sits close to Q3. The few small values pull the mean down, so <b>mean < median</b>.",
+          sym: "Both halves of the box and both whiskers are about equal, so <b>mean ≈ median</b>. Most data are in the middle, so the box is narrow.",
+          uni: "Values are spread evenly, so the box is very <b>wide</b> (the IQR is half the range) and the median sits in the middle: <b>mean ≈ median</b>."
+        };
+        return "<p>This histogram is <b>" + T.name + "</b>.</p><p>" + extra[L.truth] + "</p>";
+      }
+    };
+  }
+
+  /* ---------------- screens ---------------- */
+  function show(html) { var o = $("overlay"); o.innerHTML = '<div class="card" role="dialog" aria-modal="true">' + html + "</div>"; o.hidden = false; }
+  function hide() { $("overlay").hidden = true; }
+
+  function intro() {
+    clearInterval(timer);
+    S = fresh(); drawVault(); tick();
+    $("panel").innerHTML = '<p class="story">The vault is locked. Press <b>Start the escape</b> to begin.</p>';
+    $("say").innerHTML = "Welcome to my vault. Nobody escapes. I'm <b>1.5 IQRs</b> above everyone else!";
+    show(
+      "<h2>Escape Dr. Outlier's vault</h2>" +
+      "<p>Dr. Outlier has locked your class inside the statistics vault. The door has <b>six locks</b>, and each one opens with a number from Recitation 2: a mean, a median, the outliers, the right kind of mean, a standard deviation and a distribution's shape.</p>" +
+      "<ol><li>The clock runs while you work. Escape as fast as you can.</li>" +
+      "<li>Wrong code: <b>+0:30</b>. Hint: <b>+1:00</b>. Show solution (after 2 wrong tries): <b>+2:00</b>.</li>" +
+      "<li>Every lock explains its solution once it opens. The numbers change every game.</li></ol>" +
+      '<p class="rules">Keep a calculator ready. Decimals can be typed with a dot or a comma. Press <kbd>Enter</kbd> to try a code.</p>' +
+      '<div class="actions"><button class="btn main" id="go" type="button">Start the escape</button></div>'
+    );
+    $("go").addEventListener("click", function () {
+      hide(); S.lock = 0; renderLock(); run(); say("start");
+      timer = setInterval(tick, 250);
+      var f = $("panel").querySelector("input"); if (f) f.focus();
+    });
+    $("go").focus();
+  }
+
+  function win() {
+    stop(); clearInterval(timer); tick();
+    var total = now() + S.pen;
+    var rank = RANKS.filter(function (r) { return total < r[0]; })[0];
+    document.querySelector(".vault-wrap").classList.add("swing");
+    $("treasure").setAttribute("opacity", "1");
+    $("say").innerHTML = "Nooo! I've been <b>removed from the dataset</b>!";
+    setTimeout(function () {
+      var rows = S.log.map(function (r) { return "<tr><td>" + r.title + "</td><td>" + (r.forced ? "solution shown" : r.tries ? r.tries + " wrong" : "first try ✓") + "</td></tr>"; }).join("");
+      show(
+        "<h2>You escaped!</h2>" +
+        '<div class="bigtime">' + mmss(total) + "</div>" +
+        "<p>Working time " + mmss(now()) + " + penalties " + mmss(S.pen) + " (" + S.wrong + " wrong code" + (S.wrong === 1 ? "" : "s") + ", " + S.hints + " hint" + (S.hints === 1 ? "" : "s") + ", " + S.solves + " solution" + (S.solves === 1 ? "" : "s") + " shown)</p>" +
+        '<p>Your class is…</p><div class="rank">' + rank[1] + "</div><p>" + rank[2] + "</p>" +
+        '<table class="recap">' + rows + "</table>" +
+        '<div class="actions"><button class="btn main" id="again" type="button">Play again with new numbers</button></div>'
+      );
+      $("again").addEventListener("click", intro);
+      $("again").focus();
+    }, 1700);
+  }
+
+  $("restart").addEventListener("click", function () { if (!S || S.opened === 0 || confirm("Restart with new numbers? Your current time will be lost.")) intro(); });
+  document.addEventListener("visibilitychange", function () { if (!S || !S.locks) return; if (document.hidden) stop(); else if ($("overlay").hidden && S.opened < 6) run(); });
+
+  // test hook (harmless): lets automated checks read the current answers
+  window.__vault = function () { return S; };
+  intro();
+})();
+</script>
+</body>
+</html>

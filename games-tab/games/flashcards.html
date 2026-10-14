@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STAT 112 Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root {
+  --paper: #e8ecf0; --panel: #f7f9fa; --ink: #1d2733; --ink-2: #4a5866;
+  --steel: #3c4a5a; --steel-3: #a9b4bf; --brass: #c99a2e; --brass-dk: #8f6b17; --brass-2: #f0d48a;
+  --teal: #138a7a; --teal-bg: #d9f0ec; --alarm: #c8372d; --alarm-bg: #f8e0dd; --line: #cfd6dd;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper); color: var(--ink); font: 17px/1.5 var(--body); min-height: 100vh;
+  background-image: radial-gradient(circle at 1px 1px, rgba(60, 74, 90, .13) 1px, transparent 0); background-size: 22px 22px;
+}
+button { font: inherit; color: inherit; }
+kbd { font: 700 .78em var(--body); border: 1px solid var(--steel-3); border-bottom-width: 2px; border-radius: 4px; padding: 0 .35em; background: #fff; }
+.bar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .7rem 1.25rem; background: var(--steel); color: #fff; }
+.bar h1 { font: 800 1.35rem/1 var(--display); margin: 0; }
+.bar h1 span { color: var(--brass-2); }
+.decks { margin-left: auto; display: flex; gap: .35rem; flex-wrap: wrap; }
+.decks button { background: transparent; border: 1px solid var(--steel-3); border-radius: 999px; padding: .25rem .8rem; color: #fff; cursor: pointer; font-size: .9rem; }
+.decks button[aria-pressed="true"] { background: var(--brass-2); color: var(--ink); border-color: var(--brass-2); font-weight: 700; }
+
+main { max-width: 760px; margin: 0 auto; padding: 1.4rem 1.1rem 3rem; }
+.tools { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-bottom: .9rem; }
+.btn { border: 2px solid var(--steel); background: #fff; color: var(--steel); border-radius: 10px; padding: .45rem .9rem; font-weight: 700; cursor: pointer; }
+.btn:hover { background: #eef1f4; }
+.btn[aria-pressed="true"] { background: var(--steel); color: #fff; }
+.btn:disabled { opacity: .45; cursor: default; }
+.count { margin-left: auto; font: 700 1rem var(--display); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 1.1rem; }
+.progress span { display: block; height: 100%; width: 0; background: var(--teal); transition: width .3s; }
+
+.scene { perspective: 1400px; }
+.card { position: relative; width: 100%; min-height: 330px; cursor: pointer; transform-style: preserve-3d; transition: transform .55s cubic-bezier(.3, .7, .3, 1); border: 0; padding: 0; background: none; text-align: left; display: block; }
+.card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border: 2px solid var(--steel); border-radius: 20px; background: var(--panel); box-shadow: 0 6px 0 var(--steel);
+  padding: 1.4rem 1.6rem 1.3rem; display: flex; flex-direction: column;
+}
+.back { transform: rotateY(180deg); background: #fff; border-color: var(--teal); box-shadow: 0 6px 0 var(--teal); }
+.topic { font-size: .85rem; font-weight: 700; color: var(--brass-dk); }
+.back .topic { color: var(--teal); }
+.q { font: 800 clamp(1.35rem, 3.6vw, 1.85rem)/1.25 var(--display); margin: auto 0; padding: 1rem 0; letter-spacing: -.01em; }
+.a { margin: auto 0; padding: .8rem 0; font-size: 1.08rem; overflow-wrap: anywhere; }
+.a p { margin: .35rem 0; }
+.a .katex-display { margin: .6rem 0; overflow-x: auto; overflow-y: hidden; padding: .2rem 0; }
+.tap { font-size: .85rem; color: var(--ink-2); }
+.answer-row { display: flex; gap: .7rem; justify-content: center; margin-top: 1.3rem; flex-wrap: wrap; }
+.answer-row .btn { min-width: 9.5rem; padding: .6rem 1rem; }
+.btn.miss { border-color: var(--alarm); color: var(--alarm); }
+.btn.miss:hover { background: var(--alarm-bg); }
+.btn.got { border-color: var(--teal); color: #fff; background: var(--teal); }
+.btn.got:hover { background: #0f7568; }
+.hint { text-align: center; font-size: .85rem; color: var(--ink-2); margin-top: .9rem; }
+
+.done { border: 2px solid var(--steel); border-radius: 20px; background: var(--panel); box-shadow: 0 6px 0 var(--steel); padding: 1.6rem; text-align: center; }
+.done h2 { font: 800 1.8rem var(--display); margin: 0 0 .4rem; }
+.done .big { font: 800 3rem/1 var(--display); margin: .4rem 0; color: var(--teal); }
+.done .actions { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+.done ul { text-align: left; display: inline-block; margin: .6rem auto 0; padding-left: 1.2rem; }
+:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
+[hidden] { display: none !important; }
+@media (max-width: 600px) {
+  .bar { padding: .6rem .9rem; }
+  .decks { margin-left: 0; }
+  .face { padding: 1.1rem 1.1rem 1rem; }
+  .card { min-height: 360px; }
+  .count { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+/* inside the course site (iframe): no page-height minimum, no duplicate title */
+.embedded body { min-height: 0; background: transparent; }
+.embedded .bar h1 { display: none; } .embedded .decks { margin-left: 0; } .embedded .bar { border-radius: 12px; max-width: 760px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add("embedded");</script>
+<header class="bar">
+  <h1>STAT 112 <span>Flashcards</span></h1>
+  <div class="decks" role="group" aria-label="Choose a deck">
+    <button type="button" data-deck="w1">Recitation 1</button>
+    <button type="button" data-deck="w2">Recitation 2</button>
+    <button type="button" data-deck="all">All cards</button>
+  </div>
+</header>
+
+<main>
+  <div class="tools">
+    <button type="button" class="btn" id="shuffle">Shuffle</button>
+    <button type="button" class="btn" id="missedBtn" aria-pressed="false">Missed pile (0)</button>
+    <button type="button" class="btn" id="restartBtn">Start over</button>
+    <span class="count" id="count">1 / 1</span>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="prog"></span></div>
+
+  <div id="study">
+    <div class="scene">
+      <button type="button" class="card" id="card" aria-live="polite">
+        <div class="face front"><span class="topic" id="ftopic"></span><div class="q" id="fq"></div><span class="tap">Tap or press <kbd>Space</kbd> to flip</span></div>
+        <div class="face back"><span class="topic" id="btopic"></span><div class="a" id="ba"></div></div>
+      </button>
+    </div>
+    <div class="answer-row" id="answerRow" hidden>
+      <button type="button" class="btn miss" id="missBtn">✗ Missed it</button>
+      <button type="button" class="btn got" id="gotBtn">✓ Got it</button>
+    </div>
+    <p class="hint">Think of the answer first, then flip. Keys: <kbd>Space</kbd> flip · <kbd>←</kbd> missed · <kbd>→</kbd> got it</p>
+  </div>
+
+  <div class="done" id="done" hidden></div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =====================================================================
+     THE CARDS. Edit freely: one object per card.
+       deck : "w1" (Recitation 1) or "w2" (Recitation 2). Add "w3" later.
+       topic: small label at the top of the card
+       q    : the front (question)
+       a    : the back (answer). Use $...$ for inline math and $$...$$ for display math.
+     ===================================================================== */
+  var CARDS = [
+    // ---------------- Recitation 1 ----------------
+    { deck: "w1", topic: "Basic terms", q: "Population vs. sample", a: "<p><b>Population:</b> the entire group of individuals or items we want to study.</p><p><b>Sample:</b> a subset of the population that we actually observe.</p>" },
+    { deck: "w1", topic: "Basic terms", q: "Parameter vs. statistic", a: "<p>A <b>parameter</b> is a numerical summary of a <b>population</b> (e.g. $\\mu$, $\\sigma$).</p><p>A <b>statistic</b> is a numerical summary of a <b>sample</b> (e.g. $\\bar{x}$, $s$).</p><p>Memory trick: <b>P</b>opulation–<b>P</b>arameter, <b>S</b>ample–<b>S</b>tatistic.</p>" },
+    { deck: "w1", topic: "Basic terms", q: "Variable, data and experimental unit", a: "<p><b>Variable:</b> a characteristic that can differ between units (age, GPA…).</p><p><b>Data:</b> the observed values of the variables.</p><p><b>Experimental unit:</b> the object or person on which we measure the variables.</p>" },
+    { deck: "w1", topic: "Branches of statistics", q: "Descriptive vs. inferential statistics", a: "<p><b>Descriptive:</b> summarise and present the data we have (tables, graphs, numerical measures).</p><p><b>Inferential:</b> use a sample to draw conclusions about a larger population (estimate, test, predict).</p>" },
+    { deck: "w1", topic: "Types of data", q: "Qualitative vs. quantitative data", a: "<p><b>Qualitative (categorical):</b> values are categories or labels (blood type, city).</p><p><b>Quantitative (numerical):</b> values are numbers measured on a numerical scale (height, income).</p>" },
+    { deck: "w1", topic: "Types of data", q: "Discrete vs. continuous variables", a: "<p><b>Discrete:</b> countable values, usually whole numbers (number of children).</p><p><b>Continuous:</b> any value in an interval (time, weight).</p><p>Count it → discrete. Measure it → continuous.</p>" },
+    { deck: "w1", topic: "Scales of measurement", q: "Nominal scale", a: "<p>Categories with <b>no order</b>, only names or labels.</p><p>Examples: gender, car brand, blood type.</p><p>Allowed: counts and the <b>mode</b>.</p>" },
+    { deck: "w1", topic: "Scales of measurement", q: "Ordinal scale", a: "<p>Categories with a <b>meaningful order</b>, but the gaps between them are not equal or measurable.</p><p>Examples: letter grades, satisfaction (1–5).</p><p>Allowed: mode and <b>median</b>.</p>" },
+    { deck: "w1", topic: "Scales of measurement", q: "Interval scale", a: "<p>Numbers with <b>equal, meaningful differences</b> but <b>no true zero</b>.</p><p>Examples: temperature in °C, calendar year.</p><p>You can add and subtract, but 40 °C is <i>not</i> twice as hot as 20 °C.</p>" },
+    { deck: "w1", topic: "Scales of measurement", q: "Ratio scale", a: "<p>Equal differences <b>and a true zero</b> (0 means “none”).</p><p>Examples: height, income, time, Kelvin.</p><p>All of $+,\\ -,\\ \\times,\\ \\div$ are meaningful: 180 cm is twice 90 cm.</p>" },
+    { deck: "w1", topic: "Tables", q: "Relative frequency of a category", a: "$$\\text{relative frequency} = \\frac{\\text{frequency of the category}}{n}$$<p>Relative frequencies add up to 1 (or 100%). Always report <b>n</b> together with percentages.</p>" },
+    { deck: "w1", topic: "Tables", q: "Contingency (two-way) table", a: "<p>A table of the counts for every <b>combination</b> of two categorical variables.</p><p>The row and column totals are the <b>marginal</b> totals.</p>" },
+    { deck: "w1", topic: "Graphs", q: "Bar chart vs. pie chart", a: "<p><b>Bar chart:</b> compares frequencies across categories. Easy to read and to compare.</p><p><b>Pie chart:</b> shows parts of a whole (proportions). Hard to compare slices; never use 3D.</p><p>When in doubt, <b>prefer bar charts</b>.</p>" },
+    { deck: "w1", topic: "Graphs", q: "Clustered vs. stacked bar chart", a: "<p><b>Clustered:</b> bars side by side. Best for comparing each category <i>between</i> groups.</p><p><b>Stacked:</b> bars on top of each other. Best for comparing the <i>totals</i>.</p>" },
+    { deck: "w1", topic: "Graphs", q: "Spine plot and mosaic plot", a: "<p><b>Spine plot:</b> a 100% stacked bar chart whose bar <b>widths</b> show the size of each group.</p><p><b>Mosaic plot:</b> the same idea for two or more categorical variables. Tile <b>area</b> ∝ count.</p>" },
+    { deck: "w1", topic: "Central tendency by scale", q: "Which measures of centre suit nominal, ordinal and interval/ratio data?", a: "<p><b>Nominal:</b> mode only.</p><p><b>Ordinal:</b> mode and median.</p><p><b>Interval / ratio:</b> mode, median and mean.</p>" },
+
+    // ---------------- Recitation 2 ----------------
+    { deck: "w2", topic: "Central tendency", q: "Arithmetic mean (sample and population)", a: "$$\\bar{x}=\\frac{1}{n}\\sum_{i=1}^{n}x_i \\qquad \\mu=\\frac{1}{N}\\sum_{i=1}^{N}x_i$$<p>The balance point of the data. Uses every value, so it is <b>sensitive to outliers</b>.</p>" },
+    { deck: "w2", topic: "Central tendency", q: "How do you find the median?", a: "<p>Sort the data first.</p><p>$n$ odd: the $\\frac{n+1}{2}$th value.</p><p>$n$ even: the average of the $\\frac{n}{2}$th and $\\left(\\frac{n}{2}+1\\right)$th values.</p><p>Robust to outliers.</p>" },
+    { deck: "w2", topic: "Central tendency", q: "Mode", a: "<p>The most frequent value. A data set can have no mode, one mode, or several (bimodal, multimodal).</p><p>The only measure of centre for <b>nominal</b> data.</p>" },
+    { deck: "w2", topic: "Central tendency", q: "Geometric mean: formula and when to use it", a: "$$GM=\\sqrt[n]{x_1x_2\\cdots x_n}$$<p>For things that <b>multiply</b>: growth factors, returns, ratios. All values must be <b>positive</b>; use growth factors (1.10, 0.95) rather than +10%, −5%.</p>" },
+    { deck: "w2", topic: "Central tendency", q: "Harmonic mean: formula and when to use it", a: "$$HM=\\frac{n}{\\sum_{i=1}^{n} 1/x_i}$$<p>For <b>rates</b> over equal amounts: speeds over equal distances, price per litre with equal money spent. All values must be positive.</p>" },
+    { deck: "w2", topic: "Central tendency", q: "How are AM, GM and HM ordered for positive data?", a: "$$HM \\le GM \\le AM$$<p>They are equal only when all values are the same. Example for $\\{2, 8\\}$: HM = 3.2, GM = 4, AM = 5.</p>" },
+    { deck: "w2", topic: "Shape", q: "Skewness: where are the mean, median and mode?", a: "<p><b>Positive (right) skew:</b> long right tail, mode &lt; median &lt; mean.</p><p><b>Negative (left) skew:</b> long left tail, mean &lt; median &lt; mode.</p><p><b>Symmetric:</b> mean = median = mode.</p><p>The mean is pulled toward the tail.</p>" },
+    { deck: "w2", topic: "Dispersion", q: "Range", a: "$$\\text{range}=\\max-\\min$$<p>Easy to compute, but uses only the two most extreme values.</p>" },
+    { deck: "w2", topic: "Dispersion", q: "Sample variance (definition and shortcut)", a: "$$s^2=\\frac{\\sum (x_i-\\bar{x})^2}{n-1}=\\frac{\\sum x_i^2-\\frac{(\\sum x_i)^2}{n}}{n-1}$$<p>Population version: $\\sigma^2=\\frac{1}{N}\\sum (x_i-\\mu)^2$.</p>" },
+    { deck: "w2", topic: "Dispersion", q: "Why do we divide by n − 1 in the sample variance?", a: "<p>Deviations are measured from $\\bar{x}$, which comes from the same data, so they are slightly too small on average. Dividing by $n-1$ corrects this and makes $s^2$ an <b>unbiased</b> estimator of $\\sigma^2$.</p><p>Also: only $n-1$ deviations are free, since they must sum to 0.</p>" },
+    { deck: "w2", topic: "Dispersion", q: "Standard deviation, and why we use it", a: "$$s=\\sqrt{s^2}$$<p>It is in the <b>same units</b> as the data. The variance is in squared units (points², °C²).</p>" },
+    { deck: "w2", topic: "Dispersion", q: "Coefficient of variation", a: "$$CV=\\frac{s}{\\bar{x}}\\times 100\\%$$<p>Unit-free relative spread, for comparing variables with different units or means. Only for <b>ratio-scale</b> data with a positive mean (not °C or °F!).</p>" },
+    { deck: "w2", topic: "Dispersion", q: "What happens to the mean and SD if $y = a + bx$?", a: "$$\\bar{y}=a+b\\,\\bar{x}\\qquad s_y=|b|\\,s_x\\qquad s_y^2=b^2 s_x^2$$<p>Adding a constant shifts the centre but <b>not</b> the spread.</p>" },
+    { deck: "w2", topic: "Shape", q: "The empirical rule", a: "<p>For mound-shaped (bell-shaped) data:</p><p>≈ 68% within $\\bar{x}\\pm s$</p><p>≈ 95% within $\\bar{x}\\pm 2s$</p><p>≈ 99.7% within $\\bar{x}\\pm 3s$</p>" },
+    { deck: "w2", topic: "Shape", q: "Kurtosis and excess kurtosis", a: "<p>Kurtosis measures <b>tailedness</b> (how prone to extreme values), not just the peak.</p><p>Excess kurtosis = kurtosis − 3.</p><p>&gt; 0 <b>leptokurtic</b> (heavy tails) · = 0 <b>mesokurtic</b> (normal) · &lt; 0 <b>platykurtic</b> (light tails)</p>" },
+    { deck: "w2", topic: "Position", q: "How do you find the p-th percentile (lecture rule)?", a: "<p>Sort the data. Find a value with</p><p>at least $np$ observations $\\le$ it, <b>and</b></p><p>at least $n(1-p)$ observations $\\ge$ it.</p><p>If $np$ is not a whole number, round it <b>up</b>: that ordered value is the percentile.</p>" },
+    { deck: "w2", topic: "Position", q: "Quartiles and the five-number summary", a: "<p>$Q_1$ = 25th, $Q_2$ = median = 50th, $Q_3$ = 75th percentile.</p><p>Five-number summary: <b>min, $Q_1$, median, $Q_3$, max</b>.</p>" },
+    { deck: "w2", topic: "Position", q: "Interquartile range (IQR)", a: "$$IQR=Q_3-Q_1$$<p>The spread of the middle 50%. <b>Robust</b> to outliers.</p>" },
+    { deck: "w2", topic: "Box plots", q: "Fences for potential outliers", a: "$$Q_1-1.5\\,IQR \\qquad Q_3+1.5\\,IQR$$<p>Values outside the fences are <b>potential outliers</b>. Investigate them; don't just delete them.</p>" },
+    { deck: "w2", topic: "Box plots", q: "Where do the whiskers of a box plot end?", a: "<p>At the most extreme observations that are still <b>inside the fences</b>. Anything beyond them is drawn as a separate point.</p><p>If there are no outliers, the whiskers reach the min and the max.</p>" },
+    { deck: "w2", topic: "Box plots", q: "How do you read skewness from a box plot?", a: "<p>The <b>longer whisker</b> and the longer half of the box point toward the tail.</p><p>Median closer to $Q_1$ → right skew. Median closer to $Q_3$ → left skew.</p>" }
+  ];
+
+  /* ---------------- state ---------------- */
+  var DECK_NAMES = { w1: "Recitation 1", w2: "Recitation 2", all: "All cards" };
+  var KEY = "stat112-flashcards-missed";
+  var deck = "w2", order = [], pos = 0, onlyMissed = false, got = 0, missedNow = [];
+  var missed = load();
+  var $ = function (id) { return document.getElementById(id); };
+
+  function load() { try { var v = JSON.parse(localStorage.getItem(KEY) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(missed)); } catch (e) { /* storage blocked: keep in memory */ } }
+  function idOf(c) { return c.deck + ":" + c.q; }
+  function inDeck(c) { return deck === "all" || c.deck === deck; }
+  function shuffled(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pileForDeck() { return CARDS.filter(function (c) { return inDeck(c) && missed.indexOf(idOf(c)) >= 0; }); }
+
+  function math(el) {
+    if (window.renderMathInElement) {
+      try {
+        renderMathInElement(el, { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }], throwOnError: false });
+      } catch (e) { /* show raw text */ }
+    }
+  }
+
+  function start(useShuffle) {
+    var pool = onlyMissed ? pileForDeck() : CARDS.filter(inDeck);
+    if (!pool.length) { onlyMissed = false; pool = CARDS.filter(inDeck); }
+    order = useShuffle ? shuffled(pool) : pool;
+    pos = 0; got = 0; missedNow = [];
+    $("study").hidden = false; $("done").hidden = true;
+    show();
+  }
+
+  function show() {
+    var c = order[pos], card = $("card");
+    card.classList.remove("flipped");
+    $("answerRow").hidden = true;
+    $("ftopic").textContent = c.topic + " · " + DECK_NAMES[c.deck];
+    $("btopic").textContent = c.topic;
+    $("fq").innerHTML = c.q; $("ba").innerHTML = c.a;
+    math($("fq")); math($("ba"));
+    fit();
+    $("count").textContent = (onlyMissed ? "Missed pile · " : "") + (pos + 1) + " / " + order.length;
+    $("prog").style.width = (pos / order.length * 100) + "%";
+    updateMissedBtn();
+  }
+
+  // grow the card so long answers always fit
+  function fit() {
+    var card = $("card"), faces = card.querySelectorAll(".face"), need = 0;
+    card.style.height = "";
+    faces.forEach(function (fc) { fc.style.position = "relative"; need = Math.max(need, fc.offsetHeight); fc.style.position = ""; });
+    card.style.height = Math.max(need, window.innerWidth < 600 ? 360 : 330) + "px";
+  }
+  window.addEventListener("resize", function () { if (order.length) fit(); });
+
+  function updateMissedBtn() {
+    var n = pileForDeck().length, b = $("missedBtn");
+    b.textContent = onlyMissed ? "Back to full deck" : "Missed pile (" + n + ")";
+    b.setAttribute("aria-pressed", onlyMissed ? "true" : "false");
+    b.disabled = !onlyMissed && n === 0;
+  }
+
+  function flip() {
+    if ($("study").hidden) return;
+    var card = $("card");
+    card.classList.toggle("flipped");
+    if (card.classList.contains("flipped")) $("answerRow").hidden = false;
+  }
+
+  function answer(knew) {
+    if ($("answerRow").hidden) return;
+    var c = order[pos], id = idOf(c), k = missed.indexOf(id);
+    if (knew) { got++; if (k >= 0) missed.splice(k, 1); }
+    else { missedNow.push(c); if (k < 0) missed.push(id); }
+    save();
+    if (pos < order.length - 1) { pos++; show(); } else finish();
+  }
+
+  function finish() {
+    $("prog").style.width = "100%";
+    $("study").hidden = true;
+    var d = $("done"), pile = pileForDeck().length;
+    var list = missedNow.length ? "<ul>" + missedNow.map(function (c) { return "<li>" + c.q + "</li>"; }).join("") + "</ul>" : "";
+    d.innerHTML = "<h2>" + (missedNow.length ? "Deck finished!" : "Perfect round! 🎉") + "</h2>" +
+      '<div class="big">' + got + " / " + order.length + "</div>" +
+      "<p>" + (missedNow.length ? "Cards you missed this round:" : "You knew every card. Try another deck, or shuffle and go again.") + "</p>" + list +
+      '<div class="actions">' +
+      (pile ? '<button type="button" class="btn" id="reviewMissed">Review missed pile (' + pile + ")</button>" : "") +
+      '<button type="button" class="btn" id="again">Shuffle and go again</button></div>';
+    d.hidden = false;
+    math(d);
+    if ($("reviewMissed")) $("reviewMissed").addEventListener("click", function () { onlyMissed = true; start(true); });
+    $("again").addEventListener("click", function () { onlyMissed = false; start(true); });
+    updateMissedBtn();
+    $("count").textContent = "Done";
+  }
+
+  function setDeck(d) {
+    deck = d; onlyMissed = false;
+    document.querySelectorAll(".decks button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.deck === d ? "true" : "false"); });
+    start(false);
+  }
+
+  /* ---------------- events ---------------- */
+  $("card").addEventListener("click", flip);
+  $("gotBtn").addEventListener("click", function () { answer(true); });
+  $("missBtn").addEventListener("click", function () { answer(false); });
+  $("shuffle").addEventListener("click", function () { start(true); });
+  $("restartBtn").addEventListener("click", function () { start(false); });
+  $("missedBtn").addEventListener("click", function () { onlyMissed = !onlyMissed; start(onlyMissed); });
+  document.querySelectorAll(".decks button").forEach(function (b) { b.addEventListener("click", function () { setDeck(b.dataset.deck); }); });
+  document.addEventListener("keydown", function (e) {
+    if (e.target.tagName === "INPUT") return;
+    if (e.key === " " && document.activeElement !== $("card")) { e.preventDefault(); flip(); }
+    else if (e.key === "ArrowRight") answer(true);
+    else if (e.key === "ArrowLeft") answer(false);
+  });
+
+  // ?deck=w1 in the link opens that deck directly
+  var m = location.search.match(/deck=(w1|w2|all)/);
+  function boot() { setDeck(m ? m[1] : "w2"); }
+  if (document.readyState === "complete") boot(); else window.addEventListener("load", boot);
+})();
+</script>
+</body>
+</html>

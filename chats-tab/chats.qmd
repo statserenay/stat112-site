@@ -1,0 +1,29 @@
+---
+title: "Student Chats"
+subtitle: "Overheard in the STAT 112 group chats. Every joke hides a recitation topic."
+---
+
+Read the chats, then ask yourself: *would I have answered correctly?* Each one matches a topic from the recitation notes.
+
+## Recitation 1: basic terms, scales and charts
+
+::: {layout-ncol="2"}
+![Parameter or statistic? And why 40 °C is not "twice as hot" as 20 °C](images/chat-r1-parameter.png){fig-alt="Student chat about parameter vs statistic and interval vs ratio scales"}
+
+![The 3D pie chart has to go: bar charts, clustered or stacked](images/chat-r1-piechart.png){fig-alt="Student chat about why 3D pie charts are a bad idea"}
+:::
+
+## Recitation 2: numerical descriptive measures
+
+::: {layout-ncol="2"}
+![Mean or median salary? Right skew in real life](images/chat-r2-median.png){fig-alt="Student chat about mean vs median salaries"}
+
+![The Eskişehir trip and the harmonic mean](images/chat-r2-harmonic.png){fig-alt="Student chat about the harmonic mean of speeds"}
+:::
+
+::: {layout-ncol="2"}
+![Why n − 1, squared units, and a potential outlier from Gölbaşı](images/chat-r2-variance.png){fig-alt="Student chat about n-1, the standard deviation and outliers"}
+
+:::
+
+<p style="font-size:.8rem;color:#6c757d;margin-top:2rem">The names and chats are made up. Emoji graphics: Twemoji, CC-BY 4.0.</p>

@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STAT 112 Step-by-Step Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+:root {
+  --paper: #e8ecf0; --panel: #f7f9fa; --ink: #1d2733; --ink-2: #4a5866;
+  --steel: #3c4a5a; --steel-3: #a9b4bf; --brass: #c99a2e; --brass-dk: #8f6b17; --brass-2: #f0d48a;
+  --teal: #138a7a; --teal-bg: #d9f0ec; --alarm: #c8372d; --alarm-bg: #f8e0dd; --line: #cfd6dd; --blue: #2a78d6;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper); color: var(--ink); font: 17px/1.5 var(--body); min-height: 100vh;
+  background-image: radial-gradient(circle at 1px 1px, rgba(60, 74, 90, .13) 1px, transparent 0); background-size: 22px 22px;
+}
+button, input, textarea { font: inherit; color: inherit; }
+.bar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .7rem 1.25rem; background: var(--steel); color: #fff; }
+.bar h1 { font: 800 1.35rem/1 var(--display); margin: 0; }
+.bar h1 span { color: var(--brass-2); }
+.bar p { margin: 0 0 0 auto; color: var(--steel-3); font-size: .9rem; }
+main { max-width: 900px; margin: 0 auto; padding: 1.4rem 1.1rem 3rem; }
+
+.panel { background: var(--panel); border: 2px solid var(--steel); border-radius: 18px; box-shadow: 0 5px 0 var(--steel); padding: 1.2rem 1.3rem 1.3rem; margin-bottom: 1.4rem; }
+.panel h2 { font: 800 1.35rem/1.2 var(--display); margin: 0 0 .5rem; }
+label.big { font-weight: 700; display: block; margin-bottom: .35rem; }
+textarea {
+  width: 100%; min-height: 110px; resize: vertical; padding: .7rem .8rem; border: 2px solid var(--steel-3); border-radius: 12px;
+  background: #fff; font: 600 1.05rem/1.5 var(--body);
+}
+textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--brass); box-shadow: 0 0 0 3px rgba(201, 154, 46, .3); }
+.row { display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: center; margin-top: .8rem; }
+.seg { display: inline-flex; border: 2px solid var(--steel-3); border-radius: 10px; overflow: hidden; }
+.seg button { border: 0; background: #fff; padding: .35rem .75rem; cursor: pointer; font-weight: 700; }
+.seg button[aria-pressed="true"] { background: var(--steel); color: #fff; }
+.btn { border: 2px solid var(--steel); background: #fff; color: var(--steel); border-radius: 10px; padding: .5rem 1rem; font-weight: 700; cursor: pointer; }
+.btn:hover { background: #eef1f4; }
+.btn.main { background: var(--brass); border-color: var(--brass-dk); color: var(--ink); box-shadow: 0 3px 0 var(--brass-dk); }
+.btn.main:hover { background: #d8aa3d; }
+.btn.small { padding: .25rem .65rem; font-size: .88rem; border-width: 1.5px; }
+.note { color: var(--ink-2); font-size: .9rem; margin: .5rem 0 0; }
+.err { margin-top: .8rem; padding: .6rem .8rem; border-radius: 10px; background: var(--alarm-bg); color: var(--alarm); font-weight: 700; }
+.err:empty { display: none; }
+
+.modebar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin: 0 0 1rem; }
+.modebar strong { font: 800 1.1rem var(--display); }
+.sorted { display: flex; flex-wrap: wrap; gap: .3rem; margin: .4rem 0 0; padding: 0; list-style: none; }
+.sorted li { min-width: 2.6rem; text-align: center; background: #fff; border: 1.5px solid var(--steel-3); border-radius: 8px; padding: .1rem .4rem; font-weight: 700; font-variant-numeric: tabular-nums; position: relative; }
+.sorted li small { position: absolute; top: -0.95rem; left: 0; right: 0; font-size: .62rem; color: var(--ink-2); font-weight: 400; }
+.sorted.idx { margin-top: 1.2rem; }
+
+.step { background: #fff; border: 1.5px solid var(--line); border-radius: 14px; margin: .8rem 0; overflow: hidden; }
+.step-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; padding: .75rem 1rem; }
+.step-head h3 { font: 800 1.1rem var(--display); margin: 0; flex: 1 1 12rem; }
+.step-head h3 small { font: 400 .85rem var(--body); color: var(--ink-2); margin-left: .4rem; }
+.check { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+.check input { width: 7.5rem; padding: .3rem .5rem; border: 1.5px solid var(--steel-3); border-radius: 8px; font-weight: 700; background: #fff; }
+.check .res { font-weight: 700; font-size: .9rem; min-width: 1rem; }
+.res.ok { color: var(--teal); } .res.bad { color: var(--alarm); }
+.step-body { padding: .2rem 1rem 1rem; border-top: 1.5px dashed var(--line); }
+.step-body[hidden] { display: none; }
+.step-body p { margin: .45rem 0; }
+.ans { display: inline-block; background: var(--teal-bg); color: var(--teal); font-weight: 800; border-radius: 8px; padding: .05rem .5rem; }
+.tex-d { overflow-x: auto; overflow-y: hidden; padding: .2rem 0; }
+table.dev { border-collapse: collapse; font-variant-numeric: tabular-nums; margin: .5rem 0; font-size: .95rem; }
+table.dev th, table.dev td { border-bottom: 1px solid var(--line); padding: .2rem .7rem; text-align: right; }
+table.dev th { font-weight: 700; color: var(--ink-2); }
+table.dev tfoot td { font-weight: 800; border-top: 2px solid var(--steel-3); }
+.tablewrap { overflow-x: auto; }
+svg.box { width: 100%; height: auto; display: block; margin: .4rem 0; }
+.pct-row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.pct-row input { width: 5rem; padding: .3rem .5rem; border: 1.5px solid var(--steel-3); border-radius: 8px; font-weight: 700; }
+:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+[hidden] { display: none !important; }
+@media (max-width: 600px) {
+  .bar p { margin: 0; width: 100%; }
+  .panel { padding: 1rem .9rem 1.1rem; }
+  .step-head { padding: .7rem .8rem; }
+  .step-body { padding: .2rem .8rem .9rem; }
+}
+/* inside the course site (iframe): no page-height minimum, no duplicate title */
+.embedded body { min-height: 0; background: transparent; }
+.embedded .bar { display: none; } .embedded main { padding-top: .4rem; }
+</style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add("embedded");</script>
+<header class="bar">
+  <h1>STAT 112 <span>Step-by-Step Calculator</span></h1>
+  <p>Check your homework one step at a time</p>
+</header>
+
+<main>
+  <section class="panel">
+    <label class="big" for="data">Paste or type your numbers</label>
+    <textarea id="data" spellcheck="false" placeholder="e.g. 12, 15, 18, 20, 22, 22, 25, 27, 30, 31, 35, 38, 40, 45, 95"></textarea>
+    <div class="row">
+      <span>Decimal separator:</span>
+      <div class="seg" role="group" aria-label="Decimal separator">
+        <button type="button" data-dec="dot" aria-pressed="true">dot (3.5)</button>
+        <button type="button" data-dec="comma" aria-pressed="false">comma (3,5)</button>
+      </div>
+      <button type="button" class="btn main" id="go">Calculate</button>
+      <button type="button" class="btn" id="example">Try an example</button>
+    </div>
+    <p class="note" id="sepnote">Separate the numbers with commas, spaces, semicolons or new lines.</p>
+    <div class="err" id="err" role="alert"></div>
+  </section>
+
+  <section id="out" hidden>
+    <div class="modebar">
+      <strong id="nline"></strong>
+      <span class="note" style="margin:0">Type your own answer and press <b>Check</b>, or open a step to see the full working.</span>
+      <button type="button" class="btn small" id="openAll">Show all steps</button>
+    </div>
+    <div class="panel" style="padding-top:.9rem">
+      <h2>Step 1 · Sort the data</h2>
+      <p class="note" style="margin-top:0">Almost every measure starts here. The small numbers are the positions (ranks).</p>
+      <ul class="sorted idx" id="sorted"></ul>
+    </div>
+    <div id="steps"></div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var dec = "dot";
+
+  /* ---------------- formatting helpers ---------------- */
+  function r(x, d) { d = d == null ? 4 : d; var p = Math.pow(10, d); return Math.round(x * p) / p; }
+  function f(x, d) {
+    if (!isFinite(x)) return "—";
+    var v = r(x, d == null ? 4 : d), s = String(v);
+    if (s.indexOf("e") >= 0) s = v.toFixed(6);
+    return s.replace("-", "−");
+  }
+  function t(x) { return f(x).replace("−", "-"); } // for TeX
+  function tex(s, display) {
+    if (window.katex) { try { return katex.renderToString(s, { throwOnError: false, displayMode: !!display }); } catch (e) {} }
+    return '<code>' + s.replace(/</g, "&lt;") + "</code>";
+  }
+  function D(s) { return '<div class="tex-d">' + tex(s, true) + "</div>"; }
+  function I(s) { return tex(s, false); }
+  function sum(a) { return a.reduce(function (s, x) { return s + x; }, 0); }
+  function list(a, max) {
+    max = max || 8;
+    if (a.length <= max) return a.map(t).join(" + ");
+    return a.slice(0, 4).map(t).join(" + ") + " + \\cdots + " + a.slice(-2).map(t).join(" + ");
+  }
+
+  /* ---------------- parsing ---------------- */
+  function parse(text) {
+    var s = text.trim();
+    if (!s) return { err: "Type or paste some numbers first." };
+    var parts = dec === "comma" ? s.split(/[\s;]+/) : s.split(/[\s,;]+/);
+    var vals = [], bad = [];
+    parts.forEach(function (p) {
+      if (!p) return;
+      var q = p.replace(/[−–]/g, "-");
+      if (dec === "comma") q = q.replace(/\./g, "").replace(",", ".");
+      if (/^-?\d*\.?\d+(e[+-]?\d+)?$/i.test(q)) vals.push(parseFloat(q)); else bad.push(p);
+    });
+    if (bad.length) return { err: "These don't look like numbers: " + bad.slice(0, 6).join("  ") + (dec === "dot" && bad.some(function (b) { return /\d,\d/.test(b); }) ? " — if you use decimal commas, switch the separator to “comma”." : "") };
+    if (vals.length < 2) return { err: "Enter at least 2 numbers." };
+    if (vals.length > 500) return { err: "That's a lot of numbers! This tool handles up to 500." };
+    return { vals: vals };
+  }
+
+  /* ---------------- percentile (lecture rule) ---------------- */
+  function percentile(s, p) {
+    var n = s.length, np = n * p, k;
+    if (Math.abs(np - Math.round(np)) < 1e-9) {
+      k = Math.round(np);
+      if (k <= 0) return { v: s[0], how: "first" };
+      if (k >= n) return { v: s[n - 1], how: "last" };
+      return { v: (s[k - 1] + s[k]) / 2, k: k, np: np, whole: true };
+    }
+    k = Math.ceil(np);
+    return { v: s[k - 1], k: k, np: np, whole: false };
+  }
+  function pctExplain(s, p, name) {
+    var n = s.length, P = percentile(s, p), np = n * p;
+    var out = "<p>" + I("np = " + n + "\\times " + p + " = " + t(np)) + " and " + I("n(1-p) = " + t(n * (1 - p))) + ".</p>";
+    if (P.how) return out + "<p>So " + I(name) + " = <span class='ans'>" + f(P.v) + "</span></p>";
+    if (P.whole) {
+      out += "<p>" + I("np") + " is a whole number, so both the " + P.k + "th and the " + (P.k + 1) + "th ordered values satisfy the rule (at least " + t(np) + " values ≤ it and at least " + t(n - np) + " values ≥ it). We take their average:</p>" +
+        D(name + " = \\frac{x_{(" + P.k + ")} + x_{(" + (P.k + 1) + ")}}{2} = \\frac{" + t(s[P.k - 1]) + " + " + t(s[P.k]) + "}{2} = " + t(P.v));
+    } else {
+      out += "<p>We need at least " + t(np) + " values ≤ it and at least " + t(n * (1 - p)) + " values ≥ it. Round " + t(np) + " <b>up</b> to " + P.k + ": the <b>" + P.k + "th</b> ordered value.</p>" +
+        D(name + " = x_{(" + P.k + ")} = " + t(P.v));
+    }
+    return out + "<p>" + I(name) + " = <span class='ans'>" + f(P.v) + "</span></p>";
+  }
+
+  /* ---------------- step cards ---------------- */
+  var steps;
+  function step(title, sub, answers, bodyHtml) {
+    var box = document.createElement("div"); box.className = "step";
+    var head = document.createElement("div"); head.className = "step-head";
+    head.innerHTML = "<h3>" + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>";
+    var body = document.createElement("div"); body.className = "step-body"; body.hidden = true; body.innerHTML = bodyHtml;
+    if (answers && answers.length) {
+      var ck = document.createElement("div"); ck.className = "check";
+      var inp = document.createElement("input"); inp.type = "text"; inp.inputMode = "decimal"; inp.placeholder = "your answer";
+      inp.setAttribute("aria-label", "Your answer for " + title.replace(/<[^>]+>/g, ""));
+      var b = document.createElement("button"); b.type = "button"; b.className = "btn small"; b.textContent = "Check";
+      var res = document.createElement("span"); res.className = "res"; res.setAttribute("aria-live", "polite");
+      function check() {
+        var raw = inp.value.trim().replace(/[−–]/g, "-").replace(/%$/, "");
+        if (!raw) { res.className = "res"; res.textContent = ""; return; }
+        var v = parseFloat(raw.replace(",", "."));
+        if (isNaN(v)) { res.className = "res bad"; res.textContent = "Not a number"; return; }
+        var ok = answers.some(function (a) { return Math.abs(v - a) <= Math.max(0.011, Math.abs(a) * 0.001); });
+        res.className = "res " + (ok ? "ok" : "bad");
+        res.textContent = ok ? "✓ Correct (to 2 decimals)" : "✗ Not quite. Check your working";
+      }
+      b.addEventListener("click", check);
+      inp.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+      ck.appendChild(inp); ck.appendChild(b); ck.appendChild(res);
+      head.appendChild(ck);
+    }
+    var tog = document.createElement("button"); tog.type = "button"; tog.className = "btn small"; tog.textContent = "Show steps";
+    tog.setAttribute("aria-expanded", "false");
+    tog.addEventListener("click", function () {
+      body.hidden = !body.hidden; tog.textContent = body.hidden ? "Show steps" : "Hide steps"; tog.setAttribute("aria-expanded", body.hidden ? "false" : "true");
+    });
+    head.appendChild(tog);
+    box.appendChild(head); box.appendChild(body);
+    steps.appendChild(box);
+    return box;
+  }
+
+  /* ---------------- box plot ---------------- */
+  function boxSVG(s, q1, med, q3, lf, uf, lw, uw, outs) {
+    var lo = Math.min(s[0], lf), hi = Math.max(s[s.length - 1], uf);
+    var pad = (hi - lo) * 0.05 || 1; lo -= pad; hi += pad;
+    var W = 700, X = function (v) { return 30 + (v - lo) / (hi - lo) * (W - 60); };
+    var o = '<svg class="box" viewBox="0 0 ' + W + ' 150" role="img" aria-label="Box plot">';
+    [[lf, "lower fence " + f(lf, 2)], [uf, "upper fence " + f(uf, 2)]].forEach(function (p, i) {
+      o += '<line x1="' + X(p[0]) + '" y1="18" x2="' + X(p[0]) + '" y2="112" stroke="#6b7a8b" stroke-dasharray="5 4" stroke-width="1.5"/>' +
+        '<text x="' + X(p[0]) + '" y="12" text-anchor="' + (i ? "end" : "start") + '" font-size="13" fill="#4a5866">' + p[1] + "</text>";
+    });
+    o += '<line x1="' + X(lw) + '" y1="65" x2="' + X(q1) + '" y2="65" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + X(q3) + '" y1="65" x2="' + X(uw) + '" y2="65" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + X(lw) + '" y1="50" x2="' + X(lw) + '" y2="80" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + X(uw) + '" y1="50" x2="' + X(uw) + '" y2="80" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<rect x="' + X(q1) + '" y="40" width="' + Math.max(1, X(q3) - X(q1)) + '" height="50" rx="4" fill="#f0d48a" stroke="#1d2733" stroke-width="2.5"/>' +
+      '<line x1="' + X(med) + '" y1="40" x2="' + X(med) + '" y2="90" stroke="#c8372d" stroke-width="4"/>';
+    outs.forEach(function (v) { o += '<circle cx="' + X(v) + '" cy="65" r="7" fill="#fff" stroke="#c8372d" stroke-width="2.5"/>'; });
+    var labs = [[lw, f(lw, 2)], [q1, "Q1 " + f(q1, 2)], [med, "Q2 " + f(med, 2)], [q3, "Q3 " + f(q3, 2)], [uw, f(uw, 2)]];
+    labs.forEach(function (l, i) { o += '<text x="' + X(l[0]) + '" y="' + (i % 2 ? 128 : 144) + '" text-anchor="middle" font-size="13" fill="#1d2733">' + l[1] + "</text>"; });
+    return o + "</svg>";
+  }
+
+  /* ---------------- main calculation ---------------- */
+  function calc() {
+    $("err").textContent = "";
+    var P = parse($("data").value);
+    if (P.err) { $("err").textContent = P.err; $("out").hidden = true; return; }
+    var x = P.vals, n = x.length, s = x.slice().sort(function (a, b) { return a - b; });
+    var S = sum(x), mean = S / n;
+    steps = $("steps"); steps.innerHTML = "";
+    $("nline").textContent = "n = " + n + " observations";
+    $("sorted").innerHTML = s.map(function (v, i) { return "<li><small>" + (i + 1) + "</small>" + f(v) + "</li>"; }).join("");
+
+    // mean
+    step("Arithmetic mean", I("\\bar{x}"), [mean],
+      D("\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{" + list(x) + "}{" + n + "} = \\frac{" + t(S) + "}{" + n + "} = " + t(mean)) +
+      "<p>" + I("\\bar{x}") + " = <span class='ans'>" + f(mean) + "</span></p>");
+
+    // median
+    var med, mb;
+    if (n % 2) { var k = (n + 1) / 2; med = s[k - 1]; mb = "<p>" + I("n = " + n) + " is odd, so the median is the " + I("\\frac{n+1}{2} = " + k) + "th ordered value.</p>" + D("\\text{median} = x_{(" + k + ")} = " + t(med)); }
+    else { var a = n / 2; med = (s[a - 1] + s[a]) / 2; mb = "<p>" + I("n = " + n) + " is even, so the median is the average of the " + I("\\frac{n}{2} = " + a) + "th and " + (a + 1) + "th ordered values.</p>" + D("\\text{median} = \\frac{x_{(" + a + ")} + x_{(" + (a + 1) + ")}}{2} = \\frac{" + t(s[a - 1]) + " + " + t(s[a]) + "}{2} = " + t(med)); }
+    step("Median", I("Q_2"), [med], mb + "<p>Median = <span class='ans'>" + f(med) + "</span></p>");
+
+    // mode
+    var cnt = {}, mx = 0; s.forEach(function (v) { cnt[v] = (cnt[v] || 0) + 1; if (cnt[v] > mx) mx = cnt[v]; });
+    var modes = Object.keys(cnt).filter(function (k) { return cnt[k] === mx; }).map(Number);
+    var modeHtml = mx === 1 ? "<p>Every value appears only once, so there is <b>no mode</b>.</p>"
+      : "<p>The highest frequency is <b>" + mx + "</b>. Value" + (modes.length > 1 ? "s" : "") + " with that frequency: <span class='ans'>" + modes.map(function (v) { return f(v); }).join(", ") + "</span>" +
+        (modes.length === 2 ? " (bimodal)" : modes.length > 2 ? " (multimodal)" : "") + ".</p>";
+    step("Mode", "most frequent value", mx === 1 ? [] : modes, modeHtml);
+
+    // range
+    step("Range", "", [s[n - 1] - s[0]], D("\\text{range} = \\max - \\min = " + t(s[n - 1]) + " - " + (s[0] < 0 ? "(" + t(s[0]) + ")" : t(s[0])) + " = " + t(s[n - 1] - s[0])) +
+      "<p>Range = <span class='ans'>" + f(s[n - 1] - s[0]) + "</span></p>");
+
+    // variance & sd
+    var dev = x.map(function (v) { return v - mean; }), sq = dev.map(function (d) { return d * d; }), SS = sum(sq);
+    var s2 = SS / (n - 1), sd = Math.sqrt(s2), sig2 = SS / n, SX2 = sum(x.map(function (v) { return v * v; }));
+    var tbl = "";
+    if (n <= 40) {
+      tbl = '<div class="tablewrap"><table class="dev"><thead><tr><th>' + I("x_i") + "</th><th>" + I("x_i - \\bar{x}") + "</th><th>" + I("(x_i - \\bar{x})^2") + "</th></tr></thead><tbody>" +
+        x.map(function (v, i) { return "<tr><td>" + f(v) + "</td><td>" + f(dev[i]) + "</td><td>" + f(sq[i]) + "</td></tr>"; }).join("") +
+        "</tbody><tfoot><tr><td>Σ = " + f(S) + "</td><td>" + f(r(sum(dev), 8)) + "</td><td>" + f(SS) + "</td></tr></tfoot></table></div>";
+    }
+    step("Sample variance", I("s^2"), [s2],
+      tbl + "<p>The deviations always add up to 0, which is why we square them.</p>" +
+      D("s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{" + t(SS) + "}{" + (n - 1) + "} = " + t(s2)) +
+      "<p>Shortcut check: " + I("\\sum x_i^2 = " + t(SX2)) + ", so</p>" +
+      D("s^2 = \\frac{" + t(SX2) + " - \\frac{" + t(S) + "^2}{" + n + "}}{" + (n - 1) + "} = " + t(s2)) +
+      "<p>" + I("s^2") + " = <span class='ans'>" + f(s2) + "</span> (squared units)</p>" +
+      "<p class='note'>If these values were the whole <b>population</b>: " + I("\\sigma^2 = \\frac{" + t(SS) + "}{" + n + "} = " + t(sig2)) + ".</p>");
+    step("Standard deviation", I("s"), [sd], D("s = \\sqrt{s^2} = \\sqrt{" + t(s2) + "} = " + t(sd)) +
+      "<p>" + I("s") + " = <span class='ans'>" + f(sd) + "</span>, in the same units as the data.</p>" +
+      "<p class='note'>Population version: " + I("\\sigma = \\sqrt{" + t(sig2) + "} = " + t(Math.sqrt(sig2))) + ".</p>");
+
+    // CV
+    if (mean > 0) {
+      step("Coefficient of variation", "CV, in %", [sd / mean * 100], D("CV = \\frac{s}{\\bar{x}} \\times 100\\% = \\frac{" + t(sd) + "}{" + t(mean) + "} \\times 100\\% = " + t(sd / mean * 100) + "\\%") +
+        "<p>CV = <span class='ans'>" + f(sd / mean * 100, 2) + "%</span>. Only meaningful for ratio-scale data (a true zero).</p>");
+    }
+
+    // quartiles, IQR, fences
+    var Q1 = percentile(s, .25).v, Q3 = percentile(s, .75).v, IQR = Q3 - Q1;
+    step("First quartile", I("Q_1") + " · 25th percentile", [Q1], pctExplain(s, .25, "Q_1"));
+    step("Third quartile", I("Q_3") + " · 75th percentile", [Q3], pctExplain(s, .75, "Q_3"));
+    step("Interquartile range", "IQR", [IQR], D("IQR = Q_3 - Q_1 = " + t(Q3) + " - " + t(Q1) + " = " + t(IQR)) + "<p>IQR = <span class='ans'>" + f(IQR) + "</span>: the spread of the middle 50%.</p>");
+    var lf = Q1 - 1.5 * IQR, uf = Q3 + 1.5 * IQR;
+    var outs = s.filter(function (v) { return v < lf || v > uf; });
+    var inside = s.filter(function (v) { return v >= lf && v <= uf; });
+    var lw = inside[0], uw = inside[inside.length - 1];
+    step("Lower fence", I("Q_1 - 1.5\\,IQR"), [lf], D("Q_1 - 1.5 \\times IQR = " + t(Q1) + " - 1.5 \\times " + t(IQR) + " = " + t(lf)) + "<p>Lower fence = <span class='ans'>" + f(lf) + "</span></p>");
+    step("Upper fence", I("Q_3 + 1.5\\,IQR"), [uf], D("Q_3 + 1.5 \\times IQR = " + t(Q3) + " + 1.5 \\times " + t(IQR) + " = " + t(uf)) + "<p>Upper fence = <span class='ans'>" + f(uf) + "</span></p>");
+    step("Potential outliers and box plot", "", [],
+      "<p>" + (outs.length ? "Values outside the fences: <span class='ans'>" + outs.map(function (v) { return f(v); }).join(", ") + "</span>. Investigate them; don't just delete them." : "No value lies outside the fences, so there are <b>no potential outliers</b>.") + "</p>" +
+      "<p>Five-number summary: min " + f(s[0]) + ", Q1 " + f(Q1) + ", median " + f(med) + ", Q3 " + f(Q3) + ", max " + f(s[n - 1]) + ".</p>" +
+      "<p>The whiskers end at the most extreme values <b>inside</b> the fences: " + f(lw) + " and " + f(uw) + ".</p>" +
+      boxSVG(s, Q1, med, Q3, lf, uf, lw, uw, outs));
+
+    // GM, HM
+    if (s[0] > 0) {
+      var logs = x.map(function (v) { return Math.log10(v); }), gm = Math.pow(10, sum(logs) / n);
+      var inv = x.map(function (v) { return 1 / v; }), hm = n / sum(inv);
+      step("Geometric mean", "GM", [gm],
+        D("GM = \\sqrt[" + n + "]{x_1 x_2 \\cdots x_{" + n + "}}") +
+        "<p>Easier with logarithms: average the logs, then undo the log.</p>" +
+        D("\\log_{10} GM = \\frac{\\sum \\log_{10} x_i}{n} = \\frac{" + t(sum(logs)) + "}{" + n + "} = " + t(sum(logs) / n)) +
+        D("GM = 10^{" + t(sum(logs) / n) + "} = " + t(gm)) + "<p>GM = <span class='ans'>" + f(gm) + "</span></p>");
+      step("Harmonic mean", "HM", [hm],
+        D("HM = \\frac{n}{\\sum 1/x_i} = \\frac{" + n + "}{" + (n <= 8 ? x.map(function (v) { return "\\frac{1}{" + t(v) + "}"; }).join(" + ") + " " : "") + "} = \\frac{" + n + "}{" + t(sum(inv)) + "} = " + t(hm)) +
+        "<p>HM = <span class='ans'>" + f(hm) + "</span>. Check: HM ≤ GM ≤ mean (" + f(hm, 2) + " ≤ " + f(gm, 2) + " ≤ " + f(mean, 2) + ").</p>");
+    } else {
+      step("Geometric and harmonic mean", "", [], "<p>Not defined here: the GM and HM need <b>all values positive</b>, and this data set contains " + (s[0] === 0 ? "a zero" : "a negative value") + ".</p>");
+    }
+
+    // shape
+    var diff = mean - med, rel = sd ? diff / sd : 0;
+    var shape = Math.abs(rel) < 0.1 ? "roughly <b>symmetric</b> (mean ≈ median)" : diff > 0 ? "<b>positively (right) skewed</b> (mean > median)" : "<b>negatively (left) skewed</b> (mean < median)";
+    step("Shape", "mean vs. median", [], "<p>Mean = " + f(mean, 2) + ", median = " + f(med, 2) + ". The data look " + shape + ".</p><p class='note'>This is a rough guide; with small samples, look at a histogram or box plot too.</p>");
+
+    // any percentile
+    var pbox = step("Any percentile", "choose p", [], '<div class="pct-row"><label for="pin">Percentile (1–99):</label><input id="pin" type="text" inputmode="numeric" value="90"><button type="button" class="btn small" id="pgo">Show</button></div><div id="pout"></div>');
+    function pshow() {
+      var p = parseFloat(($("pin").value || "").replace(",", "."));
+      if (!(p > 0 && p < 100)) { $("pout").innerHTML = "<p class='res bad'>Enter a number between 1 and 99.</p>"; return; }
+      $("pout").innerHTML = pctExplain(s, p / 100, "P_{" + t(p) + "}");
+    }
+    pbox.querySelector("#pgo").addEventListener("click", pshow);
+    pbox.querySelector("#pin").addEventListener("keydown", function (e) { if (e.key === "Enter") pshow(); });
+    pshow();
+
+    $("out").hidden = false;
+    $("openAll").textContent = "Show all steps";
+  }
+
+  /* ---------------- events ---------------- */
+  document.querySelectorAll(".seg button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      dec = b.dataset.dec;
+      document.querySelectorAll(".seg button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      $("sepnote").textContent = dec === "dot" ? "Separate the numbers with commas, spaces, semicolons or new lines." : "Decimal comma mode: separate the numbers with spaces, semicolons or new lines (not commas).";
+    });
+  });
+  $("go").addEventListener("click", calc);
+  $("data").addEventListener("keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) calc(); });
+  $("example").addEventListener("click", function () {
+    var ex = ["12, 15, 18, 20, 22, 22, 25, 27, 30, 31, 35, 38, 40, 45, 95", "164, 165, 157, 164, 152, 147, 148, 131, 147, 155, 172, 145, 160", "4, 6, 7, 8, 10"];
+    var cur = $("data").value.trim(), i = (ex.indexOf(cur) + 1) % ex.length;
+    if (dec === "comma") document.querySelector('.seg button[data-dec="dot"]').click();
+    $("data").value = ex[i]; calc();
+  });
+  $("openAll").addEventListener("click", function () {
+    var open = this.textContent === "Show all steps";
+    document.querySelectorAll(".step").forEach(function (st) {
+      st.querySelector(".step-body").hidden = !open;
+      var tog = st.querySelector(".step-head > .btn.small:last-child");
+      tog.textContent = open ? "Hide steps" : "Show steps"; tog.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    this.textContent = open ? "Hide all steps" : "Show all steps";
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+---
+title: "Calculator"
+subtitle: "Paste your own numbers and check your homework one step at a time."
+---
+
+Every step stays hidden until you open it. Type your own answer first and press **Check**; open **Show steps** only when you are stuck. Quartiles use the percentile rule from the lecture notes. You can also [open the calculator in a full window](games-tab/games/calculator.html){target="_blank"}.
+
+```{=html}
+<iframe id="tool-frame" src="games-tab/games/calculator.html" title="STAT 112 step-by-step calculator"
+        style="width:100%; min-height:640px; border:0; border-radius:12px; display:block;" loading="eager"></iframe>
+<script>
+(function () {
+  var f = document.getElementById("tool-frame");
+  function fit() { try { var d = f.contentDocument; if (d && d.body) f.style.height = d.documentElement.scrollHeight + "px"; } catch (e) {} }
+  f.addEventListener("load", function () {
+    fit();
+    try { new ResizeObserver(fit).observe(f.contentDocument.body); } catch (e) { setInterval(fit, 800); }
+  });
+})();
+</script>
+```
