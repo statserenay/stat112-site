@@ -1,0 +1,615 @@
+---
+title: "Recitation 3"
+subtitle: "Histograms in depth · Frequency polygons & dot plots · Scatter plots & correlation · Modern graphs · Case study"
+toc: true
+toc-depth: 2
+format:
+  html:
+    include-after-body: _quiz.html
+---
+
+<style>
+/* long formulas scroll sideways on phones instead of widening the page */
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+/* the quiz card itself also receives the class "qz-match"; keep it a normal block */
+div.quiz.qz-match { display: block; margin-top: 1.6rem; }
+.qz-match-left mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+/* wide tables scroll sideways on phones */
+@media (max-width: 700px) { main table { display: block; max-width: 100%; overflow-x: auto; } }
+</style>
+
+## How to use this page
+
+Each question below is interactive. Click an option or type an answer, then press **Check** (or <kbd>Enter</kbd>). **Show answer** reveals the solution and the explanation, and **Reset** clears the question so you can try again.
+
+This week is the **advanced** level: most questions ask you to *read* a graph and *explain* what it shows, not just name it. Numbers can be typed with a dot or a comma (`3.2` or `3,2`); round to **2 decimals** unless a question says otherwise.
+
+::: quiz-scoreboard
+Progress
+:::
+
+# Part A — Histograms in depth
+
+::: {.callout-note collapse="false"}
+## Key terms: histograms
+
+- **Class (bin):** an interval of values. **Class width** = upper limit − lower limit. A first guess is $\dfrac{\text{largest} - \text{smallest}}{\text{number of classes}}$, rounded **up** to a convenient number.
+- **Number of classes:** more data allows more classes. Too few classes hide the shape; too many turn the histogram into noise.
+- **Class midpoint** = (lower limit + upper limit) / 2. It represents all values in the class.
+- **Relative frequency** = class frequency / $n$. Use it to compare groups of **different sizes**.
+- **Density** = relative frequency / class width. Use it for the bar heights when classes have **unequal widths**, so that the **area** of each bar matches the share of the data.
+- **Modal class:** the class with the highest frequency. A histogram with two clear peaks is **bimodal**, which often means two different groups are mixed together.
+- Unlike a bar chart, the bars of a histogram **touch**: the classes cover a continuous number line.
+:::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="fill"}
+80 students reported how many minutes they spend on their phone in bed before falling asleep.
+
+| Minutes | 0–15 | 15–30 | 30–45 | 45–60 | 60–75 | 75–90 | 90–105 |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Frequency | 6 | 14 | 24 | 18 | 10 | 5 | 3 |
+
+The relative frequency of the class 30–45 is []{.blank answer="0.3" tol="0.001"}. \
+The modal class is []{.blank answer="30-45|30–45|30 - 45|30 to 45"} minutes. \
+The midpoint of the class 45–60 is []{.blank answer="52.5" tol="0.01"}. \
+[]{.blank answer="22.5" tol="0.05"} % of the students spend **60 minutes or more** on their phone before sleeping. \
+The cumulative percentage of students below 45 minutes is []{.blank answer="55" tol="0.05"} %, so the median lies in the class []{.blank answer="30-45|30–45|30 - 45|30 to 45"}. \
+**Advanced:** using the class midpoints, the estimated mean is []{.blank answer="44.81" tol="0.02"} minutes.
+
+::: explain
+- $n = 6 + 14 + 24 + 18 + 10 + 5 + 3 = 80$, so the relative frequency of 30–45 is $24/80 = 0.30$. It is also the modal class (24 is the largest frequency).
+- Midpoint of 45–60: $(45 + 60)/2 = 52.5$.
+- 60 minutes or more: $(10 + 5 + 3)/80 = 18/80 = 22.5\%$.
+- Below 45: $(6 + 14 + 24)/80 = 44/80 = 55\%$. The 40th and 41st ordered values lie between the 20th and the 44th observation, so the **median class** is 30–45.
+- **Grouped mean:** each class is represented by its midpoint:
+  $$\bar{x} \approx \frac{\sum f_i m_i}{n} = \frac{6(7.5) + 14(22.5) + 24(37.5) + 18(52.5) + 10(67.5) + 5(82.5) + 3(97.5)}{80} = \frac{3585}{80} = 44.81$$
+  This is only an estimate, because the raw data are lost once they are grouped.
+
+![](images/recitation3/freq-polygon.png){fig-alt="Histogram of the frequency table with a frequency polygon drawn through the class midpoints."}
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="ms" answer="a,b,c,e"}
+Which statements about building a histogram are **true**? Select all that apply.
+
+- With too few classes, important features such as a second peak can disappear.
+- With too many classes for a small data set, the histogram becomes spiky and hard to read.
+- A first guess for the class width is (largest − smallest) / (number of classes), rounded up to a convenient number.
+- Changing the class width changes the data, so only one histogram of a data set is correct.
+- The first class should start at, or a little below, the smallest observation.
+- Like a bar chart, a histogram should have gaps between its bars.
+
+::: explain
+- **d is false:** the data stay the same; only the *picture* changes. That is why it is good practice to try a few widths.
+- **f is false:** the bars of a histogram touch, because the classes cover a continuous scale. Gaps belong to bar charts of categories.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="classify" options="Symmetric|Positively skewed|Negatively skewed|Bimodal|Uniform"}
+![](images/recitation3/hist-shapes.png){fig-alt="Five histograms labelled A to E with different shapes."}
+
+Describe the shape of each histogram.
+
+- Histogram A :: Negatively skewed
+- Histogram B :: Bimodal
+- Histogram C :: Uniform
+- Histogram D :: Positively skewed
+- Histogram E :: Symmetric
+
+::: explain
+- **A:** long tail to the **left** → negatively skewed (mean < median).
+- **B:** two clear peaks → bimodal. Ask whether two groups are mixed.
+- **C:** all bars about the same height → uniform (flat).
+- **D:** long tail to the **right** → positively skewed (mean > median).
+- **E:** mound-shaped and mirror-symmetric → symmetric. This is the shape where the empirical rule works.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="mc" answer="c"}
+600 customers' spending at a campus café (in ₺) is shown with three different bin widths.
+
+![](images/recitation3/bin-width.png){fig-alt="Three histograms of the same café spending data with bin widths 40, 10 and 1 lira."}
+
+Which histogram reveals that **most customers spend a round amount** (a multiple of 5 ₺)?
+
+- H1 (bin width 40 ₺)
+- H2 (bin width 10 ₺)
+- H3 (bin width 1 ₺)
+- None of them: a histogram can never show this
+
+::: explain
+Only the narrow bins of **H3** show the tall spikes at 50, 55, 60, … ₺: many receipts are rounded to a multiple of 5 (this is called **heaping**). With wide bins (H1, H2) the spikes are averaged away and the distribution simply looks right-skewed.
+
+Lesson: wide bins show the **overall shape**; narrow bins show **fine details** of how the data were recorded. Look at both before you interpret.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="fill"}
+The ages of 110 students in an evening course were grouped into classes of **unequal** width:
+
+| Age | 18–20 | 20–22 | 22–30 |
+|---|:-:|:-:|:-:|
+| Frequency | 30 | 40 | 40 |
+
+If you draw the bars with heights equal to the frequencies, the class 22–30 looks as "popular" as 20–22, even though it is four times as wide. Instead, use **frequency per year of age** (frequency / class width) as the height:
+
+18–20: []{.blank answer="15" tol="0.01"} students per year, 20–22: []{.blank answer="20" tol="0.01"} students per year, 22–30: []{.blank answer="5" tol="0.01"} students per year.
+
+::: explain
+Class widths are 2, 2 and 8 years: $30/2 = 15$, $40/2 = 20$ and $40/8 = 5$.
+
+With these heights, the **area** of each bar (height × width) equals its frequency (15 × 2 = 30, 20 × 2 = 40, 5 × 8 = 40), so the picture is honest: students aged 22–30 are spread thinly over many ages. (Dividing again by $n$ gives the **density**, whose total area is 1.) Open-ended classes such as "30 and over" have no width at all, which is why they can't be drawn fairly.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="mc" answer="b"}
+Section A has **40** students and Section B has **160** students. You want to compare the shape of their exam score distributions with two histograms side by side. What should the vertical axis show?
+
+- Frequencies, because they are the real counts
+- Relative frequencies (or percentages)
+- Cumulative frequencies
+- It does not matter, the comparison is the same either way
+
+::: explain
+With frequencies, Section B's bars are about four times as tall just because it is bigger, which hides the comparison of **shapes**. Relative frequencies put both histograms on the same scale (each sums to 1). Also use the **same classes** on both histograms.
+:::
+::::
+
+![](images/recitation3/meme-binwidth.png){fig-align="center" fig-alt="Comic: the same data shown with 3, 16 and 400 bins say very different things."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="open" keywords="two groups|two populations|mix|mixture|different groups|two types; separate|split|by group|by sport|violin|colour|color|two histograms|side by side; not normal|bimodal|two peaks|two modes"}
+The heights of all members of a university sports club form a **bimodal** histogram, with one peak near 168 cm and another near 192 cm. The club has a gymnastics team and a basketball team.
+
+Explain what the two peaks probably mean, and suggest a better way to display the data.
+
+::: explain
+**Model answer:** The two peaks suggest that two different groups are mixed together: gymnasts (shorter) and basketball players (taller). One overall mean (around 180 cm) would describe nobody well. A better display separates the groups: two histograms with the same classes (relative frequencies), or side-by-side box plots or violin plots by team.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="order"}
+Put the steps for constructing a histogram by hand in the correct order.
+
+- Find the smallest and largest observations and the range
+- Choose the number of classes (more data → more classes)
+- Compute the class width and round it up to a convenient number
+- Set the class limits, starting at or slightly below the smallest value
+- Count the frequency (and relative frequency) of each class
+- Draw adjoining bars whose heights are the frequencies (or relative frequencies)
+
+::: explain
+You need the range before you can choose a width, and the class limits before you can count. If the class widths are unequal, use **density** for the bar heights in the last step.
+:::
+::::
+
+# Part B — Frequency polygons, dot plots and outliers
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="fill"}
+Look at the frequency polygon in the explanation of the first question (phone time before sleeping, classes of width 15 from 0 to 105 minutes).
+
+Each point of a frequency polygon is plotted at the class []{.blank answer="midpoint|midpoints|mid-point|middle|centre|center"}. The first point of the data is at $x =$ []{.blank answer="7.5" tol="0.01"}. To close the polygon, we add one extra point with frequency 0 at each end, at $x =$ []{.blank answer="-7.5" tol="0.01"} and $x =$ []{.blank answer="112.5" tol="0.01"}.
+
+::: explain
+The points are the midpoints 7.5, 22.5, …, 97.5 with heights equal to the frequencies. The extra points sit one class width (15) beyond the first and last midpoints: $7.5 - 15 = -7.5$ and $97.5 + 15 = 112.5$.
+
+Frequency polygons are handy for **comparing two distributions on one graph**, because two lines overlap more readably than two sets of bars.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="fill"}
+A consumer magazine tested the battery life of **17 phones of the same model**:
+
+![](images/recitation3/dotplot-battery.png){fig-alt="Dot plot of battery life of 17 phones: most between 9.5 and 13.5 hours, one at 2.1 and one at 22 hours."}
+
+Sorted data (hours): 2.1, 9.5, 10.2, 10.8, 11.0, 11.0, 11.3, 11.6, 11.8, 12.0, 12.1, 12.4, 12.4, 12.7, 13.0, 13.5, 22.0
+
+Median = []{.blank answer="11.8" tol="0.01"}, $Q_1$ = []{.blank answer="11" tol="0.01"}, $Q_3$ = []{.blank answer="12.4" tol="0.01"} \
+Lower fence = []{.blank answer="8.9" tol="0.01"}, upper fence = []{.blank answer="14.5" tol="0.01"} \
+Number of potential outliers: []{.blank answer="2" tol="0"}
+
+::: explain
+- $n = 17$: the median is the 9th value, **11.8**.
+- $Q_1$: $np = 4.25$ → 5th value = **11.0**. $Q_3$: $np = 12.75$ → 13th value = **12.4**. IQR = 1.4, and 1.5 × IQR = 2.1.
+- Fences: $11.0 - 2.1 = 8.9$ and $12.4 + 2.1 = 14.5$. Both **2.1 h** and **22.0 h** are outside.
+
+A dot plot makes such values jump out immediately, which is exactly what it is for: small data sets where you want to **see every observation**.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="classify" options="Recording or data-entry error|Comes from a different population|Correct, but a rare event"}
+An outlier is a value that is unusually large or small compared with the rest. Before you remove one, find out **why** it is there. What is the most likely explanation in each case?
+
+- A student's height is recorded as 1.78 cm :: Recording or data-entry error
+- A phone in the battery test above lasts 22 hours; it turns out to be the newer "Pro" model with a bigger battery :: Comes from a different population
+- In a study of adults' blood pressure, one participant is a 9-year-old child :: Comes from a different population
+- A "daily screen time" of 31 hours :: Recording or data-entry error
+- The highest river level in 50 years of daily measurements, recorded during a once-in-a-century flood :: Correct, but a rare event
+- A penthouse that rents for ₺29,450 a month in a data set of student flats :: Correct, but a rare event | Comes from a different population
+
+::: explain
+- **Errors** (1.78 cm, 31 hours a day) should be corrected if possible, or removed.
+- **Different population** (another phone model, a child among adults): exclude it, but say so in your report.
+- **Rare but real** values (a record flood) must **stay**: they are often the most important observations! Report results with and without them if they change the conclusions.
+- The penthouse can be argued either way: it is a real rent, but a luxury flat is arguably not part of the "student flat" market.
+:::
+::::
+
+# Part C — Scatter plots and correlation
+
+::: {.callout-note collapse="false"}
+## Key terms: two numerical variables
+
+- **Explanatory variable** ($x$, horizontal axis): the one that may explain or predict changes in the other. **Response variable** ($y$, vertical axis): the outcome.
+- Describe a scatter plot by its **form** (linear or curved), **direction** (positive or negative), **strength** (how closely the points follow the pattern) and any **unusual points**.
+- **Pearson correlation coefficient:**
+  $$r = \frac{S_{xy}}{\sqrt{S_{xx}\,S_{yy}}}, \qquad S_{xy} = \sum (x_i - \bar{x})(y_i - \bar{y}),\quad S_{xx} = \sum (x_i - \bar{x})^2,\quad S_{yy} = \sum (y_i - \bar{y})^2$$
+- $-1 \le r \le 1$. The sign gives the direction, $|r|$ the strength of the **linear** relationship. $r$ has no units, and it does not change if you swap $x$ and $y$ or change units (cm → inches).
+- $r$ measures only **linear** association, and it is **sensitive to outliers**.
+:::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="classify" options="Explanatory|Response"}
+For each pair, which variable is the **explanatory** variable and which is the **response**?
+
+- Hours of sunlight per day (in a study of plant growth) :: Explanatory
+- Plant growth (cm per week) :: Response
+- Price of a cup of coffee (in a study of daily sales) :: Explanatory
+- Number of cups of coffee sold per day :: Response
+- Daily maximum temperature (in a study of electricity use) :: Explanatory
+- Daily electricity use for air conditioning :: Response
+
+::: explain
+The explanatory variable is the one we change or that comes first and could influence the other: sunlight → growth, price → sales, temperature → electricity use. By convention it goes on the **horizontal** axis. If there is no natural direction (e.g. height of siblings), either variable can go on either axis.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="classify" options="Strong positive (r ≈ 0.9)|Strong negative (r ≈ −0.9)|Moderate positive (r ≈ 0.5)|Moderate negative (r ≈ −0.5)|No relationship (r ≈ 0)|Strong curved pattern, yet r ≈ 0"}
+![](images/recitation3/scatter-r.png){fig-alt="Six scatter plots labelled P1 to P6 with different correlations."}
+
+Match each scatter plot with the best description.
+
+- P1 :: Strong positive (r ≈ 0.9)
+- P2 :: Strong negative (r ≈ −0.9)
+- P3 :: Moderate positive (r ≈ 0.5)
+- P4 :: No relationship (r ≈ 0)
+- P5 :: Moderate negative (r ≈ −0.5)
+- P6 :: Strong curved pattern, yet r ≈ 0
+
+::: explain
+The computed values are P1: 0.91, P2: −0.87, P3: 0.54, P4: 0.00, P5: −0.48 and P6: −0.01.
+
+**P6 is the trap:** the points follow a perfect U-shape, so $y$ is almost completely determined by $x$, yet $r \approx 0$. The rising and falling halves cancel out. $r = 0$ means *no linear* relationship, **not** *no relationship*. Always plot the data before trusting $r$.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="fill"}
+Five students report the hours they slept the night before an exam ($x$) and their exam score ($y$):
+
+| $x$ (hours of sleep) | 4 | 5 | 6 | 7 | 8 |
+|---|:-:|:-:|:-:|:-:|:-:|
+| $y$ (score) | 50 | 62 | 58 | 70 | 75 |
+
+$\bar{x} =$ []{.blank answer="6" tol="0.001"}, $\bar{y} =$ []{.blank answer="63" tol="0.001"} \
+$S_{xy} =$ []{.blank answer="58" tol="0.01"}, $S_{xx} =$ []{.blank answer="10" tol="0.01"}, $S_{yy} =$ []{.blank answer="388" tol="0.01"} \
+$r =$ []{.blank answer="0.93" tol="0.006"}: a []{.blank answer="strong positive|strong, positive|strong positive linear|positive strong|very strong positive"} linear relationship.
+
+::: explain
+| $x$ | $y$ | $x - \bar{x}$ | $y - \bar{y}$ | $(x-\bar{x})(y-\bar{y})$ | $(x-\bar{x})^2$ | $(y-\bar{y})^2$ |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 4 | 50 | −2 | −13 | 26 | 4 | 169 |
+| 5 | 62 | −1 | −1 | 1 | 1 | 1 |
+| 6 | 58 | 0 | −5 | 0 | 0 | 25 |
+| 7 | 70 | 1 | 7 | 7 | 1 | 49 |
+| 8 | 75 | 2 | 12 | 24 | 4 | 144 |
+| | | | **Sum** | **58** | **10** | **388** |
+
+$$r = \frac{58}{\sqrt{10 \times 388}} = \frac{58}{62.29} = 0.93$$
+
+A strong positive linear relationship: students who slept more tended to score higher. With only 5 students, though, one unusual student could change $r$ a lot.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="ms" answer="a,b,c,d,f"}
+Which statements about the correlation coefficient $r$ are **true**? Select all that apply.
+
+- $r$ has no units.
+- Measuring height in inches instead of centimetres does not change $r$.
+- $r = 0$ means there is no **linear** relationship.
+- A single extreme point can change $r$ a lot.
+- If $r = 0.8$, then 80% of the points lie on a straight line.
+- $r$ is always between −1 and 1.
+- Swapping $x$ and $y$ changes the sign of $r$.
+
+::: explain
+- **e is false:** $r$ is not a percentage of points; it measures how tightly the cloud follows a line.
+- **g is false:** the formula is symmetric in $x$ and $y$, so swapping them gives exactly the same $r$.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="mc" answer="c"}
+![](images/recitation3/influential.png){fig-alt="Scatter plot of tutoring hours versus exam score: twelve students form a flat cloud, and one student Z is far to the upper right."}
+
+Without student Z, $r = 0.09$. With student Z, $r = 0.86$. Which conclusion is best?
+
+- There is clearly a strong linear relationship between tutoring and scores, since $r = 0.86$.
+- Student Z is an outlier, so we should delete Z and report $r = 0.09$ without comment.
+- The strong correlation is created by a single point; investigate Z and report the results both with and without Z.
+- $r$ cannot be computed when there is an outlier.
+
+::: explain
+Among the twelve typical students there is practically **no** linear relationship ($r = 0.09$). One extreme student turns it into $r = 0.86$: such a point is called **influential**. Neither blindly trusting 0.86 nor silently deleting Z is honest. Find out who Z is (a data error? a different kind of student?) and show both analyses.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="mc" answer="b"}
+![](images/recitation3/jitter.png){fig-alt="Two scatter plots of number of courses versus rounded hours of sleep for 140 students: without jitter only a few dots are visible; with jitter all points are visible."}
+
+The data show 140 students, but the left plot seems to contain only about 15 dots. Why, and what does jittering do?
+
+- Most students did not answer, so their dots are missing.
+- Many students have exactly the same (courses, sleep) pair, so their dots are drawn on top of each other. Jittering adds a little random noise to the plotted positions so that overlapping points become visible.
+- Jittering removes outliers so that the plot looks cleaner.
+- Jittering rounds the data so that more points fall on the same spot.
+
+::: explain
+Both variables are **discrete** (whole numbers of courses and rounded hours), so dozens of students share each position: this is **overplotting**. Jittering moves each dot by a tiny random amount (here at most ±0.25) **only in the picture**. Transparency (semi-see-through dots) helps too, especially with thousands of points.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="tf" answer="false"}
+After jittering the plot above, we should compute the correlation from the jittered values, because they are more accurate.
+
+::: explain
+**False.** The random noise is only a **display trick**. All statistics ($\bar{x}$, $s$, $r$, …) must be computed from the **original** data.
+:::
+::::
+
+# Part D — More graphs for numerical data
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="classify" options="Lollipop chart|Slope chart|Dumbbell plot|Line chart (time series)|Frequency polygon|Bubble chart" label="Name that graph"}
+![](images/recitation3/chart-gallery.png){fig-alt="Six small graphs labelled G1 to G6."}
+
+Name each graph.
+
+- G1 :: Lollipop chart
+- G2 :: Slope chart
+- G3 :: Dumbbell plot
+- G4 :: Line chart (time series)
+- G5 :: Frequency polygon
+- G6 :: Bubble chart
+
+::: explain
+- **G1, lollipop:** a bar chart in which each bar is replaced by a thin line with a dot. Less ink, same information.
+- **G2, slope chart:** each line connects an item's values at **two time points**; the slope shows the change, and crossing lines show rank changes.
+- **G3, dumbbell:** two dots per category (two years, two groups) joined by a bar that shows the **gap**.
+- **G4, line chart:** values over time, connected in time order.
+- **G5, frequency polygon:** frequencies at class midpoints, joined by straight lines.
+- **G6, bubble chart:** a scatter plot whose bubble **size** shows a third numerical variable.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="fill"}
+Use graph **G2** (GPAs of four students in the fall and the spring semester).
+
+The only student whose GPA **decreased** is []{.blank answer="Bora"}. \
+The student who improved the most is []{.blank answer="Duru"}, by []{.blank answer="0.6" tol="0.01"} GPA points. \
+In the spring, the student with the highest GPA is []{.blank answer="Ada"}.
+
+::: explain
+Values: Ada 3.1 → 3.4 (+0.3), Bora 2.4 → 2.1 (−0.3, the only red line), Cem 2.9 → 3.3 (+0.4), Duru 2.2 → 2.8 (+0.6). In the spring, Ada (3.4) is first. Notice how easily the slope chart shows **both** the change for each student and the change in **ranking**: Duru passes Bora.
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="match"}
+Match each graph with the job it does best.
+
+- Lollipop chart :: Compare values across categories, like a bar chart but with less ink
+- Slope chart :: Show how each item changed between two time points, including changes in rank
+- Dumbbell plot :: Show the gap between two values (two years or two groups) for each category
+- Bubble chart :: Show three numerical variables in one plot
+- Scatter plot matrix :: Look at every pairwise relationship among several numerical variables
+- Violin plot :: Compare the shape of distributions across groups, including multiple peaks
+- Line chart :: Show how a variable changes over time
+
+::: explain
+Choosing the graph starts with the question: *compare categories* (lollipop, bar), *show change* (slope, dumbbell, line), *show relationships* (scatter, bubble, scatter matrix) or *show distributions* (histogram, box, violin).
+:::
+::::
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="mc" answer="d"}
+![](images/recitation3/box-vs-violin.png){fig-alt="Box plots of two sections look almost identical, but the violin plot of Section L has two separate bulges."}
+
+Both sections have $Q_1 = 52$, median $= 60$ and $Q_3 = 68$. What does the violin plot show that the box plot hides?
+
+- Section L has a higher median than Section K.
+- Section L has more outliers than Section K.
+- Section K is bimodal.
+- Section L is bimodal: its scores form two separate groups, around 50 and around 70, with few students near the median.
+
+::: explain
+The boxes are identical because they use only five numbers. The violin adds the **density** (a smoothed histogram), mirrored on both sides, and reveals that Section L consists of two groups and almost nobody scores near 60. Perhaps the section contains students who did and did not take the preparatory course. A box plot can never show multiple peaks.
+:::
+::::
+
+![](images/recitation3/meme-violin.png){fig-align="center" fig-alt="Comic: a box plot claims to be one normal group, but the violin plot reveals two groups."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="classify" options="Time series|Cross-sectional"}
+Are these **time-series** or **cross-sectional** data?
+
+- Turkey's monthly inflation rate from 2015 to 2026 :: Time series
+- The GPAs of all STAT 112 students this semester :: Cross-sectional
+- The daily number of visitors to the METU library during October :: Time series
+- The rents of 160 flats near METU in September 2026 :: Cross-sectional
+- Your weight, measured every Monday for a year :: Time series
+- The heights of the players of the national basketball team in 2026 :: Cross-sectional
+
+::: explain
+**Time-series** data follow one unit (a country, a library, a person) through **successive points in time**; the order of the observations matters, and a line chart is the natural graph. **Cross-sectional** data measure many units **at one point in time**; their order does not matter.
+:::
+::::
+
+# Part E — Case study: student flats near METU
+
+A website listed **160 flats for rent** within 25 km of the METU campus in September 2026. *(The data were simulated for this recitation, but the patterns are realistic.)* For each flat we have:
+
+| Variable | Description | Type |
+|---|---|---|
+| `rent` | monthly rent (₺) | quantitative, continuous |
+| `size` | floor area (m²) | quantitative, continuous |
+| `distance` | distance to the METU campus (km) | quantitative, continuous |
+| `age` | age of the building (years) | quantitative, discrete |
+| `district` | Çankaya, Yenimahalle or Etimesgut | qualitative, nominal |
+| `furnished` | yes / no | qualitative, nominal (binary) |
+
+Summary of `rent`: mean = ₺10,507, median = ₺10,000, $Q_1$ = ₺7,000, $Q_3$ = ₺12,750, max = ₺29,450.
+
+![](images/recitation3/case-hist.png){fig-alt="Figure F1: histogram of monthly rent, right-skewed with most flats between 5 and 15 thousand lira and one flat near 30 thousand."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="ms" answer="a,b,d,e"}
+Use **Figure F1** and the summary above. Which statements are supported? Select all that apply.
+
+- The distribution of rents is right-skewed.
+- Most flats rent for less than ₺15,000 a month.
+- The histogram shows that bigger flats are more expensive.
+- About half of the flats rent for less than ₺10,000.
+- There are a few very expensive flats, one at almost ₺30,000.
+- The middle 50% of flats rent for between ₺5,000 and ₺15,000.
+
+::: explain
+- **a, b, e:** the long right tail and the mean (10,507) above the median (10,000) indicate right skew; about 86% of flats are below ₺15,000.
+- **c is not supported:** a histogram shows **one** variable. To see the relationship with size we need a scatter plot (Figure F2).
+- **d:** the median is ₺10,000.
+- **f is wrong:** the middle 50% lie between $Q_1$ = ₺7,000 and $Q_3$ = ₺12,750.
+:::
+::::
+
+![](images/recitation3/case-scatter.png){fig-alt="Figure F2: rent increases with size, furnished flats mostly above unfurnished ones. Figure F3: rent decreases with distance, steeply at first and then levelling off."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="ms" answer="a,b,c,e"}
+Use **Figures F2 and F3**. Which statements are supported? Select all that apply.
+
+- F2 shows a positive, roughly linear relationship between size and rent.
+- For flats of the same size, furnished flats tend to be more expensive than unfurnished ones.
+- In F2, the spread of rents gets larger for bigger flats (a "fan" shape).
+- F3 shows no relationship between distance and rent.
+- In F3, rent falls quickly over the first few kilometres and then levels off, so the relationship is curved.
+- F3 shows a strong positive relationship between distance and rent.
+
+::: explain
+- **a, b, c:** in F2 the cloud rises from left to right, the orange (furnished) points lie mostly above the blue ones, and the vertical spread grows with size.
+- **d is false and e is true:** rent clearly decreases with distance, but along a **curve**. Close to campus every kilometre matters a lot; far away, much less.
+- **f is false:** the relationship in F3 is negative (rent goes down as distance goes up).
+:::
+::::
+
+![](images/recitation3/case-corr.png){fig-align="center" width="620" fig-alt="Figure F7: correlation matrix of rent, size, distance and age."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="fill"}
+Use the correlation matrix **Figure F7**.
+
+The strongest linear relationship with rent is with []{.blank answer="size|floor area|size (m2)|size m2"}, with $r =$ []{.blank answer="0.69" tol="0.01"}. \
+The correlation between rent and distance is $r =$ []{.blank answer="-0.34" tol="0.01"}. \
+The correlation between rent and building age is approximately []{.blank answer="0" tol="0.02"}. \
+The numbers on the diagonal are all equal to []{.blank answer="1" tol="0"}, because each variable is perfectly correlated with itself.
+
+::: explain
+- **Size** has the strongest relationship with rent ($r = 0.69$, moderately strong and positive).
+- Rent and distance: $r = -0.34$. Careful: this **underestimates** the real relationship, which F3 showed to be curved. Remember that $r$ measures only linear association. A transformation such as $\log(\text{distance})$ would show a stronger linear pattern.
+- Age: $r \approx 0$, so building age has almost no **linear** relationship with rent in these data.
+- A correlation matrix is symmetric: the value above the diagonal equals the value below it.
+:::
+::::
+
+![](images/recitation3/case-violin.png){fig-align="center" width="620" fig-alt="Figure F4: violin plots of rent by district."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="open" keywords="median|centre|center|typical|middle; Çankaya|cankaya; Etimesgut; tail|outlier|skew|extreme|luxury|expensive; spread|variab|wide|range"}
+Use **Figure F4**. Compare the rents in the three districts in 3–4 sentences (centre, spread, shape, unusual values).
+
+::: explain
+**Model answer:** Çankaya, which is closest to campus, has the highest median rent (about ₺11,750), followed by Yenimahalle (about ₺10,900) and Etimesgut (about ₺7,750). Çankaya and Yenimahalle show a wide range of rents, while most Etimesgut flats are cheap: half of them rent for between about ₺5,750 and ₺10,250. However, Etimesgut also has a very long, thin upper tail caused by a single luxury flat at almost ₺30,000, which is a potential outlier. Without the violin's shape, a mean for Etimesgut would be pulled upwards by this one flat, so the median is the better summary here.
+:::
+::::
+
+![](images/recitation3/case-bubble.png){fig-align="center" width="620" fig-alt="Figure F5: bubble chart of size versus rent, bubble size by building age and colour by distance."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="mc" answer="c"}
+In **Figure F5**, the position shows size and rent, the bubble size shows how **new** the building is (newer = bigger bubble), and the colour shows the distance to METU. How many variables are displayed in this one graph?
+
+- 2
+- 3
+- 4
+- 5
+
+::: explain
+Four: **size** ($x$), **rent** ($y$), **building age** (bubble size) and **distance** (colour). A bubble chart can carry a lot of information, but it gets hard to read quickly; areas are difficult to compare by eye. Here, the dark (far away) bubbles tend to sit lower than yellow (close) bubbles of the same size, which matches what we saw in F3.
+:::
+::::
+
+![](images/recitation3/case-line.png){fig-alt="Figure F6: average asking rent from January 2025 to September 2026, rising steadily with a peak every September."}
+
+<!-- ===================================================================== -->
+
+:::: {.quiz type="open" keywords="increase|rise|upward|grow|trend|higher; september|seasonal|season|every year|peak|spike|jump; student|semester|academic|university|school|term"}
+**Figure F6** shows the average asking rent of flats near METU each month, January 2025 to September 2026. Describe the two main patterns you see and suggest an explanation for each.
+
+::: explain
+**Model answer:** (1) A clear **upward trend**: the average asking rent rose from about ₺13,000 to about ₺22,000 over 21 months, mostly because of inflation. (2) A **seasonal pattern**: every year the rent jumps around **September** and then drops back slightly. This is when new and returning students are looking for flats before the semester starts, so demand is highest. A line chart is the right graph here because these are **time-series** data: the order of the months matters.
+:::
+::::
+
+<p style="font-size:.85rem;color:#6c757d;margin-top:2rem">All data sets on this page were created for this recitation. The patterns are realistic, but the numbers are not real measurements.</p>

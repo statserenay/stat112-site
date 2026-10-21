@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Plot's Graph Hospital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e7f3f0; --card: #ffffff; --ink: #12343b; --ink-2: #4b6b70; --line: #c9e0db;
+  --teal: #0f7c74; --teal-2: #d5efea; --mint: #2fbf71; --red: #e5484d; --red-bg: #fde4e4;
+  --gold: #e9a400; --plot: #2a78d6; --plot-2: #eb6834;
+  --display: "Fredoka", "Avenir Next Rounded", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 17px/1.5 var(--body); min-height: 100vh; }
+button { font: inherit; color: inherit; }
+
+/* ---------- top bar with heartbeat ---------- */
+.bar { background: var(--ink); color: #fff; padding: .55rem 1.2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.logo { display: flex; align-items: center; gap: .55rem; }
+.cross { width: 30px; height: 30px; flex: none; }
+.bar h1 { font: 700 1.4rem/1 var(--display); margin: 0; }
+.bar h1 span { color: #8ff0b8; }
+.ecg { flex: 1 1 160px; height: 34px; min-width: 120px; }
+.ecg path { fill: none; stroke: #2fbf71; stroke-width: 2.5; stroke-linejoin: round; stroke-dasharray: 600; stroke-dashoffset: 600; animation: beat 2.4s linear infinite; }
+.flat .ecg path { animation: none; stroke-dashoffset: 0; stroke: #e5484d; }
+@keyframes beat { to { stroke-dashoffset: -600; } }
+.meta { display: flex; gap: 1.1rem; align-items: center; font-variant-numeric: tabular-nums; }
+.stat { display: flex; flex-direction: column; line-height: 1.1; }
+.stat small { font-size: .72rem; color: #9cc7c1; }
+.stat b { font: 700 1.15rem var(--display); }
+.bar button { background: transparent; border: 1px solid #6f9c98; color: #fff; border-radius: 999px; padding: .3rem .8rem; cursor: pointer; font-size: .85rem; }
+
+main { max-width: 1140px; margin: 0 auto; padding: 1.2rem 1.1rem 2.5rem; }
+.queue { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem; align-items: center; }
+.queue .lbl { font-size: .85rem; color: var(--ink-2); margin-right: .2rem; }
+.bed { width: 34px; height: 34px; border-radius: 10px; border: 2px solid var(--line); background: #fff; display: grid; place-items: center; font: 700 .95rem var(--display); color: var(--ink-2); }
+.bed.on { border-color: var(--teal); background: var(--teal); color: #fff; }
+.bed.ok { border-color: var(--mint); background: #dff6e9; color: #137a45; }
+.bed.half { border-color: var(--gold); background: #fff3d1; color: #8a6300; }
+.bed.bad { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+
+.ward { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.3rem; align-items: start; }
+.chart, .panel { background: var(--card); border: 2px solid var(--ink); border-radius: 20px; box-shadow: 0 5px 0 var(--ink); }
+.chart { padding: .9rem; position: relative; }
+.chart-head { display: flex; align-items: center; gap: .7rem; margin-bottom: .4rem; }
+.chart-head .tag { font: 700 .8rem var(--display); background: var(--teal-2); color: var(--teal); border-radius: 999px; padding: .15rem .65rem; }
+.chart-head .tag.cured { background: #dff6e9; color: #137a45; }
+.chart-head h3 { font: 700 1.15rem var(--display); margin: 0; }
+.chart svg { width: 100%; height: auto; display: block; }
+.stamp { position: absolute; right: 18px; top: 52px; font: 700 1.5rem var(--display); color: #137a45; border: 4px solid #137a45; border-radius: 10px; padding: .1rem .7rem; transform: rotate(-9deg); opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none; background: rgba(255,255,255,.85); }
+.stamp.show { opacity: 1; transform: rotate(-9deg) scale(1.05); }
+.stamp.fail { color: var(--red); border-color: var(--red); }
+
+.panel { padding: 1.15rem 1.3rem 1.3rem; }
+.patient { display: flex; gap: .8rem; align-items: flex-start; }
+.patient svg { flex: none; width: 64px; height: 64px; }
+.speech { background: var(--teal-2); border-radius: 4px 16px 16px 16px; padding: .55rem .85rem; font-size: .98rem; }
+.speech b { color: var(--teal); }
+.step { margin-top: 1rem; }
+.step h4 { font: 700 1.05rem var(--display); margin: 0 0 .45rem; display: flex; gap: .5rem; align-items: center; }
+.step h4 .n { width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: #fff; font-size: .85rem; }
+.step.locked { opacity: .45; }
+.opts { display: grid; gap: .45rem; }
+.opt { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: .5rem .8rem; cursor: pointer; font-weight: 700; font-size: .95rem; }
+.opt:hover:not(:disabled) { border-color: var(--teal); }
+.opt:disabled { cursor: default; }
+.opt.right { border-color: var(--mint); background: #dff6e9; }
+.opt.wrong { border-color: var(--red); background: var(--red-bg); }
+.note { margin-top: .9rem; padding: .7rem .9rem; border-radius: 12px; background: #f3faf8; border-left: 4px solid var(--teal); font-size: .95rem; }
+.note:empty { display: none; }
+.note b.pts { font-family: var(--display); }
+.actions { margin-top: 1rem; display: flex; gap: .6rem; flex-wrap: wrap; }
+.btn { border: 2px solid var(--ink); background: #fff; border-radius: 999px; padding: .5rem 1.15rem; font-weight: 700; cursor: pointer; }
+.btn.main { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: 0 3px 0 #08524d; }
+.btn.main:hover { background: #0c6a63; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.overlay { position: fixed; inset: 0; background: rgba(18, 52, 59, .55); display: grid; place-items: center; padding: 1rem; z-index: 10; }
+.overlay[hidden] { display: none; }
+.modal { background: #fff; border: 2px solid var(--ink); border-radius: 22px; box-shadow: 0 8px 0 var(--ink); max-width: 640px; width: 100%; padding: 1.5rem 1.6rem; max-height: 92vh; overflow: auto; }
+.modal h2 { font: 700 2rem/1.1 var(--display); margin: 0 0 .5rem; }
+.modal ol { padding-left: 1.3rem; } .modal li { margin: .25rem 0; }
+.big { font: 700 3rem/1 var(--display); color: var(--teal); margin: .3rem 0; font-variant-numeric: tabular-nums; }
+.rank { font: 700 1.45rem var(--display); color: var(--ink); }
+table.chart-sum { width: 100%; border-collapse: collapse; margin: .7rem 0; font-size: .92rem; }
+table.chart-sum td { padding: .3rem .4rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.chart-sum td:last-child { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 860px) {
+  .ward { grid-template-columns: 1fr; }
+  .bar { padding: .55rem .9rem; } .ecg { order: 3; flex-basis: 100%; }
+  .meta { margin-left: auto; }
+  .modal { padding: 1.2rem 1.1rem; } .modal h2 { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { .ecg path { animation: none; stroke-dashoffset: 0; } .stamp { transition: none; } }
+</style>
+</head>
+<body>
+<header class="bar" id="bar">
+  <div class="logo">
+    <svg class="cross" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#fff"/><path d="M12 5h6v7h7v6h-7v7h-6v-7H5v-6h7z" fill="#e5484d"/></svg>
+    <h1>Dr. Plot's <span>Graph Hospital</span></h1>
+  </div>
+  <svg class="ecg" viewBox="0 0 300 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0 18 H60 L70 18 L76 6 L84 30 L92 2 L100 26 L106 18 H170 L180 18 L186 6 L194 30 L202 2 L210 26 L216 18 H300"/></svg>
+  <div class="meta">
+    <div class="stat"><small>Health points</small><b id="score">0</b></div>
+    <div class="stat"><small>Patient</small><b id="pno">–</b></div>
+    <button type="button" id="restart">New shift</button>
+  </div>
+</header>
+
+<main>
+  <div class="queue" id="queue"></div>
+  <div class="ward">
+    <div class="chart">
+      <div class="chart-head"><span class="tag" id="ctag">Admitted</span><h3 id="ctitle"></h3></div>
+      <svg id="plot" viewBox="0 0 480 320" role="img" aria-label="The patient's graph"></svg>
+      <div class="stamp" id="stamp">CURED!</div>
+    </div>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+</main>
+<div class="overlay" id="overlay"></div>
+
+<script>
+(function () {
+  "use strict";
+  /* ==================================================================
+     Dr. Plot's Graph Hospital · STAT 112 Recitation 3 (Lecture 3 topics)
+     Each patient is a sick graph. Step 1: diagnose (50 pts). Step 2: treat (50 pts).
+     A shift has 6 random patients out of the 10 below.
+     ================================================================== */
+  var PER_SHIFT = 6;
+  var RANKS = [
+    [550, "Chief of Graphology", "Flawless rounds. The graphs of this hospital sleep peacefully tonight."],
+    [420, "Specialist", "Excellent diagnoses with only a little side-effect."],
+    [280, "Resident", "Good instincts. A few more night shifts and you'll be a specialist."],
+    [-1, "Intern (under supervision)", "Some patients left with a worse histogram than they arrived with. Another shift?"]
+  ];
+  var NURSE = {
+    ok: ["Nurse Median: “Textbook. I'll update the chart.”", "The patient's histogram is smiling again.", "Beautiful work, doctor."],
+    bad: ["Nurse Median: “Doctor… are you sure you went to stats school?”", "The patient is now feeling slightly skewed.", "Hmm. Let's call that a learning experience."]
+  };
+
+  /* ---------- helpers ---------- */
+  var $ = function (id) { return document.getElementById(id); };
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function ri(a, b) { return Math.floor(rnd(a, b + 1)); }
+  function randn() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function corr(x, y) { var n = x.length, mx = 0, my = 0, i; for (i = 0; i < n; i++) { mx += x[i]; my += y[i]; } mx /= n; my /= n; var a = 0, b = 0, c = 0; for (i = 0; i < n; i++) { a += (x[i] - mx) * (y[i] - my); b += (x[i] - mx) * (x[i] - mx); c += (y[i] - my) * (y[i] - my); } return a / Math.sqrt(b * c); }
+  function quant(s, p) { var i = (s.length - 1) * p, lo = Math.floor(i), hi = Math.ceil(i); return s[lo] + (s[hi] - s[lo]) * (i - lo); }
+
+  /* ---------- tiny SVG chart kit (viewBox 480 x 320) ---------- */
+  var W = 480, H = 320, L = 52, R = 18, T = 18, B = 46;
+  var C = { blue: "#2a78d6", orange: "#eb6834", aqua: "#1baf7a", violet: "#4a3aa7", ink: "#12343b", grid: "#e3efec", soft: "#9cc3f0" };
+  function sx(lo, hi) { return function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); }; }
+  function sy(lo, hi) { return function (v) { return H - B - (v - lo) / (hi - lo) * (H - T - B); }; }
+  function nice(v) { var e = Math.pow(10, Math.floor(Math.log10(v))), f = v / e; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * e; }
+  function ticks(lo, hi, n) { var st = nice((hi - lo) / (n || 5)), out = []; for (var v = Math.ceil(lo / st) * st; v <= hi + 1e-9; v += st) out.push(+v.toFixed(6)); return out; }
+  function frame(xlo, xhi, ylo, yhi, xl, yl, opts) {
+    opts = opts || {}; var X = sx(xlo, xhi), Y = sy(ylo, yhi), o = "";
+    (opts.yt || ticks(ylo, yhi, 5)).forEach(function (t) { o += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(t) + '" y2="' + Y(t) + '" stroke="' + C.grid + '"/><text x="' + (L - 7) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="11" fill="#4b6b70">' + (opts.yfmt ? opts.yfmt(t) : t) + "</text>"; });
+    if (!opts.noXt) (opts.xt || ticks(xlo, xhi, 6)).forEach(function (t) { o += '<text x="' + X(t) + '" y="' + (H - B + 16) + '" text-anchor="middle" font-size="11" fill="#4b6b70">' + (opts.xfmt ? opts.xfmt(t) : t) + "</text>"; });
+    o += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - B) + '" y2="' + (H - B) + '" stroke="' + C.ink + '" stroke-width="1.5"/>';
+    o += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="12.5" fill="#12343b">' + xl + "</text>";
+    o += '<text transform="translate(14 ' + ((T + H - B) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12.5" fill="#12343b">' + yl + "</text>";
+    return { X: X, Y: Y, svg: o };
+  }
+  function histogram(data, edges, opt) {
+    opt = opt || {}; var counts = edges.slice(1).map(function () { return 0; });
+    data.forEach(function (v) { for (var i = 0; i < edges.length - 1; i++) if (v >= edges[i] && (v < edges[i + 1] || (i === edges.length - 2 && v <= edges[i + 1]))) { counts[i]++; break; } });
+    var n = data.length, h = counts.map(function (c, i) { return opt.density ? c / (edges[i + 1] - edges[i]) : opt.rel ? c / n : c; });
+    return { counts: counts, h: h };
+  }
+  function drawHist(edges, h, xl, yl, opt) {
+    opt = opt || {}; var ymax = opt.ymax || Math.max.apply(null, h) * 1.1;
+    var f = frame(edges[0], edges[edges.length - 1], 0, ymax, xl, yl, opt), o = f.svg;
+    h.forEach(function (v, i) { var x0 = f.X(edges[i]), x1 = f.X(edges[i + 1]); o += '<rect x="' + x0 + '" y="' + f.Y(v) + '" width="' + Math.max(0.6, x1 - x0 - (opt.gap === 0 ? 0 : 1.2)) + '" height="' + (f.Y(0) - f.Y(v)) + '" fill="' + (opt.color || C.blue) + '" fill-opacity="' + (opt.alpha || 1) + '"/>'; });
+    return o;
+  }
+  function kde(data, lo, hi, n, bw) { var out = []; for (var i = 0; i <= n; i++) { var x = lo + (hi - lo) * i / n, s = 0; data.forEach(function (d) { var z = (x - d) / bw; s += Math.exp(-.5 * z * z); }); out.push([x, s / (data.length * bw * Math.sqrt(2 * Math.PI))]); } return out; }
+  function setPlot(svg, title, tag, cured) {
+    $("plot").innerHTML = svg; $("ctitle").textContent = title;
+    $("ctag").textContent = tag; $("ctag").className = "tag" + (cured ? " cured" : "");
+  }
+
+  /* ---------- the patients ---------- */
+  function face(color, mood) {
+    var mouth = mood === "sad" ? '<path d="M24 46 Q32 39 40 46" fill="none" stroke="#12343b" stroke-width="3" stroke-linecap="round"/>' :
+      mood === "happy" ? '<path d="M23 41 Q32 50 41 41" fill="none" stroke="#12343b" stroke-width="3" stroke-linecap="round"/>' :
+      '<ellipse cx="32" cy="44" rx="4" ry="5" fill="#12343b"/>';
+    return '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="6" width="56" height="52" rx="14" fill="' + color + '" stroke="#12343b" stroke-width="3"/>' +
+      '<circle cx="23" cy="28" r="4" fill="#12343b"/><circle cx="41" cy="28" r="4" fill="#12343b"/>' + mouth +
+      '<rect x="44" y="2" width="14" height="10" rx="3" fill="#fff" stroke="#12343b" stroke-width="2"/><path d="M48 7h6M51 4v6" stroke="#e5484d" stroke-width="2"/></svg>';
+  }
+
+  function noteText(t, ok) { return '<text x="' + (W - R - 6) + '" y="' + (T + 12) + '" text-anchor="end" font-size="12.5" font-weight="700" fill="' + (ok ? "#0f7c74" : "#e5484d") + '">' + t + "</text>"; }
+  function twoPanels(d, same) {
+    var o = "", lo = 20, hi = 100;
+    d.g.forEach(function (g, k) {
+      var x0 = 46 + k * 222, w = 190, top = 30, bot = 262;
+      var ylo = same || k === 0 ? lo : Math.min.apply(null, g.y) - 2, yhi = same || k === 0 ? hi : Math.min.apply(null, g.y) + 22;
+      var xlo = 0, xhi = same || k === 0 ? 13 : 8;
+      var X = function (v) { return x0 + (v - xlo) / (xhi - xlo) * w; }, Y = function (v) { return bot - (v - ylo) / (yhi - ylo) * (bot - top); };
+      o += '<rect x="' + x0 + '" y="' + top + '" width="' + w + '" height="' + (bot - top) + '" fill="#f7fbfa" stroke="#c9e0db"/>';
+      o += '<clipPath id="cp' + k + '"><rect x="' + x0 + '" y="' + top + '" width="' + w + '" height="' + (bot - top) + '"/></clipPath><g clip-path="url(#cp' + k + ')">';
+      g.x.forEach(function (v, i) { o += '<circle cx="' + X(v) + '" cy="' + Y(g.y[i]) + '" r="4.5" fill="' + (k ? C.orange : C.blue) + '" fill-opacity=".8"/>'; });
+      o += "</g>";
+      [0, 1, 2].forEach(function (j) { var yv = ylo + (yhi - ylo) * j / 2; o += '<text x="' + (x0 - 5) + '" y="' + (Y(yv) + 4) + '" text-anchor="end" font-size="10.5" fill="#4b6b70">' + Math.round(yv) + "</text>"; });
+      [0, 1].forEach(function (j) { var xv = xlo + (xhi - xlo) * j; o += '<text x="' + X(xv) + '" y="' + (bot + 14) + '" text-anchor="middle" font-size="10.5" fill="#4b6b70">' + xv + "</text>"; });
+      o += '<text x="' + (x0 + w / 2) + '" y="' + (top - 8) + '" text-anchor="middle" font-size="12.5" font-weight="700" fill="#12343b">' + (k ? "Evening section" : "Morning section") + "</text>";
+      o += '<text x="' + (x0 + w / 2) + '" y="' + (bot + 30) + '" text-anchor="middle" font-size="11.5" fill="#12343b">study hours</text>';
+    });
+    o += '<text transform="translate(14 146) rotate(-90)" text-anchor="middle" font-size="12" fill="#12343b">exam score</text>';
+    return o;
+  }
+  function unaLabels(e, h, ymax, txt) {
+    var X = sx(e[0], e[e.length - 1]), Y = sy(0, ymax), o = "";
+    h.forEach(function (v, i) { o += '<text x="' + (X(e[i]) + X(e[i + 1])) / 2 + '" y="' + (Y(v) - 6) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#12343b">' + txt[i] + "</text>"; });
+    return o;
+  }
+  var PATIENTS = [
+    { id: "oscar", name: "Overplotted Oscar", color: "#9cc3f0",
+      complaint: "Doctor, <b>150 students</b> live inside me, but people only ever see about 20 dots. I feel… invisible.",
+      setup: function () {
+        var x = [], y = []; for (var i = 0; i < 150; i++) { var c = ri(4, 7); x.push(c); y.push(Math.max(3, Math.min(9, Math.round(8.4 - .35 * c + randn() * .8)))); }
+        return { x: x, y: y };
+      },
+      before: function (d) { var f = frame(3.5, 7.5, 2.5, 9.5, "number of courses taken", "hours of sleep", { xt: [4, 5, 6, 7], yt: [3, 5, 7, 9] }), o = f.svg; d.x.forEach(function (v, i) { o += '<circle cx="' + f.X(v) + '" cy="' + f.Y(d.y[i]) + '" r="5" fill="' + C.blue + '"/>'; }); return o; },
+      after: function (d) { var f = frame(3.5, 7.5, 2.5, 9.5, "number of courses taken", "hours of sleep", { xt: [4, 5, 6, 7], yt: [3, 5, 7, 9] }), o = f.svg; d.x.forEach(function (v, i) { o += '<circle cx="' + f.X(v + rnd(-.27, .27)) + '" cy="' + f.Y(d.y[i] + rnd(-.27, .27)) + '" r="4" fill="' + C.blue + '" fill-opacity=".55"/>'; }); return o; },
+      dx: ["Overplotting: many students share exactly the same point", "Too few students were measured", "The two variables have no relationship", "The graph has too many outliers"],
+      tx: ["Add jitter (a little random noise) and transparency", "Delete students with duplicate values", "Use relative frequencies", "Use fewer classes"],
+      lesson: "Both variables are <b>discrete</b>, so dozens of students sit on the same spot. <b>Jittering</b> adds a small amount of random noise (for example a uniform number in [−0.5, 0.5]) so that overlapping marks separate, and transparency shows where dots pile up." },
+
+    { id: "betty", name: "Blocky Betty", color: "#f0d48a",
+      complaint: "I'm a histogram with only <b>3 fat classes</b>. Everyone says I look boring, but I feel like I'm hiding something deep inside…",
+      setup: function () { var d = []; for (var i = 0; i < 300; i++) d.push(i % 2 ? 42 + randn() * 6 : 70 + randn() * 6); return { d: d.map(function (v) { return Math.max(21, Math.min(89, v)); }) }; },
+      before: function (d) { var e = [20, 43.4, 66.7, 90], h = histogram(d.d, e).h; return drawHist(e, h, "exam score", "frequency", { xt: [20, 40, 60, 80] }); },
+      after: function (d) { var e = []; for (var v = 20; v <= 90; v += 4.375) e.push(v); var h = histogram(d.d, e).h; return drawHist(e, h, "exam score", "frequency", { xt: [20, 40, 60, 80] }); },
+      dx: ["Too few classes hide the shape: a second peak is invisible", "Too many classes create random noise", "The data are perfectly uniform", "The two groups have different sizes"],
+      tx: ["Use more, narrower classes", "Use even fewer, wider classes", "Remove the middle scores", "Use relative frequencies instead of frequencies"],
+      lesson: "With 3 wide classes, the two modal classes melt together. With about 16 classes the histogram is clearly <b>bimodal</b>: two groups of students. (Relative frequencies would not help: the shape is the same with either label.) Try a few class widths before you interpret a histogram." },
+
+    { id: "sam", name: "Spiky Sam", color: "#e87ba4",
+      complaint: "I only have <b>30 observations</b> but someone gave me <b>40 classes</b>. Now I'm all spikes and gaps. Is this… a rash?",
+      setup: function () { var d = []; for (var i = 0; i < 30; i++) d.push(Math.max(5, Math.min(55, 30 + randn() * 8))); return { d: d }; },
+      before: function (d) { var e = []; for (var v = 5; v <= 55.01; v += 1.25) e.push(v); var h = histogram(d.d, e).h; return drawHist(e, h, "waiting time (minutes)", "frequency", { xt: [10, 20, 30, 40, 50] }); },
+      after: function (d) { var e = [5, 13.33, 21.67, 30, 38.33, 46.67, 55], h = histogram(d.d, e).h; return drawHist(e, h, "waiting time (minutes)", "frequency", { xt: [10, 20, 30, 40, 50] }); },
+      dx: ["Too many classes for so few data: the shape is lost in noise", "Too few classes hide a second peak", "Overplotting", "Unequal class widths"],
+      tx: ["Use fewer, wider classes (about 5–7 for 30 values)", "Use even more classes", "Add jitter", "Use relative frequencies"],
+      lesson: "The lecture's table: <b>fewer than 50 observations → 5 to 7 classes</b>. With 6 classes the shape appears: roughly mound-shaped around 30 minutes. Too many classes turn every random wobble into a spike." },
+
+    { id: "greg", name: "Gappy Greg", color: "#f0d48a",
+      complaint: "I'm a histogram of <b>200 commute times</b>, but someone drew me with <b>big gaps</b> between my boxes. Now people think I'm a bar chart of categories. Identity crisis!",
+      setup: function () { var d = []; for (var i = 0; i < 200; i++) d.push(Math.max(1, Math.min(59, 22 + randn() * 10 + (Math.random() < .3 ? rnd(5, 20) : 0)))); return { d: d }; },
+      before: function (d) {
+        var e = [0, 10, 20, 30, 40, 50, 60], h = histogram(d.d, e).h, f = frame(0, 60, 0, Math.max.apply(null, h) * 1.12, "commute time (minutes)", "frequency", { xt: e }), o = f.svg;
+        h.forEach(function (v, i) { var x0 = f.X(e[i]), x1 = f.X(e[i + 1]), g = (x1 - x0) * .28; o += '<rect x="' + (x0 + g) + '" y="' + f.Y(v) + '" width="' + (x1 - x0 - 2 * g) + '" height="' + (f.Y(0) - f.Y(v)) + '" fill="' + C.blue + '"/>'; });
+        return o;
+      },
+      after: function (d) { var e = [0, 10, 20, 30, 40, 50, 60], h = histogram(d.d, e).h; return drawHist(e, h, "commute time (minutes)", "frequency", { xt: e, gap: 0 }) + unaLabels(e, h, Math.max.apply(null, h) * 1.1, h.map(String)); },
+      dx: ["A histogram's boxes must be adjoining: its classes cover a continuous scale", "Too few classes hide a second peak", "Overplotting", "The groups have different sizes"],
+      tx: ["Draw adjoining boxes with no gaps between them", "Make the gaps even bigger", "Sort the bars from tallest to shortest", "Add jitter"],
+      lesson: "A histogram consists of <b>adjoining boxes</b> (no gaps between the boxes), because the classes 0–10, 10–20, … follow each other on a continuous number line. The bars also keep their order on the scale: sorting them by height would destroy the shape of the distribution." },
+
+    { id: "ursula", name: "Unequal Ursula", color: "#a8e6cf",
+      complaint: "I compare <b>Class A (40 students)</b> with <b>Class B (240 students)</b>. Class B's bars tower over A's, and now A has an inferiority complex.",
+      setup: function () { var a = [], b = [], i; for (i = 0; i < 40; i++) a.push(Math.max(31, Math.min(99, 62 + randn() * 11))); for (i = 0; i < 240; i++) b.push(Math.max(31, Math.min(99, 64 + randn() * 11))); return { a: a, b: b }; },
+      before: function (d) {
+        var e = [30, 40, 50, 60, 70, 80, 90, 100], ha = histogram(d.a, e).h, hb = histogram(d.b, e).h, ymax = Math.max.apply(null, hb) * 1.1;
+        var f = frame(30, 100, 0, ymax, "exam score", "frequency", { xt: e }), o = f.svg;
+        e.slice(0, -1).forEach(function (v, i) { var w = (f.X(e[1]) - f.X(e[0])) / 2 - 2; o += '<rect x="' + (f.X(v) + 1) + '" y="' + f.Y(ha[i]) + '" width="' + w + '" height="' + (f.Y(0) - f.Y(ha[i])) + '" fill="' + C.orange + '"/><rect x="' + (f.X(v) + w + 2) + '" y="' + f.Y(hb[i]) + '" width="' + w + '" height="' + (f.Y(0) - f.Y(hb[i])) + '" fill="' + C.blue + '"/>'; });
+        o += '<rect x="' + (W - R - 150) + '" y="' + (T + 4) + '" width="12" height="12" fill="' + C.orange + '"/><text x="' + (W - R - 133) + '" y="' + (T + 14) + '" font-size="12">Class A (n = 40)</text>';
+        o += '<rect x="' + (W - R - 150) + '" y="' + (T + 22) + '" width="12" height="12" fill="' + C.blue + '"/><text x="' + (W - R - 133) + '" y="' + (T + 32) + '" font-size="12">Class B (n = 240)</text>';
+        return o;
+      },
+      after: function (d) {
+        var e = [30, 40, 50, 60, 70, 80, 90, 100], ha = histogram(d.a, e, { rel: true }).h, hb = histogram(d.b, e, { rel: true }).h, ymax = Math.max.apply(null, ha.concat(hb)) * 1.15;
+        var f = frame(30, 100, 0, ymax, "exam score", "relative frequency", { xt: e, yfmt: function (t) { return Math.round(t * 100) + "%"; } }), o = f.svg;
+        e.slice(0, -1).forEach(function (v, i) { var w = (f.X(e[1]) - f.X(e[0])) / 2 - 2; o += '<rect x="' + (f.X(v) + 1) + '" y="' + f.Y(ha[i]) + '" width="' + w + '" height="' + (f.Y(0) - f.Y(ha[i])) + '" fill="' + C.orange + '"/><rect x="' + (f.X(v) + w + 2) + '" y="' + f.Y(hb[i]) + '" width="' + w + '" height="' + (f.Y(0) - f.Y(hb[i])) + '" fill="' + C.blue + '"/>'; });
+        o += '<rect x="' + (W - R - 150) + '" y="' + (T + 4) + '" width="12" height="12" fill="' + C.orange + '"/><text x="' + (W - R - 133) + '" y="' + (T + 14) + '" font-size="12">Class A (n = 40)</text>';
+        o += '<rect x="' + (W - R - 150) + '" y="' + (T + 22) + '" width="12" height="12" fill="' + C.blue + '"/><text x="' + (W - R - 133) + '" y="' + (T + 32) + '" font-size="12">Class B (n = 240)</text>';
+        return o;
+      },
+      dx: ["The groups have different sizes, so raw frequencies can't be compared", "Class A has too few classes", "Class B is overplotted", "Class A is left-skewed"],
+      tx: ["Use relative frequencies with the same classes", "Remove 200 students from Class B", "Add jitter", "Use fewer classes"],
+      lesson: "Frequencies grow with the group size. <b>Relative frequencies</b> (count ÷ n) put both classes on the same scale, and now you can see that their shapes are actually very similar." },
+
+    { id: "stella", name: "Stretchy Stella", color: "#c4b5fd",
+      complaint: "I'm two scatter plots: <b>study hours vs score</b> for the morning and the evening section. Everyone says the evening students are wildly different… but I think somebody <b>stretched</b> my right half!",
+      setup: function () { var g = []; for (var k = 0; k < 2; k++) { var x = [], y = []; for (var i = 0; i < 28; i++) { var h = rnd(1, 12); x.push(h); y.push(Math.max(20, Math.min(98, 40 + 4 * h + randn() * 7))); } g.push({ x: x, y: y }); } return { g: g }; },
+      before: function (d) { return twoPanels(d, false); },
+      after: function (d) { return twoPanels(d, true); },
+      dx: ["The two plots use different scales, so they can't be compared directly", "The evening section has a much stronger relationship", "Overplotting", "Too few classes"],
+      tx: ["Redraw both plots with the same scales on both axes", "Delete the evening section", "Draw a histogram for each section", "Add jitter"],
+      lesson: "In <b>comparative scatter plots</b> the same relationship is drawn for each group. The lecture's note: <i>the scale on both plots is the same, to allow for direct comparison.</i> With the same scales, both sections show a similar positive linear relationship." },
+
+    { id: "larry", name: "Lonely Larry", color: "#fca5a5",
+      complaint: "I'm a dot plot of <b>16 students' heights</b>. One dot sits all alone, far away from its friends. Nobody sits with it at lunch.",
+      setup: function () { var h = []; for (var i = 0; i < 15; i++) h.push(Math.round(165 + randn() * 7)); return { h: h }; },
+      before: function (d) { var f = frame(0, 200, 0, 4, "height (cm)", "", { yt: [], xt: [0, 25, 50, 75, 100, 125, 150, 175, 200] }), o = f.svg, cnt = {};
+        d.h.concat([1.78]).forEach(function (v) { var k = Math.round(v / 2.5); cnt[k] = (cnt[k] || 0) + 1; o += '<circle cx="' + f.X(v) + '" cy="' + f.Y(cnt[k] * .6) + '" r="6" fill="' + (v < 10 ? C.orange : C.blue) + '" stroke="#12343b"/>'; }); return o; },
+      after: function (d) { var f = frame(140, 200, 0, 4, "height (cm)", "", { yt: [], xt: [140, 150, 160, 170, 180, 190, 200] }), o = f.svg, cnt = {};
+        d.h.concat([178]).forEach(function (v, i) { var k = Math.round(v); cnt[k] = (cnt[k] || 0) + 1; o += '<circle cx="' + f.X(v) + '" cy="' + f.Y(cnt[k] * .6) + '" r="6" fill="' + (i === d.h.length ? C.orange : C.blue) + '" stroke="#12343b"/>'; }); return o; },
+      dx: ["A potential outlier, far from all other values", "A bimodal distribution", "Overplotting", "Too many classes"],
+      tx: ["Find out why: it was recorded in metres (1.78), so correct it to 178 cm", "Delete it immediately, outliers are always errors", "Ignore it, outliers never matter", "Add jitter so it moves closer"],
+      lesson: "An outlier is unusually large or small relative to the other values. Find the <b>reason</b>: (1) observed, recorded or entered incorrectly, (2) from a different population, or (3) correct but a rare event. Here it was recorded incorrectly, in metres: 1.78 m = 178 cm." },
+
+    { id: "cora", name: "Curvy Cora", color: "#fde68a",
+      complaint: "An analyst computed <b>r ≈ 0</b> for me and wrote “no relationship”. But look at me! I'm a perfect smile!",
+      setup: function () { var x = [], y = []; for (var i = 0; i < 45; i++) { var a = -3 + 6 * i / 44 + randn() * .04; x.push(a); y.push(a * a + randn() * .6); } return { x: x, y: y, r: corr(x, y) }; },
+      before: function (d) { var f = frame(-3.3, 3.3, -1.5, 10.5, "x", "y", { xt: [-3, -2, -1, 0, 1, 2, 3], yt: [0, 2, 4, 6, 8, 10] }), o = f.svg; d.x.forEach(function (v, i) { o += '<circle cx="' + f.X(v) + '" cy="' + f.Y(d.y[i]) + '" r="5" fill="' + C.blue + '"/>'; });
+        o += '<text x="' + (W - R - 8) + '" y="' + (T + 14) + '" text-anchor="end" font-size="13" font-weight="700" fill="#e5484d">r = ' + d.r.toFixed(2) + "</text>"; return o; },
+      after: function (d) { var f = frame(-3.3, 3.3, -1.5, 10.5, "x", "y", { xt: [-3, -2, -1, 0, 1, 2, 3], yt: [0, 2, 4, 6, 8, 10] }), o = f.svg; d.x.forEach(function (v, i) { o += '<circle cx="' + f.X(v) + '" cy="' + f.Y(d.y[i]) + '" r="5" fill="' + C.blue + '" fill-opacity=".7"/>'; });
+        var pts = []; for (var a = -3.1; a <= 3.1; a += .1) pts.push(f.X(a) + "," + f.Y(a * a)); o += '<polyline points="' + pts.join(" ") + '" fill="none" stroke="' + C.orange + '" stroke-width="3"/>';
+        o += '<text x="' + (W - R - 8) + '" y="' + (T + 14) + '" text-anchor="end" font-size="13" font-weight="700" fill="#0f7c74">strong, curved relationship</text>'; return o; },
+      dx: ["A strong nonlinear (curved) relationship; r only measures linear association", "There is truly no relationship", "A weak linear relationship", "Overplotting"],
+      tx: ["Describe the curved pattern from the scatter plot instead of relying on r", "Remove points until r gets bigger", "Swap x and y to fix r", "Add jitter"],
+      lesson: "<b>r measures only linear relationships.</b> A U-shape has r ≈ 0 because the falling and rising halves cancel out, yet y depends strongly on x. A scatter plot shows the form (here nonlinear), direction and strength of the relationship, so always look at the plot as well as r." },
+
+    { id: "tina", name: "Tiny-Tail Tina", color: "#bae6fd",
+      complaint: "I'm a histogram of <b>200 students' monthly incomes</b>. My last four classes hold only <b>5, 2, 1 and 1</b> students. I've got a long, lonely tail of tiny bars!",
+      setup: function () { return {}; },
+      before: function () { var e = [0, 5, 10, 15, 20, 25, 30, 35, 40], h = [38, 74, 52, 27, 5, 2, 1, 1]; return drawHist(e, h, "monthly income (thousand ₺)", "frequency", { xt: e, ymax: 84 }) + unaLabels(e, h, 84, h.map(String)); },
+      after: function () { var e = [0, 5, 10, 15, 20, 25], h = [38, 74, 52, 27, 9]; return drawHist(e, h, "monthly income (thousand ₺)", "frequency", { xt: [0, 5, 10, 15, 20], ymax: 84 }) + unaLabels(e, h, 84, ["38", "74", "52", "27", "9"]) + '<text x="' + sx(0, 25)(22.5) + '" y="' + (H - B + 16) + '" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f7c74">20 and over</text>'; },
+      dx: ["Several classes have very low frequencies", "Too few classes", "The groups have different sizes", "Overplotting"],
+      tx: ["Combine them into one open-ended class: “20 and over”", "Delete the students with high incomes", "Use even more, narrower classes", "Add jitter"],
+      lesson: "It is generally best to use equal class widths, but when some classes have <b>too low frequencies</b>, several classes are <b>combined</b> into a wider, “more populated” class, or an <b>open-ended class</b> is formed at the higher (or lower) end: 5 + 2 + 1 + 1 = 9 students “20 and over”." },
+
+    { id: "stan", name: "Starting Stan", color: "#fbcfe8",
+      complaint: "I'm supposed to show <b>50 waiting times</b>, but my first class starts at 10 minutes. The <b>4 shortest</b> times have nowhere to sit. I feel incomplete!",
+      setup: function () { var d = [6.2, 7.5, 8.1, 9.4]; for (var i = 0; i < 46; i++) d.push(Math.max(10.2, Math.min(64, 32 + randn() * 11))); return { d: d }; },
+      before: function (d) { var e = [10, 20, 30, 40, 50, 60, 70], h = histogram(d.d, e).h, n = h.reduce(function (a, b) { return a + b; }, 0); return drawHist(e, h, "waiting time (minutes)", "frequency", { xt: [0, 10, 20, 30, 40, 50, 60, 70], ymax: 22 }) + noteText("only " + n + " of 50 observations shown"); },
+      after: function (d) { var e = [5, 15, 25, 35, 45, 55, 65], h = histogram(d.d, e).h; return drawHist(e, h, "waiting time (minutes)", "frequency", { xt: [5, 15, 25, 35, 45, 55, 65], ymax: 22 }) + noteText("all 50 observations shown", true); },
+      dx: ["The first class starts above the smallest observation, so some data are left out", "Too many classes", "Overplotting", "The data are categorical"],
+      tx: ["Start the first class at a number smaller than the smallest observation", "Remove the 4 shortest times", "Use relative frequencies", "Make the classes narrower"],
+      lesson: "When you construct a histogram, <b>choose a starting number for the first interval that is smaller than the smallest data value</b>. Starting at 5 (the smallest time is 6.2), every one of the 50 observations falls into a class." },
+
+    { id: "carla", name: "Crowded Carla", color: "#d9f99d",
+      complaint: "I have <b>three numerical variables</b> (size, rent and building age) and I was drawn as three separate histograms. How will anyone see how they relate?",
+      setup: function () { var s = [], r = [], a = []; for (var i = 0; i < 24; i++) { var sz = rnd(40, 160); s.push(sz); a.push(ri(1, 40)); r.push(4 + .09 * sz + randn() * 1.6 - .03 * a[i]); } return { s: s, r: r, a: a }; },
+      before: function (d) {
+        var o = ""; [["size (m²)", d.s, 40, 160, C.blue], ["rent (k₺)", d.r, 4, 20, C.orange], ["building age", d.a, 0, 40, C.aqua]].forEach(function (g, j) {
+          var x0 = 20 + j * 155, w = 140, e = []; for (var k = 0; k <= 5; k++) e.push(g[2] + (g[3] - g[2]) * k / 5);
+          var h = histogram(g[1], e).h, mx = Math.max.apply(null, h);
+          h.forEach(function (v, k) { var bh = v / mx * 200; o += '<rect x="' + (x0 + k * w / 5) + '" y="' + (250 - bh) + '" width="' + (w / 5 - 2) + '" height="' + bh + '" fill="' + g[4] + '"/>'; });
+          o += '<line x1="' + x0 + '" x2="' + (x0 + w) + '" y1="250" y2="250" stroke="#12343b"/><text x="' + (x0 + w / 2) + '" y="272" text-anchor="middle" font-size="12.5">' + g[0] + "</text>";
+        }); return o; },
+      after: function (d) { var f = frame(35, 165, 0, 22, "size (m²)", "rent (thousand ₺)", { xt: [40, 60, 80, 100, 120, 140, 160], yt: [0, 5, 10, 15, 20] }), o = f.svg;
+        d.s.forEach(function (v, i) { o += '<circle cx="' + f.X(v) + '" cy="' + f.Y(d.r[i]) + '" r="' + (4 + (41 - d.a[i]) * .45) + '" fill="' + C.aqua + '" fill-opacity=".45" stroke="#12343b"/>'; });
+        o += '<text x="' + (L + 8) + '" y="' + (T + 14) + '" font-size="12" fill="#4b6b70">bubble size = how new the building is</text>'; return o; },
+      dx: ["Separate histograms can't show relationships between variables", "Too few classes in each histogram", "The variables are categorical", "There are outliers"],
+      tx: ["A bubble chart: size on x, rent on y, building age as bubble size", "A mosaic plot of the three variables", "A frequency polygon for each variable", "A dot diagram of rent only"],
+      lesson: "Histograms describe <b>one</b> variable at a time. To see relationships among three numerical variables, use a <b>bubble chart</b>: two variables on the axes and the third as bubble size. One bubble chart allows three pairwise comparisons (size–rent, rent–age, size–age) and a three-way comparison. (A mosaic plot is for categorical variables.)" }
+  ];
+
+  /* ---------- state ---------- */
+  var S;
+  function newShift(skip) {
+    var ids = shuffle(PATIENTS).slice(0, PER_SHIFT);
+    S = { list: ids.map(function (p) { return { p: p, data: p.setup(), dxOrder: shuffle(p.dx.map(function (t, i) { return i; })), txOrder: shuffle(p.tx.map(function (t, i) { return i; })), res: null }; }), i: 0, score: 0 };
+    $("bar").classList.remove("flat"); hud(); if (skip) treat(); else intro();
+  }
+  function hud() {
+    $("score").textContent = S.score; $("pno").textContent = Math.min(S.i + 1, PER_SHIFT) + " / " + PER_SHIFT;
+    $("queue").innerHTML = '<span class="lbl">Waiting room:</span>' + S.list.map(function (c, k) {
+      var cls = k === S.i && !c.res ? "on" : !c.res ? "" : c.res === 100 ? "ok" : c.res > 0 ? "half" : "bad";
+      return '<span class="bed ' + cls + '" title="Patient ' + (k + 1) + '">' + (k + 1) + "</span>";
+    }).join("");
+  }
+  function show(html) { var o = $("overlay"); o.innerHTML = '<div class="modal" role="dialog" aria-modal="true">' + html + "</div>"; o.hidden = false; }
+  function hide() { $("overlay").hidden = true; }
+
+  function intro() {
+    var c0 = S.list[0]; setPlot(c0.p.before(c0.data), c0.p.name, "Admitted", false);
+    $("panel").innerHTML = "<p>The night shift is about to start…</p>";
+    show("<h2>Dr. Plot's Graph Hospital</h2>" +
+      "<p>Welcome to the night shift, doctor! Tonight <b>" + PER_SHIFT + " sick graphs</b> are waiting in the ER. For each patient:</p>" +
+      "<ol><li><b>Diagnose</b> what is wrong with the graph (50 health points).</li><li>Prescribe the right <b>treatment</b> (50 health points).</li><li>Watch the graph get cured, and read the doctor's note.</li></ol>" +
+      '<p style="color:#4b6b70;font-size:.92rem">All cases come from Lecture 3 (slides 1–63): histograms (classes, class width, starting point, unequal classes, relative frequencies, bar width), dot diagrams and outliers, scatter plots and r, jittering, comparative scatter plots and bubble charts. Each shift brings different patients.</p>' +
+      '<div class="actions"><button class="btn main" id="go" type="button">Start the shift</button></div>');
+    $("go").addEventListener("click", function () { hide(); treat(); }); $("go").focus();
+  }
+
+  function treat() {
+    var c = S.list[S.i], p = c.p; hud();
+    $("stamp").className = "stamp"; $("stamp").textContent = "CURED!";
+    setPlot(p.before(c.data), p.name, "Patient " + (S.i + 1), false);
+    var panel = $("panel");
+    panel.innerHTML = '<div class="patient">' + face(p.color, "sad") + '<div class="speech"><b>' + p.name + ":</b> “" + p.complaint + "”</div></div>" +
+      '<div class="step" id="s1"><h4><span class="n">1</span>Diagnosis: what is wrong?</h4><div class="opts" id="o1"></div></div>' +
+      '<div class="step locked" id="s2"><h4><span class="n">2</span>Treatment: how do we fix it?</h4><div class="opts" id="o2"></div></div>' +
+      '<div class="note" id="note"></div><div class="actions" id="acts"></div>';
+    var got = 0;
+    function makeOpts(box, texts, order, onPick) {
+      var btns = order.map(function (k) { var b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = texts[k]; b.dataset.k = k; $(box).appendChild(b); return b; });
+      btns.forEach(function (b) { b.addEventListener("click", function () { var k = +b.dataset.k; btns.forEach(function (x) { x.disabled = true; if (+x.dataset.k === 0) x.classList.add("right"); }); if (k !== 0) b.classList.add("wrong"); onPick(k === 0); }); });
+      return btns;
+    }
+    var b1 = makeOpts("o1", p.dx, c.dxOrder, function (ok) {
+      if (ok) got += 50;
+      $("note").innerHTML = ok ? "✓ Correct diagnosis! <b class='pts'>+50</b>" : "✗ Misdiagnosis. The highlighted option is the right one.";
+      $("s2").classList.remove("locked"); b2.forEach(function (x) { x.disabled = false; }); b2[0].focus();
+    });
+    var b2 = makeOpts("o2", p.tx, c.txOrder, function (ok) {
+      if (ok) got += 50;
+      c.res = got; S.score += got; hud();
+      setPlot(p.after(c.data), p.name, ok ? "After treatment" : "After the correct treatment", true);
+      var st = $("stamp"); st.textContent = got === 100 ? "CURED!" : got > 0 ? "STABLE" : "SAVED BY NURSE"; st.className = "stamp show" + (got === 0 ? " fail" : "");
+      panel.querySelector(".patient svg").outerHTML = face(p.color, got >= 50 ? "happy" : "wow");
+      $("note").innerHTML = (ok ? "✓ Right treatment! <b class='pts'>+50</b>" : "✗ Wrong treatment. The graph shows the correct one.") +
+        " Total for this patient: <b class='pts'>" + got + "/100</b>.<br><br><b>Doctor's note:</b> " + p.lesson + "<br><br><i>" + pick(got === 100 ? NURSE.ok : NURSE.bad) + "</i>";
+      var nb = document.createElement("button"); nb.type = "button"; nb.className = "btn main";
+      nb.textContent = S.i === PER_SHIFT - 1 ? "End the shift" : "Next patient";
+      nb.addEventListener("click", function () { S.i++; if (S.i >= PER_SHIFT) finish(); else treat(); });
+      $("acts").appendChild(nb); nb.focus();
+    });
+    b2.forEach(function (x) { x.disabled = true; });
+    b1[0].focus();
+  }
+
+  function finish() {
+    hud(); $("bar").classList.add("flat");
+    var max = PER_SHIFT * 100, rank = RANKS.filter(function (r) { return S.score >= r[0]; })[0];
+    var rows = S.list.map(function (c) { return "<tr><td>" + c.p.name + "</td><td>" + c.res + " / 100</td></tr>"; }).join("");
+    show("<h2>Shift over!</h2><div class='big'>" + S.score + " <span style='font-size:1.2rem;color:#4b6b70'>/ " + max + "</span></div>" +
+      "<p>Your hospital title:</p><div class='rank'>" + rank[1] + "</div><p>" + rank[2] + "</p>" +
+      "<table class='chart-sum'>" + rows + "</table>" +
+      "<p style='font-size:.92rem;color:#4b6b70'>There are 11 different patients. Play another shift to meet the others!</p>" +
+      '<div class="actions"><button class="btn main" id="again" type="button">Start a new shift</button></div>');
+    $("again").addEventListener("click", function () { hide(); newShift(true); }); $("again").focus();
+  }
+
+  $("restart").addEventListener("click", function () { if (!S || S.score === 0 || confirm("Start a new shift? Your health points will be lost.")) { hide(); newShift(true); } });
+  window.__hosp = function () { return S; };
+  newShift();
+})();
+</script>
+</body>
+</html>

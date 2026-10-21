@@ -3,7 +3,7 @@ title: "Flashcards"
 subtitle: "Every definition and formula from the recitations. Flip, mark, and review your missed pile."
 ---
 
-Choose a deck at the top of the box. Click a card (or press <kbd>Space</kbd>) to flip it, then mark **Got it** or **Missed it**. Your missed pile is saved in this browser. You can also [open the flashcards in a full window](games-tab/games/flashcards.html){target="_blank"}.
+Choose a deck at the top of the box (Recitation 1, 2, 3 or all cards). Click a card (or press <kbd>Space</kbd>) to flip it, then mark **Got it** or **Missed it**. Your missed pile is saved in this browser. You can also [open the flashcards in a full window](games-tab/games/flashcards.html){target="_blank"}.
 
 ```{=html}
 <iframe id="tool-frame" src="games-tab/games/flashcards.html" title="STAT 112 flashcards"

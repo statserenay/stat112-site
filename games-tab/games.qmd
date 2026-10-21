@@ -27,6 +27,7 @@ a.game-card:focus-visible { outline: 3px solid var(--bs-primary, #2780e3); outli
 
 ```{=html}
 <div class="game-grid">
+
 <a class="game-card" href="games/data-panic.html" target="_blank" rel="noopener">
   <div class="game-thumb"><img src="images/games/data-panic.png" alt="Screenshot of Pie-thagoras' Data Panic"></div>
   <div class="game-body">
@@ -36,23 +37,36 @@ a.game-card:focus-visible { outline: 3px solid var(--bs-primary, #2780e3); outli
     <span class="game-play">Play now →</span>
   </div>
 </a>
-   <a class="game-card" href="games/outlier-vault.html" target="_blank" rel="noopener">
-     <div class="game-thumb"><img src="images/games/outlier-vault.png" alt="Screenshot of Dr. Outlier's Vault"></div>
-     <div class="game-body">
-       <span class="game-tag">Recitation 2</span>
-       <h3 class="game-title">Dr. Outlier's Vault</h3>
-       <p class="game-desc">Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.</p>
-       <span class="game-play">Play now →</span>
-     </div>
-   </a>
-   <div class="game-card soon" aria-disabled="true">
-     <div class="game-thumb">?</div>
-     <div class="game-body">
-       <span class="game-tag">Recitation 3</span>
-       <h3 class="game-title">Coming soon</h3>
-       <p class="game-desc">A new game will appear here after the next recitation.</p>
-     </div>
-   </div>
+
+<a class="game-card" href="games/outlier-vault.html" target="_blank" rel="noopener">
+  <div class="game-thumb"><img src="images/games/outlier-vault.png" alt="Screenshot of Dr. Outlier's Vault"></div>
+  <div class="game-body">
+    <span class="game-tag">Recitation 2</span>
+    <h3 class="game-title">Dr. Outlier's Vault</h3>
+    <p class="game-desc">Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.</p>
+    <span class="game-play">Play now →</span>
+  </div>
+</a>
+
+
+<a class="game-card" href="games/graph-hospital.html" target="_blank" rel="noopener">
+  <div class="game-thumb"><img src="images/games/graph-hospital.png" alt="Screenshot of Dr. Plot's Graph Hospital"></div>
+  <div class="game-body">
+    <span class="game-tag">Recitation 3</span>
+    <h3 class="game-title">Dr. Plot's Graph Hospital</h3>
+    <p class="game-desc">Sick graphs in the ER! Diagnose what's wrong (too many classes, gaps between boxes, overplotting, stretched scales…), prescribe the treatment and watch the graph get cured.</p>
+    <span class="game-play">Play now →</span>
+  </div>
+</a>
+
+<div class="game-card soon" aria-disabled="true">
+  <div class="game-thumb">?</div>
+  <div class="game-body">
+    <span class="game-tag">Recitation 4</span>
+    <h3 class="game-title">Coming soon</h3>
+    <p class="game-desc">A new game will appear here after the next recitation.</p>
+  </div>
+</div>
+
+</div>
 ```
-
-

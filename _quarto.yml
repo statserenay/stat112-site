@@ -20,6 +20,8 @@ website:
             href: recitation-week1.qmd
           - text: "Week 2"
             href: recitation-week2.qmd
+          - text: "Week 3"
+            href: recitation-week3.qmd
       - text: "Homeworks"
         href: homeworks.qmd
       - text: "Games"
