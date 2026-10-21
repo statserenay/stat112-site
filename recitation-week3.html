@@ -1,0 +1,2607 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Recitation 3 – STAT 112</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-56a7b34e75b53d10542cf2c64bff5a33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Recitation 3 – STAT 112">
+<meta property="og:description" content="Histograms · Frequency polygons &amp; dot diagrams · Scatter plots &amp; correlation · Jittering, mosaic &amp; bubble plots">
+<meta property="og:image" content="https://statserenay.github.io/stat112-site/images/recitation3/freq-polygon.png">
+<meta property="og:site_name" content="STAT 112">
+<meta property="og:image:alt" content="Histogram of the frequency table with a frequency polygon drawn through the class midpoints.">
+<meta property="og:image:height" content="554">
+<meta property="og:image:width" content="1103">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 112</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-computing">    
+        <li>
+    <a class="dropdown-item" href="./computing-setup.html">
+ <span class="dropdown-text">Setup</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-recitations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Recitations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-recitations">    
+        <li>
+    <a class="dropdown-item" href="./recitation-week1.html">
+ <span class="dropdown-text">Week 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week2.html">
+ <span class="dropdown-text">Week 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week3.html">
+ <span class="dropdown-text">Week 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./homeworks.html"> 
+<span class="menu-text">Homeworks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./games-tab/games.html"> 
+<span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chats-tab/chats.html"> 
+<span class="menu-text">Student Chats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./flashcards.html"> 
+<span class="menu-text">Flashcards</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calculator.html"> 
+<span class="menu-text">Calculator</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ask.html"> 
+<span class="menu-text">Ask a Question</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/statserenay"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:serenay@metu.edu.tr"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#how-to-use-this-page" id="toc-how-to-use-this-page" class="nav-link active" data-scroll-target="#how-to-use-this-page">How to use this page</a></li>
+  <li><a href="#part-a-histograms" id="toc-part-a-histograms" class="nav-link" data-scroll-target="#part-a-histograms">Part A — Histograms</a></li>
+  <li><a href="#part-b-frequency-polygons-dot-diagrams-and-outliers" id="toc-part-b-frequency-polygons-dot-diagrams-and-outliers" class="nav-link" data-scroll-target="#part-b-frequency-polygons-dot-diagrams-and-outliers">Part B — Frequency polygons, dot diagrams and outliers</a></li>
+  <li><a href="#part-c-scatter-plots-and-correlation" id="toc-part-c-scatter-plots-and-correlation" class="nav-link" data-scroll-target="#part-c-scatter-plots-and-correlation">Part C — Scatter plots and correlation</a></li>
+  <li><a href="#part-d-case-study-a-couriers-pilot-study" id="toc-part-d-case-study-a-couriers-pilot-study" class="nav-link" data-scroll-target="#part-d-case-study-a-couriers-pilot-study">Part D — Case study: a courier’s pilot study</a></li>
+  <li><a href="#part-e-case-study-student-flats-near-metu" id="toc-part-e-case-study-student-flats-near-metu" class="nav-link" data-scroll-target="#part-e-case-study-student-flats-near-metu">Part E — Case study: student flats near METU</a></li>
+  <li><a href="#part-f-your-turn" id="toc-part-f-your-turn" class="nav-link" data-scroll-target="#part-f-your-turn">Part F — Your Turn</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Recitation 3</h1>
+<p class="subtitle lead">Histograms · Frequency polygons &amp; dot diagrams · Scatter plots &amp; correlation · Jittering, mosaic &amp; bubble plots</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+/* long formulas scroll sideways on phones instead of widening the page */
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+/* the quiz card itself also receives the class "qz-match"; keep it a normal block */
+div.quiz.qz-match { display: block; margin-top: 1.6rem; }
+.qz-match-left mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+/* wide tables scroll sideways on phones */
+@media (max-width: 700px) { main table { display: block; max-width: 100%; overflow-x: auto; } }
+.pts { font-weight: 700; color: #0f7c74; }
+/* long classify options must not widen the page on phones */
+.qz-row-ctrls, .qz-row-ctrls > * { min-width: 0; max-width: 100%; }
+.qz-row-ctrls select { width: 100%; }
+</style>
+<section id="how-to-use-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-page">How to use this page</h2>
+<p>Each question below is interactive. Click an option or type an answer, then press <strong>Check</strong> (or <kbd>Enter</kbd>). <strong>Show answer</strong> reveals the solution and the explanation, and <strong>Reset</strong> clears the question so you can try again.</p>
+<p>Numbers can be typed with a dot or a comma (<code>3.2</code> or <code>3,2</code>); round to <strong>2 decimals</strong> unless a question says otherwise.</p>
+<div class="quiz-scoreboard">
+<p>Progress</p>
+</div>
+</section>
+<section id="part-a-histograms" class="level1">
+<h1>Part A — Histograms</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms: histograms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li>A <strong>histogram</strong> consists of <strong>adjoining boxes</strong> (no gaps between the boxes). The horizontal axis shows what the data represent; the vertical axis shows the <strong>frequency</strong> or the <strong>relative frequency</strong> (percent). The graph has the <strong>same shape</strong> with either label.</li>
+<li>A histogram shows the <strong>shape</strong>, the <strong>center</strong> and the <strong>spread</strong> of the data. It is most practical for <strong>large</strong> data sets (100 values or more) and it is <strong>not suitable for categorical (qualitative) data</strong>.</li>
+<li><strong>Number of classes:</strong> many histograms use <strong>5 to 15</strong> classes. A guide based on the number of observations:</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Number of observations</th>
+<th style="text-align: center;">&lt; 50</th>
+<th style="text-align: center;">50–200</th>
+<th style="text-align: center;">200–500</th>
+<th style="text-align: center;">500–1,000</th>
+<th style="text-align: center;">1,000–5,000</th>
+<th style="text-align: center;">5,000–50,000</th>
+<th style="text-align: center;">&gt; 50,000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number of classes</td>
+<td style="text-align: center;">5–7</td>
+<td style="text-align: center;">7–9</td>
+<td style="text-align: center;">9–10</td>
+<td style="text-align: center;">10–11</td>
+<td style="text-align: center;">11–13</td>
+<td style="text-align: center;">13–17</td>
+<td style="text-align: center;">17–20</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Class width</strong> <span class="math inline">\(= \dfrac{\text{largest} - \text{smallest}}{\text{number of classes}}\)</span> (largest and smallest observations), rounded <strong>up</strong> to a convenient number. The first class starts at a number <strong>smaller than the smallest observation</strong>.</li>
+<li><strong>Relative frequency</strong> <span class="math inline">\(= \dfrac{\text{class frequency}}{\text{total number of observations}}\)</span>. Use it when comparing two or more histograms whose samples have <strong>different sizes</strong>.</li>
+<li><strong>Unequal class widths:</strong> when some classes have very low frequencies, several classes can be <strong>combined</strong> into a wider, “more populated” class, or an <strong>open-ended class</strong> can be formed at the lower or upper end.</li>
+<li><strong>Reading a histogram:</strong> the highest bar is the <strong>modal class</strong>; a long tail to the right means <strong>positively (right) skewed</strong>, a long tail to the left means <strong>negatively (left) skewed</strong>; bars spread over a wide range mean high variability; a <strong>gap or dip</strong> means no or few observations in that range.</li>
+<li><strong>Shapes:</strong> symmetric (bell or mound shaped), positively or negatively skewed, uniform, <strong>unimodal</strong> (one modal class), <strong>bimodal</strong> (two modal classes) or multimodal.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>80 students reported how many minutes they spend on their phone in bed before falling asleep.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Minutes</th>
+<th style="text-align: center;">0–15</th>
+<th style="text-align: center;">15–30</th>
+<th style="text-align: center;">30–45</th>
+<th style="text-align: center;">45–60</th>
+<th style="text-align: center;">60–75</th>
+<th style="text-align: center;">75–90</th>
+<th style="text-align: center;">90–105</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frequency</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+</tr>
+</tbody>
+</table>
+<p>The relative frequency of the class 30–45 is <span class="blank" data-answer="0.3" data-tol="0.001"></span>.<br>
+The modal class is <span class="blank" data-answer="30-45|30–45|30 - 45|30 to 45"></span> minutes.<br>
+The midpoint of the class 45–60 is <span class="blank" data-answer="52.5" data-tol="0.01"></span>.<br>
+<span class="blank" data-answer="22.5" data-tol="0.05"></span> % of the students spend <strong>60 minutes or more</strong> on their phone before sleeping.<br>
+The long tail is on the right, so the histogram is <span class="blank" data-answer="positively skewed|right skewed|right-skewed|positively|skewed to the right|positive skew"></span>.</p>
+<div class="explain">
+<ul>
+<li><span class="math inline">\(n = 6 + 14 + 24 + 18 + 10 + 5 + 3 = 80\)</span>, so the relative frequency of 30–45 is <span class="math inline">\(24/80 = 0.30\)</span>. It is also the modal class (24 is the largest frequency).</li>
+<li>Midpoint of 45–60: <span class="math inline">\((45 + 60)/2 = 52.5\)</span>.</li>
+<li>60 minutes or more: <span class="math inline">\((10 + 5 + 3)/80 = 18/80 = 0.225 = 22.5\%\)</span>.</li>
+<li>The frequencies fall off slowly towards large values: a long right tail, so the histogram is <strong>positively (right) skewed</strong>.</li>
+</ul>
+<p><img src="images/recitation3/freq-polygon.png" class="img-fluid" alt="Histogram of the frequency table with a frequency polygon drawn through the class midpoints."></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>A bus company recorded <strong>320</strong> commute times (in minutes). The smallest is <strong>2.4</strong> and the largest is <strong>79.8</strong> minutes.</p>
+<p>According to the table in the key terms, the histogram should have between 9 and <span class="blank" data-answer="10" data-tol="0"></span> classes.<br>
+The range is <span class="blank" data-answer="77.4" data-tol="0.01"></span> minutes. Using <strong>9</strong> classes, the class width is <span class="math inline">\(77.4 / 9 =\)</span> <span class="blank" data-answer="8.6" data-tol="0.01"></span>, which we round <strong>up</strong> to <span class="blank" data-answer="9" data-tol="0"></span> minutes.<br>
+The first class must start at a number smaller than <span class="blank" data-answer="2.4" data-tol="0.001"></span>; if it starts at 2, the 9 classes cover 2 to <span class="blank" data-answer="83" data-tol="0"></span> minutes.</p>
+<div class="explain">
+<ul>
+<li>320 observations lie in the row <strong>200–500</strong>, which suggests <strong>9–10</strong> classes.</li>
+<li>Range <span class="math inline">\(= 79.8 - 2.4 = 77.4\)</span>; width <span class="math inline">\(= 77.4/9 = 8.6\)</span>, rounded up to <strong>9</strong>.</li>
+<li>Starting at 2 (smaller than the smallest value 2.4), the classes are 2–11, 11–20, …, 74–83. The last class ends at <span class="math inline">\(2 + 9 \times 9 = 83 \ge 79.8\)</span>, so every observation fits.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,c,e">
+<p>Which statements about histograms are <strong>true</strong>? Select all that apply.</p>
+<ul>
+<li>The boxes of a histogram are adjoining: there are no gaps between them.</li>
+<li>A histogram drawn with relative frequencies has the same shape as one drawn with frequencies.</li>
+<li>Histograms are more practical when the data set has about 100 values or more.</li>
+<li>A histogram is a good graph for the favourite colours of 200 students.</li>
+<li>The first class should start at a number smaller than the smallest observation.</li>
+<li>Changing the class width changes the data, so only one histogram of a data set is correct.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>d is false:</strong> favourite colour is <strong>categorical (qualitative)</strong>; a histogram is not suitable for categorical data.</li>
+<li><strong>f is false:</strong> the data stay the same; only the <em>picture</em> changes. That is why it is useful to try several class (bar) widths, as in the tipping example of the lecture.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Symmetric|Positively skewed|Negatively skewed|Bimodal|Uniform">
+<p><img src="images/recitation3/hist-shapes.png" class="img-fluid" alt="Five histograms labelled A to E with different shapes."></p>
+<p>Describe the shape of each histogram.</p>
+<ul>
+<li>Histogram A :: Negatively skewed</li>
+<li>Histogram B :: Bimodal</li>
+<li>Histogram C :: Uniform</li>
+<li>Histogram D :: Positively skewed</li>
+<li>Histogram E :: Symmetric</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>A:</strong> long tail to the <strong>left</strong> → negatively skewed.</li>
+<li><strong>B:</strong> two modal classes → bimodal.</li>
+<li><strong>C:</strong> all bars about the same height → uniform.</li>
+<li><strong>D:</strong> long tail to the <strong>right</strong> → positively skewed.</li>
+<li><strong>E:</strong> mound (bell) shaped and mirror-symmetric → symmetric. Many statistical techniques require a bell-shaped population; drawing the histogram helps to check this.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>600 customers’ spending at a campus café (in ₺) is shown with three different bar widths.</p>
+<p><img src="images/recitation3/bin-width.png" class="img-fluid" alt="Three histograms of the same café spending data with bin widths 40, 10 and 1 lira."></p>
+<p>Which histogram reveals that <strong>many customers spend a round amount</strong> (a multiple of 5 ₺)?</p>
+<ul>
+<li>H1 (bar width 40 ₺)</li>
+<li>H2 (bar width 10 ₺)</li>
+<li>H3 (bar width 1 ₺)</li>
+<li>None of them: a histogram can never show this</li>
+</ul>
+<div class="explain">
+<p>Only the narrow bars of <strong>H3</strong> show the tall peaks at 50, 55, 60, … ₺: many amounts are <strong>rounded</strong> to a multiple of 5. With the wide bars of H1 the histogram simply looks unimodal and right-skewed; H2 starts to show more detail.</p>
+<p>This is the same lesson as the tips histograms in the lecture: as the bar width gets smaller, the histogram went from unimodal to multimodal, revealing that customers round their tips. Wide bars show the <strong>overall shape</strong>; narrow bars show <strong>fine details</strong>. Look at several widths before you interpret.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation3/meme-binwidth.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: the same data shown with 3, 16 and 400 bins say very different things."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>The monthly incomes (thousand ₺) of 200 part-time student workers are grouped as follows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Income</th>
+<th style="text-align: center;">0–5</th>
+<th style="text-align: center;">5–10</th>
+<th style="text-align: center;">10–15</th>
+<th style="text-align: center;">15–20</th>
+<th style="text-align: center;">20–25</th>
+<th style="text-align: center;">25–30</th>
+<th style="text-align: center;">30–35</th>
+<th style="text-align: center;">35–40</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frequency</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">74</td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p>The last four classes have very low frequencies. If we <strong>combine</strong> them into one wider class 20–40, its frequency is <span class="blank" data-answer="9" data-tol="0"></span>.<br>
+Alternatively, we can form an <strong>open-ended class</strong> “20 and over” with the same frequency. With this class, the table has <span class="blank" data-answer="5" data-tol="0"></span> classes.</p>
+<div class="explain">
+<p><span class="math inline">\(5 + 2 + 1 + 1 = 9\)</span>. The new table is 0–5, 5–10, 10–15, 15–20 and “20 and over”: <strong>5</strong> classes.</p>
+<p>The lecture: <em>it is generally best to use equal class widths, but unequal class widths are used when the frequency of some classes is too low; several classes are then combined to form a wider and “more populated” class, or an open-ended class is formed at the higher or lower end.</em></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>Section A has <strong>40</strong> students and Section B has <strong>160</strong> students. You want to compare their exam score distributions with two histograms. What should the vertical axis show?</p>
+<ul>
+<li>Frequencies, because they are the real counts</li>
+<li>Relative frequencies (or percentages)</li>
+<li>The class midpoints</li>
+<li>It does not matter, the comparison is the same either way</li>
+</ul>
+<div class="explain">
+<p>With frequencies, Section B’s bars are about four times as tall just because it is bigger, which hides the comparison. The lecture: <em>relative frequencies should be used when comparing two or more histograms and the number of observations of the samples are different.</em> Also use the <strong>same classes</strong> for both histograms.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-keywords="two groups|two populations|mix|mixture|different groups|two types|gymnast|basketball; separate|split|by team|each team|two histograms|for each|separately; bimodal|two peaks|two modes|two modal">
+<p>The heights of all members of a university sports club form a <strong>bimodal</strong> histogram, with one modal class near 168 cm and another near 192 cm. The club has a gymnastics team and a basketball team.</p>
+<p>Explain what the two modal classes probably mean, and how you would display the data instead.</p>
+<div class="explain">
+<p><strong>Model answer:</strong> The histogram is bimodal because two different groups are mixed together: gymnasts (shorter) and basketball players (taller). This also makes the spread of the combined data large. Draw a separate histogram for each team, using the <strong>same classes</strong> and <strong>relative frequencies</strong> (the teams may have different sizes), so the two distributions can be compared.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="order">
+<p>Put the steps for constructing a histogram in the correct order.</p>
+<ul>
+<li>Collect the data and find the smallest and largest observations</li>
+<li>Choose the number of classes (use the table of the number of observations)</li>
+<li>Compute the class width and round it up to a convenient number</li>
+<li>Set the class limits, starting below the smallest value</li>
+<li>Count the frequency (and relative frequency) of each class</li>
+<li>Draw adjoining boxes whose heights are the frequencies (or relative frequencies)</li>
+</ul>
+<div class="explain">
+<p>This is the lecture’s recipe: <strong>collect data → prepare a frequency distribution → draw a histogram</strong>. You need the number of classes before you can compute the width, and the class limits before you can count.</p>
+</div>
+</div>
+</section>
+<section id="part-b-frequency-polygons-dot-diagrams-and-outliers" class="level1">
+<h1>Part B — Frequency polygons, dot diagrams and outliers</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Frequency polygon:</strong> points at the <strong>midpoints</strong> of the class intervals (height = frequency), connected with straight lines. As in the lecture example, the polygon is closed with a point of frequency 0 one class width beyond each end.</li>
+<li><strong>Dot diagram:</strong> each observation is a dot on a number line. The aim is to identify <strong>unusual features</strong> of the data.</li>
+<li><strong>Outlier:</strong> an observation that is unusually large or small relative to the other values. Three reasons for outliers: (1) the measurement was observed, recorded or entered <strong>incorrectly</strong>; (2) it comes from a <strong>different population</strong>; (3) it is <strong>correct but represents a rare event</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Look at the frequency polygon in the explanation of the first question (phone time before sleeping, classes of width 15 from 0 to 105 minutes).</p>
+<p>Each point of a frequency polygon is plotted at the class <span class="blank" data-answer="midpoint|midpoints|mid-point|mid-points|middle|centre|center"></span>. The first point of the data is at <span class="math inline">\(x =\)</span> <span class="blank" data-answer="7.5" data-tol="0.01"></span> with height <span class="blank" data-answer="6" data-tol="0"></span>. To close the polygon, we add one extra point with frequency 0 at each end, at <span class="math inline">\(x =\)</span> <span class="blank" data-answer="-7.5" data-tol="0.01"></span> and <span class="math inline">\(x =\)</span> <span class="blank" data-answer="112.5" data-tol="0.01"></span>.</p>
+<div class="explain">
+<p>The points are the midpoints 7.5, 22.5, …, 97.5 with heights equal to the frequencies (6, 14, …, 3). The extra points sit one class width (15) beyond the first and last midpoints: <span class="math inline">\(7.5 - 15 = -7.5\)</span> and <span class="math inline">\(97.5 + 15 = 112.5\)</span>, just like 44.5 and 104.5 in the calculus scores example of the lecture.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>A consumer magazine tested the battery life of <strong>17 phones of the same model</strong>:</p>
+<p><img src="images/recitation3/dotplot-battery.png" class="img-fluid" alt="Dot plot of battery life of 17 phones: most between 9.5 and 13.5 hours, one at 2.1 and one at 22 hours."></p>
+<p>Most phones last between <span class="blank" data-answer="9.5" data-tol="0.01"></span> and <span class="blank" data-answer="13.5" data-tol="0.01"></span> hours.<br>
+The dot diagram shows <span class="blank" data-answer="2|two"></span> unusual values: a very small one at <span class="blank" data-answer="2.1" data-tol="0.01"></span> hours and a very large one at <span class="blank" data-answer="22" data-tol="0.01"></span> hours.</p>
+<div class="explain">
+<p>Fifteen dots form a cluster from 9.5 to 13.5 hours. The values <strong>2.1</strong> and <strong>22.0</strong> are far from all the others: they are potential <strong>outliers</strong>. Identifying such unusual features is exactly the aim of a dot diagram (compare the neutrino example of the lecture, where one time of 7.3 s stands out).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Recorded or entered incorrectly|Comes from a different population|Correct, but a rare event">
+<p>For each outlier, what is the most likely reason?</p>
+<ul>
+<li>A student’s height is recorded as 2.78 cm :: Recorded or entered incorrectly</li>
+<li>The phone that lasts 22 hours in the test above turns out to be the newer “Pro” model with a bigger battery :: Comes from a different population</li>
+<li>In a study of adults’ blood pressure, one participant is a 9-year-old child :: Comes from a different population</li>
+<li>A “daily screen time” of 31 hours :: Recorded or entered incorrectly</li>
+<li>The highest river level in 50 years of daily measurements, recorded during a once-in-a-century flood :: Correct, but a rare event</li>
+<li>A ₺160 tip on a ₺530 food order from a very generous customer :: Correct, but a rare event</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Incorrect values</strong> (2.78 cm, 31 hours in a day) are impossible: they were observed, recorded or entered incorrectly.</li>
+<li><strong>Different population:</strong> another phone model, a child among adults.</li>
+<li><strong>Rare events:</strong> a record flood or a very generous customer are correct values. As the lecture says about the large tips: <em>these are outliers, but from a waiter’s perspective, these are the customers that you like!</em></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-c-scatter-plots-and-correlation" class="level1">
+<h1>Part C — Scatter plots and correlation</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms: two numerical variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Two variables are <strong>related (associated)</strong> when knowing one helps you understand or predict the other. The statistical study of the relationship between variables is called <strong>regression</strong>.</li>
+<li>A <strong>scatter plot</strong> shows the <span class="math inline">\((x, y)\)</span> pairs. It helps us understand the <strong>form</strong>, <strong>direction</strong> and <strong>strength</strong> of the relationship.</li>
+<li><strong>Explanatory (independent, input) variable</strong> <span class="math inline">\(x\)</span>: explains changes in the response; horizontal axis. <strong>Response (dependent, output) variable</strong> <span class="math inline">\(y\)</span>: measures the outcome. If there is no explanatory–response distinction, <strong>either variable can go on the horizontal axis</strong>.</li>
+<li>Typical patterns: positive linear, negative linear, no relationship, nonlinear (e.g.&nbsp;negative nonlinear, concave); also quadratic, cubic, exponential, logarithmic or random patterns.</li>
+<li><strong>Correlation</strong> measures the <strong>strength and direction of the linear relationship</strong>. The <strong>correlation coefficient</strong> of two continuous variables: <span class="math display">\[r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\,\sqrt{\sum (y_i - \bar{y})^2}}\]</span></li>
+<li>Properties: <span class="math inline">\(-1 \le r \le 1\)</span>. If <span class="math inline">\(r = 1\)</span>, the data form a straight line with a <strong>positive</strong> slope; if <span class="math inline">\(r = -1\)</span>, a straight line with a <strong>negative</strong> slope; if <span class="math inline">\(r = 0\)</span>, the data have <strong>no (linear) correlation</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Explanatory|Response">
+<p>For each pair, which variable is the <strong>explanatory</strong> variable and which is the <strong>response</strong>?</p>
+<ul>
+<li>Hours of sunlight per day (in a study of plant growth) :: Explanatory</li>
+<li>Plant growth (cm per week) :: Response</li>
+<li>Price of a cup of coffee (in a study of daily sales) :: Explanatory</li>
+<li>Number of cups of coffee sold per day :: Response</li>
+<li>Daily maximum temperature (in a study of electricity use) :: Explanatory</li>
+<li>Daily electricity use for air conditioning :: Response</li>
+</ul>
+<div class="explain">
+<p>The response variable measures the <strong>outcome</strong> of the study; the explanatory variable explains changes in it: sunlight → growth, price → sales, temperature → electricity use. The explanatory variable goes on the <strong>horizontal</strong> (<span class="math inline">\(x\)</span>) axis. If there is no natural explanatory–response distinction (for example, the heights of two siblings), either variable can go on the horizontal axis.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Strong positive|Strong negative|Weak positive|Weak negative|No relationship|Nonlinear relationship">
+<p><img src="images/recitation3/scatter-r.png" class="img-fluid" alt="Six scatter plots labelled P1 to P6 with different correlations."></p>
+<p>Describe the relationship shown in each scatter plot.</p>
+<ul>
+<li>P1 :: Strong positive</li>
+<li>P2 :: Strong negative</li>
+<li>P3 :: Weak positive</li>
+<li>P4 :: No relationship</li>
+<li>P5 :: Weak negative</li>
+<li>P6 :: Nonlinear relationship</li>
+</ul>
+<div class="explain">
+<p>The computed values are P1: <span class="math inline">\(r = 0.91\)</span>, P2: <span class="math inline">\(r = -0.87\)</span>, P3: <span class="math inline">\(r = 0.54\)</span>, P4: <span class="math inline">\(r = 0.00\)</span>, P5: <span class="math inline">\(r = -0.48\)</span> and P6: <span class="math inline">\(r = -0.01\)</span>.</p>
+<p><strong>P6 is the trap:</strong> the points follow a clear U-shaped (nonlinear) pattern, yet <span class="math inline">\(r \approx 0\)</span>. The correlation coefficient is a measure of the <strong>linear</strong> relationship only, so always look at the scatter plot, not just at <span class="math inline">\(r\)</span>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Five students report the hours they slept the night before an exam (<span class="math inline">\(x\)</span>) and their exam score (<span class="math inline">\(y\)</span>):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span> (hours of sleep)</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y\)</span> (score)</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">75</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\bar{x} =\)</span> <span class="blank" data-answer="6" data-tol="0.001"></span>, <span class="math inline">\(\bar{y} =\)</span> <span class="blank" data-answer="63" data-tol="0.001"></span><br>
+<span class="math inline">\(\sum (x_i-\bar{x})(y_i-\bar{y}) =\)</span> <span class="blank" data-answer="58" data-tol="0.01"></span>, <span class="math inline">\(\sum (x_i-\bar{x})^2 =\)</span> <span class="blank" data-answer="10" data-tol="0.01"></span>, <span class="math inline">\(\sum (y_i-\bar{y})^2 =\)</span> <span class="blank" data-answer="388" data-tol="0.01"></span><br>
+<span class="math inline">\(r =\)</span> <span class="blank" data-answer="0.93" data-tol="0.006"></span>: a <span class="blank" data-answer="strong positive|strong, positive|strong positive linear|positive strong|very strong positive"></span> linear relationship.</p>
+<div class="explain">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(y\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(x - \bar{x}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(y - \bar{y}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((x-\bar{x})(y-\bar{y})\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((x-\bar{x})^2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((y-\bar{y})^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">−2</td>
+<td style="text-align: center;">−13</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">169</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">−1</td>
+<td style="text-align: center;">−1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">−5</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">75</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">144</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Sum</strong></td>
+<td style="text-align: center;"><strong>58</strong></td>
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: center;"><strong>388</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[r = \frac{58}{\sqrt{10}\,\sqrt{388}} = \frac{58}{62.29} = 0.93\]</span></p>
+<p>There is a <strong>strong positive</strong> linear relationship: students who slept more tended to score higher.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,c,e">
+<p>Which statements about the correlation coefficient <span class="math inline">\(r\)</span> are <strong>true</strong>? Select all that apply.</p>
+<ul>
+<li><span class="math inline">\(r\)</span> is always between −1 and 1.</li>
+<li>If <span class="math inline">\(r = -1\)</span>, all points lie on a straight line with a negative slope.</li>
+<li><span class="math inline">\(r\)</span> measures the strength and direction of the <strong>linear</strong> relationship.</li>
+<li>If <span class="math inline">\(r = 0.8\)</span>, then 80% of the points lie on a straight line.</li>
+<li>A strong nonlinear relationship can have <span class="math inline">\(r\)</span> close to 0.</li>
+<li>A positive <span class="math inline">\(r\)</span> means that <span class="math inline">\(y\)</span> decreases as <span class="math inline">\(x\)</span> increases.</li>
+<li><span class="math inline">\(r\)</span> can be computed between the favourite colour and the hometown of students.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>d is false:</strong> <span class="math inline">\(r\)</span> is not a percentage of points; it measures how closely the points follow a straight line.</li>
+<li><strong>f is false:</strong> a positive <span class="math inline">\(r\)</span> means <span class="math inline">\(y\)</span> tends to <strong>increase</strong> as <span class="math inline">\(x\)</span> increases.</li>
+<li><strong>g is false:</strong> <span class="math inline">\(r\)</span> is defined for two <strong>continuous (numerical)</strong> variables, not for categorical ones.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p><img src="images/recitation3/jitter.png" class="img-fluid" alt="Two scatter plots of number of courses versus rounded hours of sleep for 140 students: without jitter only a few dots are visible; with jitter all points are visible."></p>
+<p>The data show 140 students, but the left plot seems to contain only about 15 dots. Why, and what does jittering do?</p>
+<ul>
+<li>Most students did not answer, so their dots are missing.</li>
+<li>Many students have exactly the same (courses, sleep) pair, so their dots are drawn on top of each other. Jittering adds a small amount of random noise so that the overlapping points become visible.</li>
+<li>Jittering removes outliers so that the plot looks cleaner.</li>
+<li>Jittering rounds the data so that more points fall on the same spot.</li>
+</ul>
+<div class="explain">
+<p>Both variables are <strong>discrete</strong>, so dozens of students share each position: this is <strong>overplotting</strong>. The lecture: <em>jittering is the act of adding random noise to data in order to prevent overplotting.</em> For example, to a value of 1 you might add <span class="math inline">\(u\)</span>, a uniform random number in <span class="math inline">\([-0.5,\, 0.5]\)</span> (here we used <span class="math inline">\([-0.25,\, 0.25]\)</span>).</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation3/meme-jitter.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: without jitter the plot looks like 6 students; with jitter it shows about 150."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,c,d">
+<p>Which statements about scatter plots and jittering are <strong>true</strong>? Select all that apply.</p>
+<ul>
+<li>Scatter plots are really only effective when both variables are continuous.</li>
+<li>Jittering is needed when both variables are continuous and no two observations are equal.</li>
+<li>With discrete data such as party size or years of education, a box plot at every level can be tedious and difficult to read, so a jittered scatter plot is a good alternative.</li>
+<li>When points overlap because there are many thousands of observations, jittering does not help, but transparency can lessen the overplotting.</li>
+<li>Jittering changes the relationship between the two variables.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>b is false:</strong> jittering is for overlapping marks, typically from <strong>discrete</strong> data that is almost continuous.</li>
+<li><strong>e is false:</strong> the noise is small; it only separates the overlapping marks so that the existing relationship can be seen.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-d-case-study-a-couriers-pilot-study" class="level1">
+<h1>Part D — Case study: a courier’s pilot study</h1>
+<p>A courier who delivers for a food app near METU recorded <strong>all 300 orders</strong> s/he delivered during eight weeks in spring 2026. <em>(The data were simulated for this recitation.)</em> The main question: <strong>“Which factors are most related with the tip rate?”</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>TOTAL</code></td>
+<td>order total (₺)</td>
+</tr>
+<tr class="even">
+<td><code>TIP</code></td>
+<td>tip (₺)</td>
+</tr>
+<tr class="odd">
+<td><code>PAY</code></td>
+<td>payment: App or Cash</td>
+</tr>
+<tr class="even">
+<td><code>WEATHER</code></td>
+<td>Dry or Rainy</td>
+</tr>
+<tr class="odd">
+<td><code>DAY</code></td>
+<td>day of the week</td>
+</tr>
+<tr class="even">
+<td><code>TIME</code></td>
+<td>Lunch or Dinner</td>
+</tr>
+<tr class="odd">
+<td><code>ITEMS</code></td>
+<td>number of items in the order</td>
+</tr>
+</tbody>
+</table>
+<p>Like the restaurant-tipping data of the lecture, this is a <strong>pilot study</strong>: there should be no temptation to make inferences about all customers. The aim is to explore the data and to formulate ideas for a careful study later.</p>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p><strong>Data restructuring.</strong> A tip of ₺20 means something different on a ₺150 order than on a ₺600 order, so we create a new variable, the <strong>tip rate</strong> = TIP / TOTAL.</p>
+<p>An order of ₺250 with a ₺20 tip has a tip rate of <span class="blank" data-answer="8" data-tol="0.01"></span> %.<br>
+An order of ₺600 with a ₺30 tip has a tip rate of <span class="blank" data-answer="5" data-tol="0.01"></span> %.</p>
+<p><strong>Table 1</strong> (all 300 orders):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">TOTAL (₺)</th>
+<th style="text-align: center;">TIP (₺)</th>
+<th style="text-align: center;">Tip rate (%)</th>
+<th style="text-align: center;">ITEMS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean</td>
+<td style="text-align: center;">336.98</td>
+<td style="text-align: center;">29.68</td>
+<td style="text-align: center;">8.77</td>
+<td style="text-align: center;">2.70</td>
+</tr>
+<tr class="even">
+<td>SD</td>
+<td style="text-align: center;">117.63</td>
+<td style="text-align: center;">17.82</td>
+<td style="text-align: center;">3.78</td>
+<td style="text-align: center;">1.30</td>
+</tr>
+</tbody>
+</table>
+<p>On average, customers tipped about <span class="blank" data-answer="8.77" data-tol="0.3"></span> % of the order total.</p>
+<div class="explain">
+<p><span class="math inline">\(20/250 = 0.08 = 8\%\)</span> and <span class="math inline">\(30/600 = 0.05 = 5\%\)</span>. The tip rate “calibrates” the tip according to the bill, so orders of different sizes can be compared. This is the first suggested approach in the lecture’s tipping case study (data restructuring).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,d">
+<p><strong>Table 2:</strong> average tip rate in % (number of orders) broken down by weather and time of day.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Lunch</th>
+<th style="text-align: center;">Dinner</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Dry</strong></td>
+<td style="text-align: center;">8.2 (120)</td>
+<td style="text-align: center;">8.6 (110)</td>
+<td style="text-align: center;">8.4 (230)</td>
+</tr>
+<tr class="even">
+<td><strong>Rainy</strong></td>
+<td style="text-align: center;">9.3 (6)</td>
+<td style="text-align: center;">10.2 (64)</td>
+<td style="text-align: center;">10.1 (70)</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">8.2 (126)</td>
+<td style="text-align: center;">9.2 (174)</td>
+<td style="text-align: center;">8.8 (300)</td>
+</tr>
+</tbody>
+</table>
+<p>Which statements are supported by Table 2? Select all that apply.</p>
+<ul>
+<li>On rainy days the average tip rate was higher than on dry days, both at lunch and at dinner.</li>
+<li>The courier delivered very few lunch orders on rainy days, so the average 9.3% is based on only 6 orders and should be interpreted with care.</li>
+<li>These data prove that rain makes all food-app customers in Ankara tip more.</li>
+<li>Most orders were delivered at dinner.</li>
+<li>The lowest average tip rate occurred on rainy dinners.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a:</strong> 9.3 &gt; 8.2 at lunch and 10.2 &gt; 8.6 at dinner.</li>
+<li><strong>b:</strong> like the lecture’s Friday lunch “with only 7 dining parties”, an average based on very few observations is not reliable.</li>
+<li><strong>c is false:</strong> this is a pilot study of <strong>one</strong> courier; there should be no temptation to make inferences, only to formulate ideas for a careful study.</li>
+<li><strong>d:</strong> 174 of the 300 orders were at dinner.</li>
+<li><strong>e is false:</strong> rainy dinners have the <strong>highest</strong> average tip rate (10.2%); the lowest are dry lunches (8.2%).</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<p><img src="images/recitation3/deliv-mosaic.png" class="img-fluid" alt="Two mosaic plots. Left: payment by time of day; the app and cash shares are about the same at lunch and dinner. Right: time of day by day of the week; Saturday and Sunday have no lunch orders and Monday has very few dinner orders."></p>
+<div class="quiz" type="ms" data-answer="a,c,d">
+<p><strong>Mosaic plots.</strong> The width of each column shows how many orders fall in that category; the heights inside a column show the <strong>conditional distribution</strong> of the other variable. Which statements are supported by Figures D2a and D2b?</p>
+<ul>
+<li>In D2a, the share of app payments is roughly the same at lunch and at dinner, so payment method and time of day seem unrelated.</li>
+<li>In D2a, more orders were paid in cash than in the app.</li>
+<li>In D2b, there were no lunch orders on Saturday and Sunday.</li>
+<li>In D2b, Monday has very few dinner orders.</li>
+<li>In D2b, every day has the same number of orders.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a:</strong> the App/Cash split is about 65% / 35% at lunch and 60% / 40% at dinner: roughly equal rectangles across the categories, so no (strong) relationship. This is how the lecture read the “Smoking vs Sex” mosaic plot.</li>
+<li><strong>b is false:</strong> the App rectangles are the larger ones in both columns (187 app vs 113 cash orders).</li>
+<li><strong>c, d:</strong> the Saturday and Sunday columns are (almost) all “Dinner”, and the Monday column is almost all “Lunch” (only 4 dinner orders).</li>
+<li><strong>e is false:</strong> the columns have different widths, so the days have different numbers of orders.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<p><img src="images/recitation3/deliv-scatter.png" class="img-fluid" alt="Scatter plot of tip versus order total for 300 orders, with a dashed line where the tip rate is 10%. Most points lie below the line, and the tips form horizontal rows at 10, 20, 30, 40 and 50 lira."></p>
+<div class="quiz" type="ms" data-answer="a,b,c,e">
+<p>Which statements are supported by Figure D1? Select all that apply.</p>
+<ul>
+<li>There is a positive, roughly linear relationship between the tip and the order total.</li>
+<li>Many points lie in horizontal rows at ₺10, ₺20, ₺30, …, so customers tend to round their tips to a multiple of ₺10.</li>
+<li>More points lie below the dashed 10% line than above it, so most customers tipped less than 10% of the order total.</li>
+<li>The plot proves that bigger orders cause bigger tips for every customer.</li>
+<li>There are more small orders (₺100–₺400) than very large ones, and a few very generous tips stand out.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a, c, e:</strong> In these data, 65% of the orders are below the 10% line, and the largest tip (₺160 on a ₺530 order, a 30% tip) is a clear outlier.</li>
+<li><strong>b:</strong> 72% of the tips are multiples of ₺10. The rows of points are the scatter-plot version of the spikes we saw in histograms with narrow bars.</li>
+<li><strong>d is false:</strong> a scatter plot shows a relationship; it does not prove anything about every customer, and this is only a pilot study.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p><strong>Comparative scatter plots.</strong> A student drew tip vs order total separately for app and cash payments:</p>
+<p><img src="images/recitation3/deliv-comp-bad.png" class="img-fluid" alt="Two scatter plots side by side: app payments with tips up to 160 lira, and cash payments with a y-axis that only goes up to 50 and an x-axis that stops at about 480, so cash tips look larger."></p>
+<p>Looking at these plots, cash tips seem to be much larger than app tips. What is wrong?</p>
+<ul>
+<li>Nothing: the cash customers clearly tip more.</li>
+<li>The plots should be pie charts.</li>
+<li>The two plots use different scales on the axes, so they cannot be compared directly. Comparative scatter plots must use the same scales.</li>
+<li>The scatter plots should be replaced by histograms of tips.</li>
+</ul>
+<div class="explain">
+<p>The cash plot has a <span class="math inline">\(y\)</span>-axis from 0 to 50 (and a shorter <span class="math inline">\(x\)</span>-axis), while the app plot goes up to 160, so the cash points are “stretched”. The lecture’s note on comparative scatter plots: <em>the scale on both plots is the same, to allow for direct comparison.</em> With the same scales the two groups look similar (average tip rate 8.9% for app and 8.5% for cash):</p>
+<p><img src="images/recitation3/deliv-comp-good.png" class="img-fluid" alt="The same two scatter plots drawn with the same axis scales: the app and cash points look very similar."></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<p><img src="images/recitation3/deliv-bubble.png" class="img-fluid" alt="Bubble plot of tip versus order total; bubble size shows the number of items and colour shows dry or rainy weather."></p>
+<div class="quiz" type="ms" data-answer="a,b,d">
+<p><strong>Bubble plot for mixed relationships.</strong> In Figure D4, which statements are true? Select all that apply.</p>
+<ul>
+<li>The plot shows four variables: TOTAL (<span class="math inline">\(x\)</span>), TIP (<span class="math inline">\(y\)</span>), ITEMS (bubble size) and WEATHER (colour).</li>
+<li>Bubble size is used for a numerical variable and colour for a categorical grouping.</li>
+<li>A bubble plot can only show two variables.</li>
+<li>Orders with more items (bigger bubbles) tend to have larger totals.</li>
+<li>Colour can only be used for numerical variables.</li>
+</ul>
+<div class="explain">
+<ul>
+<li>A <strong>bubble chart</strong> is an enhanced scatter plot: two numerical variables on the axes and a <strong>third numerical variable</strong> as bubble size. Extra variables can be added with <strong>colours</strong> (categorical grouping) and <strong>shapes</strong> (another categorical variable).</li>
+<li><strong>d:</strong> the big bubbles are mostly on the right. With three numerical variables in one bubble chart we can make three pairwise comparisons (TOTAL vs TIP, TIP vs ITEMS, TOTAL vs ITEMS) and a three-way comparison.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-e-case-study-student-flats-near-metu" class="level1">
+<h1>Part E — Case study: student flats near METU</h1>
+<p>A website listed <strong>160 flats for rent</strong> within 25 km of the METU campus in September 2026. <em>(The data were simulated for this recitation.)</em> For each flat we have the monthly <code>rent</code> (₺), the <code>size</code> (m²), the <code>distance</code> to campus (km), the building <code>age</code> (years), the <code>district</code> (Çankaya, Yenimahalle or Etimesgut) and whether it is <code>furnished</code>.</p>
+<p><img src="images/recitation3/case-hist.png" class="img-fluid" alt="Figure F1: histogram of monthly rent, right-skewed with most flats between 5 and 15 thousand lira and one flat near 30 thousand."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,d,e">
+<p>Use <strong>Figure F1</strong> (classes of width ₺2,500 starting at ₺4,000). Which statements are supported? Select all that apply.</p>
+<ul>
+<li>The distribution of rents is positively (right) skewed.</li>
+<li>Most flats rent for less than ₺15,000 a month.</li>
+<li>The histogram shows that bigger flats are more expensive.</li>
+<li>The modal class is ₺6,500–₺9,000.</li>
+<li>After a gap, one flat at almost ₺30,000 is far from the others: a potential outlier.</li>
+<li>Rent is a categorical variable, so a bar chart should be used instead.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a, b:</strong> the long tail is on the right; about 86% of flats are below ₺15,000.</li>
+<li><strong>c is not supported:</strong> a histogram shows <strong>one</strong> variable. To see the relationship with size we need a scatter plot (Figure F2).</li>
+<li><strong>d:</strong> the tallest bar (41 flats) is 6.5–9 thousand ₺.</li>
+<li><strong>e:</strong> there are no flats between about ₺24,000 and ₺29,000, then one at ₺29,450.</li>
+<li><strong>f is false:</strong> rent is numerical (continuous), so a histogram is the right graph.</li>
+</ul>
+</div>
+</div>
+<p><img src="images/recitation3/case-scatter.png" class="img-fluid" alt="Figure F2: rent increases with size, furnished flats mostly above unfurnished ones. Figure F3: rent decreases with distance, steeply at first and then levelling off."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,c,f">
+<p>Use <strong>Figures F2 and F3</strong>. Which statements are supported? Select all that apply.</p>
+<ul>
+<li>F2 shows a positive, roughly linear relationship between size and rent.</li>
+<li>For flats of the same size, furnished flats tend to be more expensive than unfurnished ones.</li>
+<li>F3 shows a negative nonlinear relationship: rent falls quickly over the first few kilometres and then levels off.</li>
+<li>F3 shows no relationship between distance and rent.</li>
+<li>F3 shows a strong positive relationship between distance and rent.</li>
+<li>In both plots, rent is the response variable.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a, b:</strong> the cloud in F2 rises from left to right, and the orange (furnished) points lie mostly above the blue ones. Colouring the points by group is a simple way to compare groups in one scatter plot.</li>
+<li><strong>c:</strong> rent clearly decreases with distance, but along a <strong>curve</strong>: a negative nonlinear relationship (one of the typical patterns in the lecture). <strong>d</strong> and <strong>e</strong> are therefore false.</li>
+<li><strong>f:</strong> rent is the outcome we want to understand, so it goes on the <span class="math inline">\(y\)</span>-axis.</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation3/case-bubble.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Figure F4: bubble chart of size versus rent, bubble size by how new the building is and colour by district." width="640"></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>In <strong>Figure F4</strong>, the position shows size and rent, the bubble size shows how <strong>new</strong> the building is (newer = bigger bubble), and the colour shows the district. How many variables are displayed in this one graph?</p>
+<ul>
+<li>2</li>
+<li>3</li>
+<li>4</li>
+<li>5</li>
+</ul>
+<div class="explain">
+<p>Four: <strong>size</strong> (<span class="math inline">\(x\)</span>), <strong>rent</strong> (<span class="math inline">\(y\)</span>), <strong>building age</strong> (bubble size) and <strong>district</strong> (colour). Three are numerical and one, the colour, is a categorical grouping. Notice that the yellow (Etimesgut) bubbles tend to sit lower than blue (Çankaya) bubbles of the same size.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation3/case-corr.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Figure F5: correlation heatmap of rent, size, distance and age." width="560"></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p><strong>Figure F5</strong> is a correlation heatmap: each cell is the correlation coefficient of two variables.</p>
+<p>The strongest linear relationship with rent is with <span class="blank" data-answer="size|floor area|size (m2)|size m2"></span>, with <span class="math inline">\(r =\)</span> <span class="blank" data-answer="0.69" data-tol="0.01"></span>.<br>
+The correlation between rent and distance is <span class="math inline">\(r =\)</span> <span class="blank" data-answer="-0.34" data-tol="0.01"></span>.<br>
+The correlation between rent and building age is approximately <span class="blank" data-answer="0" data-tol="0.02"></span>.<br>
+The numbers on the diagonal are all equal to <span class="blank" data-answer="1" data-tol="0"></span>, because each variable is perfectly correlated with itself.</p>
+<div class="explain">
+<ul>
+<li><strong>Size:</strong> <span class="math inline">\(r = 0.69\)</span>, a fairly strong positive linear relationship.</li>
+<li><strong>Distance:</strong> <span class="math inline">\(r = -0.34\)</span> looks weak, but F3 showed a clear <strong>curved</strong> relationship. <span class="math inline">\(r\)</span> measures only the <strong>linear</strong> relationship, so it understates a nonlinear pattern. Always look at the scatter plot too.</li>
+<li><strong>Age:</strong> <span class="math inline">\(r \approx 0\)</span>: almost no linear relationship with rent in these data.</li>
+<li>The heatmap is symmetric: the value above the diagonal equals the value below it.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-f-your-turn" class="level1">
+<h1>Part F — Your Turn</h1>
+<p>Try the following questions on paper first, then check your answers.</p>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>The waiting times (minutes) of <strong>40</strong> students at the campus ring-bus stop were recorded:</p>
+<p>1.2, 1.3, 1.4, 1.5, 2.2, 2.2, 2.4, 2.6, 3.0, 3.3, 3.5, 3.7, 4.3, 4.6, 5.4, 5.4, 5.6, 5.6, 5.6, 5.8, 5.9, 6.0, 6.2, 6.5, 6.9, 7.4, 8.2, 8.3, 9.6, 9.9, 11.3, 11.3, 11.8, 13.9, 14.3, 18.1, 19.2, 21.4, 24.8, 28.6</p>
+<p><strong>(a)</strong> Using the table of the lecture, the number of classes should be between 5 and <span class="blank" data-answer="7" data-tol="0"></span>.<br>
+<strong>(b)</strong> Using <strong>6</strong> classes, the class width is <span class="math inline">\((28.6 - 1.2)/6 =\)</span> <span class="blank" data-answer="4.57" data-tol="0.01"></span>, rounded up to <span class="blank" data-answer="5" data-tol="0"></span> minutes. Start the first class at 0.<br>
+<strong>(c)</strong> Complete the frequency distribution:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th style="text-align: center;">0–5</th>
+<th style="text-align: center;">5–10</th>
+<th style="text-align: center;">10–15</th>
+<th style="text-align: center;">15–20</th>
+<th style="text-align: center;">20–25</th>
+<th style="text-align: center;">25–30</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frequency</td>
+<td style="text-align: center;"><span class="blank" data-answer="14" data-tol="0"></span></td>
+<td style="text-align: center;"><span class="blank" data-answer="16" data-tol="0"></span></td>
+<td style="text-align: center;"><span class="blank" data-answer="5" data-tol="0"></span></td>
+<td style="text-align: center;"><span class="blank" data-answer="2" data-tol="0"></span></td>
+<td style="text-align: center;"><span class="blank" data-answer="2" data-tol="0"></span></td>
+<td style="text-align: center;"><span class="blank" data-answer="1" data-tol="0"></span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>(d)</strong> The relative frequency of the class 5–10 is <span class="blank" data-answer="0.4" data-tol="0.001"></span>, and the modal class is <span class="blank" data-answer="5-10|5–10|5 - 10|5 to 10"></span>.<br>
+<strong>(e)</strong> The histogram is <span class="blank" data-answer="positively skewed|right skewed|right-skewed|positively|skewed to the right|positive skew"></span>.</p>
+<div class="explain">
+<p><strong>(a)</strong> <span class="math inline">\(n = 40 &lt; 50\)</span> → <strong>5–7</strong> classes. <strong>(b)</strong> Range <span class="math inline">\(= 28.6 - 1.2 = 27.4\)</span>; <span class="math inline">\(27.4 / 6 = 4.57\)</span> → <strong>5</strong>. The first class starts at 0, which is smaller than the smallest value 1.2, and 6 classes of width 5 cover 0–30.</p>
+<p><strong>(c)</strong> Values below 5 run from 1.2 to 4.6: <strong>14</strong>; 5–10 (5.4 to 9.9): <strong>16</strong>; 10–15 (11.3, 11.3, 11.8, 13.9, 14.3): <strong>5</strong>; 15–20 (18.1, 19.2): <strong>2</strong>; 20–25 (21.4, 24.8): <strong>2</strong>; 25–30 (28.6): <strong>1</strong>. Check: <span class="math inline">\(14 + 16 + 5 + 2 + 2 + 1 = 40\)</span>.</p>
+<p><strong>(d)</strong> <span class="math inline">\(16/40 = 0.40\)</span>; the modal class is <strong>5–10</strong> (the highest bar).</p>
+<p><strong>(e)</strong> Most waiting times are short and a few are long: a long right tail, so <strong>positively (right) skewed</strong>. The value 28.6 is far from most others and could be checked as a potential outlier.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Class</th>
+<th style="text-align: center;">Frequency</th>
+<th style="text-align: center;">Relative frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0–5</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">0.350</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5–10</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">0.400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10–15</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.125</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">15–20</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.050</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">20–25</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.050</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">25–30</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.025</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>40</strong></td>
+<td style="text-align: center;"><strong>1.000</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Using the frequency distribution of <strong>Q29</strong>, a frequency polygon is drawn.</p>
+<p>The points of the polygon are placed at <span class="math inline">\(x = 2.5,\)</span> <span class="blank" data-answer="7.5" data-tol="0.01"></span><span class="math inline">\(,\ 12.5,\ 17.5,\ 22.5,\)</span> <span class="blank" data-answer="27.5" data-tol="0.01"></span>.<br>
+The highest point is at <span class="math inline">\(x =\)</span> <span class="blank" data-answer="7.5" data-tol="0.01"></span> with height <span class="blank" data-answer="16" data-tol="0"></span>.<br>
+To close the polygon, points with frequency 0 are added at <span class="math inline">\(x =\)</span> <span class="blank" data-answer="-2.5" data-tol="0.01"></span> and <span class="math inline">\(x =\)</span> <span class="blank" data-answer="32.5" data-tol="0.01"></span>.</p>
+<div class="explain">
+<p>The points are at the <strong>class midpoints</strong> <span class="math inline">\((0+5)/2 = 2.5,\ 7.5,\ \dots,\ 27.5\)</span> with heights 14, 16, 5, 2, 2, 1, joined by straight lines. The highest point is the midpoint of the modal class, (7.5, 16). The closing points lie one class width beyond the ends: <span class="math inline">\(2.5 - 5 = -2.5\)</span> and <span class="math inline">\(27.5 + 5 = 32.5\)</span> (they only bring the polygon down to the axis).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>An instructor recorded the number of practice quizzes (<span class="math inline">\(x\)</span>) solved by six students and their midterm scores (<span class="math inline">\(y\)</span>):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span> (quizzes)</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y\)</span> (score)</td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">81</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(a)</strong> The explanatory variable is the number of <span class="blank" data-answer="quizzes|practice quizzes|quizzes solved|quiz"></span>, and the response variable is the midterm <span class="blank" data-answer="score|scores|midterm score"></span>.<br>
+<strong>(b)</strong> <span class="math inline">\(\bar{x} =\)</span> <span class="blank" data-answer="3.5" data-tol="0.001"></span> and <span class="math inline">\(\bar{y} =\)</span> <span class="blank" data-answer="61" data-tol="0.001"></span>.<br>
+<strong>(c)</strong> <span class="math inline">\(\sum (x_i-\bar{x})(y_i-\bar{y}) =\)</span> <span class="blank" data-answer="118" data-tol="0.01"></span>, <span class="math inline">\(\sum (x_i-\bar{x})^2 =\)</span> <span class="blank" data-answer="17.5" data-tol="0.01"></span> and <span class="math inline">\(\sum (y_i-\bar{y})^2 =\)</span> <span class="blank" data-answer="868" data-tol="0.01"></span>.<br>
+<strong>(d)</strong> <span class="math inline">\(r =\)</span> <span class="blank" data-answer="0.96" data-tol="0.006"></span>.<br>
+<strong>(e)</strong> The relationship is <span class="blank" data-answer="strong positive|strong, positive|strong positive linear|positive strong|very strong positive"></span> and linear.</p>
+<div class="explain">
+<p><strong>(a)</strong> The quizzes may explain changes in the score (the outcome), so <span class="math inline">\(x\)</span> = number of practice quizzes (horizontal axis) and <span class="math inline">\(y\)</span> = midterm score.</p>
+<p><strong>(b)</strong> <span class="math inline">\(\bar{x} = 21/6 = 3.5\)</span>, <span class="math inline">\(\bar{y} = 366/6 = 61\)</span>.</p>
+<p><strong>(c)</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(y\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(x - \bar{x}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(y - \bar{y}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((x-\bar{x})(y-\bar{y})\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((x-\bar{x})^2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((y-\bar{y})^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">−2.5</td>
+<td style="text-align: center;">−16</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">6.25</td>
+<td style="text-align: center;">256</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">−1.5</td>
+<td style="text-align: center;">−11</td>
+<td style="text-align: center;">16.5</td>
+<td style="text-align: center;">2.25</td>
+<td style="text-align: center;">121</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">−0.5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">−0.5</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">−3</td>
+<td style="text-align: center;">−1.5</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">13.5</td>
+<td style="text-align: center;">2.25</td>
+<td style="text-align: center;">81</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">81</td>
+<td style="text-align: center;">2.5</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">6.25</td>
+<td style="text-align: center;">400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Sum</strong></td>
+<td style="text-align: center;"><strong>118</strong></td>
+<td style="text-align: center;"><strong>17.5</strong></td>
+<td style="text-align: center;"><strong>868</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>(d)</strong> <span class="math display">\[r = \frac{118}{\sqrt{17.5}\,\sqrt{868}} = \frac{118}{4.183 \times 29.462} = \frac{118}{123.25} = 0.96\]</span></p>
+<p><strong>(e)</strong> <span class="math inline">\(r = 0.96\)</span> is close to 1: a <strong>strong positive linear</strong> relationship. Students who solved more practice quizzes tended to get higher midterm scores.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-keywords="skew|right|tail|unimodal; round|rounding|50|100|multiple|multimodal|peaks|spikes; 20|minimum|no amount|nothing below|less than">
+<p>The amounts (₺) that 500 students loaded onto their transit cards are shown with three different bar widths.</p>
+<p><img src="images/recitation3/exam-topup.png" class="img-fluid" alt="Three histograms of the same top-up amounts with bar widths 50, 10 and 2 lira. E1 looks right-skewed; E2 and E3 show tall spikes at 50, 100, 150, 200, 250 and 300 lira and smaller spikes at 20, 30, 40, 60, 70 and 80 lira, and nothing below 20 lira."></p>
+<p>Describe what each histogram tells you about the data. What do you learn from E2 and E3 that E1 hides? (4–6 sentences)</p>
+<div class="explain">
+<p><strong>Model answer:</strong></p>
+<ul>
+<li><strong>E1 (₺50):</strong> the distribution is unimodal and positively (right) skewed: most students load less than ₺150, and a few load large amounts up to ₺350.</li>
+<li><strong>E2 (₺10):</strong> it is no longer a smooth unimodal shape; there are tall peaks at ₺50, ₺100, ₺150, ₺200, … with low bars in between.</li>
+<li><strong>E3 (₺2):</strong> the histogram is clearly multimodal. The large peaks at multiples of ₺50, and smaller ones at ₺20, ₺30, ₺40, …, show that students <strong>round</strong> the amount they load to “nice” numbers. It is also clear that <strong>no amount below ₺20</strong> was loaded (perhaps a minimum top-up).</li>
+<li><strong>Lesson:</strong> the bar width can hide or reveal features of the data. Wide bars show the overall shape; narrow bars show details such as rounding, gaps and outliers.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Relative-frequency histograms|Jittered scatter plot|Bubble chart|Comparative scatter plots (same scales)|Dot diagram|Mosaic plot">
+<p>Choose the most appropriate graph for each task.</p>
+<ul>
+<li>Compare the exam score distributions of a class of 35 students and a class of 140 students :: Relative-frequency histograms</li>
+<li>Show the relationship between number of siblings and number of pets for 500 students (both are small whole numbers) :: Jittered scatter plot</li>
+<li>Show the relationship among three continuous variables (height, weight and age) in a single graph :: Bubble chart</li>
+<li>Show tip vs bill separately for male and female bill payers so the two groups can be compared :: Comparative scatter plots (same scales)</li>
+<li>Find unusual values among 12 measurements of the boiling point of a liquid :: Dot diagram</li>
+<li>Show whether the faculty (Engineering / Arts and Sciences / Architecture) and dormitory use (yes / no) of students are related :: Mosaic plot</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Different group sizes</strong> → relative frequencies, with the same classes.</li>
+<li><strong>Discrete data with many repeated pairs</strong> → overplotting, so jitter the points (add a little random noise).</li>
+<li><strong>Three numerical variables</strong> → bubble chart: <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> and bubble size.</li>
+<li><strong>Same relationship in two groups</strong> → comparative scatter plots, drawn on the <strong>same scales</strong> to allow direct comparison.</li>
+<li><strong>A small data set and unusual values</strong> → dot diagram, whose aim is to identify unusual features.</li>
+<li><strong>Two categorical variables</strong> → mosaic plot, which shows the conditional distributions; roughly equal rectangles across categories suggest no relationship.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-keywords="dorm|dormitory; home|live at home; 3|three|few|small|only|reliable|careful|caution; pilot|infer|inference|cannot|general|all students">
+<p>In a small pilot study, students wore step counters for one week. The table shows the <strong>average daily steps (thousands)</strong> and, in parentheses, the <strong>number of students</strong>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Lives in a dorm</th>
+<th style="text-align: center;">Lives at home</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prep</strong></td>
+<td style="text-align: center;">9.1 (40)</td>
+<td style="text-align: center;">6.2 (35)</td>
+<td style="text-align: center;">7.7 (75)</td>
+</tr>
+<tr class="even">
+<td><strong>1st year</strong></td>
+<td style="text-align: center;">8.4 (52)</td>
+<td style="text-align: center;">5.9 (60)</td>
+<td style="text-align: center;">7.1 (112)</td>
+</tr>
+<tr class="odd">
+<td><strong>4th year</strong></td>
+<td style="text-align: center;">11.5 (3)</td>
+<td style="text-align: center;">6.4 (48)</td>
+<td style="text-align: center;">6.7 (51)</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">8.8 (95)</td>
+<td style="text-align: center;">6.1 (143)</td>
+<td style="text-align: center;">7.2 (238)</td>
+</tr>
+</tbody>
+</table>
+<p>Write <strong>three</strong> observations from the table. At least one of them must be a warning about how to interpret the table.</p>
+<div class="explain">
+<p><strong>Model answer (any three of these):</strong></p>
+<ol type="1">
+<li>In every year, students who live in a dorm walk more on average than students who live at home (e.g.&nbsp;8.4 vs 5.9 thousand steps for 1st-year students).</li>
+<li>For students who live at home, the averages are similar in all years (5.9–6.4 thousand steps).</li>
+<li><strong>Warning:</strong> the highest average, 11.5 thousand steps for 4th-year dorm students, is based on only <strong>3 students</strong>.</li>
+<li>Most 4th-year students live at home, so their total average (6.7) is lower partly because so few of them live in a dorm.</li>
+<li><strong>Warning:</strong> this is a pilot study; there should be no temptation to make inferences about all students. It can only suggest ideas for a careful study.</li>
+</ol>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="b,c,e,g">
+<p>Which of the following statements are <strong>true</strong>? Select all that apply.</p>
+<ul>
+<li>A histogram can have gaps between its boxes if the classes are categories.</li>
+<li>The vertical axis of a histogram may show frequency, relative frequency or percent, and the shape stays the same.</li>
+<li>A modal class is the class with the largest number of observations.</li>
+<li>If <span class="math inline">\(r = 0\)</span>, there is no relationship of any kind between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
+<li>Jittering adds a small amount of random noise to the data to prevent overplotting.</li>
+<li>In a bubble chart, the bubble size must represent a categorical variable.</li>
+<li>An outlier may be a correct measurement that represents a rare event.</li>
+<li>An open-ended class can only be formed at the upper end of a histogram.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a is false:</strong> a histogram consists of adjoining boxes, and it is not suitable for categorical data.</li>
+<li><strong>d is false:</strong> <span class="math inline">\(r = 0\)</span> means no <strong>linear</strong> correlation; a strong nonlinear (e.g.&nbsp;U-shaped) relationship can still exist.</li>
+<li><strong>f is false:</strong> bubble size shows a third <strong>numerical</strong> variable; colours or shapes are used for categorical variables.</li>
+<li><strong>h is false:</strong> an open-ended class can be formed at the higher <strong>or</strong> the lower end.</li>
+</ul>
+</div>
+</div>
+<p style="font-size:.85rem;color:#6c757d;margin-top:2rem">
+All data sets on this page were created for this recitation. The patterns are realistic, but the numbers are not real measurements.
+</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--
+  STAT 112 interactive quiz engine
+  ---------------------------------
+  Include in any page with (front matter):
+      format:
+        html:
+          include-after-body: _quiz.html
+
+  Question types (write them as fenced divs in the .qmd):
+    type=mc        one correct option        answer="b"
+    type=ms        select all that apply     answer="a,c,e"
+    type=tf        single true/false         answer="true"
+    type=short     typed answer              answer="ratio|ratio scale"   (add tol="0.5" for numbers)
+    type=fill      inline blanks             []{.blank answer="parameter"}
+    type=match     "term :: definition" list
+    type=classify  "item :: category" list   options="A|B|C"  (several columns: options="A|B ; X|Y" columns="Scale ; Type")
+    type=order     list written in the correct order (shown shuffled)
+    type=open      free text + model answer  keywords="idea one|alt ; idea two"
+  Put explanations / model answers in a nested  ::: explain  div.
+-->
+<style>
+:root {
+  --qz-accent: var(--bs-primary, #2780e3);
+  --qz-border: var(--bs-border-color, #dee2e6);
+  --qz-soft: rgba(127, 127, 127, 0.07);
+  --qz-muted: var(--bs-secondary-color, #6c757d);
+  --qz-ok: #1a7f37;
+  --qz-ok-bg: rgba(26, 127, 55, 0.11);
+  --qz-bad: #c0392b;
+  --qz-bad-bg: rgba(192, 57, 43, 0.10);
+  --qz-partial: #b9770e;
+}
+.qz {
+  position: relative;
+  border: 1px solid var(--qz-border);
+  border-left: 5px solid var(--qz-accent);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.1rem;
+  margin: 1.6rem 0;
+  background: var(--bs-body-bg, #fff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color .2s;
+}
+.qz.qz-correct { border-left-color: var(--qz-ok); }
+.qz.qz-wrong { border-left-color: var(--qz-bad); }
+.qz.qz-partial { border-left-color: var(--qz-partial); }
+.qz > p:last-of-type { margin-bottom: .4rem; }
+.qz-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.qz-num {
+  font-weight: 700; font-size: .85rem; color: #fff; background: var(--qz-accent);
+  border-radius: 6px; padding: .1rem .5rem; font-variant-numeric: tabular-nums;
+}
+.qz-correct .qz-num { background: var(--qz-ok); }
+.qz-wrong .qz-num { background: var(--qz-bad); }
+.qz-partial .qz-num { background: var(--qz-partial); }
+.qz-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--qz-muted); font-weight: 600; }
+.qz img { max-width: 100%; height: auto; }
+
+/* options (mc / ms / tf) */
+.qz-options { display: grid; gap: .5rem; margin: .7rem 0 .2rem; }
+.qz-options.qz-inline { grid-template-columns: repeat(auto-fit, minmax(120px, 200px)); }
+.qz-opt {
+  display: flex; align-items: flex-start; gap: .65rem; width: 100%; text-align: left;
+  border: 1px solid var(--qz-border); background: var(--bs-body-bg, #fff); color: inherit;
+  border-radius: 8px; padding: .55rem .75rem; cursor: pointer; font: inherit; line-height: 1.4;
+  transition: border-color .15s, background-color .15s;
+}
+.qz-opt:hover { border-color: var(--qz-accent); background: var(--qz-soft); }
+.qz-opt:focus-visible { outline: 2px solid var(--qz-accent); outline-offset: 2px; }
+.qz-letter {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--qz-border);
+  display: grid; place-items: center; font-weight: 600; font-size: .8rem;
+}
+.qz-opt-text { flex: 1; padding-top: .05rem; }
+.qz-opt-text p { margin: 0; }
+.qz-opt.is-sel { border-color: var(--qz-accent); box-shadow: inset 0 0 0 1px var(--qz-accent); }
+.qz-opt.is-sel .qz-letter { background: var(--qz-accent); border-color: var(--qz-accent); color: #fff; }
+.qz-opt.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); box-shadow: inset 0 0 0 1px var(--qz-ok); }
+.qz-opt.is-ok .qz-letter { background: var(--qz-ok); border-color: var(--qz-ok); color: #fff; }
+.qz-opt.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); box-shadow: inset 0 0 0 1px var(--qz-bad); }
+.qz-opt.is-bad .qz-letter { background: var(--qz-bad); border-color: var(--qz-bad); color: #fff; }
+.qz-opt.is-missed { border: 1px dashed var(--qz-ok); }
+
+/* controls & feedback */
+.qz-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; align-items: center; }
+.qz-controls .btn { border-radius: 6px; }
+.qz-feedback { margin-top: .65rem; font-weight: 500; padding: .45rem .75rem; border-radius: 6px; }
+.qz-feedback:empty { display: none; }
+.qz-fb-ok { color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-fb-bad { color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fb-partial { color: var(--qz-partial); background: rgba(185, 119, 14, .10); }
+.qz-fb-info { background: var(--qz-soft); }
+.qz-explain {
+  margin-top: .75rem; padding: .75rem 1rem; background: var(--qz-soft);
+  border-radius: 8px; border-left: 3px solid var(--qz-accent);
+}
+.qz-explain > :last-child { margin-bottom: 0; }
+.qz-explain-title { font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); margin-bottom: .35rem; }
+
+/* typed inputs */
+.qz-short { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .6rem; }
+.qz-input { max-width: 24rem; }
+.qz-input.is-ok, .qz-select.is-ok, textarea.is-ok { border-color: var(--qz-ok); background-color: var(--qz-ok-bg); }
+.qz-input.is-bad, .qz-select.is-bad { border-color: var(--qz-bad); background-color: var(--qz-bad-bg); }
+.qz-unit { color: var(--qz-muted); }
+.qz-blank-input {
+  border: 0; border-bottom: 2px solid var(--qz-accent); background: var(--qz-soft); color: inherit;
+  font: inherit; padding: 0 .3rem; margin: 0 .15rem; text-align: center; border-radius: 4px 4px 0 0;
+  min-width: 5ch;
+}
+.qz-blank-input:focus { outline: 2px solid var(--qz-accent); outline-offset: 1px; }
+.qz-blank-input.is-ok { border-bottom-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-blank-input.is-bad { border-bottom-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fill-body { line-height: 2.3; }
+
+/* classify rows */
+.qz-rows { display: grid; gap: .4rem; margin-top: .7rem; }
+.qz-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; align-items: center;
+  padding: .45rem .7rem; border-radius: 8px; background: var(--qz-soft);
+}
+.qz-row-head { background: transparent; padding-top: 0; padding-bottom: 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); font-weight: 600; }
+.qz-row-ctrls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+.qz-row-head .qz-row-ctrls span { min-width: 9rem; text-align: center; }
+.qz-row p { margin: 0; }
+.qz-seg { display: inline-flex; border: 1px solid var(--qz-border); border-radius: 8px; overflow: hidden; background: var(--bs-body-bg, #fff); }
+.qz-seg button {
+  border: 0; border-right: 1px solid var(--qz-border); background: transparent; color: inherit;
+  padding: .3rem .7rem; font: inherit; font-size: .88rem; cursor: pointer; white-space: nowrap;
+}
+.qz-seg button:last-child { border-right: 0; }
+.qz-seg button:hover { background: var(--qz-soft); }
+.qz-seg button[aria-pressed="true"] { background: var(--qz-accent); color: #fff; }
+.qz-seg.is-ok { border-color: var(--qz-ok); box-shadow: 0 0 0 1px var(--qz-ok); }
+.qz-seg.is-ok button[aria-pressed="true"] { background: var(--qz-ok); }
+.qz-seg.is-bad { border-color: var(--qz-bad); box-shadow: 0 0 0 1px var(--qz-bad); }
+.qz-seg.is-bad button[aria-pressed="true"] { background: var(--qz-bad); }
+.qz-select { width: auto; min-width: 9rem; display: inline-block; }
+
+/* image grid (classify with pictures) */
+.qz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .8rem; margin-top: .7rem; }
+.qz-card { border: 1px solid var(--qz-border); border-radius: 8px; padding: .5rem; display: flex; flex-direction: column; gap: .5rem; background: var(--bs-body-bg, #fff); }
+.qz-card-media { height: 170px; display: grid; place-items: center; background: #fff; border-radius: 6px; overflow: hidden; }
+.qz-card-media img { max-height: 166px; max-width: 100%; width: auto; object-fit: contain; }
+.qz-card-media p { margin: 0; }
+.qz-card .qz-select { width: 100%; }
+.qz-card-tag { font-size: .75rem; color: var(--qz-muted); font-weight: 600; }
+
+/* matching */
+.qz-match { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1.25rem; margin-top: .7rem; }
+.qz-match-left { display: grid; gap: .4rem; align-content: start; }
+.qz-match-left .qz-row { grid-template-columns: auto minmax(0, 1fr); }
+.qz-match-left .qz-select { min-width: 4.6rem; }
+.qz-match-right { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; align-content: start; }
+.qz-match-right li { display: flex; gap: .6rem; align-items: flex-start; padding: .45rem .7rem; border: 1px solid var(--qz-border); border-radius: 8px; }
+.qz-match-right li p { margin: 0; }
+
+/* ordering */
+.qz-order { list-style: none; padding: 0; margin: .7rem 0 0; }
+.qz-order li {
+  display: flex; align-items: center; gap: .6rem; padding: .45rem .6rem; margin: .35rem 0;
+  border: 1px solid var(--qz-border); border-radius: 8px; background: var(--bs-body-bg, #fff); cursor: grab;
+}
+.qz-order li.is-drag { opacity: .45; }
+.qz-order li.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-order li.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-order .qz-order-text { flex: 1; }
+.qz-order .qz-order-text p { margin: 0; }
+.qz-move { border: 1px solid var(--qz-border); background: transparent; color: inherit; border-radius: 6px; width: 2rem; height: 2rem; cursor: pointer; line-height: 1; }
+.qz-move:hover { background: var(--qz-soft); }
+
+/* open */
+.qz-open textarea { margin-top: .6rem; }
+.qz-chip { display: inline-block; padding: .05rem .55rem; border-radius: 999px; margin: .15rem .2rem 0 0; font-size: .85rem; font-weight: 500; }
+.qz-chip-ok { background: var(--qz-ok-bg); color: var(--qz-ok); }
+
+/* scoreboard */
+.quiz-scoreboard {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+  padding: .75rem 1rem; border: 1px solid var(--qz-border); border-radius: 10px; background: var(--qz-soft); margin: 1.25rem 0 1.5rem;
+}
+.qz-score-big { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.qz-score-bar { flex: 1 1 160px; height: 8px; background: var(--qz-border); border-radius: 99px; overflow: hidden; min-width: 120px; }
+.qz-score-bar span { display: block; height: 100%; width: 0; background: var(--qz-ok); transition: width .3s; }
+.qz-pill {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 1030; background: var(--bs-body-bg, #fff);
+  border: 1px solid var(--qz-border); border-radius: 999px; padding: .35rem .85rem; font-weight: 600;
+  font-size: .9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); font-variant-numeric: tabular-nums;
+}
+.qz-error { color: var(--qz-bad); font-family: monospace; font-size: .85rem; }
+
+@media (max-width: 700px) {
+  .qz { padding: .85rem .9rem 1rem; }
+  .qz-row { grid-template-columns: 1fr; }
+  .qz-row-ctrls { justify-content: flex-start; }
+  .qz-row-head { display: none; }
+  .qz-match { grid-template-columns: 1fr; }
+  .qz-seg button { padding: .3rem .5rem; font-size: .82rem; }
+}
+@media print {
+  .qz-controls, .qz-pill, .quiz-scoreboard { display: none !important; }
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var LABELS = {
+    mc: "Multiple choice", ms: "Select all that apply", tf: "True / False",
+    short: "Short answer", fill: "Fill in the blanks", match: "Matching",
+    classify: "Classify", order: "Put in order", open: "Open-ended"
+  };
+  var registry = [];
+
+  /* ---------- helpers ---------- */
+  function attr(el, name) {
+    var v = el.getAttribute("data-" + name);
+    if (v === null) v = el.getAttribute(name);
+    return v;
+  }
+  function h(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function btn(label, cls, fn) {
+    var b = h("button", "btn btn-sm " + cls, label);
+    b.type = "button";
+    b.addEventListener("click", fn);
+    return b;
+  }
+  function norm(s) {
+    return String(s == null ? "" : s).toLowerCase()
+      .replace(/ı/g, "i").normalize("NFKD").replace(/[̀-ͯ]/g, "")
+      .replace(/[‘’'`"“”]/g, "")
+      .replace(/[^a-z0-9.%\s-]/g, " ")
+      .replace(/^(a|an|the)\s+/, "")
+      .replace(/\s+/g, " ").trim();
+  }
+  function num(s) {
+    s = String(s == null ? "" : s).trim().replace(/\s/g, "").replace(/%$/, "");
+    if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", ".");
+    var frac = s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+    if (frac) return parseFloat(frac[1]) / parseFloat(frac[2]);
+    if (!/^-?\d*\.?\d+(e-?\d+)?$/i.test(s)) return null;
+    return parseFloat(s);
+  }
+  function alts(spec) {
+    return String(spec == null ? "" : spec).split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function matches(input, spec, tol) {
+    var a = alts(spec);
+    if (tol !== null && tol !== undefined) {
+      var v = num(input), t = parseFloat(tol) || 0;
+      if (v === null) return false;
+      return a.some(function (x) { var y = num(x); return y !== null && Math.abs(v - y) <= t + 1e-9; });
+    }
+    var n = norm(input);
+    return n !== "" && a.some(function (x) { return norm(x) === n; });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function stripTags(html) { var d = h("div", null, html); return d.textContent.trim(); }
+  function unwrapP(html) { return html.trim().replace(/^<p>/, "").replace(/<\/p>$/, ""); }
+  function firstList(q) { return q.querySelector(":scope > ol, :scope > ul"); }
+  function pairs(q) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list of 'item :: answer' lines.");
+    var out = Array.prototype.map.call(list.children, function (li) {
+      var html = li.innerHTML, i = html.lastIndexOf("::");
+      if (i < 0) throw new Error("List item is missing '::' — " + stripTags(html).slice(0, 60));
+      return { html: unwrapP(html.slice(0, i)), answer: stripTags(html.slice(i + 2)) };
+    });
+    list.remove();
+    return out;
+  }
+  function markEl(el, ok) {
+    el.classList.remove("is-ok", "is-bad");
+    if (ok === true) el.classList.add("is-ok");
+    if (ok === false) el.classList.add("is-bad");
+  }
+
+  /* ---------- status + scoreboard ---------- */
+  function setStatus(q, s) {
+    q._status = s;
+    q.classList.remove("qz-correct", "qz-wrong", "qz-partial");
+    if (s) q.classList.add("qz-" + s);
+    updateScore();
+  }
+  function updateScore() {
+    var total = registry.length, correct = 0, tried = 0;
+    registry.forEach(function (q) {
+      if (q._status === "correct") correct++;
+      if (q._status) tried++;
+    });
+    document.querySelectorAll(".qz-score-big").forEach(function (e) { e.textContent = correct + " / " + total + " correct"; });
+    document.querySelectorAll(".qz-score-tried").forEach(function (e) { e.textContent = tried + " attempted"; });
+    document.querySelectorAll(".qz-score-bar span").forEach(function (e) { e.style.width = (total ? 100 * correct / total : 0) + "%"; });
+    var pill = document.querySelector(".qz-pill");
+    if (pill) pill.textContent = "✓ " + correct + " / " + total;
+  }
+  function feedback(p, kind, msg) {
+    p.fb.className = "qz-feedback qz-fb-" + kind;
+    p.fb.innerHTML = msg;
+  }
+  function showExplain(p) { if (p.explain) p.explain.hidden = false; }
+  function clearFb(p) { p.fb.className = "qz-feedback"; p.fb.innerHTML = ""; if (p.explain) p.explain.hidden = true; }
+  function scoreMsg(p, q, ok, total) {
+    if (ok === total) { feedback(p, "ok", "✓ All " + total + " correct!"); setStatus(q, "correct"); showExplain(p); }
+    else if (ok > 0) { feedback(p, "partial", ok + " / " + total + " correct. Fix the red ones and check again."); setStatus(q, "partial"); }
+    else { feedback(p, "bad", "0 / " + total + " correct. Have another go."); setStatus(q, "wrong"); }
+  }
+
+  /* ---------- scaffold ---------- */
+  function scaffold(q, type, n) {
+    q.classList.add("qz", "qz-t-" + type);
+    var explain = q.querySelector(":scope > .explain");
+    if (explain) explain.remove();
+    var head = h("div", "qz-head",
+      '<span class="qz-num">Q' + n + '</span><span class="qz-type">' + (attr(q, "label") || LABELS[type] || type) + "</span>");
+    q.insertBefore(head, q.firstChild);
+    var p = { ui: h("div", "qz-ui"), controls: h("div", "qz-controls"), fb: h("div", "qz-feedback"), explain: explain };
+    p.fb.setAttribute("role", "status");
+    p.fb.setAttribute("aria-live", "polite");
+    q.appendChild(p.ui);
+    q.appendChild(p.controls);
+    q.appendChild(p.fb);
+    if (explain) {
+      explain.classList.add("qz-explain");
+      explain.hidden = true;
+      explain.insertBefore(h("div", "qz-explain-title", type === "open" ? "Model answer" : "Explanation"), explain.firstChild);
+      q.appendChild(explain);
+    }
+    return p;
+  }
+  function standardControls(p, q, check, reveal, reset) {
+    if (check) p.controls.appendChild(btn("Check", "btn-primary", check));
+    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); }));
+    p.controls.appendChild(btn("Reset", "btn-outline-secondary", function () { reset(); clearFb(p); setStatus(q, null); }));
+    q._reset = function () { reset(); clearFb(p); setStatus(q, null); };
+  }
+  function parseIdx(spec, n) {
+    return String(spec || "").split(/[\s,;]+/).filter(Boolean).map(function (t) {
+      if (/^\d+$/.test(t)) return parseInt(t, 10) - 1;
+      return t.toUpperCase().charCodeAt(0) - 65;
+    }).filter(function (i) { return i >= 0 && i < n; });
+  }
+
+  /* ---------- multiple choice / multi-select / true-false ---------- */
+  function buildChoice(q, p, multi, tf) {
+    var items, ans;
+    if (tf) {
+      items = ["True", "False"];
+      var a = norm(attr(q, "answer"));
+      ans = [/^(t|true|yes|dogru)$/.test(a) ? 0 : 1];
+    } else {
+      var list = firstList(q);
+      if (!list) throw new Error("Expected a list of options.");
+      items = Array.prototype.map.call(list.children, function (li) { return unwrapP(li.innerHTML); });
+      list.remove();
+      ans = parseIdx(attr(q, "answer"), items.length);
+      if (!ans.length) throw new Error("answer= is missing or out of range.");
+    }
+    var wrap = h("div", "qz-options" + (tf ? " qz-inline" : ""));
+    var btns = items.map(function (html, i) {
+      var b = h("button", "qz-opt", '<span class="qz-letter">' + (tf ? (i ? "F" : "T") : String.fromCharCode(65 + i)) + '</span><span class="qz-opt-text">' + html + "</span>");
+      b.type = "button";
+      wrap.appendChild(b);
+      return b;
+    });
+    p.ui.appendChild(wrap);
+    function clear() { btns.forEach(function (b) { b.classList.remove("is-ok", "is-bad", "is-sel", "is-missed"); b.setAttribute("aria-pressed", "false"); }); }
+
+    if (!multi) {
+      btns.forEach(function (b, i) {
+        b.addEventListener("click", function () {
+          clear();
+          if (ans.indexOf(i) >= 0) {
+            b.classList.add("is-ok");
+            feedback(p, "ok", "✓ Correct!");
+            setStatus(q, "correct");
+            showExplain(p);
+          } else {
+            b.classList.add("is-bad");
+            feedback(p, "bad", "✗ Not quite. Try another option.");
+            setStatus(q, "wrong");
+          }
+        });
+      });
+      standardControls(p, q, null, function () {
+        clear();
+        ans.forEach(function (i) { btns[i].classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return tf ? items[i] : String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    } else {
+      btns.forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          var on = !b.classList.contains("is-sel");
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          b.classList.toggle("is-sel", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      });
+      standardControls(p, q, function () {
+        var hit = 0, wrong = 0;
+        btns.forEach(function (b, i) {
+          var sel = b.classList.contains("is-sel"), good = ans.indexOf(i) >= 0;
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          if (sel && good) { hit++; b.classList.add("is-ok"); }
+          if (sel && !good) { wrong++; b.classList.add("is-bad"); }
+        });
+        if (hit === ans.length && !wrong) { feedback(p, "ok", "✓ Correct, you found all " + ans.length + "!"); setStatus(q, "correct"); showExplain(p); }
+        else if (hit === 0 && wrong === 0) { feedback(p, "info", "Select at least one option first."); }
+        else {
+          feedback(p, hit ? "partial" : "bad", hit + " of " + ans.length + " correct options selected" + (wrong ? ", " + wrong + " wrong selection" + (wrong > 1 ? "s" : "") : "") + ".");
+          setStatus(q, hit ? "partial" : "wrong");
+        }
+      }, function () {
+        clear();
+        btns.forEach(function (b, i) { if (ans.indexOf(i) >= 0) b.classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    }
+  }
+
+  /* ---------- short answer ---------- */
+  function buildShort(q, p) {
+    var spec = attr(q, "answer"), tol = attr(q, "tol"), unit = attr(q, "unit");
+    if (!spec) throw new Error("answer= is missing.");
+    var row = h("div", "qz-short");
+    var input = h("input", "form-control qz-input");
+    input.type = "text";
+    input.placeholder = attr(q, "placeholder") || (tol !== null ? "Type a number…" : "Type your answer…");
+    input.setAttribute("aria-label", "Your answer");
+    row.appendChild(input);
+    if (unit) row.appendChild(h("span", "qz-unit", unit));
+    p.ui.appendChild(row);
+    function check() {
+      if (!input.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+      var ok = matches(input.value, spec, tol);
+      markEl(input, ok);
+      if (ok) { feedback(p, "ok", "✓ Correct!"); setStatus(q, "correct"); showExplain(p); }
+      else { feedback(p, "bad", "✗ Not quite. Try again" + (tol !== null ? " (check your rounding)." : ".")); setStatus(q, "wrong"); }
+    }
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+    standardControls(p, q, check, function () {
+      feedback(p, "info", "Answer: <strong>" + alts(spec)[0] + (unit ? " " + unit : "") + "</strong>");
+    }, function () { input.value = ""; markEl(input, null); });
+  }
+
+  /* ---------- fill in the blanks ---------- */
+  function buildFill(q, p) {
+    var blanks = Array.prototype.map.call(q.querySelectorAll(".blank"), function (span) {
+      var spec = attr(span, "answer"), tol = attr(span, "tol");
+      var input = h("input", "qz-blank-input");
+      input.type = "text";
+      input.setAttribute("aria-label", "blank");
+      var longest = alts(spec).reduce(function (m, x) { return Math.max(m, x.length); }, 4);
+      input.style.width = Math.min(longest + 3, 28) + "ch";
+      span.innerHTML = "";
+      span.appendChild(input);
+      return { input: input, spec: spec, tol: tol };
+    });
+    if (!blanks.length) throw new Error("No []{.blank answer=...} spans found.");
+    q.querySelectorAll(":scope > p").forEach(function (para) { if (para.querySelector(".blank")) para.classList.add("qz-fill-body"); });
+    function check() {
+      var ok = 0;
+      blanks.forEach(function (b) { var good = matches(b.input.value, b.spec, b.tol); markEl(b.input, good); if (good) ok++; });
+      scoreMsg(p, q, ok, blanks.length);
+    }
+    blanks.forEach(function (b) { b.input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); }); });
+    standardControls(p, q, check, function () {
+      blanks.forEach(function (b) { b.input.value = alts(b.spec)[0]; markEl(b.input, true); });
+      feedback(p, "info", "Answers filled in.");
+    }, function () { blanks.forEach(function (b) { b.input.value = ""; markEl(b.input, null); }); });
+  }
+
+  /* ---------- selectable control (segmented buttons or dropdown) ---------- */
+  function control(options, forceSelect) {
+    var longest = options.reduce(function (m, o) { return Math.max(m, o.length); }, 0);
+    if (!forceSelect && options.length <= 4 && longest <= 18) {
+      var seg = h("div", "qz-seg"), value = null;
+      seg.setAttribute("role", "group");
+      var bs = options.map(function (o) {
+        var b = h("button", null, o);
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () { set(o); markEl(seg, null); });
+        seg.appendChild(b);
+        return b;
+      });
+      function set(v) {
+        value = v;
+        bs.forEach(function (b, i) { b.setAttribute("aria-pressed", options[i] === v ? "true" : "false"); });
+      }
+      return { el: seg, get: function () { return value; }, set: set, mark: function (ok) { markEl(seg, ok); } };
+    }
+    var sel = h("select", "form-select form-select-sm qz-select");
+    sel.appendChild(h("option", null, "— choose —")).value = "";
+    options.forEach(function (o) { var op = h("option", null, o); op.value = o; sel.appendChild(op); });
+    sel.addEventListener("change", function () { markEl(sel, null); });
+    return { el: sel, get: function () { return sel.value || null; }, set: function (v) { sel.value = v == null ? "" : v; }, mark: function (ok) { markEl(sel, ok); } };
+  }
+
+  /* ---------- classify ---------- */
+  function buildClassify(q, p) {
+    var items = pairs(q);
+    var groupsSpec = attr(q, "options");
+    var groups;
+    if (groupsSpec) groups = groupsSpec.split(";").map(function (g) { return alts(g); });
+    else {
+      var seen = [];
+      items.forEach(function (it) { alts(it.answer).forEach(function (a) { if (seen.indexOf(a) < 0) seen.push(a); }); });
+      groups = [seen];
+    }
+    var cols = attr(q, "columns") ? attr(q, "columns").split(";").map(function (s) { return s.trim(); }) : null;
+    var grid = items.some(function (it) { return /<img/i.test(it.html); });
+    var container = h("div", grid ? "qz-grid" : "qz-rows");
+    if (cols && !grid) {
+      var hr = h("div", "qz-row qz-row-head", "<span></span>");
+      var hc = h("div", "qz-row-ctrls");
+      cols.forEach(function (c) { hc.appendChild(h("span", null, c)); });
+      hr.appendChild(hc);
+      container.appendChild(hr);
+    }
+    var rows = items.map(function (it, idx) {
+      var answers = it.answer.split(";").map(function (s) { return s.trim(); });
+      if (answers.length !== groups.length) throw new Error("Item '" + stripTags(it.html).slice(0, 40) + "' needs " + groups.length + " answer(s) separated by ';'.");
+      var ctrls = groups.map(function (g) { return control(g, grid); });
+      var row;
+      if (grid) {
+        row = h("div", "qz-card");
+        row.appendChild(h("div", "qz-card-tag", "Display " + (idx + 1)));
+        row.appendChild(h("div", "qz-card-media", it.html));
+        ctrls.forEach(function (c) { row.appendChild(c.el); });
+      } else {
+        row = h("div", "qz-row", "<div>" + it.html + "</div>");
+        var cw = h("div", "qz-row-ctrls");
+        ctrls.forEach(function (c) { cw.appendChild(c.el); });
+        row.appendChild(cw);
+      }
+      container.appendChild(row);
+      return { ctrls: ctrls, answers: answers };
+    });
+    p.ui.appendChild(container);
+    var total = rows.length * groups.length;
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) {
+        r.ctrls.forEach(function (c, i) {
+          var v = c.get(), good = v !== null && matches(v, r.answers[i]);
+          c.mark(v === null ? false : good);
+          if (good) ok++;
+        });
+      });
+      scoreMsg(p, q, ok, total);
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c, i) { c.set(alts(r.answers[i])[0]); c.mark(true); }); });
+      feedback(p, "info", "Correct answers selected.");
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c) { c.set(null); c.mark(null); }); });
+    });
+  }
+
+  /* ---------- matching ---------- */
+  function buildMatch(q, p) {
+    var items = pairs(q);
+    var rights = [];
+    items.forEach(function (it) { if (rights.indexOf(it.answer) < 0) rights.push(it.answer); });
+    rights = shuffle(rights);
+    var letters = rights.map(function (_, i) { return String.fromCharCode(65 + i); });
+    var wrap = h("div", "qz-match");
+    var left = h("div", "qz-match-left");
+    var right = h("ol", "qz-match-right");
+    rights.forEach(function (r, i) {
+      right.appendChild(h("li", null, '<span class="qz-letter">' + letters[i] + "</span><span>" + r + "</span>"));
+    });
+    var rows = items.map(function (it) {
+      var c = control(letters, true);
+      c.el.setAttribute("aria-label", "Match for " + stripTags(it.html));
+      var row = h("div", "qz-row");
+      row.appendChild(c.el);
+      row.appendChild(h("div", null, it.html));
+      left.appendChild(row);
+      return { c: c, letter: letters[rights.indexOf(it.answer)] };
+    });
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    p.ui.appendChild(wrap);
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) { var v = r.c.get(), good = v === r.letter; r.c.mark(v === null ? false : good); if (good) ok++; });
+      scoreMsg(p, q, ok, rows.length);
+    }, function () {
+      rows.forEach(function (r) { r.c.set(r.letter); r.c.mark(true); });
+      feedback(p, "info", "Answer: " + rows.map(function (r, i) { return (i + 1) + "→" + r.letter; }).join(", "));
+    }, function () { rows.forEach(function (r) { r.c.set(null); r.c.mark(null); }); });
+  }
+
+  /* ---------- ordering ---------- */
+  function buildOrder(q, p) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list written in the correct order.");
+    var items = Array.prototype.map.call(list.children, function (li, i) { return { html: unwrapP(li.innerHTML), idx: i }; });
+    list.remove();
+    var ul = h("ol", "qz-order");
+    var dragged = null;
+    function lis() { return Array.prototype.slice.call(ul.children); }
+    function make(it) {
+      var li = h("li");
+      li.draggable = true;
+      li._idx = it.idx;
+      li.innerHTML = '<span class="qz-letter qz-pos"></span><span class="qz-order-text">' + it.html + "</span>";
+      var up = h("button", "qz-move", "↑"); up.type = "button"; up.setAttribute("aria-label", "Move up");
+      var dn = h("button", "qz-move", "↓"); dn.type = "button"; dn.setAttribute("aria-label", "Move down");
+      up.addEventListener("click", function () { if (li.previousElementSibling) ul.insertBefore(li, li.previousElementSibling); changed(); });
+      dn.addEventListener("click", function () { if (li.nextElementSibling) ul.insertBefore(li.nextElementSibling, li); changed(); });
+      li.appendChild(up); li.appendChild(dn);
+      li.addEventListener("dragstart", function (e) { dragged = li; li.classList.add("is-drag"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", ""); } catch (_) {} });
+      li.addEventListener("dragend", function () { li.classList.remove("is-drag"); dragged = null; changed(); });
+      li.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        if (!dragged || dragged === li) return;
+        var r = li.getBoundingClientRect();
+        ul.insertBefore(dragged, (e.clientY - r.top) > r.height / 2 ? li.nextSibling : li);
+      });
+      return li;
+    }
+    function changed() {
+      lis().forEach(function (li, i) { li.querySelector(".qz-pos").textContent = i + 1; li.classList.remove("is-ok", "is-bad"); });
+    }
+    function fill(order) { ul.innerHTML = ""; order.forEach(function (it) { ul.appendChild(make(it)); }); changed(); }
+    function shuffled() {
+      var s = shuffle(items), tries = 0;
+      while (items.length > 1 && s.every(function (it, i) { return it.idx === i; }) && tries++ < 20) s = shuffle(items);
+      return s;
+    }
+    fill(shuffled());
+    p.ui.appendChild(ul);
+    standardControls(p, q, function () {
+      var ok = 0;
+      lis().forEach(function (li, i) { var good = li._idx === i; markEl(li, good); if (good) ok++; });
+      scoreMsg(p, q, ok, items.length);
+    }, function () {
+      fill(items);
+      lis().forEach(function (li) { markEl(li, true); });
+      feedback(p, "info", "Correct order shown.");
+    }, function () { fill(shuffled()); });
+  }
+
+  /* ---------- open-ended ---------- */
+  function buildOpen(q, p) {
+    var ta = h("textarea", "form-control");
+    ta.rows = parseInt(attr(q, "rows") || "4", 10);
+    ta.placeholder = "Type the class's answer here…";
+    var w = h("div", "qz-open");
+    w.appendChild(ta);
+    p.ui.appendChild(w);
+    var kw = attr(q, "keywords");
+    var groups = kw ? kw.split(";").map(function (g) { return alts(g); }).filter(function (g) { return g.length; }) : [];
+    var check = null;
+    if (groups.length) {
+      check = function () {
+        if (!ta.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+        var text = " " + norm(ta.value) + " ";
+        var found = groups.filter(function (g) { return g.some(function (a) { return text.indexOf(norm(a)) >= 0; }); });
+        var chips = found.map(function (g) { return '<span class="qz-chip qz-chip-ok">✓ ' + g[0] + "</span>"; }).join("");
+        var n = found.length, t = groups.length;
+        if (n === t) { feedback(p, "ok", "All " + t + " key ideas mentioned! " + chips); setStatus(q, "correct"); showExplain(p); }
+        else if (n) { feedback(p, "partial", n + " of " + t + " key ideas found. Something is still missing. " + chips); setStatus(q, "partial"); }
+        else { feedback(p, "bad", "None of the " + t + " key ideas found yet. Think about what the question asks for."); setStatus(q, "wrong"); }
+      };
+    }
+    standardControls(p, q, check, function () { feedback(p, "info", "Compare with the model answer below."); }, function () { ta.value = ""; });
+    if (check) p.controls.firstChild.textContent = "Check key ideas";
+  }
+
+  /* ---------- init ---------- */
+  function init() {
+    var quizzes = document.querySelectorAll("div.quiz");
+    var n = 0;
+    quizzes.forEach(function (q) {
+      var type = (attr(q, "type") || "").toLowerCase();
+      if (!type) Object.keys(LABELS).forEach(function (k) { if (q.classList.contains(k)) type = k; });
+      n++;
+      try {
+        var p = scaffold(q, type, n);
+        if (type === "mc") buildChoice(q, p, false, false);
+        else if (type === "ms") buildChoice(q, p, true, false);
+        else if (type === "tf") buildChoice(q, p, false, true);
+        else if (type === "short") buildShort(q, p);
+        else if (type === "fill") buildFill(q, p);
+        else if (type === "classify") buildClassify(q, p);
+        else if (type === "match") buildMatch(q, p);
+        else if (type === "order") buildOrder(q, p);
+        else if (type === "open") buildOpen(q, p);
+        else throw new Error("Unknown type '" + type + "'.");
+        registry.push(q);
+      } catch (err) {
+        q.appendChild(h("div", "qz-error", "Quiz error: " + err.message));
+        if (window.console) console.error("Quiz Q" + n, err);
+      }
+    });
+    document.querySelectorAll(".quiz-scoreboard").forEach(function (sb) {
+      sb.innerHTML = "";
+      var left = h("div", null, '<div class="qz-score-big"></div><div class="qz-score-tried" style="font-size:.85rem;color:var(--qz-muted)"></div>');
+      var bar = h("div", "qz-score-bar", "<span></span>");
+      sb.appendChild(left);
+      sb.appendChild(bar);
+      sb.appendChild(btn("Reset all", "btn-outline-secondary", function () {
+        if (!window.confirm("Clear every answer on this page?")) return;
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+      }));
+    });
+    if (registry.length && !document.querySelector(".qz-pill")) document.body.appendChild(h("div", "qz-pill"));
+    updateScore();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/statserenay\.github\.io\/stat112-site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Made with ❤️ and Quarto · Emoji graphics: Twemoji (CC-BY 4.0)</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

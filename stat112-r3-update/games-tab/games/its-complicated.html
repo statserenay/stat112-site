@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>X ♥ Y: It's Complicated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4eef7; --card: #fffdfe; --ink: #2b1b3d; --ink-2: #5d4c6e; --line: #dccfe5;
+  --pink: #d6336c; --pink-2: #fbd3e1; --plum: #5b2a86; --plum-2: #ebe0f4;
+  --teal: #138a7a; --teal-bg: #d9f0ec; --alarm: #c8372d; --alarm-bg: #f8e0dd; --gold: #e0a100;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 17px/1.5 var(--body); min-height: 100vh;
+  background-image: radial-gradient(circle at 12px 12px, rgba(214, 51, 108, .09) 2px, transparent 2.5px); background-size: 28px 28px; }
+button, input { font: inherit; color: inherit; }
+kbd { font: 700 .78em var(--body); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 .35em; background: #fff; }
+
+.bar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .7rem 1.25rem; background: var(--ink); color: #fff; }
+.bar h1 { font: 800 1.45rem/1 var(--display); margin: 0; letter-spacing: -.01em; }
+.bar h1 .heart { color: #ff7aa8; }
+.meta { margin-left: auto; display: flex; gap: 1.2rem; align-items: center; font-variant-numeric: tabular-nums; }
+.stat { display: flex; flex-direction: column; line-height: 1.1; }
+.stat small { color: #c9b6da; font-size: .72rem; }
+.stat b { font: 800 1.15rem var(--display); }
+.bar button { background: transparent; color: #fff; border: 1px solid #8e79a6; border-radius: 999px; padding: .3rem .8rem; cursor: pointer; font-size: .85rem; }
+
+main { max-width: 1120px; margin: 0 auto; padding: 1.3rem 1.1rem 2.5rem; }
+.roundbar { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.roundbar span { font-size: .82rem; padding: .2rem .7rem; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: var(--ink-2); }
+.roundbar span.on { background: var(--pink); border-color: var(--pink); color: #fff; font-weight: 700; }
+.roundbar span.done { background: var(--plum-2); border-color: var(--plum-2); color: var(--plum); }
+
+.stage { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+.plotcard, .panel { background: var(--card); border: 2px solid var(--ink); border-radius: 22px; box-shadow: 0 6px 0 var(--ink); }
+.plotcard { padding: .8rem; }
+.plotcard svg { width: 100%; height: auto; display: block; }
+.plotcard .cap { text-align: center; font-size: .85rem; color: var(--ink-2); margin: .2rem 0 0; }
+.panel { padding: 1.2rem 1.35rem 1.35rem; }
+.eyebrow { font-size: .85rem; color: var(--pink); font-weight: 700; }
+.panel h2 { font: 800 1.7rem/1.15 var(--display); margin: .1rem 0 .5rem; letter-spacing: -.01em; }
+.panel p { margin: .4rem 0; }
+.host { display: flex; gap: .7rem; align-items: flex-start; margin: .6rem 0 .9rem; }
+.host svg { flex: none; width: 54px; height: 54px; }
+.say { background: var(--plum-2); border-radius: 4px 16px 16px 16px; padding: .5rem .8rem; font-size: .95rem; }
+
+.slider-wrap { margin: 1rem 0 .4rem; }
+.slider-wrap .val { font: 800 2.4rem/1 var(--display); text-align: center; font-variant-numeric: tabular-nums; color: var(--plum); }
+input[type=range] { width: 100%; accent-color: var(--pink); height: 2.2rem; }
+.ends { display: flex; justify-content: space-between; font-size: .8rem; color: var(--ink-2); }
+.choices { display: grid; gap: .5rem; margin: .8rem 0 .2rem; }
+.choice { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 14px; padding: .6rem .85rem; cursor: pointer; font-weight: 700; }
+.choice small { display: block; font-weight: 400; color: var(--ink-2); }
+.choice:hover:not(:disabled) { border-color: var(--plum); }
+.choice.right { border-color: var(--teal); background: var(--teal-bg); }
+.choice.wrong { border-color: var(--alarm); background: var(--alarm-bg); }
+.choice:disabled { cursor: default; }
+.btn { border: 2px solid var(--ink); background: #fff; border-radius: 999px; padding: .55rem 1.2rem; font-weight: 700; cursor: pointer; }
+.btn.main { background: var(--pink); border-color: var(--pink); color: #fff; box-shadow: 0 3px 0 #9c1f4c; }
+.btn.main:hover { background: #c22a60; }
+.btn[hidden] { display: none; }
+.actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+.result { margin-top: .9rem; padding: .75rem .95rem; border-radius: 14px; }
+.result:empty { display: none; }
+.result.good { background: var(--teal-bg); }
+.result.mid { background: #fff3d1; }
+.result.bad { background: var(--alarm-bg); }
+.result .pts { font: 800 1.3rem var(--display); }
+.scenario { background: var(--plum-2); border-radius: 16px; padding: 1rem 1.1rem; font-size: 1.05rem; }
+.scenario b { color: var(--plum); }
+.pt { cursor: pointer; }
+.pt:hover { stroke: var(--pink); stroke-width: 3; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.overlay { position: fixed; inset: 0; background: rgba(43, 27, 61, .55); display: grid; place-items: center; padding: 1rem; z-index: 10; }
+.overlay[hidden] { display: none; }
+.modal { background: var(--card); border: 2px solid var(--ink); border-radius: 24px; box-shadow: 0 8px 0 var(--ink); max-width: 640px; width: 100%; padding: 1.6rem 1.7rem; max-height: 92vh; overflow: auto; }
+.modal h2 { font: 800 2.1rem/1.08 var(--display); margin: 0 0 .5rem; letter-spacing: -.015em; }
+.modal ol { padding-left: 1.3rem; } .modal li { margin: .25rem 0; }
+.bigscore { font: 800 3.2rem/1 var(--display); color: var(--pink); margin: .3rem 0; font-variant-numeric: tabular-nums; }
+.rank { font: 800 1.5rem var(--display); color: var(--plum); }
+table.recap { width: 100%; border-collapse: collapse; margin: .7rem 0; font-size: .95rem; }
+table.recap td { padding: .3rem .4rem; border-bottom: 1px solid var(--line); }
+table.recap td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 820px) {
+  .stage { grid-template-columns: 1fr; gap: 1rem; }
+  .bar { padding: .6rem .9rem; } .meta { margin-left: 0; width: 100%; justify-content: space-between; }
+  .panel h2 { font-size: 1.4rem; } .modal { padding: 1.2rem 1.1rem; } .modal h2 { font-size: 1.7rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <h1>X <span class="heart">♥</span> Y: It's Complicated</h1>
+  <div class="meta">
+    <div class="stat"><small>Chemistry points</small><b id="score">0</b></div>
+    <div class="stat"><small>Date</small><b id="dateno">–</b></div>
+    <button type="button" id="restart">New season</button>
+  </div>
+</header>
+<main>
+  <div class="roundbar" id="roundbar"></div>
+  <div class="stage">
+    <div class="plotcard" id="plotcard"><svg id="plot" viewBox="0 0 440 440" role="img" aria-label="Scatter plot"></svg><p class="cap" id="cap"></p></div>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+</main>
+<div class="overlay" id="overlay"></div>
+
+<script>
+(function () {
+  "use strict";
+  /* =============================================================
+     X ♥ Y: It's Complicated · STAT 112 Recitation 3 review
+     Round 1  Compatibility Test   guess r from a scatter plot   (5 dates)
+     Round 2  The Third Wheel      click the influential point   (2 dates)
+     Round 3  Relationship Status  form & strength               (3 dates)
+     ============================================================= */
+  var ROUNDS = [
+    { key: "guess", title: "Compatibility Test", n: 5, blurb: "Guess how compatible X and Y are: slide to your estimate of the correlation r." },
+    { key: "third", title: "The Third Wheel", n: 2, blurb: "One point is ruining (or faking) this relationship. Click the point that changes r the most." },
+    { key: "status", title: "Relationship Status", n: 3, blurb: "Look at the shape, not just the number. What is X and Y's relationship status?" }
+  ];
+  var RANKS = [
+    [850, "Perfect Correlation (r = 1)", "You read relationships like a statistician. Nothing slips past you."],
+    [650, "Strong Bond (r ≈ 0.8)", "Very good instincts. Just a few points off the line."],
+    [400, "Moderate Match (r ≈ 0.5)", "There's chemistry, but also some scatter. Play again!"],
+    [-1, "No Linear Relationship (r ≈ 0)", "You and statistics haven't clicked yet. Rematch?"]
+  ];
+  var HOST = {
+    intro: ["Welcome to the most data-driven dating show on Earth!", "Tonight: two variables, one scatter plot, and a lot of chemistry.", "I'm Rho, your host. Yes, like ρ, the Greek letter for correlation."],
+    great: ["Wow! You read that cloud like a love letter.", "Spot on. That's some strong chemistry.", "Perfect! r-mazing."],
+    ok: ["Close-ish. A little scatter in your guess.", "Not bad! The cloud was trickier than it looked."],
+    bad: ["Oof. That relationship was not what it seemed.", "Plot first, then judge. Even on a dating show."]
+  };
+
+  /* ---------- helpers ---------- */
+  var $ = function (id) { return document.getElementById(id); };
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function randn() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  function corr(x, y) {
+    var n = x.length, mx = 0, my = 0, i; for (i = 0; i < n; i++) { mx += x[i]; my += y[i]; } mx /= n; my /= n;
+    var sxy = 0, sxx = 0, syy = 0; for (i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) * (x[i] - mx); syy += (y[i] - my) * (y[i] - my); }
+    return sxy / Math.sqrt(sxx * syy);
+  }
+  function fmt(r) { return (r < 0 ? "−" : "") + Math.abs(r).toFixed(2); }
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+
+  /* ---------- data generators ---------- */
+  function linearCloud(n, r) {
+    var x = [], y = [], best = null;
+    for (var t = 0; t < 40; t++) {
+      x = []; y = [];
+      for (var i = 0; i < n; i++) { var a = randn(), e = randn(); x.push(a); y.push(r * a + Math.sqrt(1 - r * r) * e); }
+      var c = corr(x, y); if (!best || Math.abs(c - r) < Math.abs(best.c - r)) best = { x: x, y: y, c: c };
+      if (Math.abs(c - r) < .02) break;
+    }
+    return best;
+  }
+  function guessData() {
+    var r = Math.round((Math.random() * 1.9 - 0.95) * 100) / 100;
+    var d = linearCloud(45, r); return { x: d.x, y: d.y, r: d.c };
+  }
+  function thirdData() {
+    var variant = Math.random() < .5 ? "fake" : "ruin", d, x, y;
+    if (variant === "fake") { d = linearCloud(18, (Math.random() - .5) * .3); x = d.x.slice(); y = d.y.slice(); x.push(4.6 + Math.random()); y.push(4.2 + Math.random()); }
+    else { d = linearCloud(18, .85 + Math.random() * .08); x = d.x.slice(); y = d.y.slice(); x.push(4.4 + Math.random()); y.push(-3.4 - Math.random()); }
+    // decoy: unusual y but average x (much less influential)
+    x.push(0.1 * randn()); y.push(variant === "fake" ? 3.4 : -3.2);
+    var all = corr(x, y), best = -1, bestDiff = -1, without = [];
+    for (var i = 0; i < x.length; i++) {
+      var xs = x.filter(function (_, k) { return k !== i; }), ys = y.filter(function (_, k) { return k !== i; });
+      var c = corr(xs, ys); without.push(c);
+      if (Math.abs(c - all) > bestDiff) { bestDiff = Math.abs(c - all); best = i; }
+    }
+    return { x: x, y: y, r: all, target: best, without: without, variant: variant, decoy: x.length - 1 };
+  }
+  var STATUS = {
+    strong: { label: "In a relationship", sub: "strong and linear", explain: "The points hug a straight line, so |r| is large and r describes the relationship well." },
+    weak: { label: "It's casual", sub: "weak linear trend", explain: "There is a linear tendency, but with lots of scatter: |r| is small to moderate." },
+    single: { label: "Single", sub: "no relationship", explain: "A shapeless cloud: knowing X tells you nothing about Y, and r ≈ 0." },
+    complicated: { label: "It's complicated", sub: "strong, but not linear", explain: "Y clearly depends on X, but along a curve. r only measures LINEAR association, so it can be close to 0 (or misleading) even though the relationship is strong." }
+  };
+  function statusData(kind) {
+    var x = [], y = [], i, n = 45, shape = "";
+    if (kind === "strong") { var d = linearCloud(n, (Math.random() < .5 ? 1 : -1) * (.88 + Math.random() * .08)); x = d.x; y = d.y; }
+    else if (kind === "weak") { var d2 = linearCloud(n, (Math.random() < .5 ? 1 : -1) * (.3 + Math.random() * .15)); x = d2.x; y = d2.y; }
+    else if (kind === "single") { var d3 = linearCloud(n, (Math.random() - .5) * .1); x = d3.x; y = d3.y; }
+    else {
+      shape = pick(["U", "hill", "wave"]);
+      for (i = 0; i < n; i++) {
+        var a = -2.6 + 5.2 * i / (n - 1) + randn() * .03;
+        var b = shape === "U" ? a * a : shape === "hill" ? -a * a : Math.sin(a * 1.6) * 2.2;
+        x.push(a); y.push(b + randn() * .35);
+      }
+    }
+    return { x: x, y: y, r: corr(x, y), kind: kind, shape: shape };
+  }
+  /* ---------- drawing ---------- */
+  var VB = 440, PAD = 34;
+  function scaleFn(v, lo, hi) { return function (t) { return PAD + (t - lo) / (hi - lo) * (VB - 2 * PAD); }; }
+  function drawPlot(d, opts) {
+    opts = opts || {};
+    var svg = $("plot"), x = d.x, y = d.y;
+    var xl = Math.min.apply(null, x), xh = Math.max.apply(null, x), yl = Math.min.apply(null, y), yh = Math.max.apply(null, y);
+    var px = (xh - xl) * .08 || 1, py = (yh - yl) * .08 || 1;
+    var X = scaleFn(0, xl - px, xh + px), Yr = scaleFn(0, yl - py, yh + py), Y = function (t) { return VB - Yr(t); };
+    var o = '<rect x="0" y="0" width="440" height="440" rx="14" fill="#fffdfe"/>';
+    for (var g = 1; g < 5; g++) { var p = PAD + g * (VB - 2 * PAD) / 5; o += '<line x1="' + p + '" y1="' + PAD + '" x2="' + p + '" y2="' + (VB - PAD) + '" stroke="#efe6f4"/><line x1="' + PAD + '" y1="' + p + '" x2="' + (VB - PAD) + '" y2="' + p + '" stroke="#efe6f4"/>'; }
+    o += '<line x1="' + PAD + '" y1="' + (VB - PAD) + '" x2="' + (VB - PAD) + '" y2="' + (VB - PAD) + '" stroke="#2b1b3d" stroke-width="2"/>';
+    o += '<line x1="' + PAD + '" y1="' + PAD + '" x2="' + PAD + '" y2="' + (VB - PAD) + '" stroke="#2b1b3d" stroke-width="2"/>';
+    o += '<text x="' + (VB - PAD) + '" y="' + (VB - 10) + '" text-anchor="end" font-size="15" font-family="Fraunces, serif" font-weight="800" fill="#5b2a86">X</text>';
+    o += '<text x="14" y="' + (PAD + 4) + '" font-size="15" font-family="Fraunces, serif" font-weight="800" fill="#d6336c">Y</text>';
+    if (opts.line) {
+      var n = x.length, mx = 0, my = 0, i; for (i = 0; i < n; i++) { mx += x[i]; my += y[i]; } mx /= n; my /= n;
+      var sxy = 0, sxx = 0; for (i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) * (x[i] - mx); }
+      var b = sxy / sxx, a = my - b * mx, x0 = xl - px, x1 = xh + px;
+      o += '<line x1="' + X(x0) + '" y1="' + Y(a + b * x0) + '" x2="' + X(x1) + '" y2="' + Y(a + b * x1) + '" stroke="#d6336c" stroke-width="2.5" stroke-dasharray="7 5" opacity=".85"/>';
+    }
+    x.forEach(function (xv, i) {
+      var hl = opts.highlight === i, dec = opts.mark && opts.mark.indexOf(i) >= 0;
+      var fill = hl ? "#d6336c" : "#5b2a86";
+      if (opts.clickable) o += '<circle class="pt" data-i="' + i + '" cx="' + X(xv) + '" cy="' + Y(y[i]) + '" r="13" fill="transparent"/>';
+      o += '<circle ' + (opts.clickable ? 'class="pt" data-i="' + i + '" ' : "") + 'cx="' + X(xv) + '" cy="' + Y(y[i]) + '" r="' + (hl ? 9 : 6.5) + '" fill="' + fill + '" fill-opacity="' + (hl ? 1 : .78) + '" stroke="' + (dec ? "#e0a100" : "#fff") + '" stroke-width="' + (dec ? 3 : 1.5) + '"/>';
+    });
+    svg.innerHTML = o;
+    return { X: X, Y: Y };
+  }
+  function hostSVG() {
+    return '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M30 54 C8 38 2 26 8 15 C14 5 26 7 30 16 C34 7 46 5 52 15 C58 26 52 38 30 54Z" fill="#d6336c" stroke="#2b1b3d" stroke-width="2.5"/>' +
+      '<circle cx="22" cy="24" r="5.5" fill="#fff" stroke="#2b1b3d" stroke-width="2"/><circle cx="38" cy="24" r="5.5" fill="#fff" stroke="#2b1b3d" stroke-width="2"/><line x1="27.5" y1="24" x2="32.5" y2="24" stroke="#2b1b3d" stroke-width="2"/>' +
+      '<circle cx="22" cy="25" r="2" fill="#2b1b3d"/><circle cx="38" cy="25" r="2" fill="#2b1b3d"/><path d="M23 34 Q30 40 37 34" fill="none" stroke="#2b1b3d" stroke-width="2.5" stroke-linecap="round"/></svg>';
+  }
+
+  /* ---------- game state ---------- */
+  var S;
+  function newSeason() {
+    var kinds = shuffle(["strong", "weak", "single"]).slice(0, 2).concat(["complicated"]);
+    S = { round: 0, date: 0, score: 0, log: [], perRound: [0, 0, 0],
+      plan: [
+        Array.from({ length: 5 }, guessData),
+        [thirdData(), thirdData()],
+        shuffle(kinds).map(statusData)
+      ] };
+    updateHUD(); intro();
+  }
+  function updateHUD() {
+    $("score").textContent = S.score;
+    var total = ROUNDS.reduce(function (a, r) { return a + r.n; }, 0), done = 0;
+    for (var i = 0; i < S.round; i++) done += ROUNDS[i].n;
+    $("dateno").textContent = Math.min(done + S.date + 1, total) + " / " + total;
+    $("roundbar").innerHTML = ROUNDS.map(function (r, i) { return '<span class="' + (i < S.round ? "done" : i === S.round ? "on" : "") + '">' + (i + 1) + ". " + r.title + "</span>"; }).join("");
+  }
+  function show(html) { var o = $("overlay"); o.innerHTML = '<div class="modal" role="dialog" aria-modal="true">' + html + "</div>"; o.hidden = false; }
+  function hide() { $("overlay").hidden = true; }
+
+  function intro() {
+    drawPlot(guessData()); $("cap").textContent = "";
+    $("panel").innerHTML = '<p class="eyebrow">STAT 112 · Recitation 3</p><h2>Press “Start the show” to meet tonight\'s couples.</h2>';
+    show('<h2>X <span style="color:#d6336c">♥</span> Y: It\'s Complicated</h2>' +
+      '<p>Welcome to the dating show where every couple is a pair of <b>numerical variables</b>. Your job is to judge their relationship the way a statistician would.</p>' +
+      '<ol><li><b>Compatibility Test:</b> guess the correlation r from the scatter plot (5 dates).</li>' +
+      '<li><b>The Third Wheel:</b> find the influential point that fakes or ruins the relationship (2 dates).</li>' +
+      '<li><b>Relationship Status:</b> strong and linear, weak, single, or complicated (3 dates).</li></ol>' +
+      '<p style="color:#5d4c6e;font-size:.92rem">Up to 100 chemistry points per date. Every game has new couples. Keys: <kbd>←</kbd>/<kbd>→</kbd> move the slider, <kbd>Enter</kbd> confirms.</p>' +
+      '<div class="actions"><button class="btn main" id="go" type="button">Start the show</button></div>');
+    $("go").addEventListener("click", function () { hide(); roundIntro(); });
+    $("go").focus();
+  }
+  function roundIntro() {
+    var R = ROUNDS[S.round]; updateHUD();
+    show('<p class="eyebrow" style="color:#d6336c;font-weight:700;margin:0">Round ' + (S.round + 1) + " of " + ROUNDS.length + "</p><h2>" + R.title + "</h2><p>" + R.blurb + '</p><div class="actions"><button class="btn main" id="go" type="button">Let\'s go</button></div>');
+    $("go").addEventListener("click", function () { hide(); play(); });
+    $("go").focus();
+  }
+  function next() {
+    S.date++;
+    if (S.date >= ROUNDS[S.round].n) { S.round++; S.date = 0; if (S.round >= ROUNDS.length) return finale(); updateHUD(); return roundIntro(); }
+    updateHUD(); play();
+  }
+  function award(pts, label) {
+    S.score += pts; S.perRound[S.round] += pts; S.log.push([ROUNDS[S.round].title, label, pts]); updateHUD();
+  }
+  function hostBox(text) { return '<div class="host">' + hostSVG() + '<div class="say">' + text + "</div></div>"; }
+  function nextBtn() {
+    var b = el("button", "btn main", "Next date"); b.type = "button";
+    var last = S.round === ROUNDS.length - 1 && S.date === ROUNDS[S.round].n - 1;
+    if (S.date === ROUNDS[S.round].n - 1) b.textContent = last ? "See the final results" : "Next round";
+    b.addEventListener("click", next); return b;
+  }
+
+  function play() {
+    var key = ROUNDS[S.round].key, d = S.plan[S.round][S.date];
+    if (key === "guess") playGuess(d); else if (key === "third") playThird(d); else playStatus(d);
+  }
+
+  /* ---------- round 1: guess r ---------- */
+  function playGuess(d) {
+    drawPlot(d); $("cap").textContent = "45 observations of X and Y";
+    var p = $("panel");
+    p.innerHTML = '<p class="eyebrow">Date ' + (S.date + 1) + " of " + ROUNDS[0].n + '</p><h2>How compatible are X and Y?</h2>' + hostBox(S.date === 0 ? pick(HOST.intro) : "Look at the direction first, then at how tightly the points follow a line.") +
+      '<div class="slider-wrap"><div class="val" id="gval">0.00</div><input type="range" id="gr" min="-1" max="1" step="0.01" value="0" aria-label="Your guess for r"><div class="ends"><span>−1 perfect negative</span><span>0</span><span>+1 perfect positive</span></div></div>' +
+      '<div class="result" id="res"></div><div class="actions" id="acts"></div>';
+    var s = $("gr"), v = $("gval");
+    s.addEventListener("input", function () { v.textContent = fmt(parseFloat(s.value)); });
+    var b = el("button", "btn main", "Lock in my guess"); b.type = "button";
+    function lock() {
+      if (b.disabled) return; b.disabled = true; s.disabled = true;
+      var g = parseFloat(s.value), err = Math.abs(g - d.r), pts = Math.max(0, Math.round(100 - err * 200));
+      award(pts, "Guess r = " + fmt(g) + " (true " + fmt(d.r) + ")");
+      drawPlot(d, { line: true });
+      var cls = pts >= 80 ? "good" : pts >= 50 ? "mid" : "bad";
+      $("res").className = "result " + cls;
+      $("res").innerHTML = '<div class="pts">+' + pts + " points</div><p>True compatibility: <b>r = " + fmt(d.r) + "</b>. Your guess: " + fmt(g) + " (off by " + err.toFixed(2) + ").</p>" +
+        "<p>" + (Math.abs(d.r) > .8 ? "Strong: the points lie close to the dashed line." : Math.abs(d.r) > .45 ? "Moderate: a clear trend, but with noticeable scatter." : Math.abs(d.r) > .2 ? "Weak: only a slight tendency." : "Hardly any linear relationship at all.") + " " + pick(pts >= 80 ? HOST.great : pts >= 50 ? HOST.ok : HOST.bad) + "</p>";
+      b.remove(); var n = nextBtn(); $("acts").appendChild(n); n.focus();
+    }
+    b.addEventListener("click", lock); $("acts").appendChild(b);
+    s.addEventListener("keydown", function (e) { if (e.key === "Enter") lock(); });
+    s.focus();
+  }
+
+  /* ---------- round 2: third wheel ---------- */
+  function playThird(d) {
+    var p = $("panel");
+    drawPlot(d, { clickable: true }); $("cap").textContent = "Click a point";
+    p.innerHTML = '<p class="eyebrow">Date ' + (S.date + 1) + " of " + ROUNDS[1].n + '</p><h2>Who is the third wheel?</h2>' +
+      hostBox("Right now these two have <b>r = " + fmt(d.r) + "</b>. One point is making the relationship look " + (d.variant === "fake" ? "much stronger" : "much weaker") + " than it really is. Click it!") +
+      '<div class="result" id="res"></div><div class="actions" id="acts"></div>';
+    var answered = false;
+    $("plot").querySelectorAll(".pt").forEach(function (c) {
+      c.addEventListener("click", function () {
+        if (answered) return; answered = true;
+        var i = +c.getAttribute("data-i"), ok = i === d.target, rw = d.without[d.target];
+        award(ok ? 100 : (i === d.decoy ? 20 : 0), ok ? "Found the influential point" : "Missed the influential point");
+        drawPlot(d, { highlight: d.target, mark: [i] });
+        $("cap").textContent = "pink = the influential point" + (ok ? "" : " · gold ring = your click");
+        $("res").className = "result " + (ok ? "good" : "bad");
+        $("res").innerHTML = '<div class="pts">+' + (ok ? 100 : i === d.decoy ? 20 : 0) + " points</div>" +
+          "<p>With the pink point: <b>r = " + fmt(d.r) + "</b>. Without it: <b>r = " + fmt(rw) + "</b>.</p>" +
+          "<p>" + (ok ? "Correct! " : i === d.decoy ? "Close, but that point is unusual only in Y, and it sits near the middle of the X values, so it hardly moves r (without it, r = " + fmt(d.without[d.decoy]) + "). " : "Not that one. ") +
+          "A point that is far away in <b>X</b> has the most leverage: it can " + (d.variant === "fake" ? "create a strong correlation on its own" : "destroy an otherwise strong correlation") + ". Always report results with and without such points.</p>";
+        var n = nextBtn(); $("acts").appendChild(n); n.focus();
+      });
+    });
+  }
+
+  /* ---------- round 3: relationship status ---------- */
+  function playStatus(d) {
+    drawPlot(d); $("cap").textContent = "45 observations of X and Y";
+    var p = $("panel");
+    p.innerHTML = '<p class="eyebrow">Date ' + (S.date + 1) + " of " + ROUNDS[2].n + '</p><h2>What is their relationship status?</h2>' +
+      hostBox(S.date === 0 ? "Careful: a small r does not always mean “single”." : "Look at the shape of the cloud, not only its direction.") +
+      '<div class="choices" id="ch" role="group" aria-label="Relationship status"></div><div class="result" id="res"></div><div class="actions" id="acts"></div>';
+    var keys = ["strong", "weak", "single", "complicated"], btns = [];
+    keys.forEach(function (k) {
+      var b = el("button", "choice", STATUS[k].label + "<small>" + STATUS[k].sub + "</small>"); b.type = "button";
+      b.addEventListener("click", function () {
+        btns.forEach(function (x) { x.disabled = true; });
+        var ok = k === d.kind; b.classList.add(ok ? "right" : "wrong");
+        btns[keys.indexOf(d.kind)].classList.add("right");
+        award(ok ? 100 : 0, "Status: " + STATUS[d.kind].label);
+        drawPlot(d, { line: d.kind !== "complicated" });
+        $("res").className = "result " + (ok ? "good" : "bad");
+        $("res").innerHTML = '<div class="pts">+' + (ok ? 100 : 0) + " points</div><p><b>" + STATUS[d.kind].label + "</b> (r = " + fmt(d.r) + "). " + STATUS[d.kind].explain + "</p>";
+        var n = nextBtn(); $("acts").appendChild(n); n.focus();
+      });
+      btns.push(b); $("ch").appendChild(b);
+    });
+    btns[0].focus();
+  }
+
+  /* ---------- finale ---------- */
+  function finale() {
+    var max = ROUNDS.reduce(function (a, r) { return a + r.n * 100; }, 0);
+    var rank = RANKS.filter(function (r) { return S.score >= r[0]; })[0];
+    $("roundbar").innerHTML = ROUNDS.map(function (r, i) { return '<span class="done">' + (i + 1) + ". " + r.title + "</span>"; }).join("");
+    show('<h2>That\'s a wrap!</h2><div class="bigscore">' + S.score + ' <span style="font-size:1.2rem;color:#5d4c6e">/ ' + max + "</span></div>" +
+      '<p>Your relationship with statistics:</p><div class="rank">' + rank[1] + "</div><p>" + rank[2] + "</p>" +
+      '<table class="recap">' + ROUNDS.map(function (r, i) { return "<tr><td>" + r.title + "</td><td>" + S.perRound[i] + " / " + r.n * 100 + "</td></tr>"; }).join("") + "</table>" +
+      '<p style="font-size:.92rem;color:#5d4c6e"><b>Remember:</b> plot first; r measures only linear relationships; and one point can fake or ruin a correlation.</p>' +
+      '<div class="actions"><button class="btn main" id="again" type="button">Play a new season</button></div>');
+    $("again").addEventListener("click", function () { hide(); newSeason(); });
+    $("again").focus();
+  }
+
+  $("restart").addEventListener("click", function () { if (!S || S.score === 0 || confirm("Start a new season? Your points will be lost.")) { hide(); newSeason(); } });
+  window.__xy = function () { return S; };
+  newSeason();
+})();
+</script>
+</body>
+</html>

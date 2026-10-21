@@ -91,11 +91,25 @@
     "text": "TipHow it works\n\n\n\n\nPost your question with the + button. You can post anonymously, and no account is needed.\nSay where it comes from, e.g. “Recitation 2, Q20: how do I find Q1?”. Questions with a clear reference get faster answers.\nYou can attach one clear photo of your working (no PDFs or long files).\nCheck first whether someone has already asked the same thing. If so, add a ❤️ instead of posting again.\nAnswers appear as comments under each question, usually within a day or two.\nEverything here is public to everyone with the site link. Don’t write your name, student number or any personal information.\n\n\n\n\n\n\n\nThe wall doesn’t load? Open it in a new tab, or send your question by e-mail to serenay@metu.edu.tr."
   },
   {
+    "objectID": "stat112-r3-update/recitation-week3.html",
+    "href": "stat112-r3-update/recitation-week3.html",
+    "title": "Recitation 3",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nThis week is the advanced level: most questions ask you to read a graph and explain what it shows, not just name it. Numbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
+  },
+  {
+    "objectID": "stat112-r3-update/recitation-week3.html#how-to-use-this-page",
+    "href": "stat112-r3-update/recitation-week3.html#how-to-use-this-page",
+    "title": "Recitation 3",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nThis week is the advanced level: most questions ask you to read a graph and explain what it shows, not just name it. Numbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
+  },
+  {
     "objectID": "flashcards.html",
     "href": "flashcards.html",
     "title": "Flashcards",
     "section": "",
-    "text": "Choose a deck at the top of the box. Click a card (or press Space) to flip it, then mark Got it or Missed it. Your missed pile is saved in this browser. You can also open the flashcards in a full window."
+    "text": "Choose a deck at the top of the box (Recitation 1, 2, 3 or all cards). Click a card (or press Space) to flip it, then mark Got it or Missed it. Your missed pile is saved in this browser. You can also open the flashcards in a full window."
   },
   {
     "objectID": "index.html",
@@ -126,11 +140,25 @@
     "text": "Contact\n Email: serenay@metu.edu.tr\n Office: Department of Statistics Room No: 234.\n Phone: +90 (312) 210-2979\n GitHub: github.com/statserenay\n LinkedIn: serenay-çakar"
   },
   {
+    "objectID": "recitation-week3.html",
+    "href": "recitation-week3.html",
+    "title": "Recitation 3",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nNumbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
+  },
+  {
+    "objectID": "recitation-week3.html#how-to-use-this-page",
+    "href": "recitation-week3.html#how-to-use-this-page",
+    "title": "Recitation 3",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nNumbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
+  },
+  {
     "objectID": "games-tab/games.html",
     "href": "games-tab/games.html",
     "title": "Games",
     "section": "",
-    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n   \n     \n     \n       Recitation 2\n       Dr. Outlier's Vault\n       Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.\n       Play now →\n     \n   \n   \n     ?\n     \n       Recitation 3\n       Coming soon\n       A new game will appear here after the next recitation."
+    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n\n  \n  \n    Recitation 2\n    Dr. Outlier's Vault\n    Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.\n    Play now →\n  \n\n\n\n\n  \n  \n    Recitation 3\n    Dr. Plot's Graph Hospital\n    Sick graphs in the ER! Diagnose what's wrong (too many classes, gaps between boxes, overplotting, stretched scales…), prescribe the treatment and watch the graph get cured.\n    Play now →\n  \n\n\n\n  ?\n  \n    Recitation 4\n    Coming soon\n    A new game will appear here after the next recitation."
   },
   {
     "objectID": "computing-setup.html",
@@ -166,6 +194,13 @@
     "title": "Calculator",
     "section": "",
     "text": "Every step stays hidden until you open it. Type your own answer first and press Check; open Show steps only when you are stuck. Quartiles use the percentile rule from the lecture notes. You can also open the calculator in a full window."
+  },
+  {
+    "objectID": "stat112-r3-update/games-tab/games.html",
+    "href": "stat112-r3-update/games-tab/games.html",
+    "title": "Games",
+    "section": "",
+    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n\n  \n  \n    Recitation 2\n    Dr. Outlier's Vault\n    Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.\n    Play now →\n  \n\n\n\n  \n  \n    Recitation 3\n    X ♥ Y: It's Complicated\n    A dating show for variables: guess the correlation from a scatter plot, spot the influential \"third wheel\" and judge the shape of the relationship.\n    Play now →\n  \n\n\n\n  ?\n  \n    Recitation 4\n    Coming soon\n    A new game will appear here after the next recitation."
   },
   {
     "objectID": "homeworks.html",

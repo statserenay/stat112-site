@@ -94,6 +94,7 @@ main { max-width: 760px; margin: 0 auto; padding: 1.4rem 1.1rem 3rem; }
   <div class="decks" role="group" aria-label="Choose a deck">
     <button type="button" data-deck="w1">Recitation 1</button>
     <button type="button" data-deck="w2">Recitation 2</button>
+    <button type="button" data-deck="w3">Recitation 3</button>
     <button type="button" data-deck="all">All cards</button>
   </div>
 </header>
@@ -175,11 +176,41 @@ main { max-width: 760px; margin: 0 auto; padding: 1.4rem 1.1rem 3rem; }
     { deck: "w2", topic: "Position", q: "Interquartile range (IQR)", a: "$$IQR=Q_3-Q_1$$<p>The spread of the middle 50%. <b>Robust</b> to outliers.</p>" },
     { deck: "w2", topic: "Box plots", q: "Fences for potential outliers", a: "$$Q_1-1.5\\,IQR \\qquad Q_3+1.5\\,IQR$$<p>Values outside the fences are <b>potential outliers</b>. Investigate them; don't just delete them.</p>" },
     { deck: "w2", topic: "Box plots", q: "Where do the whiskers of a box plot end?", a: "<p>At the most extreme observations that are still <b>inside the fences</b>. Anything beyond them is drawn as a separate point.</p><p>If there are no outliers, the whiskers reach the min and the max.</p>" },
-    { deck: "w2", topic: "Box plots", q: "How do you read skewness from a box plot?", a: "<p>The <b>longer whisker</b> and the longer half of the box point toward the tail.</p><p>Median closer to $Q_1$ → right skew. Median closer to $Q_3$ → left skew.</p>" }
+    { deck: "w2", topic: "Box plots", q: "How do you read skewness from a box plot?", a: "<p>The <b>longer whisker</b> and the longer half of the box point toward the tail.</p><p>Median closer to $Q_1$ → right skew. Median closer to $Q_3$ → left skew.</p>" },
+    // ---------------- Recitation 3 ----------------
+    { deck: "w3", topic: "Histograms", q: "What is a histogram, and what can it show?", a: "<p>Adjoining boxes (<b>no gaps</b>) over class intervals of a numerical variable. The vertical axis is frequency or relative frequency (percent); the <b>shape is the same</b> with either.</p><p>It shows the <b>shape</b>, the <b>center</b> and the <b>spread</b> of the data.</p>" },
+    { deck: "w3", topic: "Histograms", q: "Advantages and limits of a histogram", a: "<p>Shows the shape quickly, reveals the modal class(es), and is easier to understand than a table for <b>large</b> data sets (100 values or more).</p><p>It is <b>not suitable for categorical (qualitative)</b> data.</p>" },
+    { deck: "w3", topic: "Histograms", q: "How many classes should a histogram have?", a: "<p>Usually <b>5 to 15</b>. A guide by number of observations:</p><p>&lt; 50: 5–7 · 50–200: 7–9 · 200–500: 9–10 · 500–1,000: 10–11 · 1,000–5,000: 11–13 · 5,000–50,000: 13–17 · &gt; 50,000: 17–20</p>" },
+    { deck: "w3", topic: "Histograms", q: "Class width and the first class", a: "$$\\text{class width} = \\frac{\\text{largest} - \\text{smallest}}{\\text{number of classes}}$$<p>Round <b>up</b> to a convenient number (e.g. 14.95 → 15). Start the first class at a number <b>smaller than the smallest</b> observation.</p>" },
+    { deck: "w3", topic: "Histograms", q: "Steps to construct a histogram", a: "<p>1. <b>Collect</b> the data.</p><p>2. Prepare a <b>frequency distribution</b>: number of classes, class width, class limits, frequencies.</p><p>3. <b>Draw</b> the histogram with adjoining boxes.</p>" },
+    { deck: "w3", topic: "Histograms", q: "Relative frequency: formula and when to use it", a: "$$\\text{relative frequency} = \\frac{\\text{class frequency}}{\\text{total number of observations}}$$<p>Use it when comparing two or more histograms whose samples have <b>different numbers of observations</b>.</p>" },
+    { deck: "w3", topic: "Histograms", q: "When are unequal class widths used?", a: "<p>It is best to use equal widths, but when some classes have <b>very low frequencies</b>, several classes are <b>combined</b> into a wider, “more populated” class.</p><p>An <b>open-ended class</b> can also be formed at the higher or lower end (e.g. “20 and over”).</p>" },
+    { deck: "w3", topic: "Histograms", q: "How to read a histogram", a: "<p><b>Highest bar:</b> the modal class.</p><p><b>Long tail:</b> to the right → positively skewed; to the left → negatively skewed.</p><p><b>Wide spread of bars:</b> high variability.</p><p><b>Gap or dip:</b> no or few observations there.</p>" },
+    { deck: "w3", topic: "Histograms", q: "Shapes of histograms", a: "<p><b>Symmetric</b> (bell or mound shaped), <b>positively skewed</b>, <b>negatively skewed</b>, <b>uniform</b>.</p><p><b>Unimodal</b> (one modal class), <b>bimodal</b> (two), multimodal.</p><p>Many statistical techniques require a bell-shaped population; a histogram helps check this.</p>" },
+    { deck: "w3", topic: "Histograms", q: "What can a bimodal histogram mean?", a: "<p>Two different groups may be mixed together, which also gives a <b>larger spread</b>.</p><p>Lecture example: the class taught with a mathematical (manual) emphasis formed two groups. Draw separate histograms for the groups.</p>" },
+    { deck: "w3", topic: "Histograms", q: "What happens when the bar width gets smaller?", a: "<p><b>Wide bars:</b> the overall shape (tips: right-skewed, unimodal).</p><p><b>Narrow bars:</b> details appear: several peaks (multimodal), outliers, and peaks at round amounts that show people <b>round</b> their tips.</p><p>The data never change, only the picture. Try several widths.</p>" },
+    { deck: "w3", topic: "Other graphs", q: "Frequency polygon", a: "<p>Plot a point at each class <b>midpoint</b> with height = frequency, and connect the points with <b>straight lines</b>.</p><p>The polygon is closed with a 0 point one class width beyond each end (e.g. 44.5 and 104.5 in the lecture example).</p>" },
+    { deck: "w3", topic: "Other graphs", q: "Dot diagram", a: "<p>Each observation is a dot on a number line, so you can see the frequency and distribution of the data.</p><p>Its aim is to identify <b>unusual features</b> of the data (e.g. one neutrino time of 7.3 s far from all others).</p>" },
+    { deck: "w3", topic: "Outliers", q: "Outlier: definition and three reasons", a: "<p>An observation that is unusually large or small relative to the other values.</p><p>1. Observed, recorded or entered <b>incorrectly</b>.</p><p>2. Comes from a <b>different population</b>.</p><p>3. <b>Correct</b>, but a <b>rare event</b>.</p>" },
+    { deck: "w3", topic: "Relationships", q: "When are two variables related? What is regression?", a: "<p>Two variables are <b>related (associated)</b> when knowing one helps you understand or predict the other.</p><p>The statistical study of the relationship between variables is called <b>regression</b>. A <b>scatter plot</b> displays it for two numerical variables.</p>" },
+    { deck: "w3", topic: "Relationships", q: "Explanatory vs. response variable", a: "<p><b>Response</b> (dependent, $y$): measures the outcome of a study.</p><p><b>Explanatory</b> (independent, $x$): explains changes in the response; horizontal axis.</p><p>No explanatory–response distinction? Either variable can go on the horizontal axis.</p>" },
+    { deck: "w3", topic: "Relationships", q: "What does a scatter plot help you understand?", a: "<p>The <b>form</b> (linear or nonlinear), the <b>direction</b> (positive or negative) and the <b>strength</b> of the relationship between two variables.</p>" },
+    { deck: "w3", topic: "Relationships", q: "Typical patterns of scatter diagrams", a: "<p>Positive linear · negative linear · no relationship · negative nonlinear · nonlinear (concave).</p><p>Other possible forms: quadratic, cubic, exponential, logarithmic, random.</p>" },
+    { deck: "w3", topic: "Correlation", q: "Correlation coefficient r: formula", a: "$$r = \\frac{\\sum (x_i-\\bar{x})(y_i-\\bar{y})}{\\sqrt{\\sum (x_i-\\bar{x})^2}\\sqrt{\\sum (y_i-\\bar{y})^2}}$$<p>A measure of the strength and direction of the <b>linear</b> relationship between two continuous variables.</p>" },
+    { deck: "w3", topic: "Correlation", q: "Properties of r", a: "<p>$-1 \\le r \\le 1$.</p><p>$r = 1$: a straight line with a <b>positive</b> slope.</p><p>$r = -1$: a straight line with a <b>negative</b> slope.</p><p>$r = 0$: <b>no (linear) correlation</b>.</p>" },
+    { deck: "w3", topic: "Correlation", q: "Does r = 0 mean there is no relationship?", a: "<p><b>No.</b> $r$ only measures the <b>linear</b> relationship. A strong nonlinear pattern (e.g. a U-shape) can have $r \\approx 0$.</p><p>Always look at the scatter plot as well.</p>" },
+    { deck: "w3", topic: "Case study", q: "Pilot study: what may we do with the data?", a: "<p>Explore the data (“poke around”) to <b>formulate hypotheses</b> and design a careful study.</p><p>There should be <b>no temptation to make inferences</b> about a population.</p>" },
+    { deck: "w3", topic: "Case study", q: "Tip rate: why create a new variable?", a: "$$\\text{tip rate} = \\frac{\\text{tip}}{\\text{total bill}}$$<p>It calibrates the tip according to the bill, so parties with different bills can be compared (data restructuring).</p>" },
+    { deck: "w3", topic: "Case study", q: "Reading a table of averages broken down by two factors", a: "<p>Each cell gives an average and (in parentheses) the number of cases.</p><p>Watch the counts: an average based on very few cases (the lecture's Friday lunch had only 7 parties) is not reliable.</p>" },
+    { deck: "w3", topic: "Case study", q: "Mosaic plot", a: "<p>Shows two (or more) <b>categorical</b> variables. Column widths show the group sizes; the heights inside each column show the <b>conditional distribution</b>.</p><p>Roughly equal rectangles across the categories → no relationship.</p>" },
+    { deck: "w3", topic: "Scatter plots", q: "Rows of points in a scatter plot of tip vs bill", a: "<p>Horizontal lines of points at $2, $3, $4 (and $1.50, $2.50, …) show that customers <b>round</b> their tips to the nearest dollar or half dollar.</p><p>Points below the 15% line: patrons tipping less than the recommended rate.</p>" },
+    { deck: "w3", topic: "Scatter plots", q: "Jittering", a: "<p>Adding a small amount of <b>random noise</b> to the data to prevent <b>overplotting</b>, e.g. adding $u$, uniform on $[-0.5, 0.5]$, to a party size of 1.</p><p>Useful for discrete data that is almost continuous. With many thousands of points jittering does not help; use <b>transparency</b>.</p>" },
+    { deck: "w3", topic: "Scatter plots", q: "Comparative scatter plots", a: "<p>Separate scatter plots of the same two variables for each group (e.g. tip vs bill by sex of the bill payer).</p><p>Use the <b>same scales</b> on both plots to allow direct comparison.</p>" },
+    { deck: "w3", topic: "Scatter plots", q: "Bubble chart", a: "<p>An enhanced scatter plot: two numerical variables on the axes and a <b>third numerical variable as bubble size</b>.</p><p><b>Colours</b> (and <b>shapes</b>) can add categorical variables. One bubble chart allows three pairwise comparisons (X–Y, Y–Z, X–Z) and a three-way comparison.</p>" }
   ];
 
   /* ---------------- state ---------------- */
-  var DECK_NAMES = { w1: "Recitation 1", w2: "Recitation 2", all: "All cards" };
+  var DECK_NAMES = { w1: "Recitation 1", w2: "Recitation 2", w3: "Recitation 3", all: "All cards" };
   var KEY = "stat112-flashcards-missed";
   var deck = "w2", order = [], pos = 0, onlyMissed = false, got = 0, missedNow = [];
   var missed = load();
@@ -296,8 +327,8 @@ main { max-width: 760px; margin: 0 auto; padding: 1.4rem 1.1rem 3rem; }
   });
 
   // ?deck=w1 in the link opens that deck directly
-  var m = location.search.match(/deck=(w1|w2|all)/);
-  function boot() { setDeck(m ? m[1] : "w2"); }
+  var m = location.search.match(/deck=(w1|w2|w3|all)/);
+  function boot() { setDeck(m ? m[1] : "w3"); }
   if (document.readyState === "complete") boot(); else window.addEventListener("load", boot);
 })();
 </script>
