@@ -59,10 +59,20 @@ a.game-card:focus-visible { outline: 3px solid var(--bs-primary, #2780e3); outli
   </div>
 </a>
 
+<a class="game-card" href="games/trick-or-treat.html" target="_blank" rel="noopener">
+  <div class="game-thumb"><img src="images/games/trick-or-treat.png" alt="Screenshot of Trick or Treat Street"></div>
+  <div class="game-body">
+    <span class="game-tag">Recitation 4</span>
+    <h3 class="game-title">Trick or Treat Street 🎃</h3>
+    <p class="game-desc">A Halloween walk: name the chart hiding under a black costume, find the Gestalt principle behind each haunted window, and decide whether a chart is an honest treat or a misleading trick.</p>
+    <span class="game-play">Play now →</span>
+  </div>
+</a>
+
 <div class="game-card soon" aria-disabled="true">
   <div class="game-thumb">?</div>
   <div class="game-body">
-    <span class="game-tag">Recitation 4</span>
+    <span class="game-tag">Recitation 5</span>
     <h3 class="game-title">Coming soon</h3>
     <p class="game-desc">A new game will appear here after the next recitation.</p>
   </div>

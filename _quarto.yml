@@ -16,12 +16,14 @@ website:
             href: computing-setup.qmd
       - text: "Recitations"
         menu:
-          - text: "Week 1"
+          - text: "Recitation 1"
             href: recitation-week1.qmd
-          - text: "Week 2"
+          - text: "Recitation 2"
             href: recitation-week2.qmd
-          - text: "Week 3"
+          - text: "Recitation 3"
             href: recitation-week3.qmd
+          - text: "Recitation 4"
+            href: recitation-week4.qmd 
       - text: "Homeworks"
         href: homeworks.qmd
       - text: "Games"

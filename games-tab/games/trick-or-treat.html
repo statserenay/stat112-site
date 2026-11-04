@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trick or Treat Street</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #17112a; --night-2: #231a3d; --card: #2c2250; --line: #4a3d78; --ink: #f4ecff; --muted: #b9acd9;
+  --pumpkin: #ff8a1f; --pumpkin-2: #ffb35c; --slime: #8be04e; --blood: #ff5470; --moon: #fff3c4;
+  --display: "Creepster", "Chiller", "Papyrus", fantasy, cursive;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { min-height: 100vh; color: var(--ink); font: 17px/1.5 var(--body);
+  background: radial-gradient(1200px 600px at 80% -10%, #3b2a6b 0%, var(--night) 60%) fixed, var(--night); }
+button { font: inherit; color: inherit; }
+.bats { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.bat { position: absolute; font-size: 22px; opacity: .55; animation: fly 14s linear infinite; }
+@keyframes fly { from { transform: translate(-10vw, 0) } 50% { transform: translate(50vw, -30px) } to { transform: translate(110vw, 10px) } }
+@media (prefers-reduced-motion: reduce) { .bat { animation: none; display: none; } .ghost-steal { animation: none !important; } }
+
+header { position: relative; z-index: 1; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .6rem 1.2rem; background: rgba(10, 6, 22, .65); border-bottom: 2px solid var(--line); }
+header h1 { font: 400 2rem/1 var(--display); margin: 0; color: var(--pumpkin); letter-spacing: .03em; text-shadow: 0 0 12px rgba(255, 138, 31, .45); }
+.hud { margin-left: auto; display: flex; gap: 1.1rem; align-items: center; font-variant-numeric: tabular-nums; }
+.stat { display: flex; flex-direction: column; line-height: 1.1; }
+.stat small { font-size: .72rem; color: var(--muted); }
+.stat b { font-size: 1.2rem; }
+.hud button { background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: .3rem .85rem; cursor: pointer; font-size: .85rem; color: var(--ink); }
+
+main { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 1rem 1.1rem 2.5rem; }
+.street { display: flex; gap: .35rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: .9rem; }
+.street .lbl { font-size: .82rem; color: var(--muted); margin-right: .3rem; align-self: center; }
+.house { width: 30px; height: 30px; }
+.house path { fill: #3a2f61; stroke: #6b5aa8; stroke-width: 1.5; }
+.house rect { fill: #17112a; }
+.house.on path { fill: #5a4696; stroke: var(--pumpkin); }
+.house.on rect { fill: var(--pumpkin-2); }
+.house.ok rect { fill: var(--slime); } .house.bad rect { fill: var(--blood); }
+.hood { font: 400 1.35rem/1 var(--display); color: var(--pumpkin-2); margin: 0 0 .7rem; letter-spacing: .04em; }
+
+.yard { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+.window, .panel { background: var(--card); border: 2px solid var(--line); border-radius: 18px; box-shadow: 0 8px 24px rgba(0, 0, 0, .35); }
+.window { padding: .8rem; position: relative; }
+.window svg { width: 100%; height: auto; display: block; border-radius: 12px; }
+.cap { text-align: center; font-size: .85rem; color: var(--muted); margin-top: .4rem; min-height: 1.2em; }
+.panel { padding: 1.1rem 1.25rem 1.3rem; }
+.panel h2 { margin: 0 0 .35rem; font-size: 1.25rem; }
+.eyebrow { margin: 0 0 .2rem; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--pumpkin-2); font-weight: 700; }
+.claim { background: #1e1638; border-left: 4px solid var(--pumpkin); border-radius: 10px; padding: .55rem .8rem; margin: .5rem 0 .3rem; }
+.opts { display: grid; gap: .45rem; margin-top: .8rem; }
+.opt { text-align: left; border: 2px solid var(--line); background: #241c44; border-radius: 12px; padding: .55rem .85rem; cursor: pointer; font-weight: 700; color: var(--ink); }
+.opt:hover:not(:disabled) { border-color: var(--pumpkin); }
+.opt:disabled { cursor: default; }
+.opt.right { border-color: var(--slime); background: #1f3a22; }
+.opt.wrong { border-color: var(--blood); background: #43182a; }
+.result { margin-top: .9rem; padding: .7rem .9rem; border-radius: 12px; background: #1e1638; font-size: .95rem; }
+.result:empty { display: none; }
+.result .big { font-weight: 700; font-size: 1.05rem; }
+.actions { margin-top: 1rem; display: flex; gap: .6rem; flex-wrap: wrap; }
+.btn { border: 2px solid var(--line); background: transparent; color: var(--ink); border-radius: 999px; padding: .5rem 1.15rem; font-weight: 700; cursor: pointer; }
+.btn.main { background: var(--pumpkin); border-color: var(--pumpkin); color: #2a1300; box-shadow: 0 3px 0 #a14d00; }
+.btn.main:hover { background: #ff9a3d; }
+:focus-visible { outline: 3px solid var(--moon); outline-offset: 2px; }
+.ghost-steal { position: fixed; right: 12%; top: 70px; font-size: 44px; z-index: 30; animation: steal 1.4s ease-in forwards; pointer-events: none; }
+@keyframes steal { 0% { transform: translate(0, 0) scale(.6); opacity: 0 } 25% { opacity: 1 } 100% { transform: translate(-220px, 140px) scale(1.1); opacity: 0 } }
+
+.overlay { position: fixed; inset: 0; background: rgba(8, 4, 18, .72); display: grid; place-items: center; padding: 1rem; z-index: 20; }
+.overlay[hidden] { display: none; }
+.modal { background: var(--night-2); border: 2px solid var(--pumpkin); border-radius: 22px; max-width: 640px; width: 100%; padding: 1.5rem 1.6rem; max-height: 92vh; overflow: auto; box-shadow: 0 0 40px rgba(255, 138, 31, .25); }
+.modal h2 { font: 400 2.3rem/1.05 var(--display); color: var(--pumpkin); margin: 0 0 .5rem; letter-spacing: .03em; }
+.modal ol { padding-left: 1.3rem; } .modal li { margin: .3rem 0; }
+.haul { font-size: 3rem; font-weight: 700; color: var(--pumpkin-2); margin: .2rem 0; font-variant-numeric: tabular-nums; }
+.rank { font: 400 1.7rem var(--display); color: var(--slime); letter-spacing: .03em; }
+table.recap { width: 100%; border-collapse: collapse; margin: .7rem 0; font-size: .92rem; }
+table.recap td { padding: .3rem .4rem; border-bottom: 1px solid var(--line); }
+table.recap td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) {
+  .yard { grid-template-columns: 1fr; }
+  header h1 { font-size: 1.6rem; } .hud { margin-left: 0; width: 100%; justify-content: space-between; }
+  .modal { padding: 1.2rem 1.1rem; } .modal h2 { font-size: 1.9rem; }
+}
+</style>
+</head>
+<body>
+<div class="bats" aria-hidden="true"><span class="bat" style="top:12%;animation-delay:0s">🦇</span><span class="bat" style="top:28%;animation-delay:-5s;font-size:16px">🦇</span><span class="bat" style="top:6%;animation-delay:-9s;font-size:18px">🦇</span></div>
+<header>
+  <h1>Trick or Treat Street</h1>
+  <div class="hud">
+    <div class="stat"><small>Candy bucket</small><b id="candy">🍬 0</b></div>
+    <div class="stat"><small>House</small><b id="hno">–</b></div>
+    <button type="button" id="restart">New night</button>
+  </div>
+</header>
+<main>
+  <div class="street" id="street"></div>
+  <p class="hood" id="hood"></p>
+  <div class="yard">
+    <div class="window"><svg id="pic" viewBox="0 0 480 320" role="img" aria-label="The picture behind the door"></svg><div class="cap" id="cap"></div></div>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+</main>
+<div class="overlay" id="overlay"></div>
+
+<script>
+(function () {
+  "use strict";
+  /* =====================================================================
+     Trick or Treat Street · STAT 112 Recitation 4
+     Lecture 3 (slides 63–end) and Lecture 4 (Gestalt principles).
+     Neighbourhood 1  Shadow Costumes   name the chart from its silhouette   (5 houses)
+     Neighbourhood 2  Haunted Patterns  which Gestalt principle?              (4 houses)
+     Neighbourhood 3  Trick or Treat?   honest chart or which trick?          (6 houses)
+     Correct answer: +3 candies. Wrong answer: a ghost steals 1 candy.
+     ===================================================================== */
+  var HOODS = [
+    { key: "shadow", title: "Shadow Costumes", n: 5, blurb: "Every chart on this street is wearing a black costume. Look at its <b>shadow</b> and guess which chart is hiding underneath." },
+    { key: "gestalt", title: "Haunted Patterns", n: 4, blurb: "The pumpkins, ghosts and bats in these windows are arranged on purpose. Which <b>Gestalt principle</b> makes you see the pattern?" },
+    { key: "trick", title: "Trick or Treat?", n: 6, blurb: "Each house shows a chart and a spooky claim. Is it an honest <b>treat</b>, or a <b>trick</b> that fools your eyes? If it's a trick, name it!" }
+  ];
+  var RANKS = [
+    [39, "Pumpkin King", "Your bucket is overflowing. No chart can fool you, not even on Halloween."],
+    [30, "Chart Witch", "Powerful magic! Only a few tricks slipped past you."],
+    [18, "Friendly Ghost", "A decent haul, but some charts scared you. Try another night!"],
+    [-1, "Lost in the Fog", "The ghosts ate most of your candy. Review Recitation 4 and come back!"]
+  ];
+  var $ = function (id) { return document.getElementById(id); };
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function ri(a, b) { return Math.floor(rnd(a, b + 1)); }
+  function randn() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- SVG helpers (viewBox 480 x 320) ---------- */
+  var W = 480, H = 320;
+  var SKY = '<defs><radialGradient id="moon" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#ffd27a"/><stop offset=".7" stop-color="#ff9a3d"/><stop offset="1" stop-color="#e2620c"/></radialGradient></defs>';
+  function moonBg() { return SKY + '<rect width="480" height="320" fill="url(#moon)"/>'; }
+  function nightBg() { return '<rect width="480" height="320" fill="#1b1433"/>'; }
+  function paperBg() { return '<rect width="480" height="320" fill="#fffaf2"/>'; }
+  function kdeShape(peaks, lo, hi, n) { var out = []; for (var i = 0; i <= n; i++) { var x = lo + (hi - lo) * i / n, d = 0; peaks.forEach(function (p) { var z = (x - p[0]) / p[1]; d += p[2] * Math.exp(-.5 * z * z); }); out.push([x, d]); } var m = Math.max.apply(null, out.map(function (p) { return p[1]; })); return out.map(function (p) { return [p[0], p[1] / m]; }); }
+  function violinPath(cx, wmax, y0, y1, peaks) { // vertical violin, values mapped from 0..1 to y1..y0
+    var k = kdeShape(peaks, 0, 1, 60), L = [], R = [];
+    k.forEach(function (p) { var y = y1 - p[0] * (y1 - y0), w = p[1] * wmax; L.push((cx - w) + "," + y); R.push((cx + w) + "," + y); });
+    return L.concat(R.reverse()).join(" ");
+  }
+  function halfViolin(cx, wmax, y0, y1, peaks, side) {
+    var k = kdeShape(peaks, 0, 1, 60), pts = [];
+    k.forEach(function (p) { var y = y1 - p[0] * (y1 - y0); pts.push((cx + side * p[1] * wmax) + "," + y); });
+    return pts.concat([cx + "," + y0, cx + "," + y1]).join(" ");
+  }
+
+  /* ---------- Neighbourhood 1: chart silhouettes ---------- */
+  var CHARTS = ["Violin plot", "Split violin plot", "Lollipop chart", "Slope chart", "Dumbbell plot", "Line chart", "Scatter plot matrix", "Correlation plot"];
+  var DESC = {
+    "Violin plot": "a box plot plus a kernel density plot mirrored on each side. Wide parts = many values; a violin with two bulges is bimodal.",
+    "Split violin plot": "each violin is cut in half, and the two halves show two groups for the same category.",
+    "Lollipop chart": "the same information as a bar chart, but thin lines with a dot reduce the clutter.",
+    "Slope chart": "lines joining each category's value at two time points: shows the change in value and in ranking.",
+    "Dumbbell plot": "two dots per category joined by a bar: growth or decline between two points in time.",
+    "Line chart": "a time-series variable plotted over time, with the points connected in time order.",
+    "Scatter plot matrix": "the scatter plots of all pairwise combinations of several continuous variables, arranged in a matrix.",
+    "Correlation plot": "the correlation coefficient r for every pair of variables (size and colour of each circle). It only measures linear relationships."
+  };
+  function drawChart(type, d, ink) {
+    var o = "", col = "#120b22", c3 = ink ? "#eb6834" : col;
+    if (type === "Violin plot") {
+      d.peaks.forEach(function (pk, i) { var cx = 110 + i * 130; o += '<polygon points="' + violinPath(cx, 48, 40, 280, pk) + '" fill="' + (ink ? ["#2a78d6", "#1baf7a", "#eb6834"][i] : col) + '" fill-opacity="' + (ink ? .6 : 1) + '"/>'; if (ink) o += '<line x1="' + cx + '" x2="' + cx + '" y1="110" y2="210" stroke="#120b22" stroke-width="6"/><circle cx="' + cx + '" cy="160" r="4" fill="#fff"/>'; });
+    } else if (type === "Split violin plot") {
+      d.peaks.forEach(function (pk, i) { var cx = 110 + i * 130; o += '<polygon points="' + halfViolin(cx - 2, 52, 40, 280, pk[0], -1) + '" fill="' + (ink ? "#2a78d6" : col) + '" fill-opacity="' + (ink ? .65 : 1) + '"/><polygon points="' + halfViolin(cx + 2, 52, 40, 280, pk[1], 1) + '" fill="' + (ink ? "#eb6834" : col) + '" fill-opacity="' + (ink ? .65 : .82) + '"/>'; });
+    } else if (type === "Lollipop chart") {
+      d.v.forEach(function (v, i) { var x = 50 + i * 48, y = 285 - v * 230; o += '<line x1="' + x + '" x2="' + x + '" y1="285" y2="' + y + '" stroke="' + col + '" stroke-width="4"/><circle cx="' + x + '" cy="' + y + '" r="11" fill="' + c3 + '"/>'; });
+      o += '<line x1="25" x2="455" y1="287" y2="287" stroke="' + col + '" stroke-width="3"/>';
+    } else if (type === "Slope chart") {
+      o += '<line x1="130" x2="130" y1="30" y2="290" stroke="' + col + '" stroke-width="3"/><line x1="350" x2="350" y1="30" y2="290" stroke="' + col + '" stroke-width="3"/>';
+      d.a.forEach(function (a, i) { var b = d.b[i], ya = 280 - a * 240, yb = 280 - b * 240; o += '<line x1="130" x2="350" y1="' + ya + '" y2="' + yb + '" stroke="' + (ink ? (b > a ? "#1baf7a" : "#e34948") : col) + '" stroke-width="4"/><circle cx="130" cy="' + ya + '" r="7" fill="' + col + '"/><circle cx="350" cy="' + yb + '" r="7" fill="' + col + '"/>'; });
+    } else if (type === "Dumbbell plot") {
+      d.a.forEach(function (a, i) { var b = d.b[i], y = 45 + i * 46, xa = 60 + a * 360, xb = 60 + b * 360; o += '<line x1="' + xa + '" x2="' + xb + '" y1="' + y + '" y2="' + y + '" stroke="' + (ink ? "#b8bec6" : col) + '" stroke-width="8" stroke-linecap="round"/><circle cx="' + xa + '" cy="' + y + '" r="11" fill="' + (ink ? "#2a78d6" : col) + '"/><circle cx="' + xb + '" cy="' + y + '" r="11" fill="' + c3 + '"/>'; });
+    } else if (type === "Line chart") {
+      var pts = d.y.map(function (v, i) { return (40 + i * 400 / (d.y.length - 1)) + "," + (280 - v * 230); });
+      o += '<polyline points="' + pts.join(" ") + '" fill="none" stroke="' + (ink ? "#2a78d6" : col) + '" stroke-width="5" stroke-linejoin="round"/>';
+      pts.forEach(function (p) { var q = p.split(","); o += '<circle cx="' + q[0] + '" cy="' + q[1] + '" r="5" fill="' + (ink ? "#2a78d6" : col) + '"/>'; });
+      o += '<line x1="30" x2="455" y1="290" y2="290" stroke="' + col + '" stroke-width="3"/><line x1="30" x2="30" y1="25" y2="290" stroke="' + col + '" stroke-width="3"/>';
+    } else if (type === "Scatter plot matrix") {
+      for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) {
+        var x0 = 75 + j * 112, y0 = 22 + i * 96;
+        o += '<rect x="' + x0 + '" y="' + y0 + '" width="104" height="88" fill="' + (ink ? "#fff" : "none") + '" stroke="' + col + '" stroke-width="3"/>';
+        if (i === j) o += '<text x="' + (x0 + 52) + '" y="' + (y0 + 52) + '" text-anchor="middle" font-size="22" font-weight="700" fill="' + col + '">' + ["x", "y", "z"][i] + "</text>";
+        else d.pts[i * 3 + j].forEach(function (p) { o += '<circle cx="' + (x0 + 8 + p[0] * 88) + '" cy="' + (y0 + 80 - p[1] * 72) + '" r="3" fill="' + (ink ? "#2a78d6" : col) + '"/>'; });
+      }
+    } else if (type === "Correlation plot") {
+      var names = ["a", "b", "c", "d"];
+      for (var r = 0; r < 4; r++) {
+        o += '<text x="' + (95 + r * 95) + '" y="' + (58 + r * 70) + '" text-anchor="middle" font-size="22" font-weight="700" fill="' + col + '">' + names[r] + "</text>";
+        for (var s = r + 1; s < 4; s++) { var v = d.r[r * 4 + s], cxx = 95 + s * 95, cyy = 50 + r * 70; o += '<circle cx="' + cxx + '" cy="' + cyy + '" r="' + (6 + 26 * Math.abs(v)) + '" fill="' + (ink ? (v > 0 ? "#2a78d6" : "#e34948") : col) + '" fill-opacity="' + (ink ? .75 : 1) + '"/>'; }
+      }
+    }
+    return o;
+  }
+  function chartData(type) {
+    var d = {};
+    if (type === "Violin plot") d.peaks = [0, 1, 2].map(function (i) { return i === 1 ? [[rnd(.25, .35), .08, 1], [rnd(.65, .75), .08, 1]] : [[rnd(.4, .6), rnd(.12, .18), 1]]; });
+    if (type === "Split violin plot") d.peaks = [0, 1, 2].map(function () { return [[[rnd(.3, .6), .14, 1]], [[rnd(.35, .7), .12, 1]]]; });
+    if (type === "Lollipop chart") d.v = [0, 1, 2, 3, 4, 5, 6, 7, 8].map(function () { return rnd(.2, 1); }).sort(function (a, b) { return b - a; });
+    if (type === "Slope chart") { d.a = [0, 1, 2, 3, 4, 5].map(function () { return rnd(.05, 1); }); d.b = d.a.map(function (a) { return Math.max(.03, Math.min(1, a + rnd(-.45, .45))); }); }
+    if (type === "Dumbbell plot") { d.a = [0, 1, 2, 3, 4, 5].map(function () { return rnd(.05, .55); }); d.b = d.a.map(function (a) { return Math.min(1, a + rnd(.08, .45)); }); }
+    if (type === "Line chart") { d.y = []; for (var m = 0; m < 24; m++) d.y.push(Math.max(.05, Math.min(1, .3 + .015 * m + .18 * Math.sin(m / 12 * 2 * Math.PI) + randn() * .03))); }
+    if (type === "Scatter plot matrix") { d.pts = []; for (var k = 0; k < 9; k++) { var s = pick([1, -1, 0]), arr = []; for (var t = 0; t < 22; t++) { var x = Math.random(); arr.push([x, Math.max(0, Math.min(1, s === 0 ? Math.random() : (s > 0 ? x : 1 - x) * .8 + Math.random() * .2))]); } d.pts.push(arr); } }
+    if (type === "Correlation plot") { d.r = []; for (var q = 0; q < 16; q++) d.r.push(rnd(-1, 1)); }
+    return d;
+  }
+
+  /* ---------- Neighbourhood 2: Gestalt windows ---------- */
+  function pumpkin(x, y, r, fill, glow) {
+    return (glow ? '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 1.9) + '" fill="#ffb35c" opacity=".35"/>' : "") +
+      '<ellipse cx="' + x + '" cy="' + y + '" rx="' + r + '" ry="' + (r * .82) + '" fill="' + fill + '"/>' +
+      '<ellipse cx="' + x + '" cy="' + y + '" rx="' + (r * .45) + '" ry="' + (r * .82) + '" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2"/>' +
+      '<rect x="' + (x - 2.5) + '" y="' + (y - r * 1.12) + '" width="5" height="' + (r * .38) + '" fill="#3b6b1f"/>';
+  }
+  function ghost(x, y, s, fill) {
+    s = s || 1; fill = fill || "#f4f1ff";
+    return '<path d="M' + (x - 14 * s) + "," + (y + 16 * s) + " L" + (x - 14 * s) + "," + y + " A" + (14 * s) + "," + (14 * s) + " 0 0 1 " + (x + 14 * s) + "," + y + " L" + (x + 14 * s) + "," + (y + 16 * s) +
+      " l" + (-7 * s) + "," + (-5 * s) + " l" + (-7 * s) + "," + (5 * s) + " l" + (-7 * s) + "," + (-5 * s) + ' Z" fill="' + fill + '"/>' +
+      '<circle cx="' + (x - 5 * s) + '" cy="' + (y - 1 * s) + '" r="' + (2.4 * s) + '" fill="#1b1433"/><circle cx="' + (x + 5 * s) + '" cy="' + (y - 1 * s) + '" r="' + (2.4 * s) + '" fill="#1b1433"/>';
+  }
+  function bat(x, y, s, fill) { s = s || 1; return '<path d="M' + x + "," + y + " l" + (-6 * s) + "," + (-5 * s) + " l" + (-10 * s) + "," + (2 * s) + " l" + (4 * s) + "," + (5 * s) + " l" + (6 * s) + "," + (1 * s) + " l" + (6 * s) + "," + (-1 * s) + " l" + (6 * s) + "," + (1 * s) + " l" + (4 * s) + "," + (-5 * s) + " l" + (-10 * s) + "," + (-2 * s) + ' Z" fill="' + (fill || "#120b22") + '" transform="translate(0,0)"/>'; }
+  var PRINCIPLES = ["Proximity", "Similarity", "Common region", "Closure", "Continuity", "Focal point", "Figure-ground", "Prägnanz"];
+  var GESTALT = [
+    { ans: "Proximity", q: "Twelve identical pumpkins, but you see <b>three groups</b>. Why?",
+      draw: function () { var o = nightBg(); [85, 240, 395].forEach(function (gx) { for (var i = 0; i < 2; i++) for (var j = 0; j < 2; j++) o += pumpkin(gx - 18 + i * 36, 140 + j * 36, 15, "#ff8a1f"); }); return o; },
+      why: "<b>Proximity:</b> objects that are close to one another are perceived as one group. Only the spacing creates the three groups." },
+    { ans: "Similarity", q: "You read this window as <b>rows</b>, not columns. Why?",
+      draw: function () { var o = nightBg(); for (var j = 0; j < 4; j++) for (var i = 0; i < 7; i++) { var x = 50 + i * 63, y = 60 + j * 66; o += j % 2 ? ghost(x, y, 1) : pumpkin(x, y + 6, 16, "#ff8a1f"); } return o; },
+      why: "<b>Similarity:</b> elements that share visual traits (shape, colour, size) are linked together. The ghost rows and the pumpkin rows form groups." },
+    { ans: "Common region", q: "Ghosts and pumpkins are mixed, yet you see <b>two groups</b>. Why?",
+      draw: function () { var o = nightBg(); [[30, 210], [250, 210]].forEach(function (b, k) { o += '<rect x="' + b[0] + '" y="40" width="' + b[1] + '" height="240" rx="16" fill="#2c2250" stroke="#b9acd9" stroke-width="3"/>'; for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) { var x = b[0] + 40 + i * 65, y = 85 + j * 70; o += (i + j + k) % 2 ? ghost(x, y, .9) : pumpkin(x, y + 6, 14, "#ff8a1f"); } }); return o; },
+      why: "<b>Common region:</b> objects inside the same bounded area are perceived as one group, even when their shapes and colours differ." },
+    { ans: "Closure", q: "This ghost is drawn with <b>broken lines</b>, but you still see a whole ghost. Why?",
+      draw: function () { var o = nightBg(); o += '<path d="M180,250 L180,140 A60,60 0 0 1 300,140 L300,250 l-30,-20 l-30,20 l-30,-20 Z" fill="none" stroke="#f4f1ff" stroke-width="7" stroke-dasharray="34 18" stroke-linejoin="round"/><circle cx="218" cy="140" r="9" fill="#f4f1ff"/><circle cx="262" cy="140" r="9" fill="#f4f1ff"/>'; return o; },
+      why: "<b>Closure:</b> the brain fills in gaps or missing lines to perceive a complete, enclosed shape." },
+    { ans: "Continuity", q: "A trail of bats crosses a straight row of bats, and you see <b>two smooth paths</b>, not four pieces. Why?",
+      draw: function () { var o = nightBg(); for (var i = 0; i < 15; i++) o += bat(30 + i * 30, 170, 1.1, "#b9acd9"); for (var t = 0; t <= 1.0001; t += 1 / 13) o += bat(90 + 300 * t, 40 + 250 * t - 120 * Math.sin(Math.PI * t) * .5, 1.1, "#ff8a1f"); return o; },
+      why: "<b>Continuity:</b> the eye naturally follows paths, lines and curves (the smoothest route) rather than abrupt changes." },
+    { ans: "Focal point", q: "Which pumpkin do you notice first, and which principle explains it?",
+      draw: function () { var o = nightBg(), hx = ri(0, 6), hy = ri(0, 3); for (var i = 0; i < 7; i++) for (var j = 0; j < 4; j++) o += pumpkin(55 + i * 62, 60 + j * 66, 17, i === hx && j === hy ? "#ff8a1f" : "#6c6488", i === hx && j === hy); return o; },
+      why: "<b>Focal point:</b> the eye captures the element that is <b>different</b> from its surroundings: one glowing pumpkin among grey ones." },
+    { ans: "Figure-ground", q: "You see a <b>white ghost</b> on a dark wall, although only the wall is painted. Why?",
+      draw: function () { var o = '<rect width="480" height="320" fill="#f4f1ff"/><rect x="60" y="20" width="360" height="280" fill="#120b22"/>'; o += ghost(240, 150, 5.2, "#f4f1ff"); return o; },
+      why: "<b>Figure–ground:</b> the mind separates the focal object (the figure) from its background (the ground). The smaller area is read as the figure." },
+    { ans: "Prägnanz", q: "This window could be a jumble of curved pieces, but you see <b>three simple circles</b> (moons). Why?",
+      draw: function () { var o = nightBg(); [[200, 135], [280, 135], [240, 200]].forEach(function (c) { o += '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="70" fill="none" stroke="#fff3c4" stroke-width="7"/>'; }); return o; },
+      why: "<b>Prägnanz</b> (the law of simplicity): we reduce complex shapes to the simplest form possible: three overlapping circles." }
+  ];
+
+  /* ---------- Neighbourhood 3: trick or treat ---------- */
+  var VERDICTS = ["Treat: an honest chart", "Trick: non-zero baseline", "Trick: upside-down axis", "Trick: the box plot hides two groups", "Trick: r misses a curved relationship"];
+  function axes(o, x0, y0, x1, y1) { return o + '<line x1="' + x0 + '" x2="' + x1 + '" y1="' + y1 + '" y2="' + y1 + '" stroke="#1b1433" stroke-width="2"/><line x1="' + x0 + '" x2="' + x0 + '" y1="' + y0 + '" y2="' + y1 + '" stroke="#1b1433" stroke-width="2"/>'; }
+  function txt(x, y, t, a, sz, col) { return '<text x="' + x + '" y="' + y + '" text-anchor="' + (a || "middle") + '" font-size="' + (sz || 13) + '" fill="' + (col || "#1b1433") + '" font-family="Atkinson Hyperlegible, sans-serif">' + t + "</text>"; }
+  function barPic(vals, labels, lo, hi, ylab, honest) {
+    var o = paperBg(), x0 = 70, y0 = 30, y1 = 270, x1 = 450;
+    o = axes(o, x0, y0, x1, y1);
+    [0, .5, 1].forEach(function (f) { var v = lo + (hi - lo) * f, y = y1 - f * (y1 - y0); o += txt(x0 - 8, y + 4, Math.round(v * 10) / 10, "end", 12, "#5d4c6e") + '<line x1="' + x0 + '" x2="' + x1 + '" y1="' + y + '" y2="' + y + '" stroke="#eee5f6"/>'; });
+    vals.forEach(function (v, i) { var x = 120 + i * 170, h = (v - lo) / (hi - lo) * (y1 - y0); o += '<rect x="' + x + '" y="' + (y1 - h) + '" width="110" height="' + h + '" fill="' + (i ? "#ff8a1f" : "#8a7fa8") + '"/>' + txt(x + 55, y1 - h - 8, v + "%", "middle", 15) + txt(x + 55, y1 + 20, labels[i]); });
+    o += '<text transform="translate(20 150) rotate(-90)" text-anchor="middle" font-size="12.5" fill="#1b1433">' + ylab + "</text>";
+    return o;
+  }
+  function areaPic(vals, inverted) {
+    var o = paperBg(), x0 = 70, y0 = 30, y1 = 270, x1 = 450, n = vals.length, mx = 200;
+    var Y = function (v) { return inverted ? y0 + v / mx * (y1 - y0) : y1 - v / mx * (y1 - y0); };
+    var pts = vals.map(function (v, i) { return (x0 + i * (x1 - x0) / (n - 1)) + "," + Y(v); });
+    var base = inverted ? y1 : y1;
+    o += '<polygon points="' + x0 + "," + (inverted ? y1 : y1) + " " + pts.join(" ") + " " + x1 + "," + base + '" fill="#c0392b" opacity=".85"/>';
+    o = axes(o, x0, y0, x1, y1);
+    [0, 100, 200].forEach(function (v) { o += txt(x0 - 8, Y(v) + 4, v, "end", 12, "#5d4c6e"); });
+    o += txt(x0, y1 + 20, "2016") + txt(x1, y1 + 20, "2026");
+    return o;
+  }
+  function boxPic(names) {
+    var o = paperBg(); o = axes(o, 40, 30, 450, 270);
+    names.forEach(function (nm, i) { var y = 100 + i * 100; o += '<line x1="110" x2="400" y1="' + y + '" y2="' + y + '" stroke="#1b1433" stroke-width="2"/><rect x="190" y="' + (y - 28) + '" width="130" height="56" fill="#ffb35c" stroke="#1b1433" stroke-width="2"/><line x1="255" x2="255" y1="' + (y - 28) + '" y2="' + (y + 28) + '" stroke="#c0392b" stroke-width="4"/>' + txt(60, y - 36, nm, "start", 14); });
+    o += txt(245, 300, "score");
+    return o;
+  }
+  function violinPic() {
+    var o = paperBg(); o = axes(o, 40, 30, 450, 270);
+    o += '<polygon points="' + violinPath(160, 55, 40, 260, [[.5, .15, 1]]) + '" fill="#8a7fa8" fill-opacity=".7" stroke="#1b1433"/>';
+    o += '<polygon points="' + violinPath(330, 55, 40, 260, [[.28, .08, 1], [.72, .08, 1]]) + '" fill="#ff8a1f" fill-opacity=".7" stroke="#1b1433"/>';
+    o += txt(160, 290, "Witches") + txt(330, 290, "Wizards");
+    return o;
+  }
+  function curvePic() {
+    var o = axes(paperBg(), 50, 30, 450, 270);
+    for (var i = 0; i < 40; i++) { var t = i / 39, x = 60 + t * 380, y = 260 - 210 * Math.sin(Math.PI * t) + randn() * 10; o += '<circle cx="' + x + '" cy="' + y + '" r="5" fill="#4a3aa7"/>'; }
+    o += txt(440, 50, "r = 0.03", "end", 15, "#c0392b") + txt(250, 300, "outdoor temperature") + '<text transform="translate(22 150) rotate(-90)" text-anchor="middle" font-size="12.5" fill="#1b1433">pumpkins sold</text>';
+    return o;
+  }
+  function linePic(vals) {
+    var o = paperBg(); o = axes(o, 70, 30, 450, 270); var n = vals.length;
+    var pts = vals.map(function (v, i) { return (70 + i * 380 / (n - 1)) + "," + (270 - v / 200 * 240); });
+    o += '<polyline points="' + pts.join(" ") + '" fill="none" stroke="#4a3aa7" stroke-width="3.5"/>';
+    [0, 100, 200].forEach(function (v) { o += txt(62, 274 - v / 200 * 240, v, "end", 12, "#5d4c6e"); });
+    o += txt(70, 290, "2016") + txt(450, 290, "2026");
+    return o;
+  }
+  var TRICKS = [
+    { ans: 1, claim: "“Costume sales <b>exploded</b>: 2026 crushed 2025!”", cap: "Costume shops that sold out (%)",
+      draw: function () { return barPic([71, 74], ["2025", "2026"], 70, 75, "shops that sold out (%)"); },
+      why: "The axis starts at 70, so 71% vs 74% looks like 1 vs 4. A bar's length is its value: with a zero baseline the increase is only 3 points. (Lecture 4, bad examples.)" },
+    { ans: 0, claim: "“Costume sales went up a little in 2026.”", cap: "Costume shops that sold out (%)",
+      draw: function () { return barPic([71, 74], ["2025", "2026"], 0, 100, "shops that sold out (%)"); },
+      why: "The bars start at zero, so their lengths are honest, and the claim (a small increase) matches the chart." },
+    { ans: 2, claim: "“Good news: haunted-house accidents have <b>dropped</b> since 2016!”", cap: "Haunted-house accidents per year",
+      draw: function () { return areaPic([110, 118, 125, 122, 140, 150, 148, 160, 165, 172, 180], true); },
+      why: "Look at the axis: 0 is at the top. The accidents actually <b>rose</b> from 110 to 180. We read the red shape as the figure and its edge as the values, so the inverted orientation leads to misperception." },
+    { ans: 0, claim: "“Haunted-house accidents have <b>risen</b> since 2016.”", cap: "Haunted-house accidents per year",
+      draw: function () { return linePic([110, 118, 125, 122, 140, 150, 148, 160, 165, 172, 180]); },
+      why: "A line chart of time-series data in the usual orientation (0 at the bottom). The claim matches the chart." },
+    { ans: 3, claim: "“Witches and wizards brew potions in <b>exactly the same way</b>: look, identical box plots!”", cap: "Potion-brewing scores",
+      draw: function () { return boxPic(["Witches", "Wizards"]); },
+      why: "Identical boxes only mean the same five numbers. With box plots you can't see whether a distribution is bimodal: the wizards' scores may form two groups. A violin plot would show it." },
+    { ans: 0, claim: "“The wizards' scores form <b>two groups</b>; the witches' scores form one.”", cap: "Potion-brewing scores (violin plots)",
+      draw: function () { return violinPic(); },
+      why: "The violin plot shows the density: the wizards' violin has two bulges (bimodal), the witches' has one. The claim is honest." },
+    { ans: 4, claim: "“r = 0.03, so outdoor temperature has <b>nothing</b> to do with pumpkin sales.”", cap: "Pumpkins sold vs outdoor temperature",
+      draw: function () { return curvePic(); },
+      why: "The points form a clear hill: sales are highest at mild temperatures. r measures only the <b>linear</b> relationship, so it misses this strong nonlinear one. Always look at the scatter plot, not just r." }
+  ];
+
+  /* ---------- state ---------- */
+  var S;
+  function newNight(skipIntro) {
+    var shadow = shuffle(CHARTS).slice(0, 5).map(function (t) { return { type: t, data: chartData(t), opts: shuffle([t].concat(shuffle(CHARTS.filter(function (c) { return c !== t; })).slice(0, 3))), ans: t }; });
+    var gest = shuffle(GESTALT).slice(0, 4).map(function (g) { return { g: g, ans: g.ans, opts: shuffle([g.ans].concat(shuffle(PRINCIPLES.filter(function (c) { return c !== g.ans; })).slice(0, 3))) }; });
+    var tr = shuffle(TRICKS).slice(0, 6), treats = TRICKS.filter(function (t) { return t.ans === 0; });
+    if (tr.filter(function (t) { return t.ans === 0; }).length < 2) { tr[5] = treats.filter(function (t) { return tr.indexOf(t) < 0; })[0] || tr[5]; }
+    var trick = shuffle(tr).map(function (t) { return { t: t, ans: VERDICTS[t.ans], opts: VERDICTS.slice() }; });
+    S = { hood: 0, k: 0, candy: 0, plan: [shadow, gest, trick], res: [[], [], []], log: [] };
+    hud();
+    if (skipIntro) hoodIntro(); else intro();
+  }
+  function total() { return HOODS.reduce(function (a, h) { return a + h.n; }, 0); }
+  function idx() { var d = 0; for (var i = 0; i < S.hood; i++) d += HOODS[i].n; return d + S.k; }
+  function hud() {
+    $("candy").textContent = "🍬 " + S.candy; $("hno").textContent = Math.min(idx() + 1, total()) + " / " + total();
+    var html = '<span class="lbl">The street:</span>', n = 0;
+    HOODS.forEach(function (h, hi) { for (var k = 0; k < h.n; k++) { var r = S.res[hi][k], cls = r === true ? "ok" : r === false ? "bad" : (n === idx() ? "on" : "");
+      html += '<svg class="house ' + cls + '" viewBox="0 0 30 30" aria-hidden="true"><path d="M3 14 L15 3 L27 14 L27 28 L3 28 Z"/><rect x="11" y="16" width="8" height="12"/></svg>'; n++; } });
+    $("street").innerHTML = html;
+    $("hood").textContent = HOODS[Math.min(S.hood, HOODS.length - 1)].title;
+  }
+  function show(html) { var o = $("overlay"); o.innerHTML = '<div class="modal" role="dialog" aria-modal="true">' + html + "</div>"; o.hidden = false; }
+  function hide() { $("overlay").hidden = true; }
+  function intro() {
+    $("pic").innerHTML = moonBg() + drawChart("Violin plot", chartData("Violin plot"));
+    $("panel").innerHTML = '<p class="eyebrow">STAT 112 · Recitation 4</p><h2>The street is waiting…</h2>';
+    show("<h2>Trick or Treat Street</h2><p>It's Halloween night on Statistics Street! Knock on <b>15 doors</b> in three neighbourhoods:</p>" +
+      "<ol><li><b>Shadow Costumes:</b> name the chart from its black silhouette (5 houses).</li><li><b>Haunted Patterns:</b> name the Gestalt principle behind each spooky window (4 houses).</li><li><b>Trick or Treat?:</b> is the chart honest, or which trick is it playing on your eyes? (6 houses)</li></ol>" +
+      "<p>Right answer: <b>+3 candies</b> 🍬. Wrong answer: a ghost steals <b>1 candy</b> 👻.</p>" +
+      '<p style="color:#b9acd9;font-size:.9rem">Topics: violin and split violin plots, lollipop, slope and dumbbell charts, line charts, scatter plot matrix and correlation plots, Gestalt principles, and misleading charts.</p>' +
+      '<div class="actions"><button class="btn main" id="go" type="button">Start trick-or-treating 🎃</button></div>');
+    $("go").addEventListener("click", function () { hide(); hoodIntro(); }); $("go").focus();
+  }
+  function hoodIntro() {
+    var h = HOODS[S.hood]; hud();
+    show('<p class="eyebrow">Neighbourhood ' + (S.hood + 1) + " of 3</p><h2>" + h.title + "</h2><p>" + h.blurb + '</p><div class="actions"><button class="btn main" id="go" type="button">Knock on the first door</button></div>');
+    $("go").addEventListener("click", function () { hide(); play(); }); $("go").focus();
+  }
+  function play() {
+    hud(); var item = S.plan[S.hood][S.k], key = HOODS[S.hood].key, p = $("panel");
+    var head = '<p class="eyebrow">' + HOODS[S.hood].title + " · house " + (S.k + 1) + " of " + HOODS[S.hood].n + "</p>";
+    if (key === "shadow") {
+      $("pic").innerHTML = moonBg() + drawChart(item.type, item.data); $("cap").textContent = "A chart in costume…";
+      p.innerHTML = head + "<h2>Whose shadow is this?</h2><p>Which chart is hiding under the black costume?</p>";
+    } else if (key === "gestalt") {
+      $("pic").innerHTML = item.g.draw(); $("cap").textContent = "A haunted window";
+      p.innerHTML = head + "<h2>Haunted pattern</h2><p>" + item.g.q + "</p>";
+    } else {
+      $("pic").innerHTML = item.t.draw(); $("cap").textContent = item.t.cap;
+      p.innerHTML = head + '<h2>Trick or treat?</h2><div class="claim">' + item.t.claim + "</div><p style='font-size:.92rem;color:#b9acd9;margin:.3rem 0 0'>Look carefully at the chart, its axis and what it can show.</p>";
+    }
+    var box = document.createElement("div"); box.className = "opts"; box.id = "opts"; p.appendChild(box);
+    var res = document.createElement("div"); res.className = "result"; res.id = "res"; p.appendChild(res);
+    var acts = document.createElement("div"); acts.className = "actions"; acts.id = "acts"; p.appendChild(acts);
+    var btns = item.opts.map(function (o) { var b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = o; b.dataset.v = o; box.appendChild(b); return b; });
+    btns.forEach(function (b) { b.addEventListener("click", function () { answer(item, b, btns); }); });
+    btns[0].focus();
+  }
+  function answer(item, b, btns) {
+    var ok = b.dataset.v === item.ans, key = HOODS[S.hood].key;
+    btns.forEach(function (x) { x.disabled = true; if (x.dataset.v === item.ans) x.classList.add("right"); });
+    if (!ok) b.classList.add("wrong");
+    S.res[S.hood][S.k] = ok; S.candy = Math.max(0, S.candy + (ok ? 3 : -1)); S.log.push([HOODS[S.hood].title, ok]);
+    if (!ok) { var g = document.createElement("div"); g.className = "ghost-steal"; g.textContent = "👻"; document.body.appendChild(g); setTimeout(function () { g.remove(); }, 1500); }
+    var why;
+    if (key === "shadow") { $("pic").innerHTML = paperBg() + drawChart(item.type, item.data, true); $("cap").textContent = "Costume off: it's a " + item.ans.toLowerCase() + "!"; why = "<b>" + item.ans + "</b>: " + DESC[item.ans]; }
+    else if (key === "gestalt") why = item.g.why;
+    else why = "<b>" + item.ans + ".</b> " + item.t.why;
+    $("res").innerHTML = '<div class="big">' + (ok ? "🍬 Correct! +3 candies" : "👻 Boo! Wrong answer, and a ghost stole a candy.") + "</div><p style='margin:.4rem 0 0'>" + why + "</p>";
+    hud();
+    var n = document.createElement("button"); n.type = "button"; n.className = "btn main";
+    var lastInHood = S.k === HOODS[S.hood].n - 1, last = lastInHood && S.hood === HOODS.length - 1;
+    n.textContent = last ? "Count my candy" : lastInHood ? "Next neighbourhood" : "Next house";
+    n.addEventListener("click", next); $("acts").appendChild(n); n.focus();
+  }
+  function next() {
+    S.k++;
+    if (S.k >= HOODS[S.hood].n) { S.hood++; S.k = 0; if (S.hood >= HOODS.length) return finale(); return hoodIntro(); }
+    play();
+  }
+  function finale() {
+    S.hood = HOODS.length - 1; S.k = HOODS[S.hood].n - 1; hud();
+    var rank = RANKS.filter(function (r) { return S.candy >= r[0]; })[0], max = total() * 3;
+    var rows = HOODS.map(function (h, i) { var c = S.res[i].filter(function (x) { return x; }).length; return "<tr><td>" + h.title + "</td><td>" + c + " / " + h.n + " correct</td></tr>"; }).join("");
+    show("<h2>Candy count!</h2><div class='haul'>🍬 " + S.candy + " <span style='font-size:1.2rem;color:#b9acd9'>/ " + max + "</span></div><p>Your Halloween title:</p><div class='rank'>" + rank[1] + "</div><p>" + rank[2] + "</p>" +
+      "<table class='recap'>" + rows + "</table>" +
+      "<p style='font-size:.9rem;color:#b9acd9'>Every night the street changes: new costumes, new haunted windows and new tricks. Play again to meet them all!</p>" +
+      '<div class="actions"><button class="btn main" id="again" type="button">Another night 🎃</button></div>');
+    $("again").addEventListener("click", function () { hide(); newNight(true); }); $("again").focus();
+  }
+  $("restart").addEventListener("click", function () { if (!S || S.candy === 0 || confirm("Start a new night? Your candy will be lost.")) { hide(); newNight(true); } });
+  window.__tot = function () { return S; };
+  newNight();
+})();
+</script>
+</body>
+</html>
