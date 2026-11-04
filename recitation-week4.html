@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Recitation 4 – STAT 112</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-cb9204863bce9d0f417f179c14b9f9e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Recitation 4 – STAT 112">
+<meta property="og:description" content="Scatter plot matrix &amp; correlation plots · Violin plots · Lollipop, slope &amp; dumbbell charts · Time series · Gestalt principles in data visualization">
+<meta property="og:image" content="https://statserenay.github.io/stat112-site/recitation4/r4-splom.png">
+<meta property="og:site_name" content="STAT 112">
+<meta property="og:image:alt" content="Figure A1: a 4 by 4 scatter plot matrix of study hours per week, screen time per day, sleep per night and GPA for 70 students. Study and GPA rise together; study and screen fall together; sleep and GPA form an upside-down U.">
+<meta property="og:image:height" content="1291">
+<meta property="og:image:width" content="1355">
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 112</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-computing">    
+        <li>
+    <a class="dropdown-item" href="./computing-setup.html">
+ <span class="dropdown-text">Setup</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-recitations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Recitations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-recitations">    
+        <li>
+    <a class="dropdown-item" href="./recitation-week1.html">
+ <span class="dropdown-text">Recitation 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week2.html">
+ <span class="dropdown-text">Recitation 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week3.html">
+ <span class="dropdown-text">Recitation 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week4.html">
+ <span class="dropdown-text">Recitation 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./homeworks.html"> 
+<span class="menu-text">Homeworks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./games-tab/games.html"> 
+<span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chats-tab/chats.html"> 
+<span class="menu-text">Student Chats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./flashcards.html"> 
+<span class="menu-text">Flashcards</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calculator.html"> 
+<span class="menu-text">Calculator</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ask.html"> 
+<span class="menu-text">Ask a Question</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/statserenay"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:serenay@metu.edu.tr"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#how-to-use-this-page" id="toc-how-to-use-this-page" class="nav-link active" data-scroll-target="#how-to-use-this-page">How to use this page</a></li>
+  <li><a href="#part-a-many-numerical-variables" id="toc-part-a-many-numerical-variables" class="nav-link" data-scroll-target="#part-a-many-numerical-variables">Part A — Many numerical variables</a></li>
+  <li><a href="#part-b-box-plots-violin-plots-and-split-violin-plots" id="toc-part-b-box-plots-violin-plots-and-split-violin-plots" class="nav-link" data-scroll-target="#part-b-box-plots-violin-plots-and-split-violin-plots">Part B — Box plots, violin plots and split violin plots</a></li>
+  <li><a href="#part-c-lollipop-slope-and-dumbbell-charts" id="toc-part-c-lollipop-slope-and-dumbbell-charts" class="nav-link" data-scroll-target="#part-c-lollipop-slope-and-dumbbell-charts">Part C — Lollipop, slope and dumbbell charts</a></li>
+  <li><a href="#part-d-time-series-data-and-line-charts" id="toc-part-d-time-series-data-and-line-charts" class="nav-link" data-scroll-target="#part-d-time-series-data-and-line-charts">Part D — Time-series data and line charts</a></li>
+  <li><a href="#part-e-gestalt-principles" id="toc-part-e-gestalt-principles" class="nav-link" data-scroll-target="#part-e-gestalt-principles">Part E — Gestalt principles</a></li>
+  <li><a href="#part-f-gestalt-principles-in-data-visualization" id="toc-part-f-gestalt-principles-in-data-visualization" class="nav-link" data-scroll-target="#part-f-gestalt-principles-in-data-visualization">Part F — Gestalt principles in data visualization</a></li>
+  <li><a href="#part-g-your-turn" id="toc-part-g-your-turn" class="nav-link" data-scroll-target="#part-g-your-turn">Part G — YOUR TURN</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Recitation 4</h1>
+<p class="subtitle lead">Scatter plot matrix &amp; correlation plots · Violin plots · Lollipop, slope &amp; dumbbell charts · Time series · Gestalt principles in data visualization</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+div.quiz.qz-match { display: block; margin-top: 1.6rem; }
+.qz-match-left mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+@media (max-width: 700px) { main table { display: block; max-width: 100%; overflow-x: auto; } }
+.pts { font-weight: 700; color: #0f7c74; }
+.qz-row-ctrls, .qz-row-ctrls > * { min-width: 0; max-width: 100%; }
+.qz-row-ctrls select { width: 100%; }
+</style>
+<section id="how-to-use-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-page">How to use this page</h2>
+<p>Each question below is interactive. Click an option or type an answer, then press <strong>Check</strong> (or <kbd>Enter</kbd>). <strong>Show answer</strong> reveals the solution and the explanation, and <strong>Reset</strong> clears the question so you can try again.</p>
+<div class="quiz-scoreboard">
+<p>Progress</p>
+</div>
+</section>
+<section id="part-a-many-numerical-variables" class="level1">
+<h1>Part A — Many numerical variables</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Scatter plot matrix:</strong> when a data set has many continuous variables, we draw the scatter plots of <strong>all pairwise combinations</strong> of the variables and arrange them in a matrix. Row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> shows variable <span class="math inline">\(i\)</span> against variable <span class="math inline">\(j\)</span>.</li>
+<li><strong>Correlation plot:</strong> shows the correlation coefficient <span class="math inline">\(r\)</span> for every pair of variables, often with coloured circles (colour = sign, size = strength).</li>
+<li><strong>Drawback of a correlation plot:</strong> it does not give any information about the <strong>nonlinearity</strong> of a relationship; it only measures the <strong>linear</strong> relationship. If there is a nonlinear relationship, we can apply a <strong>transformation</strong> to the variables, such as <span class="math inline">\(\log(x)\)</span>, to satisfy linearity.</li>
+<li><strong>Variable types in the data:</strong> a variable stored as numbers is not always numerical. Codes such as 0/1 for “automatic/manual” or the number of cylinders (4, 6, 8) are <strong>categories</strong>, so they should be converted to <strong>factors</strong> before plotting.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><img src="recitation4/r4-splom.png" class="img-fluid" alt="Figure A1: a 4 by 4 scatter plot matrix of study hours per week, screen time per day, sleep per night and GPA for 70 students. Study and GPA rise together; study and screen fall together; sleep and GPA form an upside-down U."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Use <strong>Figure A1</strong> (70 students; variables: study hours per week, screen time per day, sleep per night and GPA).</p>
+<p>A scatter plot matrix of 4 variables contains <span class="blank" data-answer="6" data-tol="0"></span> <strong>different</strong> pairs of variables (each pair appears twice, above and below the diagonal).<br>
+The panel in row “GPA”, column “study” shows a <span class="blank" data-answer="positive|positive linear|positive, linear"></span> relationship.<br>
+The panel in row “screen”, column “study” shows a <span class="blank" data-answer="negative|negative linear|negative, linear"></span> relationship.<br>
+The pair with an upside-down U (curved) shape is sleep and <span class="blank" data-answer="GPA|gpa"></span>.</p>
+<div class="explain">
+<ul>
+<li>With 4 variables there are <span class="math inline">\(\binom{4}{2} = 6\)</span> pairs: study–screen, study–sleep, study–GPA, screen–sleep, screen–GPA, sleep–GPA. The panels above the diagonal are the mirror images of those below it (axes swapped).</li>
+<li>Students who study more tend to have a <strong>higher</strong> GPA and <strong>less</strong> screen time.</li>
+<li><strong>Sleep–GPA:</strong> GPA is highest around 7 hours of sleep and lower for both very short and very long sleep: a <strong>nonlinear</strong> relationship.</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-corrplot.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Figure A2: correlation plot of study, screen, sleep and GPA with circles for each pair." width="560"></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Use the correlation plot <strong>Figure A2</strong>, made from the same data.</p>
+<p>The strongest positive correlation is between study and <span class="blank" data-answer="GPA|gpa"></span>, with <span class="math inline">\(r =\)</span> <span class="blank" data-answer="0.5" data-tol="0.005"></span>.<br>
+The strongest negative correlation is between study and <span class="blank" data-answer="screen|screen time"></span>, with <span class="math inline">\(r =\)</span> <span class="blank" data-answer="-0.46" data-tol="0.005"></span>.<br>
+The correlation between sleep and GPA is only <span class="math inline">\(r =\)</span> <span class="blank" data-answer="-0.18" data-tol="0.005"></span>.</p>
+<div class="explain">
+<p>Darker tiles mean stronger correlations: study–GPA (<span class="math inline">\(r = 0.50\)</span>, blue = positive) and study–screen (<span class="math inline">\(r = -0.46\)</span>, red = negative). Ignore the dark diagonal: it only shows that each variable is perfectly correlated with itself (<span class="math inline">\(r = 1\)</span>). Sleep–GPA has only a pale tile (<span class="math inline">\(r = -0.18\)</span>), even though Figure A1 shows a clear pattern for this pair (see the next question).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>Figure A2 says sleep and GPA are only weakly correlated (<span class="math inline">\(r = -0.18\)</span>), but Figure A1 shows a clear upside-down U. How do you explain this?</p>
+<ul>
+<li>The correlation plot is wrong; <span class="math inline">\(r\)</span> was computed incorrectly.</li>
+<li>Sleep and GPA are not related at all.</li>
+<li>The relationship is strong but <strong>nonlinear</strong>; a correlation plot only measures the linear relationship, so it cannot show this pattern.</li>
+<li>The scatter plot matrix exaggerates relationships, so we should trust only the correlation plot.</li>
+</ul>
+<div class="explain">
+<p>This is the drawback of correlation plots stated in the lecture: they give no information about the <strong>nonlinearity</strong> of a relationship. Always look at the scatter plot matrix together with the correlation plot. For a nonlinear relationship, a <strong>transformation</strong> of the variables (such as <span class="math inline">\(\log(x)\)</span>) can sometimes make it linear.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Quantitative|Qualitative (factor)">
+<p>A data set on 40 phones was read into R. Its structure looks like this:</p>
+<pre><code>'data.frame':  40 obs. of  6 variables:
+ $ price   : num  18999 24500 15999 ...
+ $ battery : num  4500 5000 4000 ...
+ $ weight  : num  187 201 174 ...
+ $ cameras : num  2 3 2 ...
+ $ fiveG   : num  1 1 0 ...    (0 = no, 1 = yes)
+ $ brand   : num  1 3 2 ...    (1 = A, 2 = B, 3 = C)</code></pre>
+<p>Which variables should be treated as numerical and which should be converted to factors?</p>
+<ul>
+<li>price :: Quantitative</li>
+<li>battery (mAh) :: Quantitative</li>
+<li>weight (g) :: Quantitative</li>
+<li>cameras (number of rear cameras: 2, 3 or 4) :: Qualitative (factor)</li>
+<li>fiveG :: Qualitative (factor)</li>
+<li>brand :: Qualitative (factor)</li>
+</ul>
+<div class="explain">
+<ul>
+<li><code>fiveG</code> and <code>brand</code> are <strong>codes</strong> for categories: their numbers have no numerical meaning (brand 3 is not “three times” brand 1).</li>
+<li><code>cameras</code> takes only a few values that define groups (2, 3 or 4 cameras), so it is treated as a factor.</li>
+<li>Once these are factors, they can be used for colour, shape or separate panels instead of appearing in a scatter plot matrix as if they were continuous.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-b-box-plots-violin-plots-and-split-violin-plots" class="level1">
+<h1>Part B — Box plots, violin plots and split violin plots</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms: read the four plots
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A box plot uses only five numbers, so it <strong>cannot show</strong> whether a distribution is bimodal or multimodal. A <strong>violin plot</strong> adds the <strong>density</strong> on each side. Adding the points (<strong>strip plot</strong>) gives the complete view, and a <strong>split violin</strong> compares two groups inside one violin.</p>
+<p><img src="recitation4/r4-violin-guide.png" class="img-fluid" alt="Four annotated plots of the same exam scores. 1: a box plot with labels for minimum, Q1, median, Q3 and maximum, and a note that it hides the two groups. 2: a violin plot with labels: kernel density mirrored on each side, wide means many students, narrow means few students, white dot is the median, thick bar is the interquartile range, thin line is the 95% confidence interval. 3: the violin with every student as a dot, showing groups around 46 and 76 and almost nobody near the median. 4: split violins for two courses, left half female students, right half male students, with a median line in each half."></p>
+</div>
+</div>
+</div>
+<p><img src="recitation4/r4-box-violin.png" class="img-fluid" alt="Exam scores in three labs drawn as box plots, violin plots, and violin plus strip plots. Labs 1 and 2 have almost identical box plots, but the violin of Lab 2 has two separate bulges. Lab 3 is right-skewed."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<p>Labs 1 and 2 have almost the same box: <span class="math inline">\(Q_1 \approx 55\)</span>, median <span class="math inline">\(\approx 61.5\)</span>, <span class="math inline">\(Q_3 \approx 68\)</span>. What do the violin plots reveal?</p>
+<ul>
+<li>Lab 2 has a higher median than Lab 1.</li>
+<li>Lab 2 is bimodal: its scores form two groups, around 55 and around 68, with few students near the median.</li>
+<li>Lab 1 is bimodal.</li>
+<li>Lab 3 is symmetric.</li>
+</ul>
+<div class="explain">
+<p>The box plot uses only five numbers, so it hides the two peaks of Lab 2. The violin’s width shows the density: Lab 2 has two bulges and a narrow “waist” exactly at the median. Lab 1 is unimodal and roughly symmetric; Lab 3 is right-skewed (long upper tail). The third panel adds the individual points (a strip plot), which confirms the two groups in Lab 2.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Median|Interquartile range|95% confidence interval|Density (how frequent the values are)">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-violin-anatomy.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="A violin plot with four numbered labels: 1 points to the white dot, 2 to the thick black bar, 3 to the thin black line, 4 to the width of the violin." width="420"></p>
+</figure>
+</div>
+<p>What does each numbered part of the violin plot show?</p>
+<ul>
+<li>1 (white dot) :: Median</li>
+<li>2 (thick black bar) :: Interquartile range</li>
+<li>3 (thin black line) :: 95% confidence interval</li>
+<li>4 (width of the violin) :: Density (how frequent the values are)</li>
+</ul>
+<div class="explain">
+<p>The inside of the violin is a small box plot: the white dot is the <strong>median</strong> and the thick bar spans the <strong>interquartile range</strong> (<span class="math inline">\(Q_1\)</span> to <span class="math inline">\(Q_3\)</span>); the thin line shows the <strong>95% confidence interval</strong>. The outline is a <strong>kernel density plot</strong>, mirrored on both sides: the wider the violin at a value, the more observations there are near that value. This violin is wide around 30 and again around 52: it is bimodal.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,d">
+<p>Which statements about box plots and violin plots are <strong>true</strong>? Select all that apply.</p>
+<ul>
+<li>A violin plot combines a box plot with a kernel density plot drawn on each side.</li>
+<li>Two groups can have nearly identical box plots but very different violin plots.</li>
+<li>A box plot clearly shows whether a distribution is bimodal.</li>
+<li>Violin plots display more information than box plots, but they can be noisier.</li>
+<li>In a violin plot, the thick black bar shows the range from the minimum to the maximum.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>c is false:</strong> with box plots you can’t see if the distribution is bimodal or multimodal.</li>
+<li><strong>e is false:</strong> the thick bar is the <strong>interquartile range</strong>; the thin line shows the 95% confidence interval.</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/meme-violin.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: a box plot claims to be one normal group, but the violin plot reveals two groups."></p>
+</figure>
+</div>
+<p><img src="recitation4/r4-split-violin.png" class="img-fluid" alt="Figure B3: split violin plots of travel time to class at four campus gates. Left halves are bus users, right halves are bike users, with a median line in each half."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p><strong>Figure B3</strong> shows travel time to class for students who come by <strong>bus</strong> (left, blue halves) and by <strong>bike</strong> (right, orange halves), at four campus gates.</p>
+<p>The only gate where bike users are <strong>slower</strong> than bus users is Gate <span class="blank" data-answer="C|c"></span>.<br>
+The largest difference between the bus and bike medians is at Gate <span class="blank" data-answer="D|d"></span>: about 25 minutes for bus users vs about <span class="blank" data-answer="10.6" data-tol="1"></span> minutes for bike users.<br>
+The group with the <strong>widest spread</strong> of travel times is the <span class="blank" data-answer="bus|bus users"></span> users at Gate D.</p>
+<div class="explain">
+<ul>
+<li>In a split violin each category (gate) has one violin whose two halves are the two groups, so the groups can be compared directly at each gate.</li>
+<li>Gate C: bike median ≈ 16 min vs bus median ≈ 12 min, the only reversal.</li>
+<li>Gate D: bus ≈ 25 min vs bike ≈ 11 min. The blue half at Gate D is also the tallest (from about 3 to 42 minutes): bus travel times there vary the most.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-c-lollipop-slope-and-dumbbell-charts" class="level1">
+<h1>Part C — Lollipop, slope and dumbbell charts</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Lollipop chart:</strong> conveys the same information as a bar chart. By reducing the thick bars into thin lines with a dot, it <strong>reduces clutter</strong> and lays more emphasis on the <strong>value</strong>.</li>
+<li><strong>Slope chart:</strong> a great tool to visualize <strong>change in value and ranking</strong> between categories (for example from one year to the next). Each category is a line between the two time points.</li>
+<li><strong>Dumbbell plot:</strong> shows <strong>relative positions</strong> (like growth and decline) <strong>between two points in time</strong>, or compares the <strong>distance between two categories</strong>. To display the dumbbells in the desired order, arrange the levels of the <span class="math inline">\(y\)</span> variable (e.g.&nbsp;by the size of the change).</li>
+</ul>
+</div>
+</div>
+</div>
+<p><img src="recitation4/r4-gallery.png" class="img-fluid" alt="Six small graphs labelled G1 to G6."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Dumbbell plot|Line chart|Slope chart|Violin plot|Lollipop chart|Scatter plot matrix" data-label="Name that graph">
+<p>Name each graph in the gallery above.</p>
+<ul>
+<li>G1 :: Lollipop chart</li>
+<li>G2 :: Slope chart</li>
+<li>G3 :: Dumbbell plot</li>
+<li>G4 :: Line chart</li>
+<li>G5 :: Violin plot</li>
+<li>G6 :: Scatter plot matrix</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>G1:</strong> thin lines with a dot at the value: a bar chart with less ink.</li>
+<li><strong>G2:</strong> each student’s GPA in two semesters joined by a line; crossing lines show changes in <strong>ranking</strong>.</li>
+<li><strong>G3:</strong> two dots per department (2016 and 2026) joined by a bar that shows the change.</li>
+<li><strong>G4:</strong> a variable plotted over time with the points connected in time order.</li>
+<li><strong>G5:</strong> box plot + mirrored density on each side.</li>
+<li><strong>G6:</strong> all pairwise scatter plots of three variables, arranged in a matrix.</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-slope.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Figure C1: slope chart of cafeteria satisfaction by faculty in 2025 and 2026." width="560"></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Use the slope chart <strong>Figure C1</strong> (cafeteria satisfaction, scale 1–5).</p>
+<p>The faculty with the largest <strong>increase</strong> is <span class="blank" data-answer="Arts &amp; Sci.|Arts and Sciences|Arts &amp; Sciences|Arts and Sci|Arts"></span>, by <span class="blank" data-answer="0.6" data-tol="0.01"></span> points.<br>
+The number of faculties whose score <strong>decreased</strong> is <span class="blank" data-answer="3|three" data-tol="0"></span>.<br>
+Ranked first in 2025: <span class="blank" data-answer="Engineering"></span>. Ranked first in 2026: <span class="blank" data-answer="Arts &amp; Sci.|Arts and Sciences|Arts &amp; Sciences|Arts and Sci|Arts"></span>.<br>
+Education fell from rank 3 to rank <span class="blank" data-answer="5|five|last" data-tol="0"></span>.</p>
+<div class="explain">
+<ul>
+<li>Changes: Engineering 3.8 → 3.6 (−0.2), Arts &amp; Sci. 3.1 → 3.7 (<strong>+0.6</strong>), Economics 3.5 → 3.4 (−0.1), Architecture 2.9 → 3.3 (+0.4), Education 3.3 → 3.0 (−0.3). Three red (falling) lines.</li>
+<li>Ranks in 2025: Engineering, Economics, Education, Arts &amp; Sci., Architecture. In 2026: Arts &amp; Sci., Engineering, Economics, Architecture, Education.</li>
+<li>The slope chart shows <strong>both</strong> the change in value (the slope) and the change in <strong>ranking</strong> (lines crossing).</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-dumbbell.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Figure C2: dumbbell plot of the percentage of students who cycle to campus in 2016 and 2026 for seven cities, sorted by the size of the change." width="600"></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Use the dumbbell plot <strong>Figure C2</strong> (% of students who cycle to campus).</p>
+<p>The city with the largest increase from 2016 to 2026 is <span class="blank" data-answer="Eskişehir|Eskisehir"></span>, from 8% to <span class="blank" data-answer="19" data-tol="0"></span>%.<br>
+The city with the smallest increase is <span class="blank" data-answer="Bursa"></span>.<br>
+In 2016 the highest percentage was in <span class="blank" data-answer="Konya"></span>.<br>
+The cities are sorted by the <span class="blank" data-answer="change|increase|size of the change|difference|growth|gap"></span> between the two years.</p>
+<div class="explain">
+<p>Each dumbbell joins the 2016 value (blue) and the 2026 value (orange); the grey bar’s length is the change. Eskişehir: 8 → 19 (+11), Bursa: 2 → 3 (+1). In 2016 Konya had the highest value (9%), but by 2026 two cities (Eskişehir and İzmir) had passed it.</p>
+<p>The lecture’s tip: to display the dumbbells in the desired order, arrange the levels of the <span class="math inline">\(y\)</span> variable. Sorting by the size of the change makes the comparison immediate.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="match">
+<p>Match each graph with the job it does best.</p>
+<ul>
+<li>Lollipop chart :: Compare values across categories like a bar chart, with less clutter</li>
+<li>Slope chart :: Show the change in value and in ranking between two time points</li>
+<li>Dumbbell plot :: Show growth or decline between two points in time for each category</li>
+<li>Violin plot :: Show the shape of a distribution, including several peaks</li>
+<li>Scatter plot matrix :: Look at all pairwise relationships among many continuous variables</li>
+<li>Line chart :: Show how a variable changes over successive points in time</li>
+</ul>
+<div class="explain">
+<p>Choosing the graph starts with the question: <em>compare categories</em> (lollipop), <em>show change</em> (slope, dumbbell, line), <em>show relationships</em> (scatter plot matrix) or <em>show distributions</em> (violin).</p>
+</div>
+</div>
+</section>
+<section id="part-d-time-series-data-and-line-charts" class="level1">
+<h1>Part D — Time-series data and line charts</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Data can be classified by the time they are collected: <strong>cross-sectional data</strong> are all collected <strong>once</strong> in time; <strong>time-series data</strong> are collected at <strong>successive points in time</strong>.</li>
+<li>Time-series data are often depicted on a <strong>line chart</strong>: a plot of the variable over time, with the points connected in time order.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Time series|Cross-sectional">
+<p>Are these <strong>time-series</strong> or <strong>cross-sectional</strong> data?</p>
+<ul>
+<li>Turkey’s monthly inflation rate from 2015 to 2026 :: Time series</li>
+<li>The daily number of visitors to the METU library during October :: Time series</li>
+<li>The rents of 160 flats near METU in September 2026 :: Cross-sectional</li>
+<li>Your weight, measured every Monday for a year :: Time series</li>
+<li>The GPAs of all STAT 112 students this semester :: Cross-sectional</li>
+<li>The heights of the players of the national basketball team in 2026 :: Cross-sectional</li>
+</ul>
+<div class="explain">
+<p><strong>Time series:</strong> one unit (a country, a library, a person) observed at successive points in time; the <strong>order</strong> matters. <strong>Cross-sectional:</strong> many units measured <strong>once</strong>, at the same point in time.</p>
+</div>
+</div>
+<p><img src="recitation4/r4-line.png" class="img-fluid" alt="Figure D1: line chart of monthly campus bike-share trips from January 2024 to September 2026. Trips rise each spring and autumn, drop sharply in July and August and in winter, and the peaks get higher every year."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,c,e">
+<p>Use the line chart <strong>Figure D1</strong> (monthly bike-share trips on campus). Which statements are supported? Select all that apply.</p>
+<ul>
+<li>There is an upward trend: the peaks get higher from 2024 to 2026.</li>
+<li>Every year, the number of trips drops sharply in July and August.</li>
+<li>Trips are also low in the winter months (December–February).</li>
+<li>The number of trips is the same every month.</li>
+<li>The highest number of trips in the period is in spring 2026.</li>
+<li>A histogram of the 33 monthly values would show the same information as the line chart.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>a, e:</strong> the spring peaks rise from about 2,000 (2024) to about 2,600 (2025) and 3,100 (May 2026).</li>
+<li><strong>b, c:</strong> a repeating pattern: low during the summer break and in winter, high in spring and autumn (semesters).</li>
+<li><strong>f is false:</strong> a histogram ignores the <strong>order</strong> of the months, so the trend and the yearly pattern would disappear. For time-series data, use a line chart.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="part-e-gestalt-principles" class="level1">
+<h1>Part E — Gestalt principles</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Gestalt</strong> is a German word meaning “whole”, “shape” or “form”. The Gestalt principle is a psychological term developed in the <strong>1920s</strong>: people tend to organize visual elements into groups or <strong>“unified wholes”</strong>. <em>The whole is greater than its parts.</em></li>
+<li><strong>Gestalt laws</strong> (Wertheimer, Köhler and Koffka) explain how we group smaller objects to form larger ones (<strong>perceptual organization</strong>):
+<ul>
+<li><strong>Closure:</strong> the brain fills in gaps or missing lines to see a complete shape.</li>
+<li><strong>Proximity:</strong> objects that are <strong>close</strong> to one another are seen as one group.</li>
+<li><strong>Similarity:</strong> objects that share visual traits (size, colour, texture, dimension, shape, orientation) are seen as a group.</li>
+<li><strong>Prägnanz (simplicity):</strong> we reduce complex shapes to the <strong>simplest</strong> form possible.</li>
+<li><strong>Continuity:</strong> the eye follows paths, lines and curves rather than abrupt changes.</li>
+<li><strong>Common region:</strong> objects inside the <strong>same bounded region</strong> are seen as one group.</li>
+<li><strong>Figure–ground:</strong> the mind separates the <strong>figure</strong> (focal object) from the <strong>ground</strong> (background). Usually the larger area is seen as the ground and the smaller as the figure; lighter and darker colours influence this.</li>
+<li><strong>Focal point:</strong> the eye is captured by the element that is <strong>different</strong> from its surroundings.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<p><img src="recitation4/r4-gestalt.png" class="img-fluid" alt="Eight small pictures labelled P1 to P8 illustrating Gestalt principles."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="|Closure|Figure-ground|Similarity|Common region|Proximity|Focal point|Continuity|Prägnanz" data-label="Name that principle">
+<p>Which Gestalt principle does each picture illustrate best?</p>
+<ul>
+<li>P1 :: Proximity</li>
+<li>P2 :: Similarity</li>
+<li>P3 :: Common region</li>
+<li>P4 :: Closure</li>
+<li>P5 :: Continuity</li>
+<li>P6 :: Focal point</li>
+<li>P7 :: Figure-ground</li>
+<li>P8 :: Prägnanz</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>P1:</strong> 24 identical dots, but the spacing makes us see <strong>three groups</strong>.</li>
+<li><strong>P2:</strong> we see <strong>rows</strong> of circles and rows of squares (same shape and colour belong together).</li>
+<li><strong>P3:</strong> the colours alternate, yet we group the dots by the <strong>box</strong> they are in; common region overrides colour.</li>
+<li><strong>P4:</strong> a circle and a square with gaps: the brain fills in the missing parts.</li>
+<li><strong>P5:</strong> we see one straight line and one curve crossing, not two broken pieces; the eye follows the smoothest path.</li>
+<li><strong>P6:</strong> the single red dot catches the eye immediately.</li>
+<li><strong>P7:</strong> the white arrow is the <strong>figure</strong> and the black area is the <strong>ground</strong>.</li>
+<li><strong>P8:</strong> we see three overlapping circles, the simplest interpretation, rather than many complicated curved pieces.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="tf" data-answer="true">
+<p>In a figure–ground picture, our brain generally interprets the <strong>larger</strong> area as the ground (background) and the <strong>smaller</strong> area as the figure, although light and dark colours can change what is seen as the figure.</p>
+<div class="explain">
+<p><strong>True.</strong> This is how the lecture describes the figure–ground principle. Because it uses negative space, it is similar to the closure principle, and some pictures can be read in two ways, depending on which area you see as the figure.</p>
+</div>
+</div>
+</section>
+<section id="part-f-gestalt-principles-in-data-visualization" class="level1">
+<h1>Part F — Gestalt principles in data visualization</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Data visualization is “how to tell <strong>stories</strong> with data”, helping the audience understand what is sometimes difficult to see. All visualizations at the end are <strong>exploratory</strong>.</li>
+<li>The Gestalt principles help us decide which elements of a visual are <strong>informative</strong> and which are <strong>noise</strong>; they guide decisions when building a graph or a dashboard, and help the reader organize and interpret it <strong>quickly</strong>.</li>
+<li><strong>Workflow for presentation visuals:</strong> (1) define the <strong>purpose</strong> of the visual and its intended <strong>audience</strong>; (2) create a <strong>story</strong> to give your message; (3) consider <strong>aesthetic / design principles</strong>.</li>
+<li><strong>In graphs:</strong>
+<ul>
+<li><strong>Simplicity:</strong> apply a sort order.</li>
+<li><strong>Enclosure:</strong> shade an area to separate it, e.g.&nbsp;forecast vs actual.</li>
+<li><strong>Closure:</strong> remove chart borders and background shading.</li>
+<li><strong>Continuity:</strong> remove unnecessary axis lines; aligned bars are still seen as aligned.</li>
+<li><strong>Connection:</strong> connect the dots with lines to show order.</li>
+<li><strong>Focus point:</strong> highlight the important points with colour.</li>
+</ul></li>
+<li><strong>In dashboards:</strong>
+<ul>
+<li><strong>Enclosure:</strong> containers group related elements.</li>
+<li><strong>Similarity:</strong> colour links points that belong together.</li>
+<li><strong>Proximity:</strong> keep text close to its chart and place small multiples together.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<p><img src="recitation4/r4-makeover.png" class="img-fluid" alt="Six before-and-after pairs of small charts labelled M1 to M6."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Simplicity|Enclosure|Closure|Continuity|Connection|Focus point" data-label="Name that makeover">
+<p>Each pair above shows a chart <strong>before</strong> and <strong>after</strong> a makeover. Which principle does each makeover use?</p>
+<ul>
+<li>M1 :: Simplicity</li>
+<li>M2 :: Enclosure</li>
+<li>M3 :: Closure</li>
+<li>M4 :: Continuity</li>
+<li>M5 :: Connection</li>
+<li>M6 :: Focus point</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>M1, simplicity:</strong> the bars are sorted, so the order is easy to read.</li>
+<li><strong>M2, enclosure:</strong> the shaded area separates the forecast from the actual data.</li>
+<li><strong>M3, closure:</strong> the border and background shading are removed; the graph still looks complete, and the data stand out more.</li>
+<li><strong>M4, continuity:</strong> the <span class="math inline">\(y\)</span>-axis line is removed; the bars still look aligned because of the consistent white space.</li>
+<li><strong>M5, connection:</strong> lines connect the dots and help the eye see the order.</li>
+<li><strong>M6, focus point:</strong> the important points are coloured, the rest are grey, and an average line gives context.</li>
+</ul>
+</div>
+</div>
+<p><img src="recitation4/r4-connection.png" class="img-fluid" alt="Two scatter plots of puzzle score against age for 8 children each measured twice, one year apart. In panel a, older children seem to score lower. In panel b, each child's two points are connected and every line goes up."></p>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p>Eight children each solved a puzzle test <strong>twice</strong>, one year apart. Panel (a) shows only the points; panel (b) connects each child’s two scores. What does the connection reveal?</p>
+<ul>
+<li>Both panels show that children get worse at puzzles as they grow older.</li>
+<li>Connecting the points changes the data, so panel (b) cannot be trusted.</li>
+<li>Panel (a) suggests that older children score lower, but panel (b) shows that <strong>every child improved</strong> over the year; the lower scores belong to children who started lower.</li>
+<li>Panel (b) shows that age and puzzle score are not related.</li>
+</ul>
+<div class="explain">
+<p>Without connections, the cloud slopes downward (<span class="math inline">\(r \approx -0.59\)</span>): the older children in this sample happen to have lower scores. Connecting each child’s two measurements uses the <strong>connection</strong> principle: now we see the change <strong>within each child</strong> (every line goes up) separately from the <strong>differences between children</strong> (their starting levels).</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-answer="a,b,d">
+<p>You are designing a dashboard. Which choices use the Gestalt principles correctly? Select all that apply.</p>
+<ul>
+<li>Put a short explanation text right next to the chart it describes (proximity).</li>
+<li>Use the same colour for the same region in every chart of the dashboard (similarity).</li>
+<li>Spread five related small charts randomly around the page so that each one gets attention.</li>
+<li>Draw a light container around the filters and charts that belong to the same topic (enclosure / common region).</li>
+<li>Keep the default thick border and grey background on every chart so that each chart looks important.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>c is wrong:</strong> related small multiples should be placed <strong>together</strong> (proximity + similarity); if they are spread out randomly, the grouping is less obvious.</li>
+<li><strong>e is wrong:</strong> by the closure principle, borders and background shading can be removed; the graph still looks complete and the data stand out more.</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-baseline-bad.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Figure F2: bar chart of pass rates, 81% in 2025 and 84% in 2026, with the y-axis from 80 to 85, so the 2026 bar looks four times as tall." width="330"></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p><strong>Figure F2</strong> shows the pass rate of a course in 2025 and 2026. Its <span class="math inline">\(y\)</span>-axis starts at <strong>80</strong>, not at 0.</p>
+<p>The 2025 bar is 81 − 80 = 1 unit tall and the 2026 bar is <span class="blank" data-answer="4" data-tol="0"></span> units tall, so the 2026 bar <strong>looks</strong> <span class="blank" data-answer="4" data-tol="0"></span> times as tall.<br>
+In reality, the pass rate increased by only <span class="blank" data-answer="3" data-tol="0"></span> percentage points.</p>
+<div class="explain">
+<p>Because the axis starts at 80, the bars show only the part above 80: 1 vs 4 units, so the 2026 bar looks <strong>four times</strong> as tall. In fact <span class="math inline">\(84/81 \approx 1.04\)</span>. Starting a bar chart with a <strong>non-zero baseline</strong> is a classic way to make small differences look huge (the lecture’s “Bad examples”). Bars should start at zero:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-baseline-good.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="The same bar chart with the y-axis from 0 to 100: the two bars look almost the same." width="330"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/meme-baseline.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Comic: with an axis starting at 80% a 3-point increase looks like the pass rate quadrupled; with an axis starting at 0% it is clearly a small increase."></p>
+</figure>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="b">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-inverted-bad.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Figure F3: area chart of the number of students who failed a course from 2016 to 2026, drawn with the y-axis upside down (0 at the top)." width="520"></p>
+</figure>
+</div>
+<p><strong>Figure F3</strong> shows the number of students who failed a course each year. Most readers who look at it quickly conclude that the number of failures <strong>decreased</strong>, especially in 2020. Why?</p>
+<ul>
+<li>Because failures really decreased.</li>
+<li>The <span class="math inline">\(y\)</span>-axis is upside down (0 at the top), and the filled red area looks like an ordinary chart, so rising values look like falling ones.</li>
+<li>Because the chart has no title.</li>
+<li>Because the chart uses too many colours.</li>
+</ul>
+<div class="explain">
+<p>In fact the number of failures <strong>increased</strong> (from about 120 to about 160), with a peak in 2020. Our perception organizes the red region as the <strong>figure</strong> and reads its upper edge as “the values”, so the inverted orientation leads to misperception. This is the lecture’s bad example: the designer did not mean to mislead, but the way we perceive shapes produced the wrong message. Redrawn in the usual orientation:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recitation4/r4-inverted-good.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="The same data with 0 at the bottom: the number of failures clearly increases." width="520"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="part-g-your-turn" class="level1">
+<h1>Part G — YOUR TURN</h1>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-label="Question 1" data-options="Scatter plot matrix|Violin plot|Split violin plot|Lollipop chart|Slope chart|Dumbbell plot|Line chart">
+<p>Choose the most appropriate graph for each task.</p>
+<ul>
+<li>Compare the distribution of exam scores in 4 sections and check whether any section has two peaks :: Violin plot</li>
+<li>Compare the travel times of male and female students at each of 5 dormitories in one graph :: Split violin plot</li>
+<li>Show the number of books borrowed from the library each week during one semester :: Line chart</li>
+<li>Show 12 students’ rankings in the midterm and in the final, including who moved up or down :: Slope chart</li>
+<li>Examine all pairwise relationships among 6 continuous variables of a data set :: Scatter plot matrix</li>
+<li>Show the average score of 15 courses with less clutter than a bar chart :: Lollipop chart</li>
+<li>Show the unemployment rate in 2015 and in 2025 for 10 provinces and how much it changed :: Dumbbell plot</li>
+</ul>
+<div class="explain">
+<p>Distributions with possible multiple peaks → <strong>violin</strong>; two groups within each category → <strong>split violin</strong>; successive points in time → <strong>line chart</strong>; change in value <strong>and ranking</strong> → <strong>slope chart</strong>; many continuous variables → <strong>scatter plot matrix</strong>; a bar chart with less ink → <strong>lollipop</strong>; two time points for each category → <strong>dumbbell</strong>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-label="Question2" data-keywords="sort|order|simplicity; border|background|closure|grid|shading; colour|color|highlight|focus|grey|gray; zero|baseline|0; proximity|label|close|title|text">
+<p>A student made the following bar chart for a presentation: 20 cities in <strong>alphabetical order</strong>, every bar a <strong>different colour</strong>, a <strong>thick black border</strong> and a <strong>grey background with grid lines</strong>, and a <span class="math inline">\(y\)</span>-axis that starts at <strong>40</strong>. The message she wants to give is: <em>“Ankara has the lowest air pollution among these cities.”</em></p>
+<p>Suggest <strong>four</strong> improvements, and name the principle behind each one.</p>
+<div class="explain">
+<p><strong>Model answer:</strong></p>
+<ol type="1">
+<li><strong>Simplicity:</strong> sort the bars by value (not alphabetically), so the lowest value is easy to find.</li>
+<li><strong>Focus point:</strong> colour only Ankara’s bar (e.g.&nbsp;orange) and make all others grey; the eye goes straight to the message.</li>
+<li><strong>Closure:</strong> remove the thick border, the grey background and most grid lines; the graph still looks complete and the data stand out.</li>
+<li><strong>Bad example (non-zero baseline):</strong> start the <span class="math inline">\(y\)</span>-axis at <strong>0</strong>; otherwise the differences between cities are exaggerated.</li>
+<li><strong>Proximity:</strong> put a short message title or label close to Ankara’s bar, so that the text and the bar are read together.</li>
+<li>The <strong>workflow</strong> starts with purpose and audience: the story (“Ankara is the lowest”) decides the design.</li>
+</ol>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-label="Question 3" data-keywords="box|five|5; bimodal|two peaks|two groups|multimodal; density|width|wide; violin|histogram">
+<p>Two classes have <strong>exactly the same</strong> minimum, <span class="math inline">\(Q_1\)</span>, median, <span class="math inline">\(Q_3\)</span> and maximum. A student concludes: <em>“The two classes have the same distribution.”</em> Is the student right? Explain, and suggest a graph that checks the claim.</p>
+<div class="explain">
+<p><strong>Model answer:</strong> No.&nbsp;The student only looked at the box plot (five numbers). A box plot’s simplicity hides how the values are distributed between those five numbers; for example, one class could be <strong>bimodal</strong> (two groups of students) while the other is unimodal, and the box plots would still be identical. A <strong>violin plot</strong> (box plot + kernel density on each side), or a histogram, shows the density: where the violin is wide, there are many students. Adding the points (violin + strip plot) gives a complete view.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-label="Question 4" data-answer="a,c,d,g">
+<p>Which statements are <strong>true</strong>? Select all that apply.</p>
+<ul>
+<li>A correlation plot cannot show whether a relationship is nonlinear.</li>
+<li>Cross-sectional data are collected at successive points in time.</li>
+<li>A dumbbell plot shows the difference between two time points for each category.</li>
+<li>By the closure principle, removing chart borders and background shading usually makes the data stand out more.</li>
+<li>The law of Prägnanz says that the eye is captured by the element that is different from its surroundings.</li>
+<li>A lollipop chart shows different information from a bar chart.</li>
+<li>Objects inside the same bounded area are perceived as one group.</li>
+<li>Variables coded as 0/1 should always be treated as numerical variables.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>b is false:</strong> that is <strong>time-series</strong> data; cross-sectional data are collected once.</li>
+<li><strong>e is false:</strong> that is the <strong>focal point</strong> principle; Prägnanz is the law of <strong>simplicity</strong>.</li>
+<li><strong>f is false:</strong> a lollipop chart conveys the <strong>same</strong> information as a bar chart, with less clutter.</li>
+<li><strong>g is true:</strong> common region / enclosure.</li>
+<li><strong>h is false:</strong> 0/1 codes are categories and should be converted to <strong>factors</strong>.</li>
+</ul>
+</div>
+</div>
+<div class="quiz" type="classify" data-options="Proximity|Similarity|Common region|Closure|Continuity|Focal point|Figure-ground|Prägnanz">
+<p>Which principle explains each everyday observation?</p>
+<ul>
+<li>On a phone’s home screen, the four app icons inside a folder are seen as one group :: Common region</li>
+<li>In a group photo of a team in identical red shirts, the one person in a yellow shirt is noticed first :: Focal point</li>
+<li>A dashed outline of a parking space is still seen as one rectangle :: Closure</li>
+<li>On a menu, the drinks listed close together under each other are read as one group, separate from the desserts further down :: Proximity</li>
+<li>On a map, all the blue lines are understood as rivers and all the red lines as roads :: Similarity</li>
+<li>When two roads cross on a map, we see two continuous roads, not four separate pieces :: Continuity</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Common region:</strong> the folder’s boundary groups the icons.</li>
+<li><strong>Focal point:</strong> the element that is different from its surroundings captures the eye.</li>
+<li><strong>Closure:</strong> the brain fills in the gaps of the dashed line.</li>
+<li><strong>Proximity:</strong> items close together are seen as related.</li>
+<li><strong>Similarity:</strong> same colour → same kind of thing.</li>
+<li><strong>Continuity:</strong> the eye follows the smoothest path through the crossing.</li>
+</ul>
+</div>
+</div>
+<p style="font-size:.85rem;color:#6c757d;margin-top:2rem">
+All data sets on this page were created for this recitation. The patterns are realistic, but the numbers are not real measurements.
+</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--
+  STAT 112 interactive quiz engine
+  ---------------------------------
+  Include in any page with (front matter):
+      format:
+        html:
+          include-after-body: _quiz.html
+
+  Question types (write them as fenced divs in the .qmd):
+    type=mc        one correct option        answer="b"
+    type=ms        select all that apply     answer="a,c,e"
+    type=tf        single true/false         answer="true"
+    type=short     typed answer              answer="ratio|ratio scale"   (add tol="0.5" for numbers)
+    type=fill      inline blanks             []{.blank answer="parameter"}
+    type=match     "term :: definition" list
+    type=classify  "item :: category" list   options="A|B|C"  (several columns: options="A|B ; X|Y" columns="Scale ; Type")
+    type=order     list written in the correct order (shown shuffled)
+    type=open      free text + model answer  keywords="idea one|alt ; idea two"
+  Put explanations / model answers in a nested  ::: explain  div.
+-->
+<style>
+:root {
+  --qz-accent: var(--bs-primary, #2780e3);
+  --qz-border: var(--bs-border-color, #dee2e6);
+  --qz-soft: rgba(127, 127, 127, 0.07);
+  --qz-muted: var(--bs-secondary-color, #6c757d);
+  --qz-ok: #1a7f37;
+  --qz-ok-bg: rgba(26, 127, 55, 0.11);
+  --qz-bad: #c0392b;
+  --qz-bad-bg: rgba(192, 57, 43, 0.10);
+  --qz-partial: #b9770e;
+}
+.qz {
+  position: relative;
+  border: 1px solid var(--qz-border);
+  border-left: 5px solid var(--qz-accent);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.1rem;
+  margin: 1.6rem 0;
+  background: var(--bs-body-bg, #fff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color .2s;
+}
+.qz.qz-correct { border-left-color: var(--qz-ok); }
+.qz.qz-wrong { border-left-color: var(--qz-bad); }
+.qz.qz-partial { border-left-color: var(--qz-partial); }
+.qz > p:last-of-type { margin-bottom: .4rem; }
+.qz-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.qz-num {
+  font-weight: 700; font-size: .85rem; color: #fff; background: var(--qz-accent);
+  border-radius: 6px; padding: .1rem .5rem; font-variant-numeric: tabular-nums;
+}
+.qz-correct .qz-num { background: var(--qz-ok); }
+.qz-wrong .qz-num { background: var(--qz-bad); }
+.qz-partial .qz-num { background: var(--qz-partial); }
+.qz-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--qz-muted); font-weight: 600; }
+.qz img { max-width: 100%; height: auto; }
+
+/* options (mc / ms / tf) */
+.qz-options { display: grid; gap: .5rem; margin: .7rem 0 .2rem; }
+.qz-options.qz-inline { grid-template-columns: repeat(auto-fit, minmax(120px, 200px)); }
+.qz-opt {
+  display: flex; align-items: flex-start; gap: .65rem; width: 100%; text-align: left;
+  border: 1px solid var(--qz-border); background: var(--bs-body-bg, #fff); color: inherit;
+  border-radius: 8px; padding: .55rem .75rem; cursor: pointer; font: inherit; line-height: 1.4;
+  transition: border-color .15s, background-color .15s;
+}
+.qz-opt:hover { border-color: var(--qz-accent); background: var(--qz-soft); }
+.qz-opt:focus-visible { outline: 2px solid var(--qz-accent); outline-offset: 2px; }
+.qz-letter {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--qz-border);
+  display: grid; place-items: center; font-weight: 600; font-size: .8rem;
+}
+.qz-opt-text { flex: 1; padding-top: .05rem; }
+.qz-opt-text p { margin: 0; }
+.qz-opt.is-sel { border-color: var(--qz-accent); box-shadow: inset 0 0 0 1px var(--qz-accent); }
+.qz-opt.is-sel .qz-letter { background: var(--qz-accent); border-color: var(--qz-accent); color: #fff; }
+.qz-opt.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); box-shadow: inset 0 0 0 1px var(--qz-ok); }
+.qz-opt.is-ok .qz-letter { background: var(--qz-ok); border-color: var(--qz-ok); color: #fff; }
+.qz-opt.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); box-shadow: inset 0 0 0 1px var(--qz-bad); }
+.qz-opt.is-bad .qz-letter { background: var(--qz-bad); border-color: var(--qz-bad); color: #fff; }
+.qz-opt.is-missed { border: 1px dashed var(--qz-ok); }
+
+/* controls & feedback */
+.qz-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; align-items: center; }
+.qz-controls .btn { border-radius: 6px; }
+.qz-feedback { margin-top: .65rem; font-weight: 500; padding: .45rem .75rem; border-radius: 6px; }
+.qz-feedback:empty { display: none; }
+.qz-fb-ok { color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-fb-bad { color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fb-partial { color: var(--qz-partial); background: rgba(185, 119, 14, .10); }
+.qz-fb-info { background: var(--qz-soft); }
+.qz-explain {
+  margin-top: .75rem; padding: .75rem 1rem; background: var(--qz-soft);
+  border-radius: 8px; border-left: 3px solid var(--qz-accent);
+}
+.qz-explain > :last-child { margin-bottom: 0; }
+.qz-explain-title { font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); margin-bottom: .35rem; }
+
+/* typed inputs */
+.qz-short { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .6rem; }
+.qz-input { max-width: 24rem; }
+.qz-input.is-ok, .qz-select.is-ok, textarea.is-ok { border-color: var(--qz-ok); background-color: var(--qz-ok-bg); }
+.qz-input.is-bad, .qz-select.is-bad { border-color: var(--qz-bad); background-color: var(--qz-bad-bg); }
+.qz-unit { color: var(--qz-muted); }
+.qz-blank-input {
+  border: 0; border-bottom: 2px solid var(--qz-accent); background: var(--qz-soft); color: inherit;
+  font: inherit; padding: 0 .3rem; margin: 0 .15rem; text-align: center; border-radius: 4px 4px 0 0;
+  min-width: 5ch;
+}
+.qz-blank-input:focus { outline: 2px solid var(--qz-accent); outline-offset: 1px; }
+.qz-blank-input.is-ok { border-bottom-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-blank-input.is-bad { border-bottom-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fill-body { line-height: 2.3; }
+
+/* classify rows */
+.qz-rows { display: grid; gap: .4rem; margin-top: .7rem; }
+.qz-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; align-items: center;
+  padding: .45rem .7rem; border-radius: 8px; background: var(--qz-soft);
+}
+.qz-row-head { background: transparent; padding-top: 0; padding-bottom: 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); font-weight: 600; }
+.qz-row-ctrls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+.qz-row-head .qz-row-ctrls span { min-width: 9rem; text-align: center; }
+.qz-row p { margin: 0; }
+.qz-seg { display: inline-flex; border: 1px solid var(--qz-border); border-radius: 8px; overflow: hidden; background: var(--bs-body-bg, #fff); }
+.qz-seg button {
+  border: 0; border-right: 1px solid var(--qz-border); background: transparent; color: inherit;
+  padding: .3rem .7rem; font: inherit; font-size: .88rem; cursor: pointer; white-space: nowrap;
+}
+.qz-seg button:last-child { border-right: 0; }
+.qz-seg button:hover { background: var(--qz-soft); }
+.qz-seg button[aria-pressed="true"] { background: var(--qz-accent); color: #fff; }
+.qz-seg.is-ok { border-color: var(--qz-ok); box-shadow: 0 0 0 1px var(--qz-ok); }
+.qz-seg.is-ok button[aria-pressed="true"] { background: var(--qz-ok); }
+.qz-seg.is-bad { border-color: var(--qz-bad); box-shadow: 0 0 0 1px var(--qz-bad); }
+.qz-seg.is-bad button[aria-pressed="true"] { background: var(--qz-bad); }
+.qz-select { width: auto; min-width: 9rem; display: inline-block; }
+
+/* image grid (classify with pictures) */
+.qz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .8rem; margin-top: .7rem; }
+.qz-card { border: 1px solid var(--qz-border); border-radius: 8px; padding: .5rem; display: flex; flex-direction: column; gap: .5rem; background: var(--bs-body-bg, #fff); }
+.qz-card-media { height: 170px; display: grid; place-items: center; background: #fff; border-radius: 6px; overflow: hidden; }
+.qz-card-media img { max-height: 166px; max-width: 100%; width: auto; object-fit: contain; }
+.qz-card-media p { margin: 0; }
+.qz-card .qz-select { width: 100%; }
+.qz-card-tag { font-size: .75rem; color: var(--qz-muted); font-weight: 600; }
+
+/* matching */
+.qz-match { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1.25rem; margin-top: .7rem; }
+.qz-match-left { display: grid; gap: .4rem; align-content: start; }
+.qz-match-left .qz-row { grid-template-columns: auto minmax(0, 1fr); }
+.qz-match-left .qz-select { min-width: 4.6rem; }
+.qz-match-right { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; align-content: start; }
+.qz-match-right li { display: flex; gap: .6rem; align-items: flex-start; padding: .45rem .7rem; border: 1px solid var(--qz-border); border-radius: 8px; }
+.qz-match-right li p { margin: 0; }
+
+/* ordering */
+.qz-order { list-style: none; padding: 0; margin: .7rem 0 0; }
+.qz-order li {
+  display: flex; align-items: center; gap: .6rem; padding: .45rem .6rem; margin: .35rem 0;
+  border: 1px solid var(--qz-border); border-radius: 8px; background: var(--bs-body-bg, #fff); cursor: grab;
+}
+.qz-order li.is-drag { opacity: .45; }
+.qz-order li.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-order li.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-order .qz-order-text { flex: 1; }
+.qz-order .qz-order-text p { margin: 0; }
+.qz-move { border: 1px solid var(--qz-border); background: transparent; color: inherit; border-radius: 6px; width: 2rem; height: 2rem; cursor: pointer; line-height: 1; }
+.qz-move:hover { background: var(--qz-soft); }
+
+/* open */
+.qz-open textarea { margin-top: .6rem; }
+.qz-chip { display: inline-block; padding: .05rem .55rem; border-radius: 999px; margin: .15rem .2rem 0 0; font-size: .85rem; font-weight: 500; }
+.qz-chip-ok { background: var(--qz-ok-bg); color: var(--qz-ok); }
+
+/* scoreboard */
+.quiz-scoreboard {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+  padding: .75rem 1rem; border: 1px solid var(--qz-border); border-radius: 10px; background: var(--qz-soft); margin: 1.25rem 0 1.5rem;
+}
+.qz-score-big { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.qz-score-bar { flex: 1 1 160px; height: 8px; background: var(--qz-border); border-radius: 99px; overflow: hidden; min-width: 120px; }
+.qz-score-bar span { display: block; height: 100%; width: 0; background: var(--qz-ok); transition: width .3s; }
+.qz-pill {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 1030; background: var(--bs-body-bg, #fff);
+  border: 1px solid var(--qz-border); border-radius: 999px; padding: .35rem .85rem; font-weight: 600;
+  font-size: .9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); font-variant-numeric: tabular-nums;
+}
+.qz-error { color: var(--qz-bad); font-family: monospace; font-size: .85rem; }
+
+@media (max-width: 700px) {
+  .qz { padding: .85rem .9rem 1rem; }
+  .qz-row { grid-template-columns: 1fr; }
+  .qz-row-ctrls { justify-content: flex-start; }
+  .qz-row-head { display: none; }
+  .qz-match { grid-template-columns: 1fr; }
+  .qz-seg button { padding: .3rem .5rem; font-size: .82rem; }
+}
+@media print {
+  .qz-controls, .qz-pill, .quiz-scoreboard { display: none !important; }
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var LABELS = {
+    mc: "Multiple choice", ms: "Select all that apply", tf: "True / False",
+    short: "Short answer", fill: "Fill in the blanks", match: "Matching",
+    classify: "Classify", order: "Put in order", open: "Open-ended"
+  };
+  var registry = [];
+
+  /* ---------- helpers ---------- */
+  function attr(el, name) {
+    var v = el.getAttribute("data-" + name);
+    if (v === null) v = el.getAttribute(name);
+    return v;
+  }
+  function h(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function btn(label, cls, fn) {
+    var b = h("button", "btn btn-sm " + cls, label);
+    b.type = "button";
+    b.addEventListener("click", fn);
+    return b;
+  }
+  function norm(s) {
+    return String(s == null ? "" : s).toLowerCase()
+      .replace(/ı/g, "i").normalize("NFKD").replace(/[̀-ͯ]/g, "")
+      .replace(/[‘’'`"“”]/g, "")
+      .replace(/[^a-z0-9.%\s-]/g, " ")
+      .replace(/^(a|an|the)\s+/, "")
+      .replace(/\s+/g, " ").trim();
+  }
+  function num(s) {
+    s = String(s == null ? "" : s).trim().replace(/\s/g, "").replace(/%$/, "");
+    if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", ".");
+    var frac = s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+    if (frac) return parseFloat(frac[1]) / parseFloat(frac[2]);
+    if (!/^-?\d*\.?\d+(e-?\d+)?$/i.test(s)) return null;
+    return parseFloat(s);
+  }
+  function alts(spec) {
+    return String(spec == null ? "" : spec).split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function matches(input, spec, tol) {
+    var a = alts(spec);
+    if (tol !== null && tol !== undefined) {
+      var v = num(input), t = parseFloat(tol) || 0;
+      if (v === null) return false;
+      return a.some(function (x) { var y = num(x); return y !== null && Math.abs(v - y) <= t + 1e-9; });
+    }
+    var n = norm(input);
+    return n !== "" && a.some(function (x) { return norm(x) === n; });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function stripTags(html) { var d = h("div", null, html); return d.textContent.trim(); }
+  function unwrapP(html) { return html.trim().replace(/^<p>/, "").replace(/<\/p>$/, ""); }
+  function firstList(q) { return q.querySelector(":scope > ol, :scope > ul"); }
+  function pairs(q) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list of 'item :: answer' lines.");
+    var out = Array.prototype.map.call(list.children, function (li) {
+      var html = li.innerHTML, i = html.lastIndexOf("::");
+      if (i < 0) throw new Error("List item is missing '::' — " + stripTags(html).slice(0, 60));
+      return { html: unwrapP(html.slice(0, i)), answer: stripTags(html.slice(i + 2)) };
+    });
+    list.remove();
+    return out;
+  }
+  function markEl(el, ok) {
+    el.classList.remove("is-ok", "is-bad");
+    if (ok === true) el.classList.add("is-ok");
+    if (ok === false) el.classList.add("is-bad");
+  }
+
+  /* ---------- status + scoreboard ---------- */
+  function setStatus(q, s) {
+    q._status = s;
+    q.classList.remove("qz-correct", "qz-wrong", "qz-partial");
+    if (s) q.classList.add("qz-" + s);
+    updateScore();
+  }
+  function updateScore() {
+    var total = registry.length, correct = 0, tried = 0;
+    registry.forEach(function (q) {
+      if (q._status === "correct") correct++;
+      if (q._status) tried++;
+    });
+    document.querySelectorAll(".qz-score-big").forEach(function (e) { e.textContent = correct + " / " + total + " correct"; });
+    document.querySelectorAll(".qz-score-tried").forEach(function (e) { e.textContent = tried + " attempted"; });
+    document.querySelectorAll(".qz-score-bar span").forEach(function (e) { e.style.width = (total ? 100 * correct / total : 0) + "%"; });
+    var pill = document.querySelector(".qz-pill");
+    if (pill) pill.textContent = "✓ " + correct + " / " + total;
+  }
+  function feedback(p, kind, msg) {
+    p.fb.className = "qz-feedback qz-fb-" + kind;
+    p.fb.innerHTML = msg;
+  }
+  function showExplain(p) { if (p.explain) p.explain.hidden = false; }
+  function clearFb(p) { p.fb.className = "qz-feedback"; p.fb.innerHTML = ""; if (p.explain) p.explain.hidden = true; }
+  function scoreMsg(p, q, ok, total) {
+    if (ok === total) { feedback(p, "ok", "✓ All " + total + " correct!"); setStatus(q, "correct"); showExplain(p); }
+    else if (ok > 0) { feedback(p, "partial", ok + " / " + total + " correct. Fix the red ones and check again."); setStatus(q, "partial"); }
+    else { feedback(p, "bad", "0 / " + total + " correct. Have another go."); setStatus(q, "wrong"); }
+  }
+
+  /* ---------- scaffold ---------- */
+  function scaffold(q, type, n) {
+    q.classList.add("qz", "qz-t-" + type);
+    var explain = q.querySelector(":scope > .explain");
+    if (explain) explain.remove();
+    var head = h("div", "qz-head",
+      '<span class="qz-num">Q' + n + '</span><span class="qz-type">' + (attr(q, "label") || LABELS[type] || type) + "</span>");
+    q.insertBefore(head, q.firstChild);
+    var p = { ui: h("div", "qz-ui"), controls: h("div", "qz-controls"), fb: h("div", "qz-feedback"), explain: explain };
+    p.fb.setAttribute("role", "status");
+    p.fb.setAttribute("aria-live", "polite");
+    q.appendChild(p.ui);
+    q.appendChild(p.controls);
+    q.appendChild(p.fb);
+    if (explain) {
+      explain.classList.add("qz-explain");
+      explain.hidden = true;
+      explain.insertBefore(h("div", "qz-explain-title", type === "open" ? "Model answer" : "Explanation"), explain.firstChild);
+      q.appendChild(explain);
+    }
+    return p;
+  }
+  function standardControls(p, q, check, reveal, reset) {
+    if (check) p.controls.appendChild(btn("Check", "btn-primary", check));
+    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); }));
+    p.controls.appendChild(btn("Reset", "btn-outline-secondary", function () { reset(); clearFb(p); setStatus(q, null); }));
+    q._reset = function () { reset(); clearFb(p); setStatus(q, null); };
+  }
+  function parseIdx(spec, n) {
+    return String(spec || "").split(/[\s,;]+/).filter(Boolean).map(function (t) {
+      if (/^\d+$/.test(t)) return parseInt(t, 10) - 1;
+      return t.toUpperCase().charCodeAt(0) - 65;
+    }).filter(function (i) { return i >= 0 && i < n; });
+  }
+
+  /* ---------- multiple choice / multi-select / true-false ---------- */
+  function buildChoice(q, p, multi, tf) {
+    var items, ans;
+    if (tf) {
+      items = ["True", "False"];
+      var a = norm(attr(q, "answer"));
+      ans = [/^(t|true|yes|dogru)$/.test(a) ? 0 : 1];
+    } else {
+      var list = firstList(q);
+      if (!list) throw new Error("Expected a list of options.");
+      items = Array.prototype.map.call(list.children, function (li) { return unwrapP(li.innerHTML); });
+      list.remove();
+      ans = parseIdx(attr(q, "answer"), items.length);
+      if (!ans.length) throw new Error("answer= is missing or out of range.");
+    }
+    var wrap = h("div", "qz-options" + (tf ? " qz-inline" : ""));
+    var btns = items.map(function (html, i) {
+      var b = h("button", "qz-opt", '<span class="qz-letter">' + (tf ? (i ? "F" : "T") : String.fromCharCode(65 + i)) + '</span><span class="qz-opt-text">' + html + "</span>");
+      b.type = "button";
+      wrap.appendChild(b);
+      return b;
+    });
+    p.ui.appendChild(wrap);
+    function clear() { btns.forEach(function (b) { b.classList.remove("is-ok", "is-bad", "is-sel", "is-missed"); b.setAttribute("aria-pressed", "false"); }); }
+
+    if (!multi) {
+      btns.forEach(function (b, i) {
+        b.addEventListener("click", function () {
+          clear();
+          if (ans.indexOf(i) >= 0) {
+            b.classList.add("is-ok");
+            feedback(p, "ok", "✓ Correct!");
+            setStatus(q, "correct");
+            showExplain(p);
+          } else {
+            b.classList.add("is-bad");
+            feedback(p, "bad", "✗ Not quite. Try another option.");
+            setStatus(q, "wrong");
+          }
+        });
+      });
+      standardControls(p, q, null, function () {
+        clear();
+        ans.forEach(function (i) { btns[i].classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return tf ? items[i] : String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    } else {
+      btns.forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          var on = !b.classList.contains("is-sel");
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          b.classList.toggle("is-sel", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      });
+      standardControls(p, q, function () {
+        var hit = 0, wrong = 0;
+        btns.forEach(function (b, i) {
+          var sel = b.classList.contains("is-sel"), good = ans.indexOf(i) >= 0;
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          if (sel && good) { hit++; b.classList.add("is-ok"); }
+          if (sel && !good) { wrong++; b.classList.add("is-bad"); }
+        });
+        if (hit === ans.length && !wrong) { feedback(p, "ok", "✓ Correct, you found all " + ans.length + "!"); setStatus(q, "correct"); showExplain(p); }
+        else if (hit === 0 && wrong === 0) { feedback(p, "info", "Select at least one option first."); }
+        else {
+          feedback(p, hit ? "partial" : "bad", hit + " of " + ans.length + " correct options selected" + (wrong ? ", " + wrong + " wrong selection" + (wrong > 1 ? "s" : "") : "") + ".");
+          setStatus(q, hit ? "partial" : "wrong");
+        }
+      }, function () {
+        clear();
+        btns.forEach(function (b, i) { if (ans.indexOf(i) >= 0) b.classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    }
+  }
+
+  /* ---------- short answer ---------- */
+  function buildShort(q, p) {
+    var spec = attr(q, "answer"), tol = attr(q, "tol"), unit = attr(q, "unit");
+    if (!spec) throw new Error("answer= is missing.");
+    var row = h("div", "qz-short");
+    var input = h("input", "form-control qz-input");
+    input.type = "text";
+    input.placeholder = attr(q, "placeholder") || (tol !== null ? "Type a number…" : "Type your answer…");
+    input.setAttribute("aria-label", "Your answer");
+    row.appendChild(input);
+    if (unit) row.appendChild(h("span", "qz-unit", unit));
+    p.ui.appendChild(row);
+    function check() {
+      if (!input.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+      var ok = matches(input.value, spec, tol);
+      markEl(input, ok);
+      if (ok) { feedback(p, "ok", "✓ Correct!"); setStatus(q, "correct"); showExplain(p); }
+      else { feedback(p, "bad", "✗ Not quite. Try again" + (tol !== null ? " (check your rounding)." : ".")); setStatus(q, "wrong"); }
+    }
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+    standardControls(p, q, check, function () {
+      feedback(p, "info", "Answer: <strong>" + alts(spec)[0] + (unit ? " " + unit : "") + "</strong>");
+    }, function () { input.value = ""; markEl(input, null); });
+  }
+
+  /* ---------- fill in the blanks ---------- */
+  function buildFill(q, p) {
+    var blanks = Array.prototype.map.call(q.querySelectorAll(".blank"), function (span) {
+      var spec = attr(span, "answer"), tol = attr(span, "tol");
+      var input = h("input", "qz-blank-input");
+      input.type = "text";
+      input.setAttribute("aria-label", "blank");
+      var longest = alts(spec).reduce(function (m, x) { return Math.max(m, x.length); }, 4);
+      input.style.width = Math.min(longest + 3, 28) + "ch";
+      span.innerHTML = "";
+      span.appendChild(input);
+      return { input: input, spec: spec, tol: tol };
+    });
+    if (!blanks.length) throw new Error("No []{.blank answer=...} spans found.");
+    q.querySelectorAll(":scope > p").forEach(function (para) { if (para.querySelector(".blank")) para.classList.add("qz-fill-body"); });
+    function check() {
+      var ok = 0;
+      blanks.forEach(function (b) { var good = matches(b.input.value, b.spec, b.tol); markEl(b.input, good); if (good) ok++; });
+      scoreMsg(p, q, ok, blanks.length);
+    }
+    blanks.forEach(function (b) { b.input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); }); });
+    standardControls(p, q, check, function () {
+      blanks.forEach(function (b) { b.input.value = alts(b.spec)[0]; markEl(b.input, true); });
+      feedback(p, "info", "Answers filled in.");
+    }, function () { blanks.forEach(function (b) { b.input.value = ""; markEl(b.input, null); }); });
+  }
+
+  /* ---------- selectable control (segmented buttons or dropdown) ---------- */
+  function control(options, forceSelect) {
+    var longest = options.reduce(function (m, o) { return Math.max(m, o.length); }, 0);
+    if (!forceSelect && options.length <= 4 && longest <= 18) {
+      var seg = h("div", "qz-seg"), value = null;
+      seg.setAttribute("role", "group");
+      var bs = options.map(function (o) {
+        var b = h("button", null, o);
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () { set(o); markEl(seg, null); });
+        seg.appendChild(b);
+        return b;
+      });
+      function set(v) {
+        value = v;
+        bs.forEach(function (b, i) { b.setAttribute("aria-pressed", options[i] === v ? "true" : "false"); });
+      }
+      return { el: seg, get: function () { return value; }, set: set, mark: function (ok) { markEl(seg, ok); } };
+    }
+    var sel = h("select", "form-select form-select-sm qz-select");
+    sel.appendChild(h("option", null, "— choose —")).value = "";
+    options.forEach(function (o) { var op = h("option", null, o); op.value = o; sel.appendChild(op); });
+    sel.addEventListener("change", function () { markEl(sel, null); });
+    return { el: sel, get: function () { return sel.value || null; }, set: function (v) { sel.value = v == null ? "" : v; }, mark: function (ok) { markEl(sel, ok); } };
+  }
+
+  /* ---------- classify ---------- */
+  function buildClassify(q, p) {
+    var items = pairs(q);
+    var groupsSpec = attr(q, "options");
+    var groups;
+    if (groupsSpec) groups = groupsSpec.split(";").map(function (g) { return alts(g); });
+    else {
+      var seen = [];
+      items.forEach(function (it) { alts(it.answer).forEach(function (a) { if (seen.indexOf(a) < 0) seen.push(a); }); });
+      groups = [seen];
+    }
+    var cols = attr(q, "columns") ? attr(q, "columns").split(";").map(function (s) { return s.trim(); }) : null;
+    var grid = items.some(function (it) { return /<img/i.test(it.html); });
+    var container = h("div", grid ? "qz-grid" : "qz-rows");
+    if (cols && !grid) {
+      var hr = h("div", "qz-row qz-row-head", "<span></span>");
+      var hc = h("div", "qz-row-ctrls");
+      cols.forEach(function (c) { hc.appendChild(h("span", null, c)); });
+      hr.appendChild(hc);
+      container.appendChild(hr);
+    }
+    var rows = items.map(function (it, idx) {
+      var answers = it.answer.split(";").map(function (s) { return s.trim(); });
+      if (answers.length !== groups.length) throw new Error("Item '" + stripTags(it.html).slice(0, 40) + "' needs " + groups.length + " answer(s) separated by ';'.");
+      var ctrls = groups.map(function (g) { return control(g, grid); });
+      var row;
+      if (grid) {
+        row = h("div", "qz-card");
+        row.appendChild(h("div", "qz-card-tag", "Display " + (idx + 1)));
+        row.appendChild(h("div", "qz-card-media", it.html));
+        ctrls.forEach(function (c) { row.appendChild(c.el); });
+      } else {
+        row = h("div", "qz-row", "<div>" + it.html + "</div>");
+        var cw = h("div", "qz-row-ctrls");
+        ctrls.forEach(function (c) { cw.appendChild(c.el); });
+        row.appendChild(cw);
+      }
+      container.appendChild(row);
+      return { ctrls: ctrls, answers: answers };
+    });
+    p.ui.appendChild(container);
+    var total = rows.length * groups.length;
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) {
+        r.ctrls.forEach(function (c, i) {
+          var v = c.get(), good = v !== null && matches(v, r.answers[i]);
+          c.mark(v === null ? false : good);
+          if (good) ok++;
+        });
+      });
+      scoreMsg(p, q, ok, total);
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c, i) { c.set(alts(r.answers[i])[0]); c.mark(true); }); });
+      feedback(p, "info", "Correct answers selected.");
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c) { c.set(null); c.mark(null); }); });
+    });
+  }
+
+  /* ---------- matching ---------- */
+  function buildMatch(q, p) {
+    var items = pairs(q);
+    var rights = [];
+    items.forEach(function (it) { if (rights.indexOf(it.answer) < 0) rights.push(it.answer); });
+    rights = shuffle(rights);
+    var letters = rights.map(function (_, i) { return String.fromCharCode(65 + i); });
+    var wrap = h("div", "qz-match");
+    var left = h("div", "qz-match-left");
+    var right = h("ol", "qz-match-right");
+    rights.forEach(function (r, i) {
+      right.appendChild(h("li", null, '<span class="qz-letter">' + letters[i] + "</span><span>" + r + "</span>"));
+    });
+    var rows = items.map(function (it) {
+      var c = control(letters, true);
+      c.el.setAttribute("aria-label", "Match for " + stripTags(it.html));
+      var row = h("div", "qz-row");
+      row.appendChild(c.el);
+      row.appendChild(h("div", null, it.html));
+      left.appendChild(row);
+      return { c: c, letter: letters[rights.indexOf(it.answer)] };
+    });
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    p.ui.appendChild(wrap);
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) { var v = r.c.get(), good = v === r.letter; r.c.mark(v === null ? false : good); if (good) ok++; });
+      scoreMsg(p, q, ok, rows.length);
+    }, function () {
+      rows.forEach(function (r) { r.c.set(r.letter); r.c.mark(true); });
+      feedback(p, "info", "Answer: " + rows.map(function (r, i) { return (i + 1) + "→" + r.letter; }).join(", "));
+    }, function () { rows.forEach(function (r) { r.c.set(null); r.c.mark(null); }); });
+  }
+
+  /* ---------- ordering ---------- */
+  function buildOrder(q, p) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list written in the correct order.");
+    var items = Array.prototype.map.call(list.children, function (li, i) { return { html: unwrapP(li.innerHTML), idx: i }; });
+    list.remove();
+    var ul = h("ol", "qz-order");
+    var dragged = null;
+    function lis() { return Array.prototype.slice.call(ul.children); }
+    function make(it) {
+      var li = h("li");
+      li.draggable = true;
+      li._idx = it.idx;
+      li.innerHTML = '<span class="qz-letter qz-pos"></span><span class="qz-order-text">' + it.html + "</span>";
+      var up = h("button", "qz-move", "↑"); up.type = "button"; up.setAttribute("aria-label", "Move up");
+      var dn = h("button", "qz-move", "↓"); dn.type = "button"; dn.setAttribute("aria-label", "Move down");
+      up.addEventListener("click", function () { if (li.previousElementSibling) ul.insertBefore(li, li.previousElementSibling); changed(); });
+      dn.addEventListener("click", function () { if (li.nextElementSibling) ul.insertBefore(li.nextElementSibling, li); changed(); });
+      li.appendChild(up); li.appendChild(dn);
+      li.addEventListener("dragstart", function (e) { dragged = li; li.classList.add("is-drag"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", ""); } catch (_) {} });
+      li.addEventListener("dragend", function () { li.classList.remove("is-drag"); dragged = null; changed(); });
+      li.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        if (!dragged || dragged === li) return;
+        var r = li.getBoundingClientRect();
+        ul.insertBefore(dragged, (e.clientY - r.top) > r.height / 2 ? li.nextSibling : li);
+      });
+      return li;
+    }
+    function changed() {
+      lis().forEach(function (li, i) { li.querySelector(".qz-pos").textContent = i + 1; li.classList.remove("is-ok", "is-bad"); });
+    }
+    function fill(order) { ul.innerHTML = ""; order.forEach(function (it) { ul.appendChild(make(it)); }); changed(); }
+    function shuffled() {
+      var s = shuffle(items), tries = 0;
+      while (items.length > 1 && s.every(function (it, i) { return it.idx === i; }) && tries++ < 20) s = shuffle(items);
+      return s;
+    }
+    fill(shuffled());
+    p.ui.appendChild(ul);
+    standardControls(p, q, function () {
+      var ok = 0;
+      lis().forEach(function (li, i) { var good = li._idx === i; markEl(li, good); if (good) ok++; });
+      scoreMsg(p, q, ok, items.length);
+    }, function () {
+      fill(items);
+      lis().forEach(function (li) { markEl(li, true); });
+      feedback(p, "info", "Correct order shown.");
+    }, function () { fill(shuffled()); });
+  }
+
+  /* ---------- open-ended ---------- */
+  function buildOpen(q, p) {
+    var ta = h("textarea", "form-control");
+    ta.rows = parseInt(attr(q, "rows") || "4", 10);
+    ta.placeholder = "Type the class's answer here…";
+    var w = h("div", "qz-open");
+    w.appendChild(ta);
+    p.ui.appendChild(w);
+    var kw = attr(q, "keywords");
+    var groups = kw ? kw.split(";").map(function (g) { return alts(g); }).filter(function (g) { return g.length; }) : [];
+    var check = null;
+    if (groups.length) {
+      check = function () {
+        if (!ta.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+        var text = " " + norm(ta.value) + " ";
+        var found = groups.filter(function (g) { return g.some(function (a) { return text.indexOf(norm(a)) >= 0; }); });
+        var chips = found.map(function (g) { return '<span class="qz-chip qz-chip-ok">✓ ' + g[0] + "</span>"; }).join("");
+        var n = found.length, t = groups.length;
+        if (n === t) { feedback(p, "ok", "All " + t + " key ideas mentioned! " + chips); setStatus(q, "correct"); showExplain(p); }
+        else if (n) { feedback(p, "partial", n + " of " + t + " key ideas found. Something is still missing. " + chips); setStatus(q, "partial"); }
+        else { feedback(p, "bad", "None of the " + t + " key ideas found yet. Think about what the question asks for."); setStatus(q, "wrong"); }
+      };
+    }
+    standardControls(p, q, check, function () { feedback(p, "info", "Compare with the model answer below."); }, function () { ta.value = ""; });
+    if (check) p.controls.firstChild.textContent = "Check key ideas";
+  }
+
+  /* ---------- init ---------- */
+  function init() {
+    var quizzes = document.querySelectorAll("div.quiz");
+    var n = 0;
+    quizzes.forEach(function (q) {
+      var type = (attr(q, "type") || "").toLowerCase();
+      if (!type) Object.keys(LABELS).forEach(function (k) { if (q.classList.contains(k)) type = k; });
+      n++;
+      try {
+        var p = scaffold(q, type, n);
+        if (type === "mc") buildChoice(q, p, false, false);
+        else if (type === "ms") buildChoice(q, p, true, false);
+        else if (type === "tf") buildChoice(q, p, false, true);
+        else if (type === "short") buildShort(q, p);
+        else if (type === "fill") buildFill(q, p);
+        else if (type === "classify") buildClassify(q, p);
+        else if (type === "match") buildMatch(q, p);
+        else if (type === "order") buildOrder(q, p);
+        else if (type === "open") buildOpen(q, p);
+        else throw new Error("Unknown type '" + type + "'.");
+        registry.push(q);
+      } catch (err) {
+        q.appendChild(h("div", "qz-error", "Quiz error: " + err.message));
+        if (window.console) console.error("Quiz Q" + n, err);
+      }
+    });
+    document.querySelectorAll(".quiz-scoreboard").forEach(function (sb) {
+      sb.innerHTML = "";
+      var left = h("div", null, '<div class="qz-score-big"></div><div class="qz-score-tried" style="font-size:.85rem;color:var(--qz-muted)"></div>');
+      var bar = h("div", "qz-score-bar", "<span></span>");
+      sb.appendChild(left);
+      sb.appendChild(bar);
+      sb.appendChild(btn("Reset all", "btn-outline-secondary", function () {
+        if (!window.confirm("Clear every answer on this page?")) return;
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+      }));
+    });
+    if (registry.length && !document.querySelector(".qz-pill")) document.body.appendChild(h("div", "qz-pill"));
+    updateScore();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/statserenay\.github\.io\/stat112-site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Made with ❤️ and Quarto · Emoji graphics: Twemoji (CC-BY 4.0)</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
