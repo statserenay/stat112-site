@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Homework 1 – STAT 112</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-cb9204863bce9d0f417f179c14b9f9e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Homework 1 – STAT 112">
+<meta property="og:description" content="Descriptive statistics, box plots, linear transformations and misleading graphs">
+<meta property="og:image" content="https://statserenay.github.io/stat112-site/homework1/q1c-box-plot.png">
+<meta property="og:site_name" content="STAT 112">
+<meta property="og:image:alt" content="Box plot of daily screen time: minimum 168, Q1 182, median 197, Q3 224, upper fence 287, and an outlier at 310 minutes on Saturday.">
+<meta property="og:image:height" content="600">
+<meta property="og:image:width" content="1429">
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 112</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-computing">    
+        <li>
+    <a class="dropdown-item" href="./computing-setup.html">
+ <span class="dropdown-text">Setup</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-recitations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Recitations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-recitations">    
+        <li>
+    <a class="dropdown-item" href="./recitation-week1.html">
+ <span class="dropdown-text">Recitation 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week2.html">
+ <span class="dropdown-text">Recitation 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week3.html">
+ <span class="dropdown-text">Recitation 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week4.html">
+ <span class="dropdown-text">Recitation 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homeworks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homeworks</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homeworks">    
+        <li>
+    <a class="dropdown-item" href="./homework1.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./games-tab/games.html"> 
+<span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chats-tab/chats.html"> 
+<span class="menu-text">Student Chats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./flashcards.html"> 
+<span class="menu-text">Flashcards</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calculator.html"> 
+<span class="menu-text">Calculator</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ask.html"> 
+<span class="menu-text">Ask a Question</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/statserenay"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:serenay@metu.edu.tr"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#how-to-use-this-answer-key" id="toc-how-to-use-this-answer-key" class="nav-link active" data-scroll-target="#how-to-use-this-answer-key">How to use this answer key</a></li>
+  <li><a href="#q1" id="toc-q1" class="nav-link" data-scroll-target="#q1">Question 1: Your own data (30 points)</a></li>
+  <li><a href="#q2" id="toc-q2" class="nav-link" data-scroll-target="#q2">Question 2: Your personal dataset (20 points)</a></li>
+  <li><a href="#q3" id="toc-q3" class="nav-link" data-scroll-target="#q3">Question 3: Grade the chatbot (25 points)</a></li>
+  <li><a href="#q4" id="toc-q4" class="nav-link" data-scroll-target="#q4">Question 4: Misleading graph hunt (25 points)</a></li>
+  <li><a href="#qb" id="toc-qb" class="nav-link" data-scroll-target="#qb">Bonus: AI-use log and reflection (10 points)</a></li>
+  <li><a href="#check" id="toc-check" class="nav-link" data-scroll-target="#check">Check your own numbers</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework 1</h1>
+<p class="subtitle lead">Descriptive statistics, box plots, linear transformations and misleading graphs</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Due:</strong> Friday, 6 November 2026, 23:59 (Türkiye time) on ODTUClass · <strong>Points:</strong> 100 + 10 bonus</p>
+<p><a href="homework1/STAT112_Homework1_Questions.pdf" class="btn btn-primary" download="STAT112_Homework1_Questions.pdf"><i class="bi bi-file-earmark-pdf"></i> Download the questions (PDF)</a></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Question</th>
+<th style="text-align: left;">Topic</th>
+<th style="text-align: right;">Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="#q1">Your own data</a></td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="#q2">Your personal dataset</a></td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a href="#q3">Grade the chatbot</a></td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><a href="#q4">Misleading graph hunt</a></td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bonus</td>
+<td style="text-align: left;"><a href="#qb">AI-use log and reflection</a></td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Total</strong></td>
+<td style="text-align: right;"><strong>110</strong></td>
+</tr>
+</tbody>
+</table>
+<section id="how-to-use-this-answer-key" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-answer-key">How to use this answer key</h2>
+<ul>
+<li><strong>Your numbers will differ.</strong> Questions 1, 2 and 4 use your own data, your own student ID and your own graph. The key uses example data, so compare your <em>method</em> with the key, not your final numbers.</li>
+<li><strong>Try first, then look.</strong> Every solution is folded. Work out each part yourself, then click <strong>Solution</strong> to compare.</li>
+<li><strong>Check your own numbers.</strong> The <a href="#check">checker at the bottom of this page</a> recomputes Questions 1 and 2 with your own week of data and your own ID.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Course conventions used in the key
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Sample variance divides by <span class="math inline">\(n-1\)</span>.</li>
+<li>Quartiles use the <span class="math inline">\((n+1)p\)</span> position rule: <span class="math inline">\(Q_1\)</span> is at position <span class="math inline">\((n+1)/4\)</span> and <span class="math inline">\(Q_3\)</span> at <span class="math inline">\(3(n+1)/4\)</span> in the sorted data. A position such as 2.5 means halfway between the 2nd and 3rd values.</li>
+<li>Fences are <span class="math inline">\(Q_1 - 1.5 \times IQR\)</span> and <span class="math inline">\(Q_3 + 1.5 \times IQR\)</span>; a value outside them is a potential outlier.</li>
+<li>Intermediate steps keep 4 decimals; final answers are rounded to 2 decimals.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="q1" class="level2">
+<h2 class="anchored" data-anchor-id="q1">Question 1: Your own data (30 points)</h2>
+<p>Record <strong>one</strong> numerical variable about your own life for <strong>7 consecutive days</strong>: your daily phone screen time in minutes, or your daily number of steps. Attach screenshot(s) that show the daily values; the values in your table must match your screenshots.</p>
+<p>Example data used in this key (made up): daily phone screen time in minutes for one week.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Day</th>
+<th style="text-align: right;">Mon</th>
+<th style="text-align: right;">Tue</th>
+<th style="text-align: right;">Wed</th>
+<th style="text-align: right;">Thu</th>
+<th style="text-align: right;">Fri</th>
+<th style="text-align: right;">Sat</th>
+<th style="text-align: right;">Sun</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Screen time (min)</td>
+<td style="text-align: right;">182</td>
+<td style="text-align: right;">205</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">310</td>
+<td style="text-align: right;">190</td>
+</tr>
+</tbody>
+</table>
+<p><strong>a. [7 pts]</strong> Describe your variable: is it qualitative or quantitative, discrete or continuous, and on which scale of measurement? In this context, what is the experimental unit? Do your 7 values form a population or a sample, and if a sample, of which population? Is the mean of your 7 values a parameter or a statistic? Justify each answer in one sentence.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 1a
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Type:</strong> quantitative, because screen time is a measured amount, not a category.</li>
+<li><strong>Discrete or continuous:</strong> continuous, because time can take any value in an interval; the phone only rounds it to whole minutes.</li>
+<li><strong>Scale:</strong> ratio, because 0 minutes means no screen time at all, so “twice as much” makes sense.</li>
+<li><strong>Experimental unit:</strong> one day of my life, because each value describes one day.</li>
+<li><strong>Population or sample:</strong> a sample of 7 days from the population of all days in my current semester.</li>
+<li><strong>Parameter or statistic:</strong> the mean of these 7 values is a statistic, because it is computed from a sample.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>b. [8 pts]</strong> Make a table with the columns <span class="math inline">\(x_i\)</span>, <span class="math inline">\(x_i-\bar{x}\)</span> and <span class="math inline">\((x_i-\bar{x})^2\)</span>. Then compute the mean, median, mode (if any), range, sample variance, standard deviation and coefficient of variation.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 1b
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\bar{x}=\frac{\sum_{i=1}^{7}x_i}{n}=\frac{1476}{7}=210.8571\approx 210.86\ \text{min}\]</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(x_i\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(x_i-\bar{x}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\((x_i-\bar{x})^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">182</td>
+<td style="text-align: right;">−28.8571</td>
+<td style="text-align: right;">832.7347</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">205</td>
+<td style="text-align: right;">−5.8571</td>
+<td style="text-align: right;">34.3061</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">−42.8571</td>
+<td style="text-align: right;">1836.7347</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">13.1429</td>
+<td style="text-align: right;">172.7347</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">−13.8571</td>
+<td style="text-align: right;">192.0204</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">310</td>
+<td style="text-align: right;">99.1429</td>
+<td style="text-align: right;">9829.3061</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">−20.8571</td>
+<td style="text-align: right;">435.0204</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><strong>Σ = 1476</strong></td>
+<td style="text-align: right;"><strong>0</strong></td>
+<td style="text-align: right;"><strong>13332.8571</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Check: the deviations add up to 0, as they always must.</p>
+<ul>
+<li><strong>Median:</strong> sorted data are 168, 182, 190, <strong>197</strong>, 205, 224, 310. The middle (4th) value is 197 min.</li>
+<li><strong>Mode:</strong> none, because every value appears once.</li>
+<li><strong>Range:</strong> 310 − 168 = 142 min.</li>
+</ul>
+<p><span class="math display">\[s^2=\frac{\sum(x_i-\bar{x})^2}{n-1}=\frac{13332.8571}{6}=2222.1429\approx 2222.14\ \text{min}^2\]</span></p>
+<p><span class="math display">\[s=\sqrt{2222.1429}=47.1396\approx 47.14\ \text{min}\]</span></p>
+<p><span class="math display">\[CV=\frac{s}{\bar{x}}\times100\%=\frac{47.1396}{210.8571}\times100\%=22.36\%\]</span></p>
+</div>
+</div>
+</div>
+<p><strong>c.&nbsp;[12 pts]</strong> Find <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_3\)</span>, the <span class="math inline">\(IQR\)</span>, the lower and upper fences and any potential outliers. Draw a box plot <strong>by hand</strong> (a photo is fine) and label the five-number summary on it.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 1c
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>With <span class="math inline">\(n = 7\)</span>, <span class="math inline">\(Q_1\)</span> is at position <span class="math inline">\((7 + 1)/4 = 2\)</span> and <span class="math inline">\(Q_3\)</span> at position <span class="math inline">\(3(7 + 1)/4 = 6\)</span> in the sorted data.</p>
+<ul>
+<li><span class="math inline">\(Q_1\)</span> = 182 min, <span class="math inline">\(Q_3\)</span> = 224 min.</li>
+<li><span class="math inline">\(IQR\)</span> = 224 − 182 = 42 min.</li>
+<li>Lower fence = <span class="math inline">\(Q_1 - 1.5 \times IQR\)</span> = 182 − 63 = 119 min.</li>
+<li>Upper fence = <span class="math inline">\(Q_3 + 1.5 \times IQR\)</span> = 224 + 63 = 287 min.</li>
+<li><strong>Potential outlier:</strong> 310 min (Saturday), because 310 &gt; 287. No value is below 119.</li>
+</ul>
+<p>Five-number summary for the box plot: minimum 168, <span class="math inline">\(Q_1\)</span> 182, median 197, <span class="math inline">\(Q_3\)</span> 224, maximum 310. Because 310 is an outlier, draw it as a separate point, and end the upper whisker at 224, the largest value that is not an outlier. The lower whisker runs from 182 down to 168.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="homework1/q1c-box-plot.png" class="img-fluid figure-img" alt="Box plot of daily screen time: minimum 168, Q1 182, median 197, Q3 224, upper fence 287, and an outlier at 310 minutes on Saturday."></p>
+<figcaption>There is no upper whisker: the largest value that is not an outlier is 224, which is <span class="math inline">\(Q_3\)</span> itself.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>d.&nbsp;[3 pts]</strong> In 3–4 sentences of your own: which measure of centre best describes your “typical day”, and why? Can you explain any unusual value (a weekend, an exam day, a trip…)?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 1d
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The median (197 min) describes my typical day better than the mean (210.86 min). The mean is pulled up by Saturday’s 310 minutes, which is an outlier, while the median is not affected by one extreme value. Five of my seven days are below the mean, which shows it is not “typical”. Saturday was unusual because I had no classes and watched a series in the evening.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="q2" class="level2">
+<h2 class="anchored" data-anchor-id="q2">Question 2: Your personal dataset (20 points)</h2>
+<p>The weekly study hours of 9 STAT 112 students are:</p>
+<p><span class="math display">\[x:\ 4,\ 7,\ 7,\ 9,\ 10,\ 12,\ 13,\ 15,\ 31\]</span></p>
+<p>Let <span class="math inline">\(a\)</span> = the last digit of your student ID and <span class="math inline">\(b\)</span> = (the second-to-last digit of your student ID) + 1. For example, ID 2581347 gives <span class="math inline">\(a = 7\)</span> and <span class="math inline">\(b = 4 + 1 = 5\)</span>. Your instructor converts hours into “effort points” with <span class="math inline">\(y_i = a + b \cdot x_i\)</span>.</p>
+<p>This key uses the ID <strong>2073617</strong>. Enter your own ID in the <a href="#check-q2">checker</a> to see your values.</p>
+<p><strong>a. [3 pts]</strong> Write down your <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, and your nine <span class="math inline">\(y\)</span> values.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 2a
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>My ID is 2073617: the last digit is 7, so <span class="math inline">\(a = 7\)</span>. The second-to-last digit is 1, so <span class="math inline">\(b = 1 + 1 = 2\)</span>. The transformation is <span class="math inline">\(y_i = 7 + 2x_i\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(x_i\)</span></th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">7</th>
+<th style="text-align: right;">7</th>
+<th style="text-align: right;">9</th>
+<th style="text-align: right;">10</th>
+<th style="text-align: right;">12</th>
+<th style="text-align: right;">13</th>
+<th style="text-align: right;">15</th>
+<th style="text-align: right;">31</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y_i = 7 + 2x_i\)</span></td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">69</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><strong>b. [6 pts]</strong> Directly from your <span class="math inline">\(y\)</span> values, compute <span class="math inline">\(\bar{y}\)</span>, the median, <span class="math inline">\(s_y\)</span>, <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_3\)</span> and the <span class="math inline">\(IQR\)</span>. Show your work.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 2b
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\bar{y}=\frac{15+21+21+25+27+31+33+37+69}{9}=\frac{279}{9}=31\]</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(y_i\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(y_i-\bar{y}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\((y_i-\bar{y})^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">−16</td>
+<td style="text-align: right;">256</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">−10</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">−10</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">−6</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">−4</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">1444</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><strong>Σ = 279</strong></td>
+<td style="text-align: right;"><strong>0</strong></td>
+<td style="text-align: right;"><strong>1992</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[s_y^2=\frac{1992}{9-1}=249,\qquad s_y=\sqrt{249}=15.78\]</span></p>
+<ul>
+<li><strong>Median:</strong> the <span class="math inline">\(y\)</span> values are already sorted; the middle (5th) value is 27.</li>
+<li><strong><span class="math inline">\(Q_1\)</span>:</strong> position <span class="math inline">\((9 + 1)/4 = 2.5\)</span>, halfway between the 2nd and 3rd values: <span class="math inline">\((21 + 21)/2 = 21\)</span>.</li>
+<li><strong><span class="math inline">\(Q_3\)</span>:</strong> position <span class="math inline">\(3(9 + 1)/4 = 7.5\)</span>, halfway between the 7th and 8th values: <span class="math inline">\((33 + 37)/2 = 35\)</span>.</li>
+<li><strong><span class="math inline">\(IQR\)</span></strong> = 35 − 21 = 14.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>c.&nbsp;[6 pts]</strong> Compute <span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s_x\)</span>, and the <span class="math inline">\(IQR\)</span> of the original <span class="math inline">\(x\)</span> data. Then use the rules for a linear transformation to check your answers in part (b). Do they agree? If not, find your mistake.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 2c
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\bar{x}=\frac{108}{9}=12,\qquad s_x^2=\frac{\sum(x_i-\bar{x})^2}{n-1}=\frac{498}{8}=62.25,\qquad s_x=7.89\]</span></p>
+<p>For <span class="math inline">\(x\)</span>: <span class="math inline">\(Q_1 = (7 + 7)/2 = 7\)</span>, <span class="math inline">\(Q_3 = (13 + 15)/2 = 14\)</span>, so <span class="math inline">\(IQR = 7\)</span>. The median of <span class="math inline">\(x\)</span> is 10.</p>
+<p>Rules for <span class="math inline">\(y = a + bx\)</span> with <span class="math inline">\(b &gt; 0\)</span>: the shift <span class="math inline">\(a\)</span> changes measures of centre but not measures of spread; the factor <span class="math inline">\(b\)</span> multiplies both.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Statistic</th>
+<th style="text-align: left;">Rule</th>
+<th style="text-align: right;">Using the rule</th>
+<th style="text-align: right;">Direct from <span class="math inline">\(y\)</span></th>
+<th style="text-align: left;">Agree?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mean</td>
+<td style="text-align: left;"><span class="math inline">\(\bar{y} = a + b\bar{x}\)</span></td>
+<td style="text-align: right;">7 + 2(12) = 31</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Median</td>
+<td style="text-align: left;"><span class="math inline">\(a + b \cdot\)</span> (median of <span class="math inline">\(x\)</span>)</td>
+<td style="text-align: right;">7 + 2(10) = 27</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Standard deviation</td>
+<td style="text-align: left;"><span class="math inline">\(s_y = b\,s_x\)</span></td>
+<td style="text-align: right;">2(7.89) = 15.78</td>
+<td style="text-align: right;">15.78</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IQR</td>
+<td style="text-align: left;"><span class="math inline">\(IQR_y = b \cdot IQR_x\)</span></td>
+<td style="text-align: right;">2(7) = 14</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>All answers agree, so part (b) is correct.</p>
+</div>
+</div>
+</div>
+<p><strong>d.&nbsp;[5 pts]</strong> Is <span class="math inline">\(CV_y\)</span> equal to <span class="math inline">\(CV_x\)</span>? Explain why or why not, and state when they would be equal.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 2d
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[CV_x=\frac{7.89}{12}\times100\%=65.75\%,\qquad CV_y=\frac{15.78}{31}\times100\%=50.90\%\]</span></p>
+<p>No, they are not equal. Multiplying by <span class="math inline">\(b\)</span> scales the standard deviation and the mean by the same factor, which cancels in the CV. Adding <span class="math inline">\(a = 7\)</span> raises the mean but leaves the standard deviation unchanged, so the CV gets smaller. The two CVs are equal only when <span class="math inline">\(a = 0\)</span>, that is, when the transformation is a pure change of scale (<span class="math inline">\(y = bx\)</span>). Students whose ID ends in 0 will find <span class="math inline">\(CV_y = CV_x\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="q3" class="level2">
+<h2 class="anchored" data-anchor-id="q3">Question 3: Grade the chatbot (25 points)</h2>
+<p>A student gave this question to an AI chatbot:</p>
+<blockquote class="blockquote">
+<p><em>“Here are last week’s daily maximum temperatures (°C).<em> </em>Ankara: 18, 21, 19, 24, 20, 22, 16.<em> </em>Antalya: 27, 26, 28, 27, 29, 26, 25.<em> </em>Summarise and compare the two cities.<em> </em>Also: Ayşe cycles 30 km to campus at 15 km/h and returns along the same 30 km at 30 km/h. What is her average speed?”</em></p>
+</blockquote>
+<p>The chatbot’s answer, split into numbered statements:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Chatbot’s statement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">S1</td>
+<td style="text-align: left;">Temperature in °C is measured on a ratio scale, so a 24 °C day is twice as warm as a 12 °C day.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S2</td>
+<td style="text-align: left;">Ankara mean: x̄ = (18 + 21 + 19 + 24 + 20 + 22 + 16) / 7 = 140 / 7 = 20 °C.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S3</td>
+<td style="text-align: left;">Ankara median: the middle (4th) value of the data is 24 °C.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S4</td>
+<td style="text-align: left;">Ankara range: 24 − 16 = 8 °C.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S5</td>
+<td style="text-align: left;">Ankara variance: s² = Σ(x − x̄)² / n = 42 / 7 = 6, so s = 2.45 °C.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S6</td>
+<td style="text-align: left;">Antalya: x̄ = 26.86 °C and median = 27 °C. Since the mean is smaller than the median, Antalya’s temperatures are clearly right-skewed.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S7</td>
+<td style="text-align: left;">Antalya standard deviation: s = 1.35 °C.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S8</td>
+<td style="text-align: left;">To compare the variability of the two cities fairly, we must use the coefficient of variation: CV(Ankara) = 2.45 / 20 = 12.3% and CV(Antalya) = 1.25 / 26.86 = 4.6%. So Ankara is about 2.6 times as variable as Antalya.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S9</td>
+<td style="text-align: left;">Ayşe’s average speed is (15 + 30) / 2 = 22.5 km/h.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>a. [18 pts]</strong> Decide for <strong>each</strong> statement whether it is correct or wrong. For every wrong statement, explain the mistake in <strong>one sentence</strong> and give the corrected statement or number.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 3a
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Verdict</th>
+<th style="text-align: left;">The mistake, in one sentence</th>
+<th style="text-align: left;">Corrected statement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">S1</td>
+<td style="text-align: left;"><strong>Wrong</strong></td>
+<td style="text-align: left;">°C is an interval scale because 0 °C does not mean “no temperature”, so ratios are meaningless.</td>
+<td style="text-align: left;">Temperature in °C is on an interval scale; 24 °C is 12 °C warmer than 12 °C, not “twice as warm”.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S2</td>
+<td style="text-align: left;">Correct</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">x̄ = 140/7 = 20 °C.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S3</td>
+<td style="text-align: left;"><strong>Wrong</strong></td>
+<td style="text-align: left;">The 4th value was taken from the unsorted data.</td>
+<td style="text-align: left;">Sorted: 16, 18, 19, <strong>20</strong>, 21, 22, 24, so the median is 20 °C.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S4</td>
+<td style="text-align: left;">Correct</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">Range = 24 − 16 = 8 °C.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S5</td>
+<td style="text-align: left;"><strong>Wrong</strong></td>
+<td style="text-align: left;">Sample variance divides by n − 1, not n.</td>
+<td style="text-align: left;">s² = 42/6 = 7 °C², so s = √7 = 2.65 °C.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S6</td>
+<td style="text-align: left;"><strong>Wrong</strong></td>
+<td style="text-align: left;">A mean below the median points to left skew, not right skew, and a 0.14 °C gap in 7 values is too small to call “clearly” skewed.</td>
+<td style="text-align: left;">x̄ = 26.86 °C and median = 27 °C; the mean is only slightly below the median, so the data are roughly symmetric (at most slightly left-skewed).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S7</td>
+<td style="text-align: left;">Correct</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">s = √(10.8571/6) = √1.8095 = 1.35 °C.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S8</td>
+<td style="text-align: left;"><strong>Wrong</strong></td>
+<td style="text-align: left;">It uses the wrong s for Ankara (2.45) and a value for Antalya (1.25) that contradicts S7, and the CV is not meaningful for °C, which has no true zero.</td>
+<td style="text-align: left;">Both cities use the same unit, so compare the standard deviations directly: 2.65 °C vs 1.35 °C, so Ankara is about 2.65/1.35 ≈ 2 times as variable as Antalya.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S9</td>
+<td style="text-align: left;"><strong>Wrong</strong></td>
+<td style="text-align: left;">The arithmetic mean of two speeds is wrong when the times differ; average speed is total distance divided by total time.</td>
+<td style="text-align: left;">Time = 30/15 + 30/30 = 2 + 1 = 3 h, so average speed = 60/3 = <strong>20 km/h</strong> (the harmonic mean of 15 and 30).</td>
+</tr>
+</tbody>
+</table>
+<p>Working for S7 and the Antalya mean: Σx = 188, x̄ = 188/7 = 26.8571; Σ(x − x̄)² = 10.8571.</p>
+<p><span class="math display">\[\bar{v}=\frac{\text{total distance}}{\text{total time}}=\frac{30+30}{\frac{30}{15}+\frac{30}{30}}=\frac{60}{3}=20\ \text{km/h}\]</span></p>
+<p><strong>Grading note:</strong> for S8, naming any one of the three errors with a correct fix earns 1 pt; full marks need the correct numbers plus the point that the CV is not suitable for °C. Using the CV with the correct values (2.65/20 = 13.23% and 1.35/26.86 = 5.01%) and the correct conclusion earns 1 of 2 pts.</p>
+</div>
+</div>
+</div>
+<p><strong>b. [7 pts]</strong> Write a corrected comparison of the two cities in 3 sentences: centre, spread, and which city’s weather is more predictable.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 3b
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Antalya was about 7 °C warmer than Ankara last week, with a mean of 26.86 °C and a median of 27 °C against Ankara’s 20 °C and 20 °C. Ankara’s temperatures varied about twice as much (s = 2.65 °C, range 8 °C) as Antalya’s (s = 1.35 °C, range 4 °C). Antalya’s weather was therefore more predictable from day to day.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="q4" class="level2">
+<h2 class="anchored" data-anchor-id="q4">Question 4: Misleading graph hunt (25 points)</h2>
+<p>Find a graph published <strong>in the 60 days before the due date (on or after 7 September 2026)</strong> by a Turkish news site, TV channel, newspaper, social-media account, company or public institution (e.g.&nbsp;TÜİK).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Note to students
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The example below was published on 4 September 2026, three days before the window in the question starts. It is used here only to show what a complete answer looks like. In your own homework, a graph from before 7 September gets 0 points for the whole question, so check the publication date of your source carefully.</p>
+</div>
+</div>
+<p><strong>a. [8 pts]</strong> Attach a screenshot of the graph together with its <strong>exact link</strong> and <strong>publication date</strong>. Graphs without a source that I can check get 0 points for the whole question.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 4a
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The following figure is taken from page 45 of the <a href="https://en-ceidizler.ceid.org.tr/Gender-Equality-Monitoring-Report-of-Turkiye-20252026-d161">Gender Equality Monitoring Report of Türkiye (2025–2026)</a>, published by the Cinsiyet Eşitliği İzleme Derneği (CEİD) on 4 September 2026. The report’s authors built the graph from Sosyal Güvenlik Kurumu (SGK) work-accident and occupational-disease statistics for 2016–2024. I have utilized an AI to obtain the translated version from the original Turkish figure on page 45 of the report.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="homework1/q4-original-graph.png" class="img-fluid figure-img" alt="Grouped bar chart: number of children aged 14 to 18 who had a work accident, by sex, 2016 to 2024, with separate bars for men, women and the total."></p>
+<figcaption>Graph 2 from the CEİD report, translated into English.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>b. [7 pts]</strong> Which variables does the graph show? For each one, give its type (qualitative/quantitative, discrete/continuous) and scale of measurement.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 4b
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Discrete or continuous</th>
+<th style="text-align: left;">Scale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year (2016–2024)</td>
+<td style="text-align: left;">Quantitative (used here as categories in time order)</td>
+<td style="text-align: left;">Discrete</td>
+<td style="text-align: left;">Interval</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sex (Men / Women)</td>
+<td style="text-align: left;">Qualitative</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">Nominal</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of 14–18-year-olds who had a work accident</td>
+<td style="text-align: left;">Quantitative</td>
+<td style="text-align: left;">Discrete (a count)</td>
+<td style="text-align: left;">Ratio</td>
+</tr>
+</tbody>
+</table>
+<p>Year is on an interval scale because “year 0” does not mean “no time”: differences between years make sense, but ratios do not. The number of accidents is on a ratio scale because 0 means no accidents at all.</p>
+</div>
+</div>
+</div>
+<p><strong>c.&nbsp;[10 pts]</strong> Name the type of graph. Is it a good choice for these variables? Point out at least one way in which it could mislead a reader (e.g.&nbsp;a truncated axis, 3D effects, a pie chart with too many slices, missing sample size, unequal intervals), or argue convincingly why it does not mislead.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution 4c
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is a <strong>grouped (clustered) bar chart</strong>. For each year it shows three columns: men, women and the total. A bar chart is a reasonable choice for comparing counts across years and between the sexes. The y-axis starts at 0, each column shows its value, and the data source is stated.</p>
+<p>However, the graph can mislead a reader in several ways:</p>
+<ol type="1">
+<li><strong>Two totals are wrong.</strong> In 2021, 14,934 + 3,048 = 17,982, but the chart shows 17,977. In 2023, 30,266 + 7,094 = 37,360, but the chart shows 37,540, which is 180 more. The other seven years add up correctly.</li>
+<li><strong>The total should not be a separate column.</strong> Boys and girls are parts of the total, so a stacked column chart would show this better. In this chart every child is shown twice, and the tall total columns pull attention away from the comparison between boys and girls.</li>
+<li><strong>It shows counts, not rates.</strong> Accidents rose from 11,091 in 2020 to 43,876 in 2024, which looks alarming. But the number of insured 14–18-year-olds may also have grown, for example through vocational apprenticeship programmes. Without accidents per 1,000 insured young workers, we cannot tell whether work became more dangerous or whether more young people were registered. The low 2020 value may also reflect fewer young people working during the pandemic.</li>
+<li><strong>Unregistered work is missing.</strong> SGK only records insured workers. Children in informal work, such as agriculture or domestic work, are not counted, so the real numbers are probably higher, especially for girls.</li>
+<li><strong>The labels are unclear.</strong> The title talks about children, but the legend says “Kadın” (women) instead of “Kız” (girls). The y-axis also has no title saying what is being counted.</li>
+</ol>
+<p><strong>A better graph</strong> is a 100% stacked bar chart with the totals corrected (see the figure below). Each bar shows what share of that year’s accidents happened to boys and to girls, so every bar ends at 100%, and the total number of children (n) is printed above each bar. This makes a change visible that the original graph hid: girls’ share fell from 29.3% in 2016 to about 17% in 2020–2021, then rose to 21.1% in 2024.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="homework1/q4-better-graph.png" class="img-fluid figure-img" alt="100% stacked bar chart: share of boys and girls among insured children aged 14 to 18 who had a work accident, 2016 to 2024, with corrected totals above each bar."></p>
+<figcaption>Redrawn by the instructor with corrected totals for 2021 (17,982) and 2023 (37,360).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="qb" class="level2">
+<h2 class="anchored" data-anchor-id="qb">Bonus: AI-use log and reflection (10 points)</h2>
+<p>Points here are given for honesty and reflection, not for whether you used AI.</p>
+<p><strong>a. [6 pts]</strong> If you used any AI tool for this homework: name the tool, paste your prompt(s), and summarise what it answered. For each use, say what you checked yourself and describe one thing it got wrong, left out, or did differently from the STAT 112 rules. If you did not use AI, write “I did not use AI tools for this homework” and describe how you checked one of your answers yourself.</p>
+<p><strong>b. [4 pts]</strong> In 4–5 sentences, describe two specific risks of trusting an AI tool with statistics homework, and one good way to use AI as a study tool.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The bonus has no single correct answer, so no model solution is given. It is graded on honesty and on how specific your reflection is.</p>
+</div>
+</div>
+</section>
+<section id="check" class="level2">
+<h2 class="anchored" data-anchor-id="check">Check your own numbers</h2>
+<p>Enter your own values below. Everything is recomputed with the STAT 112 methods (<span class="math inline">\(n-1\)</span> in the variance, <span class="math inline">\((n+1)p\)</span> quartile positions). Nothing you type leaves this page.</p>
+<style>
+.hw-check{--hc-border:var(--bs-border-color,#dee2e6);--hc-muted:var(--bs-secondary-color,#6c757d);--hc-soft:var(--bs-tertiary-bg,#f8f9fa);--hc-accent:var(--bs-primary,#2780e3);--hc-bad:var(--bs-danger,#dc3545);--hc-ok:var(--bs-success,#198754);display:grid;gap:14px;margin-bottom:2rem}
+.hw-check .hc-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px}
+.hw-check label{font-size:.85rem;color:var(--hc-muted);display:block;margin-bottom:2px}
+.hw-check input,.hw-check select{font-family:var(--bs-font-monospace,monospace);width:100%;min-width:0}
+.hw-check .hc-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.hw-check .hc-res{border:1px solid var(--hc-border);border-radius:8px;padding:8px 12px;background:var(--hc-soft)}
+.hw-check .hc-res .k{display:block;font-size:.82rem;color:var(--hc-muted)}
+.hw-check .hc-res .v{display:block;font-family:var(--bs-font-monospace,monospace);font-weight:600;font-size:1.05rem;overflow-wrap:anywhere}
+.hw-check .hc-res.flag{border-color:var(--hc-bad)}
+.hw-check .hc-res.flag .v{color:var(--hc-bad)}
+.hw-check .hc-err{color:var(--hc-bad);font-weight:600}
+.hw-check .hc-steps{display:grid;gap:4px;font-size:.95rem}
+.hw-check .hc-steps code{white-space:normal}
+.hw-check .hc-tbl{overflow-x:auto}
+.hw-check .hc-tbl table{margin:0}
+.hw-check .hc-tbl td,.hw-check .hc-tbl th{text-align:right;font-variant-numeric:tabular-nums}
+.hw-check .hc-svg{overflow-x:auto;border:1px solid var(--hc-border);border-radius:8px;padding:6px}
+.hw-check .hc-svg svg{display:block;width:100%;min-width:520px;height:auto}
+.hw-check .hc-yes{color:var(--hc-ok);font-weight:700}
+.hw-check .hc-no{color:var(--hc-bad);font-weight:700}
+</style>
+
+<h3 id="check-q1" class="anchored">Question 1 checker</h3>
+<div class="hw-check" id="hc1">
+  <div class="row g-2 align-items-end">
+    <div class="col-sm-5"><label for="hc1-var">Variable</label>
+      <select class="form-select" id="hc1-var"><option value="min">Screen time (minutes)</option><option value="steps">Steps</option></select></div>
+    <div class="col-sm-4"><button class="btn btn-outline-primary" type="button" id="hc1-reset">Reset to example</button></div>
+  </div>
+  <div class="hc-inputs" id="hc1-inputs"></div>
+  <p class="hc-err" id="hc1-err" role="alert" hidden=""></p>
+  <div id="hc1-out" style="display:grid;gap:14px"></div>
+</div>
+
+<h3 id="check-q2" class="anchored">Question 2 checker</h3>
+<div class="hw-check" id="hc2">
+  <div class="row g-2"><div class="col-sm-5"><label for="hc2-id">Student ID</label>
+    <input class="form-control" id="hc2-id" inputmode="numeric" autocomplete="off" value="2073617"></div></div>
+  <p class="hc-err" id="hc2-err" role="alert" hidden=""></p>
+  <div id="hc2-out" style="display:grid;gap:14px"></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const sum=a=>a.reduce((s,x)=>s+x,0), sortN=a=>[...a].sort((x,y)=>x-y);
+function qpos(s,p){const n=s.length,pos=p*(n+1);if(pos<=1)return{pos,val:s[0]};if(pos>=n)return{pos,val:s[n-1]};const k=Math.floor(pos),f=pos-k;return{pos,val:s[k-1]+f*(s[k]-s[k-1])};}
+function median(s){const n=s.length;return n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2;}
+function modes(a){const m=new Map();a.forEach(x=>m.set(x,(m.get(x)||0)+1));const mx=Math.max(...m.values());if(mx<2)return[];return[...m].filter(([,c])=>c===mx).map(([v])=>v).sort((x,y)=>x-y);}
+const r2=x=>Math.round((x+Number.EPSILON)*100)/100;
+const f2=x=>{const v=r2(x);return(Object.is(v,-0)?0:v).toLocaleString("en-US",{maximumFractionDigits:2});};
+const f4=x=>{const v=Math.round(x*1e4)/1e4;return(v<0?"−":"")+Math.abs(v).toFixed(4);};
+const fi=x=>(x<0?"−":"")+Math.abs(x).toLocaleString("en-US",{maximumFractionDigits:4});
+const posTxt=p=>Number.isInteger(p)?String(p):p.toFixed(2).replace(/0+$/,"");
+function stats(x){const n=x.length,s=sortN(x),mean=sum(x)/n,dev=x.map(v=>v-mean),sq=dev.map(d=>d*d),ss=sum(sq),v=ss/(n-1),sd=Math.sqrt(v),q1=qpos(s,.25),q3=qpos(s,.75),iqr=q3.val-q1.val,lf=q1.val-1.5*iqr,uf=q3.val+1.5*iqr,out=x.filter(t=>t<lf||t>uf),inn=s.filter(t=>t>=lf&&t<=uf);
+  return{n,s,mean,dev,sq,ss,v,sd,cv:sd/mean*100,med:median(s),modes:modes(x),min:s[0],max:s[n-1],q1,q3,iqr,lf,uf,out,lw:inn[0],uw:inn[inn.length-1]};}
+const res=(k,v,flag)=>`<div class="hc-res${flag?" flag":""}"><span class="k">${k}</span><span class="v">${v}</span></div>`;
+
+function niceStep(r){const raw=r/6,mag=Math.pow(10,Math.floor(Math.log10(raw))),q=raw/mag;return(q<1.5?1:q<3?2:q<7?5:10)*mag;}
+function boxSVG(st,unit){
+  const W=640,H=200,L=40,R=40,y=86,h=42,ink="currentColor",bad="var(--hc-bad)",acc="var(--hc-accent)",mut="var(--hc-muted)";
+  let lo=st.min,hi=st.max;if(st.uf<=hi+(hi-lo)*0.4)hi=Math.max(hi,st.uf);if(st.lf>=lo-(hi-lo)*0.4)lo=Math.min(lo,st.lf);
+  const pad=(hi-lo||1)*0.08;lo-=pad;hi+=pad;const step=niceStep(hi-lo),t0=Math.ceil(lo/step)*step,X=v=>L+(v-lo)/(hi-lo)*(W-L-R);
+  let g=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Box plot of your data">`;
+  for(let t=t0;t<=hi+1e-9;t+=step){const xx=X(t);g+=`<line x1="${xx}" y1="150" x2="${xx}" y2="156" stroke="${mut}"/><text x="${xx}" y="172" text-anchor="middle" font-size="12" fill="${mut}">${fi(+t.toFixed(6))}</text>`;}
+  g+=`<line x1="${L}" y1="150" x2="${W-R}" y2="150" stroke="${mut}"/><text x="${W/2}" y="194" text-anchor="middle" font-size="12" fill="${mut}">${unit==="min"?"Daily screen time (minutes)":"Daily steps"}</text>`;
+  [["Lower fence",st.lf],["Upper fence",st.uf]].forEach(([l,v])=>{if(v>=lo&&v<=hi){const xx=X(v);g+=`<line x1="${xx}" y1="40" x2="${xx}" y2="146" stroke="${bad}" stroke-dasharray="4 4"/><text x="${xx}" y="34" text-anchor="middle" font-size="11.5" fill="${bad}">${l} ${f2(v)}</text>`;}});
+  g+=`<g stroke="${ink}" stroke-width="2"><line x1="${X(st.lw)}" y1="${y}" x2="${X(st.q1.val)}" y2="${y}"/><line x1="${X(st.lw)}" y1="${y-12}" x2="${X(st.lw)}" y2="${y+12}"/><line x1="${X(st.q3.val)}" y1="${y}" x2="${X(st.uw)}" y2="${y}"/><line x1="${X(st.uw)}" y1="${y-12}" x2="${X(st.uw)}" y2="${y+12}"/></g>`;
+  g+=`<rect x="${X(st.q1.val)}" y="${y-h/2}" width="${Math.max(1,X(st.q3.val)-X(st.q1.val))}" height="${h}" fill="${acc}" fill-opacity=".15" stroke="${acc}" stroke-width="2"/><line x1="${X(st.med)}" y1="${y-h/2}" x2="${X(st.med)}" y2="${y+h/2}" stroke="${acc}" stroke-width="3.5"/>`;
+  g+=`<text x="${X(st.med)}" y="${y-h/2-8}" text-anchor="middle" font-size="12" font-weight="700" fill="${ink}">Median ${f2(st.med)}</text><text x="${X(st.q1.val)}" y="${y+h/2+16}" text-anchor="middle" font-size="11.5" fill="${ink}">Q1 ${f2(st.q1.val)}</text><text x="${X(st.q3.val)}" y="${y+h/2+16}" text-anchor="middle" font-size="11.5" fill="${ink}">Q3 ${f2(st.q3.val)}</text>`;
+  st.out.forEach(o=>{g+=`<circle cx="${X(o)}" cy="${y}" r="6" fill="none" stroke="${bad}" stroke-width="2.2"/><text x="${X(o)}" y="${y+24}" text-anchor="middle" font-size="11.5" fill="${bad}">${fi(o)}</text>`;});
+  return g+"</svg>";
+}
+
+/* Q1 */
+const EX1=[182,205,168,224,197,310,190],box=$("#hc1-inputs");
+for(let i=0;i<7;i++){const d=document.createElement("div");d.innerHTML=`<label for="hc1-d${i}">Day ${i+1}</label><input class="form-control" id="hc1-d${i}" inputmode="decimal" autocomplete="off" value="${EX1[i]}">`;box.appendChild(d);}
+const ins=Array.from(box.querySelectorAll("input"));
+function run1(){
+  const unit=$("#hc1-var").value,err=$("#hc1-err"),out=$("#hc1-out"),vals=ins.map(i=>i.value.trim().replace(",","."));
+  const bad=vals.findIndex(v=>v===""||!isFinite(+v)||+v<0);
+  if(bad>=0){err.textContent=`Day ${bad+1} needs a number of 0 or more.`;err.hidden=false;out.innerHTML="";return;}
+  const x=vals.map(Number),st=stats(x),u=unit==="min"?" min":" steps";
+  if(st.mean===0){err.textContent="All values are 0, so the CV cannot be computed. Check your data.";err.hidden=false;} else err.hidden=true;
+  const rows=x.map((v,i)=>`<tr><td>${fi(v)}</td><td>${f4(st.dev[i])}</td><td>${f4(st.sq[i])}</td></tr>`).join("")+`<tr><th>Σ = ${fi(sum(x))}</th><th>0</th><th>${f4(st.ss)}</th></tr>`;
+  out.innerHTML=`<div class="hc-tbl"><table class="table table-sm"><thead><tr><th>x<sub>i</sub></th><th>x<sub>i</sub> − x̄</th><th>(x<sub>i</sub> − x̄)²</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <div class="hc-results">${res("Mean x̄",f2(st.mean)+u)}${res("Median",f2(st.med)+u)}${res("Mode",st.modes.length?st.modes.map(fi).join(", "):"none")}${res("Range",f2(st.max-st.min)+u)}${res("Variance s²",f2(st.v))}${res("Std. deviation s",f2(st.sd)+u)}${res("CV",st.mean?st.cv.toFixed(2)+"%":"—")}${res("Q1",f2(st.q1.val))}${res("Q3",f2(st.q3.val))}${res("IQR",f2(st.iqr))}${res("Lower fence",f2(st.lf))}${res("Upper fence",f2(st.uf))}${res("Potential outliers",st.out.length?st.out.map(fi).join(", "):"none",st.out.length>0)}</div>
+  <div class="hc-steps"><span>Sorted data: <code>${st.s.map(fi).join(", ")}</code></span><span>x̄ = <code>${fi(sum(x))} / 7 = ${f4(st.mean)}</code></span><span>s² = <code>${f4(st.ss)} / 6 = ${f4(st.v)}</code>, s = <code>√${f4(st.v)} = ${f4(st.sd)}</code></span><span>Q1 at position <code>${posTxt(st.q1.pos)}</code>, Q3 at position <code>${posTxt(st.q3.pos)}</code>.</span><span>Five-number summary: min ${fi(st.min)}, Q1 ${f2(st.q1.val)}, median ${f2(st.med)}, Q3 ${f2(st.q3.val)}, max ${fi(st.max)}. Whiskers end at ${fi(st.lw)} and ${fi(st.uw)}${st.uw===st.q3.val?" (no upper whisker: it equals Q3)":""}${st.lw===st.q1.val?" (no lower whisker: it equals Q1)":""}.</span></div>
+  <div class="hc-svg">${boxSVG(st,unit)}</div>
+  <p><strong>Remember:</strong> your homework still needs a box plot drawn <em>by hand</em>. Use this one only to check yours.</p>`;
+}
+ins.forEach(i=>i.addEventListener("input",run1));$("#hc1-var").addEventListener("change",run1);
+$("#hc1-reset").addEventListener("click",()=>{ins.forEach((i,k)=>i.value=EX1[k]);$("#hc1-var").value="min";run1();});
+run1();
+
+/* Q2 */
+const X2=[4,7,7,9,10,12,13,15,31];
+function run2(){
+  const raw=$("#hc2-id").value.replace(/\s/g,""),err=$("#hc2-err"),out=$("#hc2-out");
+  if(!/^\d{2,}$/.test(raw)){err.textContent="Enter your student ID using digits only (for example 2073617).";err.hidden=false;out.innerHTML="";return;}
+  err.hidden=true;
+  const a=+raw[raw.length-1],b=+raw[raw.length-2]+1,y=X2.map(v=>a+b*v),sx=stats(X2),sy=stats(y);
+  const yrows=y.map((v,i)=>`<tr><td>${fi(v)}</td><td>${fi(+sy.dev[i].toFixed(4))}</td><td>${fi(+sy.sq[i].toFixed(4))}</td></tr>`).join("")+`<tr><th>Σ = ${fi(sum(y))}</th><th>0</th><th>${fi(+sy.ss.toFixed(4))}</th></tr>`;
+  const chk=(n,rule,c,d)=>{const ok=Math.abs(r2(c)-r2(d))<0.011;return`<tr><td style="text-align:left">${n}</td><td style="text-align:left"><code>${rule}</code></td><td>${f2(c)}</td><td>${f2(d)}</td><td class="${ok?"hc-yes":"hc-no"}">${ok?"Yes":"No"}</td></tr>`;};
+  out.innerHTML=`<div class="hc-results">${res("a (last digit)",a)}${res("b (second-to-last + 1)",b)}${res("Transformation",`y = ${a} + ${b}x`)}</div>
+  <div class="hc-tbl"><table class="table table-sm"><tbody><tr><th style="text-align:left">x<sub>i</sub></th>${X2.map(v=>`<td>${v}</td>`).join("")}</tr><tr><th style="text-align:left">y<sub>i</sub></th>${y.map(v=>`<td>${fi(v)}</td>`).join("")}</tr></tbody></table></div>
+  <h4>Part (b): directly from y</h4>
+  <div class="hc-tbl"><table class="table table-sm"><thead><tr><th>y<sub>i</sub></th><th>y<sub>i</sub> − ȳ</th><th>(y<sub>i</sub> − ȳ)²</th></tr></thead><tbody>${yrows}</tbody></table></div>
+  <div class="hc-results">${res("ȳ",f2(sy.mean))}${res("Median",f2(sy.med))}${res("s²<sub>y</sub>",f2(sy.v))}${res("s<sub>y</sub>",f2(sy.sd))}${res("Q1 (position 2.5)",f2(sy.q1.val))}${res("Q3 (position 7.5)",f2(sy.q3.val))}${res("IQR",f2(sy.iqr))}</div>
+  <h4>Part (c): check with the linear-transformation rules</h4>
+  <p>For x: x̄ = 12, median = 10, s<sub>x</sub> = √62.25 = 7.89, Q1 = 7, Q3 = 14, IQR = 7.</p>
+  <div class="hc-tbl"><table class="table table-sm"><thead><tr><th style="text-align:left">Statistic</th><th style="text-align:left">Rule</th><th>Using the rule</th><th>Direct from y</th><th>Agree?</th></tr></thead><tbody>${chk("Mean",`${a} + ${b}(12)`,a+b*sx.mean,sy.mean)}${chk("Median",`${a} + ${b}(10)`,a+b*sx.med,sy.med)}${chk("Std. deviation",`${b}(7.89)`,b*sx.sd,sy.sd)}${chk("IQR",`${b}(7)`,b*sx.iqr,sy.iqr)}</tbody></table></div>
+  <h4>Part (d): coefficients of variation</h4>
+  <div class="hc-results">${res("CV<sub>x</sub>",sx.cv.toFixed(2)+"%")}${res("CV<sub>y</sub>",sy.cv.toFixed(2)+"%")}</div>
+  <p>${a===0?"Your ID ends in 0, so a = 0 and y = bx is a pure change of scale: the factor b cancels in the CV, so CV<sub>y</sub> = CV<sub>x</sub>.":`Your a = ${a} raises the mean but leaves the standard deviation unchanged, so CV<sub>y</sub> is smaller than CV<sub>x</sub>. The two would be equal only if a = 0.`}</p>
+  <p><strong>Rounding:</strong> if you multiply the rounded value 7.89 by b, your answer can differ from s<sub>y</sub> in the second decimal. That still counts as agreeing; keep more decimals in intermediate steps to avoid it.</p>`;
+}
+$("#hc2-id").addEventListener("input",run2);run2();
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/statserenay\.github\.io\/stat112-site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Made with ❤️ and Quarto · Emoji graphics: Twemoji (CC-BY 4.0)</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
