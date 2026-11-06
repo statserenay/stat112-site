@@ -25,7 +25,9 @@ website:
           - text: "Recitation 4"
             href: recitation-week4.qmd 
       - text: "Homeworks"
-        href: homeworks.qmd
+        menu:
+           - text: "Homework 1"
+             href: homework1.qmd
       - text: "Games"
         href: games-tab/games.qmd
       - text: "Student Chats"
