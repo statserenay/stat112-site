@@ -1,0 +1,347 @@
+<!--
+  STAT 112 review widgets (Recitation 5)
+  Lightning round, tick table, step-by-step, spot the mistake, click-on-the-graph,
+  slider estimate, draw-the-chart and readiness checklist.
+  Include it in a page's front matter, after _quiz.html:
+      include-after-body:
+        - _quiz.html
+        - _widgets.html
+-->
+<style>
+.rv { --rv-accent: var(--bs-primary, #2780e3); --rv-border: var(--bs-border-color, #dee2e6); --rv-soft: rgba(127,127,127,.07); --rv-muted: var(--bs-secondary-color, #6c757d);
+  --rv-ok: #1a7f37; --rv-ok-bg: rgba(26,127,55,.13); --rv-bad: #c0392b; --rv-bad-bg: rgba(192,57,43,.12); --rv-miss: #b9770e; --rv-miss-bg: rgba(185,119,14,.10);
+  border: 1px solid var(--rv-border); border-left: 5px solid #7c4dff; border-radius: 10px; padding: 1rem 1.25rem 1.1rem; margin: 1.6rem 0; background: var(--bs-body-bg, #fff); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.rv.rv-correct { border-left-color: var(--rv-ok); } .rv.rv-wrong { border-left-color: var(--rv-bad); }
+.rv-head { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.rv-num { font-weight: 700; font-size: .85rem; color: #fff; background: #7c4dff; border-radius: 6px; padding: .1rem .5rem; }
+.rv.rv-correct .rv-num { background: var(--rv-ok); } .rv.rv-wrong .rv-num { background: var(--rv-bad); }
+.rv-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--rv-muted); font-weight: 600; }
+.rv-controls { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .9rem; }
+.rv-feedback:empty { display: none; }
+.rv-feedback { margin-top: .7rem; padding: .5rem .75rem; border-radius: 8px; font-weight: 500; background: var(--rv-soft); }
+.rv-feedback.ok { background: var(--rv-ok-bg); color: var(--rv-ok); } .rv-feedback.bad { background: var(--rv-bad-bg); color: var(--rv-bad); }
+.rv-explain { margin-top: .9rem; padding: .8rem 1rem; border-radius: 8px; background: var(--rv-soft); }
+.rv-explain[hidden] { display: none; } .rv-explain p:last-child, .rv-explain ul:last-child { margin-bottom: 0; }
+/* lightning */
+.rv-stage .rv-big { font-size: 1.15rem; font-weight: 600; min-height: 3.2em; margin: .6rem 0; }
+.rv-timer { height: 8px; background: var(--rv-border); border-radius: 99px; overflow: hidden; margin: .4rem 0 .2rem; }
+.rv-timer span { display: block; height: 100%; background: #7c4dff; width: 100%; transition: width 1s linear; }
+.rv-meta { display: flex; justify-content: space-between; font-size: .85rem; color: var(--rv-muted); font-variant-numeric: tabular-nums; }
+.rv-tf { display: flex; gap: .6rem; margin-top: .5rem; }
+.rv-tf button { flex: 1; font-weight: 700; padding: .6rem; }
+.rv-review { margin: .6rem 0 0; padding-left: 1.2rem; } .rv-review li { margin: .45rem 0; }
+.rv-review .ok { color: var(--rv-ok); font-weight: 700; } .rv-review .bad { color: var(--rv-bad); font-weight: 700; }
+.rv-review .why { display: block; font-size: .9rem; color: var(--rv-muted); }
+.rv-items .why { display: none; }
+/* tick table */
+.tg-scroll { overflow-x: auto; }
+.tg-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 0; }
+.tg-table th, .tg-table td { border-bottom: 1px solid var(--rv-border); padding: 0; vertical-align: middle; }
+.tg-table thead th { font-weight: 700; text-align: center; padding: .55rem .4rem; border-bottom: 2px solid #7c4dff; }
+.tg-table th.tg-prop { text-align: left; font-weight: 500; padding: .55rem .75rem .55rem .25rem; width: 38%; }
+.tg-table thead th.tg-prop { font-weight: 700; }
+.tg-table tbody tr:nth-child(odd) { background: var(--rv-soft); }
+.tg-cell { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 2.75rem; border: 0; background: transparent; cursor: pointer; font-size: 1.3rem; line-height: 1; color: inherit; }
+.tg-cell:hover { background: rgba(124,77,255,.08); }
+.tg-cell .tg-box { display: inline-flex; align-items: center; justify-content: center; width: 1.7rem; height: 1.7rem; border: 2px solid var(--rv-border); border-radius: 6px; background: var(--bs-body-bg, #fff); font-weight: 700; }
+.tg-cell[aria-pressed="true"] .tg-box { border-color: #7c4dff; color: #7c4dff; }
+.tg-cell.is-ok .tg-box { border-color: var(--rv-ok); background: var(--rv-ok-bg); color: var(--rv-ok); }
+.tg-cell.is-bad .tg-box { border-color: var(--rv-bad); background: var(--rv-bad-bg); color: var(--rv-bad); }
+.tg-cell.is-miss .tg-box { border: 2px dashed var(--rv-miss); background: var(--rv-miss-bg); color: var(--rv-miss); }
+.tg-cell.is-miss .tg-box::after { content: "✔"; opacity: .6; }
+.tg-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .7rem; font-size: .85rem; color: var(--rv-muted); }
+.tg-legend[hidden] { display: none; }
+.tg-key { display: inline-flex; align-items: center; justify-content: center; width: 1.2rem; height: 1.2rem; border-radius: 4px; font-style: normal; font-size: .75rem; font-weight: 700; margin-right: .3rem; }
+.tg-key-ok { border: 2px solid var(--rv-ok); background: var(--rv-ok-bg); color: var(--rv-ok); }
+.tg-key-bad { border: 2px solid var(--rv-bad); background: var(--rv-bad-bg); color: var(--rv-bad); }
+.tg-key-miss { border: 2px dashed var(--rv-miss); background: var(--rv-miss-bg); color: var(--rv-miss); }
+.tg-ladder { padding: .5rem .7rem; border-left: 3px solid #7c4dff; background: var(--bs-body-bg, #fff); border-radius: 4px; }
+/* steps */
+.rv-step { display: none; align-items: center; flex-wrap: wrap; gap: .4rem; padding: .55rem .6rem; border-radius: 8px; margin: .35rem 0; border: 1px solid var(--rv-border); }
+.rv-step.is-open, .rv-step.is-done { display: flex; }
+.rv-step.is-done { background: var(--rv-ok-bg); border-color: transparent; }
+.rv-step-n { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: #7c4dff; color: #fff; font-weight: 700; font-size: .85rem; }
+.rv-step.is-done .rv-step-n { background: var(--rv-ok); }
+.rv-step input { width: 7rem; padding: .25rem .5rem; border: 1px solid var(--rv-border); border-radius: 6px; font: inherit; background: var(--bs-body-bg, #fff); color: inherit; }
+.rv-step.is-bad input { border-color: var(--rv-bad); background: var(--rv-bad-bg); }
+.rv-note { display: none; flex-basis: 100%; font-size: .92rem; color: var(--rv-muted); padding-left: 2rem; }
+.rv-step.is-done .rv-note { display: block; }
+/* spot the mistake */
+.rv-lines { padding-left: 0; list-style: none; counter-reset: ln; margin: .4rem 0 0; }
+.rv-lines li { counter-increment: ln; position: relative; padding: .5rem .7rem .5rem 2.6rem; margin: .3rem 0; border: 1px solid var(--rv-border); border-radius: 8px; cursor: pointer; }
+.rv-lines li::before { content: counter(ln); position: absolute; left: .7rem; top: .5rem; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--rv-soft); display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+.rv-lines li:hover { border-color: #7c4dff; }
+.rv-lines li.is-ok { border-color: var(--rv-ok); background: var(--rv-ok-bg); }
+.rv-lines li.is-bad { border-color: var(--rv-bad); background: var(--rv-bad-bg); text-decoration: none; }
+.rv-lines.locked li { cursor: default; }
+/* hotspot + slider svg */
+.rv-svg svg { width: 100%; max-width: 560px; height: auto; display: block; margin: .3rem auto; }
+.rv-svg .hs { cursor: pointer; transition: opacity .15s; }
+.rv-svg .hs:hover { opacity: .75; }
+.rv-svg .hs.is-ok { fill: #1a7f37 !important; stroke: #1a7f37 !important; }
+.rv-svg .hs.is-bad { fill: #c0392b !important; stroke: #c0392b !important; }
+.rv-slide { display: flex; align-items: center; gap: .6rem; max-width: 560px; margin: .4rem auto 0; font-variant-numeric: tabular-nums; }
+.rv-slide input { flex: 1; accent-color: #7c4dff; }
+.rv-slide output { font-weight: 700; min-width: 3.2rem; text-align: right; font-size: 1.1rem; }
+/* draw-the-chart */
+.rv-sliders { display: grid; gap: .35rem .9rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); max-width: 560px; margin: .2rem auto 0; }
+.rv-sliders label { display: flex; flex-direction: column; font-size: .88rem; font-weight: 600; }
+.rv-sliders label span { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.rv-sliders input { accent-color: #2a78d6; width: 100%; }
+.rv-sliders label.is-bad { color: var(--rv-bad); } .rv-sliders label.is-ok { color: var(--rv-ok); }
+/* checklist */
+.rv-list { list-style: none; padding: 0; margin: 0; }
+.rv-list li { padding: .3rem 0; }
+.rv-list label { display: flex; gap: .6rem; align-items: flex-start; cursor: pointer; }
+.rv-list input { margin-top: .35rem; width: 1.05rem; height: 1.05rem; accent-color: #1a7f37; flex: none; }
+@media (max-width: 600px) {
+  .rv { padding: .85rem .8rem 1rem; }
+  .tg-table th.tg-prop { width: auto; font-size: .88rem; padding-right: .4rem; }
+  .tg-table thead th { font-size: .74rem; padding: .5rem .1rem; }
+  .tg-cell { min-height: 2.5rem; } .tg-cell .tg-box { width: 1.45rem; height: 1.45rem; }
+  .rv-note { padding-left: 0; }
+}
+@media print { .rv-controls { display: none; } }
+</style>
+
+<script>
+(function () {
+  "use strict";
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function num(s) { s = String(s || "").trim().replace(/\s/g, "").replace(/%$/, ""); if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", "."); return /^-?\d*\.?\d+$/.test(s) ? parseFloat(s) : null; }
+  function say(w, kind, msg) { var f = q(".rv-feedback", w); f.className = "rv-feedback " + (kind || ""); f.innerHTML = msg; }
+  function mark(w, ok) { w.classList.remove("rv-correct", "rv-wrong"); if (ok === true) w.classList.add("rv-correct"); if (ok === false) w.classList.add("rv-wrong"); }
+  function explain(w, on) { var e = q(".rv-explain", w); if (e) e.hidden = !on; }
+  function act(w, name, fn) { var b = q('[data-act="' + name + '"]', w); if (b) b.addEventListener("click", fn); }
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function randn() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  var NS = "http://www.w3.org/2000/svg";
+  function svgEl(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function txt(parent, x, y, t, anchor, size, weight) { var e = svgEl("text", { x: x, y: y, "text-anchor": anchor || "middle", "font-size": size || 13, fill: "currentColor", "font-weight": weight || "normal" }, parent); e.textContent = t; return e; }
+
+  function safe(name, fn) { try { fn(); } catch (err) { if (window.console) console.error("Review widget (" + name + ") failed:", err); } }
+  /* skip widgets that another copy of this code has already built (e.g. an old script left in the page) */
+  function fresh(w) {
+    if (w.getAttribute("data-rv-init")) return false;
+    if (w.querySelector(".rv-stage > *, .tg-cell, .rv-step.is-open, .rv-svg svg, .rv-list label, .rv-sliders label, .rv-lines li[tabindex]")) return false;
+    w.setAttribute("data-rv-init", "1"); return true;
+  }
+  /* numbering */
+  var n = 0;
+  qa(".rv").forEach(function (w) { if (w.classList.contains("rv-check")) return; n++; q(".rv-num", w).textContent = "Challenge " + n; });
+
+  /* ---------------- lightning round ---------------- */
+  safe("lightning round", function () {
+  qa(".rv-lightning").filter(fresh).forEach(function (w) {
+    var items = qa(".rv-items li", w).map(function (li) { var why = q(".why", li); return { t: li.childNodes[0].textContent.trim(), a: li.getAttribute("data-a"), why: why ? why.innerHTML : "" }; });
+    var T = +w.getAttribute("data-time") || 90, stage = q(".rv-stage", w), timer = null;
+    function start() {
+      var i = 0, left = T, ans = [];
+      stage.innerHTML = '<div class="rv-timer"><span></span></div><div class="rv-meta"><span class="rv-count"></span><span class="rv-left"></span></div><div class="rv-big"></div><div class="rv-tf"><button type="button" class="btn btn-outline-success" data-v="T">True</button><button type="button" class="btn btn-outline-danger" data-v="F">False</button></div>';
+      var bar = q(".rv-timer span", stage);
+      function show() { q(".rv-big", stage).textContent = items[i].t; q(".rv-count", stage).textContent = "Statement " + (i + 1) + " / " + items.length; }
+      function tick() { left--; q(".rv-left", stage).textContent = left + " s left"; bar.style.width = (100 * left / T) + "%"; if (left <= 0) finish(); }
+      function finish() {
+        clearInterval(timer); var right = 0;
+        var html = items.map(function (it, k) { var a = ans[k], ok = a === it.a; if (ok) right++;
+          return "<li><b>" + it.t + "</b><br>Answer: <b>" + (it.a === "T" ? "True" : "False") + "</b> · you: " + (a ? '<span class="' + (ok ? "ok" : "bad") + '">' + (a === "T" ? "True" : "False") + (ok ? " ✓" : " ✗") + "</span>" : '<span class="bad">no answer</span>') + '<span class="why">' + it.why + "</span></li>"; }).join("");
+        stage.innerHTML = '<p class="rv-big" style="min-height:0">' + right + " / " + items.length + " correct" + (left > 0 ? " in " + (T - left) + " seconds" : " (time is up)") + '</p><ol class="rv-review">' + html + '</ol><div class="rv-controls"><button type="button" class="btn btn-sm btn-primary" data-act="again">Try again</button></div>';
+        mark(w, right >= 10 ? true : right < 7 ? false : null);
+        q('[data-act="again"]', stage).addEventListener("click", start);
+      }
+      qa(".rv-tf button", stage).forEach(function (b) { b.addEventListener("click", function () { ans[i] = b.getAttribute("data-v"); i++; if (i >= items.length) finish(); else show(); }); });
+      q(".rv-left", stage).textContent = T + " s left"; show(); mark(w, null);
+      clearInterval(timer); timer = setInterval(tick, 1000);
+    }
+    stage.innerHTML = '<div class="rv-controls" style="margin-top:.2rem"><button type="button" class="btn btn-primary" data-act="start">⚡ Start (' + T + ' s)</button></div>';
+    q('[data-act="start"]', stage).addEventListener("click", start);
+  });
+  });
+
+  /* ---------------- tick table ---------------- */
+  safe("tick table", function () {
+  qa(".rv.tg").filter(fresh).forEach(function (w) {
+    var SC = ["Nominal", "Ordinal", "Interval", "Ratio"], cells = [], legend = q(".tg-legend", w);
+    var tbl = document.createElement("table"); tbl.className = "tg-table";
+    tbl.innerHTML = '<thead><tr><th scope="col" class="tg-prop">Provides:</th>' + SC.map(function (s) { return '<th scope="col">' + s + "</th>"; }).join("") + "</tr></thead><tbody></tbody>";
+    qa(".tg-data li", w).forEach(function (li) { var tr = document.createElement("tr"); tr.setAttribute("data-answer", li.getAttribute("data-answer")); tr.innerHTML = '<th scope="row" class="tg-prop">' + li.innerHTML + "</th>"; q("tbody", tbl).appendChild(tr); });
+    q(".tg-scroll", w).appendChild(tbl);
+    qa("tbody tr", tbl).forEach(function (tr) {
+      var ansr = tr.getAttribute("data-answer"), prop = q("th", tr).textContent.trim();
+      SC.forEach(function (s, j) { var td = document.createElement("td"), b = document.createElement("button"); b.type = "button"; b.className = "tg-cell"; b.setAttribute("aria-pressed", "false"); b.setAttribute("aria-label", s + ": " + prop); b.innerHTML = '<span class="tg-box"></span>';
+        b.addEventListener("click", function () { set(b, b.getAttribute("aria-pressed") !== "true"); clear(); }); td.appendChild(b); tr.appendChild(td); cells.push({ el: b, want: ansr.charAt(j) === "1" }); });
+    });
+    function set(b, on) { b.setAttribute("aria-pressed", on ? "true" : "false"); q(".tg-box", b).textContent = on ? "✔" : ""; }
+    function on(c) { return c.el.getAttribute("aria-pressed") === "true"; }
+    function clear() { cells.forEach(function (c) { c.el.classList.remove("is-ok", "is-bad", "is-miss"); }); mark(w, null); legend.hidden = true; say(w, "", ""); }
+    act(w, "check", function () {
+      clear(); var r = 0, wr = 0, mi = 0;
+      cells.forEach(function (c) { var o = on(c); if (o && c.want) { c.el.classList.add("is-ok"); r++; } else if (o) { c.el.classList.add("is-bad"); wr++; } else if (c.want) { c.el.classList.add("is-miss"); mi++; } });
+      var tot = cells.filter(function (c) { return c.want; }).length;
+      if (!r && !wr) { say(w, "", "Tick at least one cell first."); return; }
+      legend.hidden = false;
+      if (!wr && !mi) { say(w, "ok", "✓ Perfect! All " + tot + " ticks are correct."); mark(w, true); explain(w, true); }
+      else { say(w, "bad", r + " / " + tot + " correct ticks" + (wr ? " · " + wr + " wrong (red)" : "") + (mi ? " · " + mi + " missing (dashed)" : "") + ". Fix them and check again."); mark(w, false); }
+    });
+    act(w, "show", function () { cells.forEach(function (c) { set(c.el, c.want); }); clear(); cells.forEach(function (c) { if (c.want) c.el.classList.add("is-ok"); }); say(w, "", "Correct answer shown."); explain(w, true); });
+    act(w, "reset", function () { cells.forEach(function (c) { set(c.el, false); }); clear(); explain(w, false); });
+  });
+  });
+
+  /* ---------------- step by step ---------------- */
+  safe("step by step", function () {
+  qa(".rv-steps").filter(fresh).forEach(function (w) {
+    var steps = qa(".rv-step", w);
+    function open(k) { steps.forEach(function (s, j) { s.classList.toggle("is-open", j === k); }); if (steps[k]) q("input", steps[k]).focus({ preventScroll: true }); }
+    function done(s) { s.classList.remove("is-open", "is-bad"); s.classList.add("is-done"); q("input", s).disabled = true; var k = steps.indexOf(s) + 1;
+      if (k < steps.length) open(k); else { say(w, "ok", "✓ All " + steps.length + " steps done. This is exactly the order to use on the exam."); mark(w, true); } }
+    steps.forEach(function (s) {
+      var inp = q("input", s);
+      inp.addEventListener("keydown", function (e) { if (e.key !== "Enter") return; e.preventDefault();
+        var v = num(inp.value), a = parseFloat(s.getAttribute("data-answer")), tol = parseFloat(s.getAttribute("data-tol") || "0");
+        if (v === null) { say(w, "", "Type a number first."); return; }
+        if (Math.abs(v - a) <= tol + 1e-9) { say(w, "", ""); done(s); } else { s.classList.add("is-bad"); say(w, "bad", "Not quite. Check this step, or press <b>Show this step</b>."); } });
+    });
+    act(w, "hint", function () { var s = steps.filter(function (x) { return x.classList.contains("is-open"); })[0]; if (!s) return; q("input", s).value = s.getAttribute("data-answer"); done(s); });
+    act(w, "reset", function () { steps.forEach(function (s) { s.classList.remove("is-done", "is-bad", "is-open"); var i = q("input", s); i.disabled = false; i.value = ""; }); say(w, "", ""); mark(w, null); open(0); });
+    steps[0].classList.add("is-open");
+  });
+  });
+
+  /* ---------------- spot the mistake ---------------- */
+  safe("spot the mistake", function () {
+  qa(".rv-spot").filter(fresh).forEach(function (w) {
+    var list = q(".rv-lines", w), lines = qa("li", list), tries = 0;
+    lines.forEach(function (li, k) { li.tabIndex = 0; li.setAttribute("role", "button");
+      function pickIt() { if (list.classList.contains("locked")) return; tries++;
+        if (li.getAttribute("data-wrong")) { li.classList.add("is-ok"); list.classList.add("locked"); say(w, "ok", "✓ Found it" + (tries === 1 ? " on the first try!" : " (attempt " + tries + ").")); mark(w, tries === 1); explain(w, true); }
+        else { li.classList.add("is-bad"); say(w, "bad", "Line " + (k + 1) + " is correct. Keep looking."); } }
+      li.addEventListener("click", pickIt); li.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickIt(); } }); });
+    act(w, "show", function () { lines.forEach(function (li) { li.classList.remove("is-bad"); if (li.getAttribute("data-wrong")) li.classList.add("is-ok"); }); list.classList.add("locked"); say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { lines.forEach(function (li) { li.classList.remove("is-ok", "is-bad"); }); list.classList.remove("locked"); tries = 0; say(w, "", ""); mark(w, null); explain(w, false); });
+  });
+  });
+
+  /* ---------------- hotspots ---------------- */
+  safe("hotspots", function () {
+  function drawHist(box, w) {
+    var f = w.getAttribute("data-freq").split(",").map(Number), e = w.getAttribute("data-edges").split(",").map(Number);
+    var W = 520, H = 300, L = 50, R = 15, T = 15, B = 50, mx = Math.max.apply(null, f) * 1.12;
+    var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "histogram" }, box);
+    var X = function (v) { return L + (v - e[0]) / (e[e.length - 1] - e[0]) * (W - L - R); }, Y = function (v) { return H - B - v / mx * (H - T - B); };
+    for (var g = 0; g <= mx; g += 2) { svgEl("line", { x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: "rgba(127,127,127,.25)" }, s); txt(s, L - 7, Y(g) + 4, g, "end", 11); }
+    f.forEach(function (v, i) { var r = svgEl("rect", { x: X(e[i]) + 1, y: Y(v), width: X(e[i + 1]) - X(e[i]) - 2, height: Y(0) - Y(v), fill: "#5b8def", class: "hs", "data-id": String(i), tabindex: "0" }, s);
+      var lab = svgEl("title", {}, r); lab.textContent = e[i] + "–" + e[i + 1] + ": " + v; txt(s, (X(e[i]) + X(e[i + 1])) / 2, Y(v) - 5, v, "middle", 11, "bold"); });
+    e.forEach(function (v) { txt(s, X(v), H - B + 16, v, "middle", 11); });
+    svgEl("line", { x1: L, x2: W - R, y1: Y(0), y2: Y(0), stroke: "currentColor" }, s);
+    txt(s, (L + W - R) / 2, H - 10, w.getAttribute("data-x") || "", "middle", 12.5);
+    var yl = txt(s, 14, (T + H - B) / 2, "frequency", "middle", 12.5); yl.setAttribute("transform", "rotate(-90 14 " + ((T + H - B) / 2) + ")");
+  }
+  function drawViolin(box) {
+    var W = 420, H = 320, cx = 150, s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "violin plot" }, box);
+    var pts = [], L = [], Rr = [];
+    for (var i = 0; i <= 60; i++) { var t = i / 60, y = 290 - t * 260, d = Math.exp(-.5 * Math.pow((t - .3) / .09, 2)) + .85 * Math.exp(-.5 * Math.pow((t - .72) / .09, 2)); L.push((cx - d * 95) + "," + y); Rr.push((cx + d * 95) + "," + y); }
+    svgEl("polygon", { points: L.concat(Rr.reverse()).join(" "), fill: "#8fd3b6", stroke: "#2b6b52", "stroke-width": 2, class: "hs", "data-id": "outline", tabindex: "0" }, s);
+    svgEl("rect", { x: cx - 4, y: 62, width: 8, height: 280 - 62, fill: "#1d2733", class: "hs", "data-id": "ci", tabindex: "0" }, s);
+    svgEl("rect", { x: cx - 10, y: 115, width: 20, height: 245 - 115, fill: "#1d2733", class: "hs", "data-id": "iqr", tabindex: "0" }, s);
+    svgEl("circle", { cx: cx, cy: 185, r: 8, fill: "#ffffff", stroke: "#1d2733", "stroke-width": 2, class: "hs", "data-id": "median", tabindex: "0" }, s);
+    txt(s, 300, 60, "Which part is the IQR?", "middle", 14, "bold");
+    txt(s, 300, 84, "(click directly on it)", "middle", 12);
+  }
+  qa(".rv-hot").filter(fresh).forEach(function (w) {
+    var box = q(".rv-svg", w), ans = w.getAttribute("data-answer"), done = false;
+    if (w.getAttribute("data-draw") === "hist") drawHist(box, w); else drawViolin(box);
+    var parts = qa(".hs", box);
+    function pick(p) { if (done) return; parts.forEach(function (x) { x.classList.remove("is-bad"); });
+      if (p.getAttribute("data-id") === ans) { p.classList.add("is-ok"); done = true; say(w, "ok", "✓ Correct!"); mark(w, true); explain(w, true); }
+      else { p.classList.add("is-bad"); say(w, "bad", w.getAttribute("data-msg") || "Not this one. Try again."); mark(w, false); } }
+    parts.forEach(function (p) { p.addEventListener("click", function () { pick(p); }); p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(p); } }); });
+    act(w, "show", function () { parts.forEach(function (x) { x.classList.remove("is-bad"); if (x.getAttribute("data-id") === ans) x.classList.add("is-ok"); }); done = true; say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { parts.forEach(function (x) { x.classList.remove("is-ok", "is-bad"); }); done = false; say(w, "", ""); mark(w, null); explain(w, false); });
+  });
+  });
+
+  /* ---------------- slider estimate ---------------- */
+  safe("slider estimate", function () {
+  qa(".rv-slider").filter(fresh).forEach(function (w) {
+    var box = q(".rv-svg", w), inp = q("input", w), out = q("output", w), r = 0, first = true;
+    var targets = [-0.85, -0.5, -0.2, 0, 0.3, 0.6, 0.9];
+    function plot(target) {
+      box.innerHTML = ""; var n = 45, x = [], y = [], i;
+      for (i = 0; i < n; i++) { var a = randn(), b = randn(); x.push(a); y.push(target * a + Math.sqrt(1 - target * target) * b); }
+      var mx = x.reduce(function (p, c) { return p + c; }, 0) / n, my = y.reduce(function (p, c) { return p + c; }, 0) / n, sxy = 0, sxx = 0, syy = 0;
+      for (i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += Math.pow(x[i] - mx, 2); syy += Math.pow(y[i] - my, 2); }
+      r = sxy / Math.sqrt(sxx * syy);
+      var W = 420, H = 300, P = 30, xs = Math.min.apply(null, x), xe = Math.max.apply(null, x), ys = Math.min.apply(null, y), ye = Math.max.apply(null, y);
+      var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "scatter plot" }, box);
+      svgEl("rect", { x: P, y: 10, width: W - P - 10, height: H - P - 10, fill: "none", stroke: "rgba(127,127,127,.5)" }, s);
+      for (i = 0; i < n; i++) svgEl("circle", { cx: P + 8 + (x[i] - xs) / (xe - xs) * (W - P - 26), cy: H - P - 8 - (y[i] - ys) / (ye - ys) * (H - P - 26), r: 5, fill: "#5b8def", "fill-opacity": .8 }, s);
+      txt(s, (W + P) / 2, H - 8, "x", "middle", 13); txt(s, 14, H / 2, "y", "middle", 13);
+      inp.value = 0; out.textContent = "0.00"; say(w, "", ""); mark(w, null);
+    }
+    inp.addEventListener("input", function () { out.textContent = (+inp.value).toFixed(2); });
+    act(w, "check", function () { var g = +inp.value, d = Math.abs(g - r);
+      if (d <= 0.15) { say(w, "ok", "✓ Great estimate! Your guess " + g.toFixed(2) + ", actual r = " + r.toFixed(2) + "."); mark(w, true); }
+      else say(w, "bad", "Actual r = " + r.toFixed(2) + " (your guess " + g.toFixed(2) + "). " + (Math.sign(g) !== Math.sign(r) && Math.abs(r) > .15 ? "Check the <b>direction</b>: does y go up or down as x increases? " : "Check the <b>strength</b>: how tightly do the points follow a straight line? ") + "Press <b>New plot</b> to try another.");
+      w.setAttribute("data-r", r.toFixed(3)); });
+    act(w, "new", function () { plot(targets[Math.floor(Math.random() * targets.length)]); });
+    plot(parseFloat(w.getAttribute("data-target")) || 0.6);
+  });
+  });
+
+  /* ---------------- draw the chart ---------------- */
+  safe("draw the chart", function () {
+  qa(".rv-draw").filter(fresh).forEach(function (w) {
+    var cats = w.getAttribute("data-cats").split("|"), tgt = w.getAttribute("data-target").split(",").map(Number), tol = +w.getAttribute("data-tol") || 0.02;
+    var stack = w.getAttribute("data-mode") === "stack", box = q(".rv-svg", w), sl = q(".rv-sliders", w), vals = cats.map(function () { return stack ? 0.5 : 0.1; });
+    var W = 520, H = 300, L = 56, R = 15, T = 15, B = 40, n = cats.length;
+    sl.innerHTML = cats.map(function (c, i) { return '<label><span>' + c + '<output>0%</output></span><input type="range" min="0" max="1" step="0.01" value="' + vals[i] + '" aria-label="' + c + '"></label>'; }).join("");
+    var inputs = qa("input", sl), labels = qa("label", sl);
+    function draw() {
+      box.innerHTML = ""; var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "your bar chart" }, box);
+      var Y = function (v) { return H - B - v * (H - T - B); }, bw = (W - L - R) / n;
+      [0, .25, .5, .75, 1].forEach(function (g) { svgEl("line", { x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: "rgba(127,127,127,.25)" }, s); txt(s, L - 7, Y(g) + 4, Math.round(g * 100) + "%", "end", 11); });
+      cats.forEach(function (c, i) { var x = L + i * bw + bw * .18, ww = bw * .64, v = vals[i];
+        svgEl("rect", { x: x, y: Y(v), width: ww, height: Y(0) - Y(v), fill: "#2a78d6" }, s);
+        if (stack) svgEl("rect", { x: x, y: Y(1), width: ww, height: Y(v) - Y(1), fill: "#eb6834" }, s);
+        txt(s, x + ww / 2, stack ? Y(v / 2) + 5 : Y(v) - 6, Math.round(v * 100) + "%", "middle", 12, "bold").setAttribute("fill", stack ? "#fff" : "currentColor");
+        if (stack) { var t2 = txt(s, x + ww / 2, Y((1 + v) / 2) + 5, Math.round((1 - v) * 100) + "%", "middle", 12, "bold"); t2.setAttribute("fill", "#fff"); }
+        txt(s, x + ww / 2, H - B + 17, c, "middle", 12); });
+      svgEl("line", { x1: L, x2: W - R, y1: Y(0), y2: Y(0), stroke: "currentColor" }, s);
+      var yl = txt(s, 13, (T + H - B) / 2, w.getAttribute("data-ylabel") || "", "middle", 11.5); yl.setAttribute("transform", "rotate(-90 13 " + ((T + H - B) / 2) + ")");
+      inputs.forEach(function (inp, i) { q("output", labels[i]).textContent = Math.round(vals[i] * 100) + "%"; });
+    }
+    inputs.forEach(function (inp, i) { inp.addEventListener("input", function () { vals[i] = +inp.value; labels.forEach(function (l) { l.classList.remove("is-ok", "is-bad"); }); say(w, "", ""); mark(w, null); draw(); }); });
+    act(w, "check", function () { var bad = 0;
+      vals.forEach(function (v, i) { var ok = Math.abs(v - tgt[i]) <= tol + 1e-9; labels[i].classList.toggle("is-ok", ok); labels[i].classList.toggle("is-bad", !ok); if (!ok) bad++; });
+      if (!bad) { say(w, "ok", "✓ Correct chart!"); mark(w, true); explain(w, true); }
+      else { say(w, "bad", bad + " bar" + (bad > 1 ? "s are" : " is") + " not right yet (red). " + (stack ? "Divide each faculty's dorm count by that faculty's total." : "Divide each count by the total number of students, n = 300.")); mark(w, false); } });
+    act(w, "show", function () { tgt.forEach(function (t, i) { vals[i] = t; inputs[i].value = t; }); draw(); labels.forEach(function (l) { l.classList.add("is-ok"); }); say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { vals = cats.map(function () { return stack ? 0.5 : 0.1; }); inputs.forEach(function (inp, i) { inp.value = vals[i]; }); labels.forEach(function (l) { l.classList.remove("is-ok", "is-bad"); }); say(w, "", ""); mark(w, null); explain(w, false); draw(); });
+    draw();
+  });
+  });
+
+  /* ---------------- readiness checklist ---------------- */
+  safe("readiness checklist", function () {
+  qa(".rv-check").filter(fresh).forEach(function (w) {
+    var KEY = "stat112-r5-ready", saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { saved = {}; }
+    var items = qa(".rv-list li", w);
+    items.forEach(function (li, k) { var t = li.innerHTML; li.innerHTML = '<label><input type="checkbox"' + (saved[k] ? " checked" : "") + "><span>" + t + "</span></label>"; q("input", li).addEventListener("change", update); });
+    function update() {
+      var st = {}, miss = [];
+      items.forEach(function (li, k) { var c = q("input", li).checked; st[k] = c; if (!c) miss.push(li); });
+      try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+      var done = items.length - miss.length;
+      if (!miss.length) say(w, "ok", "🎉 " + done + " / " + items.length + ": you are ready. Sleep well and good luck!");
+      else { var pages = {}; miss.forEach(function (li) { pages[li.getAttribute("data-href")] = 1; });
+        say(w, "", done + " / " + items.length + " ticked. Revise: " + Object.keys(pages).map(function (p) { return '<a href="' + p + '">' + p.replace("recitation-week", "Recitation ").replace(".html", "") + "</a>"; }).join(", ") + "."); }
+    }
+    update();
+  });
+  });
+
+})();
+</script>
