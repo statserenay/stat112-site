@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Recitation 5 – STAT 112</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-cb9204863bce9d0f417f179c14b9f9e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Recitation 5 – STAT 112">
+<meta property="og:description" content="Review">
+<meta property="og:image" content="https://statserenay.github.io/stat112-site/recitation5/images/r5-empirical.png">
+<meta property="og:site_name" content="STAT 112">
+<meta property="og:image:alt" content="Top: a bell curve with mean 64 and standard deviation 8, with brackets showing about 68% between 56 and 72, about 95% between 48 and 80, and about 99.7% between 40 and 88. Bottom: three bell curves with shaded regions: between 48 and 80 is about 95%, above 72 is about 16%, below 48 is about 2.5%.">
+<meta property="og:image:height" content="1199">
+<meta property="og:image:width" content="1520">
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 112</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-computing">    
+        <li>
+    <a class="dropdown-item" href="./computing-setup.html">
+ <span class="dropdown-text">Setup</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-recitations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Recitations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-recitations">    
+        <li>
+    <a class="dropdown-item" href="./recitation-week1.html">
+ <span class="dropdown-text">Recitation 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week2.html">
+ <span class="dropdown-text">Recitation 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week3.html">
+ <span class="dropdown-text">Recitation 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week4.html">
+ <span class="dropdown-text">Recitation 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homeworks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homeworks</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homeworks">    
+        <li>
+    <a class="dropdown-item" href="./homework1.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./games-tab/games.html"> 
+<span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chats-tab/chats.html"> 
+<span class="menu-text">Student Chats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./flashcards.html"> 
+<span class="menu-text">Flashcards</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calculator.html"> 
+<span class="menu-text">Calculator</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ask.html"> 
+<span class="menu-text">Ask a Question</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/statserenay"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:serenay@metu.edu.tr"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#warm-up-lightning-round" id="toc-warm-up-lightning-round" class="nav-link active" data-scroll-target="#warm-up-lightning-round">⚡ Warm-up: lightning round</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Recitation 5</h1>
+<p class="subtitle lead">Review</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+div.quiz.qz-match { display: block; margin-top: 1.6rem; }
+@media (max-width: 700px) { main table { display: block; max-width: 100%; overflow-x: auto; } }
+.qz-row-ctrls, .qz-row-ctrls > * { min-width: 0; max-width: 100%; }
+.qz-row-ctrls select { width: 100%; }
+.pts { font-weight: 700; color: #0f7c74; }
+</style>
+<section id="warm-up-lightning-round" class="level1">
+<h1>⚡ Warm-up: lightning round</h1>
+<div class="rv rv-lightning" data-time="90">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Lightning round · 12 statements · 90 seconds</span></div>
+  <p>True or false? Answer as fast as you can; the review at the end explains every statement.</p>
+  <ol class="rv-items" hidden="">
+    <li data-a="F">A parameter is a numerical summary of a sample.<span class="why">A <b>parameter</b> describes the <b>population</b>; a <b>statistic</b> describes a sample.</span></li>
+    <li data-a="T">Temperature in °C is measured on an interval scale.<span class="why">Differences are meaningful, but 0 °C is not "no temperature": no true zero.</span></li>
+    <li data-a="T">The median is more robust to outliers than the mean.<span class="why">The mean uses every value, so one extreme value can pull it far away; the median only depends on the middle.</span></li>
+    <li data-a="F">The sample variance divides the sum of squared deviations by n.<span class="why">The sample variance divides by <b>n − 1</b>.</span></li>
+    <li data-a="T">If every value is multiplied by 2, the standard deviation is multiplied by 2.<span class="why">For y = a + bx, s<sub>y</sub> = |b| s<sub>x</sub>.</span></li>
+    <li data-a="F">A histogram is a good graph for the blood types of 300 donors.<span class="why">Blood type is categorical; histograms are not suitable for qualitative data.</span></li>
+    <li data-a="T">In a right-skewed distribution the mean is usually larger than the median.<span class="why">The long right tail pulls the mean up.</span></li>
+    <li data-a="F">r = −0.9 shows a weaker linear relationship than r = 0.5.<span class="why">Strength is |r|: 0.9 &gt; 0.5. The sign only gives the direction.</span></li>
+    <li data-a="F">A box plot always shows whether a distribution is bimodal.<span class="why">A box plot uses only five numbers; a violin plot is needed to see two peaks.</span></li>
+    <li data-a="T">Time-series data are collected at successive points in time.<span class="why">Cross-sectional data are collected once; time-series data at successive points in time.</span></li>
+    <li data-a="T">By the proximity principle, objects that are close together are seen as one group.<span class="why">That is the Gestalt law of proximity.</span></li>
+    <li data-a="T">Starting a bar chart's y-axis at a non-zero value can exaggerate differences.<span class="why">A bar's length represents its value; cutting the axis makes small differences look huge.</span></li>
+  </ol>
+  <div class="rv-stage"></div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Parameter|Variable|Population|Sample|Statistic">
+<p>METU wants to know the average weekly study time of <strong>all its 30,000 students</strong>. A survey of <strong>500 students</strong> finds an average of <strong>14.2 hours</strong>. Classify each item.</p>
+<ul>
+<li>All 30,000 METU students :: Population</li>
+<li>The 500 surveyed students :: Sample</li>
+<li>The average weekly study time of all 30,000 students (unknown) :: Parameter</li>
+<li>14.2 hours :: Statistic</li>
+<li>Weekly study time :: Variable</li>
+</ul>
+<div class="explain">
+<p><strong>P</strong>opulation ↔︎ <strong>P</strong>arameter, <strong>S</strong>ample ↔︎ <strong>S</strong>tatistic. The 14.2 hours is computed from the sample, so it is a statistic used to estimate the unknown parameter.</p>
+</div>
+</div>
+<div class="rv tg" id="tg-scales">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Tick table · Nominal · Ordinal · Interval · Ratio</span></div>
+  <p>Tick (✔) a cell whenever the scale <b>provides</b> that property. Click a cell to add or remove a tick, then press <b>Check</b>.</p>
+  <div class="tg-scroll">
+    <ul class="tg-data" hidden="">
+      <li data-answer="0111">The “order” of values is known</li>
+      <li data-answer="1111">“Counts”, aka “Frequency distribution”</li>
+      <li data-answer="1111">Mode</li>
+      <li data-answer="0111">Median</li>
+      <li data-answer="0011">Mean</li>
+      <li data-answer="0011">Can quantify the difference between each value</li>
+      <li data-answer="0011">Can add or subtract values</li>
+      <li data-answer="0001">Can multiply and divide values</li>
+      <li data-answer="0001">Has a “true zero”</li>
+    </ul>
+  </div>
+  <div class="tg-legend" hidden=""><span><i class="tg-key tg-key-ok">✔</i> correct tick</span><span><i class="tg-key tg-key-bad">✔</i> wrong tick</span><span><i class="tg-key tg-key-miss">✔</i> missing tick</span></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-primary" data-act="check">Check</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden="">
+    <p>Each scale keeps everything the previous one provides and adds one new property:</p>
+    <p class="tg-ladder"><b>Nominal</b> (labels, counts, mode) → <b>Ordinal</b> (+ order, median) → <b>Interval</b> (+ measurable differences, mean, + and −) → <b>Ratio</b> (+ true zero, × and ÷)</p>
+    <ul>
+      <li><b>Nominal</b> (blood type, city): only counts and the mode.</li>
+      <li><b>Ordinal</b> (letter grades, satisfaction 1–5): ranked, so the median exists; the gaps are not measurable, so no mean.</li>
+      <li><b>Interval</b> (°C, calendar year): 30 °C − 20 °C = 10 °C makes sense, but 40 °C is <i>not</i> twice as hot as 20 °C (no true zero).</li>
+      <li><b>Ratio</b> (height, income, time): 0 means "none", so 180 cm <i>is</i> twice 90 cm.</li>
+    </ul>
+  </div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Nominal|Ordinal|Interval|Ratio ; Qualitative|Quantitative" data-columns="Scale ; Data type">
+<p>Choose the <strong>scale</strong> and the <strong>type of data</strong> for each variable.</p>
+<ul>
+<li>A student’s hometown :: Nominal ; Qualitative</li>
+<li>T-shirt size (S, M, L, XL) :: Ordinal ; Qualitative</li>
+<li>Year of birth :: Interval ; Quantitative</li>
+<li>Monthly rent in ₺ :: Ratio ; Quantitative</li>
+<li>Number of siblings :: Ratio ; Quantitative</li>
+<li>Course evaluation from 1 (poor) to 5 (excellent) :: Ordinal ; Qualitative</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Year of birth</strong> has no true zero (year 0 is not “no time”), so it is interval.</li>
+<li><strong>Number of siblings</strong> is a count with a true zero (0 = no siblings): ratio, and it is <strong>discrete</strong>.</li>
+<li>A 1–5 rating is ordered, but the gaps between the categories are not measurable: ordinal.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="mc" data-answer="c">
+<p><strong>Which one doesn’t belong?</strong> Three of these variables are measured on the same scale.</p>
+<ul>
+<li>Eye colour</li>
+<li>Marital Status</li>
+<li>Job Seniority</li>
+<li>Car Brands</li>
+<li>Nationality</li>
+</ul>
+<div class="explain">
+<p>Job Seniority is <strong>ordinal</strong> (Junior &lt; Mid-level &lt; Senior &lt; Executive); the other four are <strong>nominal</strong>: categories with no natural order.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="rv rv-steps">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Step by step · each correct step unlocks the next</span></div>
+  <p>Six students report how much they spent on coffee last week (₺): <b>40, 55, 35, 70, 45, 55</b>. Type each answer and press <kbd>Enter</kbd>. Round to 2 decimals.</p>
+  <div class="rv-step" data-answer="300" data-tol="0.01"><span class="rv-step-n">1</span> The sum of the values, Σx = <input type="text" inputmode="decimal" aria-label="sum"><span class="rv-note">Then x̄ = 300 / 6 = <b>50 ₺</b>.</span></div>
+  <div class="rv-step" data-answer="50" data-tol="0.01"><span class="rv-step-n">2</span> The <b>median</b> (order the data first!) = <input type="text" inputmode="decimal" aria-label="median"><span class="rv-note">Ordered: 35, 40, 45, 55, 55, 70. With n = 6 (even), median = (45 + 55) / 2 = <b>50</b>. The <b>mode</b> is 55, the <b>range</b> is 70 − 35 = 35.</span></div>
+  <div class="rv-step" data-answer="800" data-tol="0.01"><span class="rv-step-n">3</span> The sum of squared deviations, Σ(x − x̄)² = <input type="text" inputmode="decimal" aria-label="sum of squares"><span class="rv-note">Deviations: −10, 5, −15, 20, −5, 5 (they sum to 0). Squares: 100 + 25 + 225 + 400 + 25 + 25 = <b>800</b>.</span></div>
+  <div class="rv-step" data-answer="160" data-tol="0.01"><span class="rv-step-n">4</span> The sample variance, s² = <input type="text" inputmode="decimal" aria-label="variance"><span class="rv-note">s² = 800 / (n − 1) = 800 / 5 = <b>160 ₺²</b>. (Dividing by 6 is the most common exam mistake!)</span></div>
+  <div class="rv-step" data-answer="12.65" data-tol="0.01"><span class="rv-step-n">5</span> The standard deviation, s = <input type="text" inputmode="decimal" aria-label="standard deviation"><span class="rv-note">s = √160 = <b>12.65 ₺</b>, in the same units as the data.</span></div>
+  <div class="rv-step" data-answer="25.3" data-tol="0.06"><span class="rv-step-n">6</span> The coefficient of variation, CV = <input type="text" inputmode="decimal" aria-label="coefficient of variation"> %<span class="rv-note">CV = 12.65 / 50 × 100% = <b>25.3%</b>: the typical deviation is about a quarter of the mean.</span></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="hint">Show this step</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+</div>
+<div class="rv rv-spot">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Spot the mistake · click the first wrong line</span></div>
+  <p>A student found the quartiles and fences of these <b>12</b> ordered values:<br><b>12, 15, 18, 20, 22, 25, 27, 30, 31, 35, 40, 58</b>.<br>Click the <b>first</b> line that contains a mistake.</p>
+  <ol class="rv-lines">
+    <li>For Q<sub>1</sub>: np = 12 × 0.25 = 3.</li>
+    <li data-wrong="1">np = 3 is a whole number, so Q<sub>1</sub> is the 3rd ordered value: Q<sub>1</sub> = 18.</li>
+    <li>For Q<sub>3</sub>: np = 12 × 0.75 = 9, a whole number, so Q<sub>3</sub> = (31 + 35) / 2 = 33.</li>
+    <li>IQR = 33 − 18 = 15.</li>
+    <li>Upper fence = 33 + 1.5 × 15 = 55.5, so 58 is a potential outlier.</li>
+  </ol>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden="">
+    <p><b>Line 2 is wrong.</b> Q<sub>1</sub> is the median of the lower half of the data, and Q<sub>3</sub> is the median of the upper half of the data. By the lecture rule, when np is <b>an integer</b> we <b>average</b> the np-th and (np+1)-th values: Q<sub>1</sub> = (18 + 20) / 2 = <b>19</b>. Line 3 does this correctly for Q<sub>3</sub>.</p>
+    <p><b>Fence formulas:</b><br>
+    Lower fence = Q<sub>1</sub> − 1.5 × IQR<br>
+    Upper fence = Q<sub>3</sub> + 1.5 × IQR<br>
+    Any value below the lower fence or above the upper fence is a potential outlier.</p>
+    <p><b>Corrected:</b> IQR = Q<sub>3</sub> − Q<sub>1</sub> = 33 − 19 = <b>14</b>, so 1.5 × IQR = 21.<br>
+    Lower fence = 19 − 21 = <b>−2</b><br>
+    Upper fence = 33 + 21 = <b>54</b><br>
+    No value is below −2, but 58 is above 54, so <b>58 is a potential outlier</b>.</p>
+  </div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>A box plot is drawn from this five-number summary: minimum <strong>12</strong>, <span class="math inline">\(Q_1\)</span> = <strong>30</strong>, median <strong>38</strong>, <span class="math inline">\(Q_3\)</span> = <strong>46</strong>, maximum <strong>80</strong>.</p>
+<p><span class="math inline">\(IQR =\)</span> <span class="blank" data-answer="16" data-tol="0"></span>, lower fence <span class="math inline">\(=\)</span> <span class="blank" data-answer="6" data-tol="0"></span>, upper fence <span class="math inline">\(=\)</span> <span class="blank" data-answer="70" data-tol="0"></span>.<br>
+The number of potential outliers you can be sure about from this summary is <span class="blank" data-answer="1|one"></span>: the maximum, 80.</p>
+<div class="explain">
+<p><span class="math inline">\(IQR = 46 - 30 = 16\)</span>; <span class="math inline">\(1.5 \times 16 = 24\)</span>; fences <span class="math inline">\(30 - 24 = 6\)</span> and <span class="math inline">\(46 + 24 = 70\)</span>. The minimum 12 is inside, the maximum 80 is outside: it is drawn as a separate point.$.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Arithmetic mean|Geometric mean|Harmonic mean">
+<p>Which mean should you use?</p>
+<ul>
+<li>The average of your five midterm scores :: Arithmetic mean</li>
+<li>The average yearly growth of an investment that changed by +10%, −5% and +20% :: Geometric mean</li>
+<li>The average speed for a trip with three equal 100 km legs at 60, 90 and 120 km/h :: Harmonic mean</li>
+<li>The average price per litre when you spend exactly ₺1,000 on fuel each week :: Harmonic mean</li>
+<li>The average height of a basketball team :: Arithmetic mean</li>
+<li>The average yearly growth factor of a city’s population :: Geometric mean</li>
+</ul>
+<div class="explain">
+<p><strong>Values that add up</strong> → arithmetic; <strong>values that multiply</strong> (growth factors 1.10 × 0.95 × 1.20) → geometric; <strong>rates over equal amounts</strong> of the “per” quantity (equal distances, equal money) → harmonic.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Daily maximum temperatures in a city have mean <span class="math inline">\(\bar{x} = 20\)</span> °C and standard deviation <span class="math inline">\(s = 5\)</span> °C. Converted with <span class="math inline">\(F = 32 + 1.8\,C\)</span>:</p>
+<p>mean <span class="math inline">\(=\)</span> <span class="blank" data-answer="68" data-tol="0.01"></span> °F, standard deviation <span class="math inline">\(=\)</span> <span class="blank" data-answer="9" data-tol="0.01"></span> °F, variance <span class="math inline">\(=\)</span> <span class="blank" data-answer="81" data-tol="0.01"></span> °F².<br>
+Can we compare the variability with the coefficient of variation? <span class="blank" data-answer="no"></span> (yes / no)</p>
+<div class="explain">
+<p><span class="math inline">\(\bar{y} = 32 + 1.8(20) = 68\)</span>; <span class="math inline">\(s_y = |1.8| \times 5 = 9\)</span>; <span class="math inline">\(s_y^2 = 1.8^2 \times 25 = 81\)</span>. Adding 32 moves the data but does not change the spread.</p>
+<p><strong>No:</strong> temperature in °C or °F is an <strong>interval</strong> scale with no true zero, and the CV is meaningful only for ratio-scale data. (In °C the CV would be 25%, in °F 13.2%: the same data, two different “CVs”.)</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Exam scores are <strong>mound-shaped</strong> with mean 64 and standard deviation 8. By the empirical rule:</p>
+<p>About <span class="blank" data-answer="95" data-tol="0"></span> % of the students scored between 48 and 80.<br>
+About <span class="blank" data-answer="16" data-tol="0"></span> % scored above 72.<br>
+About <span class="blank" data-answer="2.5" data-tol="0.01"></span> % scored below 48.</p>
+<div class="explain">
+<ul>
+<li>48 and 80 are <span class="math inline">\(64 \pm 2(8)\)</span>: about <strong>95%</strong>.</li>
+<li>72 is <span class="math inline">\(64 + 8\)</span>: 68% lie within <span class="math inline">\(\pm 1s\)</span>, so <span class="math inline">\(32\%\)</span> are outside, half of them above: <strong>16%</strong>.</li>
+<li>Below <span class="math inline">\(64 - 2(8) = 48\)</span>: half of the 5% outside <span class="math inline">\(\pm 2s\)</span>: <strong>2.5%</strong>. <img src="recitation5/images/r5-empirical.png" class="img-fluid" alt="Top: a bell curve with mean 64 and standard deviation 8, with brackets showing about 68% between 56 and 72, about 95% between 48 and 80, and about 99.7% between 40 and 88. Bottom: three bell curves with shaded regions: between 48 and 80 is about 95%, above 72 is about 16%, below 48 is about 2.5%."></li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Positively (right) skewed|Negatively (left) skewed|Symmetric">
+<p>Use the mean and the median to decide the shape.</p>
+<ul>
+<li>House prices: mean ₺4.2 M, median ₺3.1 M :: Positively (right) skewed</li>
+<li>Scores on a very easy quiz: mean 8.1, median 8.8 (out of 10) :: Negatively (left) skewed</li>
+<li>Heights of adult women: mean = median = mode = 163 cm :: Symmetric</li>
+<li>Waiting times at a bank: mean 9 min, median 6 min :: Positively (right) skewed</li>
+</ul>
+<div class="explain">
+<p>The mean is pulled towards the long tail: <strong>mean &gt; median</strong> → right tail; <strong>mean &lt; median</strong> → left tail. Prices and waiting times cannot go below 0 but can be very large; easy-quiz scores have a natural maximum.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="rv rv-hot" data-draw="hist" data-freq="4,12,9,8,4,2,1" data-edges="0,10,20,30,40,50,60,70" data-answer="1" data-x="minutes on social media before breakfast" data-msg="Not this one: the modal class has the tallest bar.">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Click on the graph</span></div>
+  <p>40 students reported how many minutes they spend on social media before breakfast. <b>Click the modal class.</b></p>
+  <div class="rv-svg"></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden=""><p>The <b>modal class</b> is the class with the highest frequency: <b>10–20 minutes</b> (12 students). The long tail on the right makes the histogram positively skewed.</p></div>
+</div>
+<div class="rv rv-hot" data-draw="hist" data-freq="4,12,9,8,4,2,1" data-edges="0,10,20,30,40,50,60,70" data-answer="2" data-x="minutes on social media before breakfast" data-msg="Not this one. Add up the frequencies from the left until you pass the 20th and 21st values.">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Click on the graph</span></div>
+  <p>Same histogram (n = 40). <b>Click the class that contains the median.</b></p>
+  <div class="rv-svg"></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden=""><p>With n = 40, the median is the average of the 20th and 21st ordered values. Cumulative frequencies: 4, 16, <b>25</b>, … The first 16 values are below 20 minutes and values 17–25 are in <b>20–30</b>, so the median class is 20–30, one class to the right of the modal class, because of the right skew.</p></div>
+</div>
+<div class="rv rv-slider" data-target="-0.8">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Estimate r with the slider · within ±0.15 counts as correct</span></div>
+  <p>Move the slider to your best guess of the correlation coefficient <i>r</i>, then press <b>Check</b>. <b>New plot</b> gives you another one.</p>
+  <div class="rv-svg"></div>
+  <div class="rv-slide"><span>−1</span><input type="range" min="-1" max="1" step="0.01" value="0" aria-label="your guess of r"><span>+1</span><output>0.00</output></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-primary" data-act="check">Check</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="new">New plot</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Compute <span class="math inline">\(r\)</span> by hand for these four points.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y\)</span></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">9</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\bar{x} =\)</span> <span class="blank" data-answer="5" data-tol="0"></span>, <span class="math inline">\(\bar{y} =\)</span> <span class="blank" data-answer="6" data-tol="0"></span>, <span class="math inline">\(\sum(x-\bar{x})(y-\bar{y}) =\)</span> <span class="blank" data-answer="16" data-tol="0"></span>, <span class="math inline">\(\sum(x-\bar{x})^2 =\)</span> <span class="blank" data-answer="20" data-tol="0"></span>, <span class="math inline">\(\sum(y-\bar{y})^2 =\)</span> <span class="blank" data-answer="20" data-tol="0"></span><br>
+<span class="math inline">\(r =\)</span> <span class="blank" data-answer="0.8" data-tol="0.005"></span>: a strong <span class="blank" data-answer="positive|positive linear"></span> linear relationship.</p>
+<div class="explain">
+<p>Deviations: <span class="math inline">\(x - \bar{x} = -3, -1, 1, 3\)</span>; <span class="math inline">\(y - \bar{y} = -3, 1, -1, 3\)</span>. Products: <span class="math inline">\(9 - 1 - 1 + 9 = 16\)</span>. <span class="math inline">\(\sum (x-\bar{x})^2 = 20\)</span>, <span class="math inline">\(\sum (y-\bar{y})^2 = 20\)</span>.</p>
+<p><span class="math display">\[r = \frac{16}{\sqrt{20}\sqrt{20}} = \frac{16}{20} = 0.8\]</span></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Violin plot|Bubble chart|Comparative scatter plots, same scales|Add jitter|Use more, narrower classes|Line chart|Use relative frequencies">
+<p>Choose the <strong>best</strong> option.</p>
+<ul>
+<li>500 students’ number of siblings vs number of pets: only 20 dots are visible :: Add jitter</li>
+<li>Histograms of a class of 30 and a class of 150 drawn with frequencies :: Use relative frequencies</li>
+<li>Height, weight and age must be shown in one graph :: Bubble chart</li>
+<li>Tip vs bill for cash and card payers, drawn with different y-axes :: Comparative scatter plots, same scales</li>
+<li>A histogram of 400 values with only 3 classes looks flat and boring :: Use more, narrower classes</li>
+<li>36 monthly sales values were drawn as a histogram :: Line chart</li>
+<li>Two sections with identical box plots; one may have two groups of students :: Violin plot</li>
+</ul>
+<div class="explain">
+<p>Overplotting → <strong>jitter</strong>; different group sizes → <strong>relative frequencies</strong>; three numerical variables → <strong>bubble chart</strong>; groups compared → <strong>same scales</strong>; too few classes hide the shape → <strong>more classes</strong> (400 values → 9–10); time order matters → <strong>line chart</strong>; a box plot hides bimodality → <strong>violin plot</strong>.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<p>A survey asked <strong>300 students</strong> for their faculty and whether they live in a dormitory:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Faculty</th>
+<th style="text-align: center;">Lives in dorm</th>
+<th style="text-align: center;">Not in dorm</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Engineering</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">150</td>
+</tr>
+<tr class="even">
+<td>Arts &amp; Sciences</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">50</td>
+</tr>
+<tr class="odd">
+<td>Economics</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">100</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td style="text-align: center;"><strong>130</strong></td>
+<td style="text-align: center;"><strong>170</strong></td>
+<td style="text-align: center;"><strong>300</strong></td>
+</tr>
+</tbody>
+</table>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>Use the table above.</p>
+<p>Relative frequency of Engineering students: <span class="blank" data-answer="0.5" data-tol="0.005"></span>; of Arts &amp; Sciences students: <span class="blank" data-answer="0.17|0.167|0.1667" data-tol="0.005"></span>; of Economics students: <span class="blank" data-answer="0.33|0.333|0.3333" data-tol="0.005"></span>.<br>
+Within each faculty, the percentage who live in a dorm: Engineering <span class="blank" data-answer="40" data-tol="0.5"></span> %, Arts &amp; Sciences <span class="blank" data-answer="60" data-tol="0.5"></span> %, Economics <span class="blank" data-answer="40" data-tol="0.5"></span> %.<br>
+Overall, <span class="blank" data-answer="43.3|43.33|43" data-tol="0.4"></span> % of the 300 students live in a dorm.</p>
+<div class="explain">
+<ul>
+<li>Faculty: <span class="math inline">\(150/300 = 0.50\)</span>, <span class="math inline">\(50/300 \approx 0.17\)</span>, <span class="math inline">\(100/300 \approx 0.33\)</span> (they sum to 1).</li>
+<li><strong>Within</strong> a faculty, divide by that faculty’s total (the row total): <span class="math inline">\(60/150 = 40\%\)</span>, <span class="math inline">\(30/50 = 60\%\)</span>, <span class="math inline">\(40/100 = 40\%\)</span>.</li>
+<li>Overall: <span class="math inline">\(130/300 \approx 43.3\%\)</span>.</li>
+</ul>
+</div>
+</div>
+<div class="rv rv-draw" data-cats="Engineering|Arts &amp; Sci.|Economics" data-target="0.5,0.1667,0.3333" data-tol="0.02" data-mode="bar" data-ylabel="relative frequency">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Draw the chart · move the sliders to set each bar</span></div>
+  <p><b>Draw the relative-frequency bar chart of Faculty</b> (all 300 students). Set the height of each bar, then press <b>Check</b> (±2 percentage points counts as correct).</p>
+  <div class="rv-svg"></div>
+  <div class="rv-sliders"></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-primary" data-act="check">Check</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden=""><p>Heights: 150/300 = <b>50%</b>, 50/300 ≈ <b>17%</b>, 100/300 ≈ <b>33%</b>. With frequencies the bars would be 150, 50 and 100: exactly the <b>same shape</b>, only the y-axis labels change, because every count is divided by the same n = 300.</p></div>
+</div>
+<div class="rv rv-draw" data-cats="Engineering|Arts &amp; Sci.|Economics" data-target="0.4,0.6,0.4" data-tol="0.02" data-mode="stack" data-ylabel="relative frequency within faculty">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Draw the chart · 100% stacked bar chart</span></div>
+  <p><b>Draw the 100% stacked bar chart</b> of dorm use within each faculty. Each slider sets the <span style="color:#2a78d6;font-weight:700">dorm</span> part; the <span style="color:#eb6834;font-weight:700">not in dorm</span> part fills the rest up to 100%.</p>
+  <div class="rv-svg"></div>
+  <div class="rv-sliders"></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-primary" data-act="check">Check</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden=""><p>Dorm shares: 60/150 = <b>40%</b>, 30/50 = <b>60%</b>, 40/100 = <b>40%</b>. Every bar is 100% tall, so a 100% stacked bar chart compares the <b>proportions within groups</b>, but it no longer shows how big each group is.</p></div>
+</div>
+<p><img src="recitation5/images/r5-bars.png" class="img-fluid" alt="The faculty by dormitory table drawn four ways. Chart 1: clustered bars of counts, with dorm and not-in-dorm side by side (60 and 90, 30 and 20, 40 and 60). Chart 2: stacked bars of counts with totals 150, 50 and 100. Chart 3: 100% stacked bars with dorm shares of 40%, 60% and 40%. Chart 4: clustered bars of the within-faculty percentages."></p>
+<div class="rv rv-hot" data-draw="violin" data-answer="iqr" data-msg="Not this part. Look for the part that spans from Q1 to Q3.">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Click on the graph</span></div>
+  <p>Click the part of this violin plot that shows the <b>interquartile range</b>.</p>
+  <div class="rv-svg"></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden=""><p>Inside a violin: the <b>thick black bar</b> is the IQR, the <b>thin line</b> is the 95% confidence interval, the <b>white dot</b> is the median, and the <b>width</b> of the outline is the density (wide = many values). This violin is bimodal, which a box plot could not show.</p></div>
+</div>
+<div class="rv rv-spot">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Spot the mistake · click the wrong sentence</span></div>
+  <p>A student describes a correlation heatmap and the scatter plot matrix of four variables. <b>One</b> sentence is wrong. Click it.</p>
+  <ol class="rv-lines">
+    <li>The heatmap shows r = 0.62 for study hours and GPA: a positive linear relationship.</li>
+    <li>All values on the diagonal are 1, because each variable is perfectly correlated with itself.</li>
+    <li>The heatmap is symmetric: the value for (study, GPA) equals the value for (GPA, study).</li>
+    <li data-wrong="1">Since r = 0.03 for sleep and GPA, sleep and GPA are not related in any way.
+  </li></ol>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden=""><p><b>Sentence 4 is wrong.</b> r ≈ 0 only means there is no <b>linear</b> relationship. The drawback of correlation plots: they give no information about nonlinearity. The scatter plot could show a strong curved (e.g. upside-down U) relationship.</p></div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Proximity|Similarity|Common region|Closure|Continuity|Figure-ground|Prägnanz|Focal point">
+<p>Which Gestalt principle is at work?</p>
+<ul>
+<li>In a dashboard, three charts inside one light-grey container are read as one topic :: Common region</li>
+<li>A chart without its border and background still looks complete :: Closure</li>
+<li>In a line chart, one country is orange and all others are grey :: Focal point</li>
+<li>Labels placed right next to their bars are read together with them :: Proximity</li>
+<li>The same colour is used for “2026” in every chart of a report :: Similarity</li>
+<li>The eye follows a smooth trend line through the data points :: Continuity</li>
+<li>A white logo shape is seen “cut out” of a dark background :: Figure-ground</li>
+<li>Three overlapping rings are seen as three simple circles :: Prägnanz</li>
+</ul>
+<div class="explain">
+<p>Common region (enclosure) groups what is inside one boundary; closure fills in missing lines; focal point captures the eye with what is different; proximity groups what is close; similarity groups what looks alike; continuity follows smooth paths; figure–ground separates the object from the background; Prägnanz reduces shapes to the simplest form.</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill">
+<p>A bar chart shows a pass rate of <strong>61%</strong> in 2025 and <strong>64%</strong> in 2026, with the y-axis starting at <strong>60</strong>.</p>
+<p>The 2026 bar looks <span class="blank" data-answer="4|four"></span> times as tall as the 2025 bar, although the real increase is only <span class="blank" data-answer="3|three"></span> percentage points. This is the misleading <strong>non-zero</strong> <span class="blank" data-answer="baseline|base line|axis|y-axis"></span> trick.</p>
+<div class="explain">
+<p>Heights above 60: 1 vs 4 units, so the bar looks <strong>4 times</strong> as tall; <span class="math inline">\(64/61 \approx 1.05\)</span>. Bars should start at zero. (The other bad example in Lecture 4: an <strong>upside-down axis</strong>, which makes rising values look like falling ones.)</p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="fill" data-label="Mock Q1">
+<p><span class="pts">[18 pts]</span> The waiting times (minutes) of <strong>10</strong> students at the ring-bus stop, ordered:</p>
+<p>8, 11, 13, 14, 16, 17, 19, 21, 24, 41</p>
+<p><strong>(a)</strong> Median <span class="math inline">\(=\)</span> <span class="blank" data-answer="16.5" data-tol="0.01"></span><br>
+<strong>(b)</strong> <span class="math inline">\(Q_1\)</span>: <span class="math inline">\(np = 10 \times 0.25 =\)</span> <span class="blank" data-answer="2.5" data-tol="0.01"></span>, so <span class="math inline">\(Q_1\)</span> is the <span class="blank" data-answer="3rd|3|third"></span> ordered value: <span class="math inline">\(Q_1 =\)</span> <span class="blank" data-answer="13" data-tol="0"></span>.<br>
+<strong>(c)</strong> <span class="math inline">\(Q_3\)</span>: <span class="math inline">\(np = 7.5\)</span>, so <span class="math inline">\(Q_3 =\)</span> <span class="blank" data-answer="21" data-tol="0"></span>.<br>
+<strong>(d)</strong> <span class="math inline">\(IQR =\)</span> <span class="blank" data-answer="8" data-tol="0"></span>; lower fence <span class="math inline">\(=\)</span> <span class="blank" data-answer="1" data-tol="0"></span>; upper fence <span class="math inline">\(=\)</span> <span class="blank" data-answer="33" data-tol="0"></span>.<br>
+<strong>(e)</strong> Potential outlier(s): <span class="blank" data-answer="41"></span>.<br>
+<strong>(f)</strong> Will the mean be larger or smaller than the median? <span class="blank" data-answer="larger|bigger|greater|higher"></span></p>
+<div class="explain">
+<p><strong>(a)</strong> <span class="math inline">\(n = 10\)</span> is even: <span class="math inline">\((16 + 17)/2 = 16.5\)</span>.</p>
+<p><strong>(b)</strong> <span class="math inline">\(np = 2.5\)</span> is not a whole number, so round <strong>up</strong> to 3: <span class="math inline">\(Q_1\)</span> = 3rd value = <strong>13</strong>.</p>
+<p><strong>(c)</strong> <span class="math inline">\(np = 7.5\)</span> → 8th value = <strong>21</strong>.</p>
+<p><strong>(d)</strong> <span class="math inline">\(IQR = 8\)</span>, <span class="math inline">\(1.5 \times 8 = 12\)</span>: fences <span class="math inline">\(13 - 12 = 1\)</span> and <span class="math inline">\(21 + 12 = 33\)</span>.</p>
+<p><strong>(e)</strong> 41 &gt; 33 → potential outlier.</p>
+<p><strong>(f)</strong> The mean is <span class="math inline">\(184/10 = 18.4\)</span> &gt; 16.5: the outlier pulls the mean up (right skew).</p>
+<p><em>Marking: (a) 2, (b) 4, (c) 2, (d) 5, (e) 2, (f) 3.</em></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-label="Mock Q2" data-keywords="right|positive|skew; median; histogram|box plot|box-plot|boxplot|violin; outlier|extreme|mansion|tail|pulled">
+<p><span class="pts">[12 pts]</span> A real-estate report says: <em>“The average flat in our city costs ₺4.2 million.”</em> The median price is ₺3.1 million.</p>
+<p><strong>(a)</strong> What is the shape of the distribution of prices? <strong>(b)</strong> Which measure of centre would you report, and why? <strong>(c)</strong> Which graph would you draw to show the distribution?</p>
+<div class="explain">
+<p><strong>Model answer:</strong></p>
+<p><strong>(a)</strong> Mean &gt; median, so the distribution is <strong>positively (right) skewed</strong>: a few very expensive flats form a long right tail. <em>(4 pts)</em></p>
+<p><strong>(b)</strong> The <strong>median</strong> (₺3.1 M): it is robust to the few extreme prices, while the mean is pulled up by them and overstates what a typical flat costs. <em>(4 pts)</em></p>
+<p><strong>(c)</strong> A <strong>histogram</strong> (shape, modal class, the long right tail) or a <strong>box plot</strong> (median, IQR, potential outliers beyond the upper fence). A violin plot also works. <em>(4 pts)</em></p>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="ms" data-label="Mock Q3" data-answer="a,d,e,g">
+<p><span class="pts">[10 pts]</span> Which statements are <strong>true</strong>? <em>(+2 for each correct choice, −2 for each wrong choice, minimum 0.)</em></p>
+<ul>
+<li>The IQR is not affected by an extreme maximum value.</li>
+<li>The coefficient of variation is suitable for comparing temperatures in °C.</li>
+<li>A histogram should have gaps between its boxes.</li>
+<li>If r = 0, the points can still follow a strong curved pattern.</li>
+<li>Relative frequencies allow you to compare two groups of different sizes.</li>
+<li>A pie chart is the best graph for 36 months of sales.</li>
+<li>In a split violin plot, the two halves of each violin show two groups.</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>b is false:</strong> °C is interval (no true zero); the CV needs ratio data.</li>
+<li><strong>c is false:</strong> a histogram has <strong>adjoining</strong> boxes.</li>
+<li><strong>f is false:</strong> time-series data → <strong>line chart</strong>.</li>
+<li><strong>a:</strong> the IQR uses only <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span>, so the maximum doesn’t change it.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="open" data-label="Mock Q4" data-keywords="sort|order|simplicity; colour|color|highlight|focus|grey|gray; border|background|closure|clutter|grid; zero|baseline; label|proximity|title|text">
+<p><span class="pts">[12 pts]</span> A student’s bar chart compares the <strong>average GPA of 12 faculties</strong>. The bars are in <strong>random order</strong>, each bar has a <strong>different colour</strong>, the chart has a <strong>thick border and a grey background</strong>, and the y-axis <strong>starts at 2.0</strong>. The message should be: <em>“Our faculty has the highest average GPA.”</em></p>
+<p>Give <strong>four</strong> improvements and name the principle behind each.</p>
+<div class="explain">
+<p><strong>Model answer (3 pts each):</strong></p>
+<ol type="1">
+<li><strong>Simplicity:</strong> sort the bars from highest to lowest.</li>
+<li><strong>Focus point:</strong> colour only our faculty’s bar; make the others grey.</li>
+<li><strong>Closure:</strong> remove the border and background shading; the chart still looks complete.</li>
+<li><strong>Non-zero baseline</strong> (bad example): start the y-axis at 0 so the differences are not exaggerated.</li>
+<li><strong>Proximity:</strong> put the message title / value label right next to our faculty’s bar.</li>
+</ol>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-label="Mock Q5" data-options="Scatter plot|Box plots side by side|Histogram|Line chart|Mosaic plot|Bubble chart|Dot diagram">
+<p><span class="pts">[8 pts]</span> Choose the most appropriate graph.</p>
+<ul>
+<li>Shape of the distribution of 300 students’ commute times :: Histogram</li>
+<li>Compare the exam scores of 5 sections (centre, spread, outliers) :: Box plots side by side</li>
+<li>Relationship between hours studied and exam score :: Scatter plot</li>
+<li>Monthly number of library visitors over 3 years :: Line chart</li>
+<li>Size, rent and age of flats in one graph :: Bubble chart</li>
+<li>Are faculty and dormitory use (yes/no) related? :: Mosaic plot</li>
+<li>Unusual values among 12 measurements of a boiling point :: Dot diagram</li>
+<li>Rent vs distance to campus for 160 flats :: Scatter plot</li>
+</ul>
+<div class="explain">
+<p>1 pt each. One numerical variable → histogram; groups → side-by-side box plots; two numerical variables → scatter plot; three → bubble chart; over time → line chart; two categorical variables → mosaic plot; a small data set and unusual values → dot diagram.</p>
+</div>
+</div>
+<p style="font-size:.85rem;color:#6c757d;margin-top:2rem">
+All data sets on this page were created for this recitation. Good luck in the exam! 🍀
+</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--
+  STAT 112 interactive quiz engine
+  ---------------------------------
+  Include in any page with (front matter):
+      format:
+        html:
+          include-after-body: _quiz.html
+
+  Question types (write them as fenced divs in the .qmd):
+    type=mc        one correct option        answer="b"
+    type=ms        select all that apply     answer="a,c,e"
+    type=tf        single true/false         answer="true"
+    type=short     typed answer              answer="ratio|ratio scale"   (add tol="0.5" for numbers)
+    type=fill      inline blanks             []{.blank answer="parameter"}
+    type=match     "term :: definition" list
+    type=classify  "item :: category" list   options="A|B|C"  (several columns: options="A|B ; X|Y" columns="Scale ; Type")
+    type=order     list written in the correct order (shown shuffled)
+    type=open      free text + model answer  keywords="idea one|alt ; idea two"
+  Put explanations / model answers in a nested  ::: explain  div.
+-->
+<style>
+:root {
+  --qz-accent: var(--bs-primary, #2780e3);
+  --qz-border: var(--bs-border-color, #dee2e6);
+  --qz-soft: rgba(127, 127, 127, 0.07);
+  --qz-muted: var(--bs-secondary-color, #6c757d);
+  --qz-ok: #1a7f37;
+  --qz-ok-bg: rgba(26, 127, 55, 0.11);
+  --qz-bad: #c0392b;
+  --qz-bad-bg: rgba(192, 57, 43, 0.10);
+  --qz-partial: #b9770e;
+}
+.qz {
+  position: relative;
+  border: 1px solid var(--qz-border);
+  border-left: 5px solid var(--qz-accent);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.1rem;
+  margin: 1.6rem 0;
+  background: var(--bs-body-bg, #fff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color .2s;
+}
+.qz.qz-correct { border-left-color: var(--qz-ok); }
+.qz.qz-wrong { border-left-color: var(--qz-bad); }
+.qz.qz-partial { border-left-color: var(--qz-partial); }
+.qz > p:last-of-type { margin-bottom: .4rem; }
+.qz-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.qz-num {
+  font-weight: 700; font-size: .85rem; color: #fff; background: var(--qz-accent);
+  border-radius: 6px; padding: .1rem .5rem; font-variant-numeric: tabular-nums;
+}
+.qz-correct .qz-num { background: var(--qz-ok); }
+.qz-wrong .qz-num { background: var(--qz-bad); }
+.qz-partial .qz-num { background: var(--qz-partial); }
+.qz-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--qz-muted); font-weight: 600; }
+.qz img { max-width: 100%; height: auto; }
+
+/* options (mc / ms / tf) */
+.qz-options { display: grid; gap: .5rem; margin: .7rem 0 .2rem; }
+.qz-options.qz-inline { grid-template-columns: repeat(auto-fit, minmax(120px, 200px)); }
+.qz-opt {
+  display: flex; align-items: flex-start; gap: .65rem; width: 100%; text-align: left;
+  border: 1px solid var(--qz-border); background: var(--bs-body-bg, #fff); color: inherit;
+  border-radius: 8px; padding: .55rem .75rem; cursor: pointer; font: inherit; line-height: 1.4;
+  transition: border-color .15s, background-color .15s;
+}
+.qz-opt:hover { border-color: var(--qz-accent); background: var(--qz-soft); }
+.qz-opt:focus-visible { outline: 2px solid var(--qz-accent); outline-offset: 2px; }
+.qz-letter {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--qz-border);
+  display: grid; place-items: center; font-weight: 600; font-size: .8rem;
+}
+.qz-opt-text { flex: 1; padding-top: .05rem; }
+.qz-opt-text p { margin: 0; }
+.qz-opt.is-sel { border-color: var(--qz-accent); box-shadow: inset 0 0 0 1px var(--qz-accent); }
+.qz-opt.is-sel .qz-letter { background: var(--qz-accent); border-color: var(--qz-accent); color: #fff; }
+.qz-opt.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); box-shadow: inset 0 0 0 1px var(--qz-ok); }
+.qz-opt.is-ok .qz-letter { background: var(--qz-ok); border-color: var(--qz-ok); color: #fff; }
+.qz-opt.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); box-shadow: inset 0 0 0 1px var(--qz-bad); }
+.qz-opt.is-bad .qz-letter { background: var(--qz-bad); border-color: var(--qz-bad); color: #fff; }
+.qz-opt.is-missed { border: 1px dashed var(--qz-ok); }
+
+/* controls & feedback */
+.qz-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; align-items: center; }
+.qz-controls .btn { border-radius: 6px; }
+.qz-feedback { margin-top: .65rem; font-weight: 500; padding: .45rem .75rem; border-radius: 6px; }
+.qz-feedback:empty { display: none; }
+.qz-fb-ok { color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-fb-bad { color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fb-partial { color: var(--qz-partial); background: rgba(185, 119, 14, .10); }
+.qz-fb-info { background: var(--qz-soft); }
+.qz-explain {
+  margin-top: .75rem; padding: .75rem 1rem; background: var(--qz-soft);
+  border-radius: 8px; border-left: 3px solid var(--qz-accent);
+}
+.qz-explain > :last-child { margin-bottom: 0; }
+.qz-explain-title { font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); margin-bottom: .35rem; }
+
+/* typed inputs */
+.qz-short { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .6rem; }
+.qz-input { max-width: 24rem; }
+.qz-input.is-ok, .qz-select.is-ok, textarea.is-ok { border-color: var(--qz-ok); background-color: var(--qz-ok-bg); }
+.qz-input.is-bad, .qz-select.is-bad { border-color: var(--qz-bad); background-color: var(--qz-bad-bg); }
+.qz-unit { color: var(--qz-muted); }
+.qz-blank-input {
+  border: 0; border-bottom: 2px solid var(--qz-accent); background: var(--qz-soft); color: inherit;
+  font: inherit; padding: 0 .3rem; margin: 0 .15rem; text-align: center; border-radius: 4px 4px 0 0;
+  min-width: 5ch;
+}
+.qz-blank-input:focus { outline: 2px solid var(--qz-accent); outline-offset: 1px; }
+.qz-blank-input.is-ok { border-bottom-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-blank-input.is-bad { border-bottom-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fill-body { line-height: 2.3; }
+
+/* classify rows */
+.qz-rows { display: grid; gap: .4rem; margin-top: .7rem; }
+.qz-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; align-items: center;
+  padding: .45rem .7rem; border-radius: 8px; background: var(--qz-soft);
+}
+.qz-row-head { background: transparent; padding-top: 0; padding-bottom: 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); font-weight: 600; }
+.qz-row-ctrls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+.qz-row-head .qz-row-ctrls span { min-width: 9rem; text-align: center; }
+.qz-row p { margin: 0; }
+.qz-seg { display: inline-flex; border: 1px solid var(--qz-border); border-radius: 8px; overflow: hidden; background: var(--bs-body-bg, #fff); }
+.qz-seg button {
+  border: 0; border-right: 1px solid var(--qz-border); background: transparent; color: inherit;
+  padding: .3rem .7rem; font: inherit; font-size: .88rem; cursor: pointer; white-space: nowrap;
+}
+.qz-seg button:last-child { border-right: 0; }
+.qz-seg button:hover { background: var(--qz-soft); }
+.qz-seg button[aria-pressed="true"] { background: var(--qz-accent); color: #fff; }
+.qz-seg.is-ok { border-color: var(--qz-ok); box-shadow: 0 0 0 1px var(--qz-ok); }
+.qz-seg.is-ok button[aria-pressed="true"] { background: var(--qz-ok); }
+.qz-seg.is-bad { border-color: var(--qz-bad); box-shadow: 0 0 0 1px var(--qz-bad); }
+.qz-seg.is-bad button[aria-pressed="true"] { background: var(--qz-bad); }
+.qz-select { width: auto; min-width: 9rem; display: inline-block; }
+
+/* image grid (classify with pictures) */
+.qz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .8rem; margin-top: .7rem; }
+.qz-card { border: 1px solid var(--qz-border); border-radius: 8px; padding: .5rem; display: flex; flex-direction: column; gap: .5rem; background: var(--bs-body-bg, #fff); }
+.qz-card-media { height: 170px; display: grid; place-items: center; background: #fff; border-radius: 6px; overflow: hidden; }
+.qz-card-media img { max-height: 166px; max-width: 100%; width: auto; object-fit: contain; }
+.qz-card-media p { margin: 0; }
+.qz-card .qz-select { width: 100%; }
+.qz-card-tag { font-size: .75rem; color: var(--qz-muted); font-weight: 600; }
+
+/* matching */
+.qz-match { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1.25rem; margin-top: .7rem; }
+.qz-match-left { display: grid; gap: .4rem; align-content: start; }
+.qz-match-left .qz-row { grid-template-columns: auto minmax(0, 1fr); }
+.qz-match-left .qz-select { min-width: 4.6rem; }
+.qz-match-right { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; align-content: start; }
+.qz-match-right li { display: flex; gap: .6rem; align-items: flex-start; padding: .45rem .7rem; border: 1px solid var(--qz-border); border-radius: 8px; }
+.qz-match-right li p { margin: 0; }
+
+/* ordering */
+.qz-order { list-style: none; padding: 0; margin: .7rem 0 0; }
+.qz-order li {
+  display: flex; align-items: center; gap: .6rem; padding: .45rem .6rem; margin: .35rem 0;
+  border: 1px solid var(--qz-border); border-radius: 8px; background: var(--bs-body-bg, #fff); cursor: grab;
+}
+.qz-order li.is-drag { opacity: .45; }
+.qz-order li.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-order li.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-order .qz-order-text { flex: 1; }
+.qz-order .qz-order-text p { margin: 0; }
+.qz-move { border: 1px solid var(--qz-border); background: transparent; color: inherit; border-radius: 6px; width: 2rem; height: 2rem; cursor: pointer; line-height: 1; }
+.qz-move:hover { background: var(--qz-soft); }
+
+/* open */
+.qz-open textarea { margin-top: .6rem; }
+.qz-chip { display: inline-block; padding: .05rem .55rem; border-radius: 999px; margin: .15rem .2rem 0 0; font-size: .85rem; font-weight: 500; }
+.qz-chip-ok { background: var(--qz-ok-bg); color: var(--qz-ok); }
+
+/* scoreboard */
+.quiz-scoreboard {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+  padding: .75rem 1rem; border: 1px solid var(--qz-border); border-radius: 10px; background: var(--qz-soft); margin: 1.25rem 0 1.5rem;
+}
+.qz-score-big { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.qz-score-bar { flex: 1 1 160px; height: 8px; background: var(--qz-border); border-radius: 99px; overflow: hidden; min-width: 120px; }
+.qz-score-bar span { display: block; height: 100%; width: 0; background: var(--qz-ok); transition: width .3s; }
+.qz-pill {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 1030; background: var(--bs-body-bg, #fff);
+  border: 1px solid var(--qz-border); border-radius: 999px; padding: .35rem .85rem; font-weight: 600;
+  font-size: .9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); font-variant-numeric: tabular-nums;
+}
+.qz-error { color: var(--qz-bad); font-family: monospace; font-size: .85rem; }
+
+@media (max-width: 700px) {
+  .qz { padding: .85rem .9rem 1rem; }
+  .qz-row { grid-template-columns: 1fr; }
+  .qz-row-ctrls { justify-content: flex-start; }
+  .qz-row-head { display: none; }
+  .qz-match { grid-template-columns: 1fr; }
+  .qz-seg button { padding: .3rem .5rem; font-size: .82rem; }
+}
+@media print {
+  .qz-controls, .qz-pill, .quiz-scoreboard { display: none !important; }
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var LABELS = {
+    mc: "Multiple choice", ms: "Select all that apply", tf: "True / False",
+    short: "Short answer", fill: "Fill in the blanks", match: "Matching",
+    classify: "Classify", order: "Put in order", open: "Open-ended"
+  };
+  var registry = [];
+
+  /* ---------- helpers ---------- */
+  function attr(el, name) {
+    var v = el.getAttribute("data-" + name);
+    if (v === null) v = el.getAttribute(name);
+    return v;
+  }
+  function h(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function btn(label, cls, fn) {
+    var b = h("button", "btn btn-sm " + cls, label);
+    b.type = "button";
+    b.addEventListener("click", fn);
+    return b;
+  }
+  function norm(s) {
+    return String(s == null ? "" : s).toLowerCase()
+      .replace(/ı/g, "i").normalize("NFKD").replace(/[̀-ͯ]/g, "")
+      .replace(/[‘’'`"“”]/g, "")
+      .replace(/[^a-z0-9.%\s-]/g, " ")
+      .replace(/^(a|an|the)\s+/, "")
+      .replace(/\s+/g, " ").trim();
+  }
+  function num(s) {
+    s = String(s == null ? "" : s).trim().replace(/\s/g, "").replace(/%$/, "");
+    if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", ".");
+    var frac = s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+    if (frac) return parseFloat(frac[1]) / parseFloat(frac[2]);
+    if (!/^-?\d*\.?\d+(e-?\d+)?$/i.test(s)) return null;
+    return parseFloat(s);
+  }
+  function alts(spec) {
+    return String(spec == null ? "" : spec).split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function matches(input, spec, tol) {
+    var a = alts(spec);
+    if (tol !== null && tol !== undefined) {
+      var v = num(input), t = parseFloat(tol) || 0;
+      if (v === null) return false;
+      return a.some(function (x) { var y = num(x); return y !== null && Math.abs(v - y) <= t + 1e-9; });
+    }
+    var n = norm(input);
+    return n !== "" && a.some(function (x) { return norm(x) === n; });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function stripTags(html) { var d = h("div", null, html); return d.textContent.trim(); }
+  function unwrapP(html) { return html.trim().replace(/^<p>/, "").replace(/<\/p>$/, ""); }
+  function firstList(q) { return q.querySelector(":scope > ol, :scope > ul"); }
+  function pairs(q) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list of 'item :: answer' lines.");
+    var out = Array.prototype.map.call(list.children, function (li) {
+      var html = li.innerHTML, i = html.lastIndexOf("::");
+      if (i < 0) throw new Error("List item is missing '::' — " + stripTags(html).slice(0, 60));
+      return { html: unwrapP(html.slice(0, i)), answer: stripTags(html.slice(i + 2)) };
+    });
+    list.remove();
+    return out;
+  }
+  function markEl(el, ok) {
+    el.classList.remove("is-ok", "is-bad");
+    if (ok === true) el.classList.add("is-ok");
+    if (ok === false) el.classList.add("is-bad");
+  }
+
+  /* ---------- status + scoreboard ---------- */
+  function setStatus(q, s) {
+    q._status = s;
+    q.classList.remove("qz-correct", "qz-wrong", "qz-partial");
+    if (s) q.classList.add("qz-" + s);
+    updateScore();
+  }
+  function updateScore() {
+    var total = registry.length, correct = 0, tried = 0;
+    registry.forEach(function (q) {
+      if (q._status === "correct") correct++;
+      if (q._status) tried++;
+    });
+    document.querySelectorAll(".qz-score-big").forEach(function (e) { e.textContent = correct + " / " + total + " correct"; });
+    document.querySelectorAll(".qz-score-tried").forEach(function (e) { e.textContent = tried + " attempted"; });
+    document.querySelectorAll(".qz-score-bar span").forEach(function (e) { e.style.width = (total ? 100 * correct / total : 0) + "%"; });
+    var pill = document.querySelector(".qz-pill");
+    if (pill) pill.textContent = "✓ " + correct + " / " + total;
+  }
+  function feedback(p, kind, msg) {
+    p.fb.className = "qz-feedback qz-fb-" + kind;
+    p.fb.innerHTML = msg;
+  }
+  function showExplain(p) { if (p.explain) p.explain.hidden = false; }
+  function clearFb(p) { p.fb.className = "qz-feedback"; p.fb.innerHTML = ""; if (p.explain) p.explain.hidden = true; }
+  function scoreMsg(p, q, ok, total) {
+    if (ok === total) { feedback(p, "ok", "✓ All " + total + " correct!"); setStatus(q, "correct"); showExplain(p); }
+    else if (ok > 0) { feedback(p, "partial", ok + " / " + total + " correct. Fix the red ones and check again."); setStatus(q, "partial"); }
+    else { feedback(p, "bad", "0 / " + total + " correct. Have another go."); setStatus(q, "wrong"); }
+  }
+
+  /* ---------- scaffold ---------- */
+  function scaffold(q, type, n) {
+    q.classList.add("qz", "qz-t-" + type);
+    var explain = q.querySelector(":scope > .explain");
+    if (explain) explain.remove();
+    var head = h("div", "qz-head",
+      '<span class="qz-num">Q' + n + '</span><span class="qz-type">' + (attr(q, "label") || LABELS[type] || type) + "</span>");
+    q.insertBefore(head, q.firstChild);
+    var p = { ui: h("div", "qz-ui"), controls: h("div", "qz-controls"), fb: h("div", "qz-feedback"), explain: explain };
+    p.fb.setAttribute("role", "status");
+    p.fb.setAttribute("aria-live", "polite");
+    q.appendChild(p.ui);
+    q.appendChild(p.controls);
+    q.appendChild(p.fb);
+    if (explain) {
+      explain.classList.add("qz-explain");
+      explain.hidden = true;
+      explain.insertBefore(h("div", "qz-explain-title", type === "open" ? "Model answer" : "Explanation"), explain.firstChild);
+      q.appendChild(explain);
+    }
+    return p;
+  }
+  function standardControls(p, q, check, reveal, reset) {
+    if (check) p.controls.appendChild(btn("Check", "btn-primary", check));
+    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); }));
+    p.controls.appendChild(btn("Reset", "btn-outline-secondary", function () { reset(); clearFb(p); setStatus(q, null); }));
+    q._reset = function () { reset(); clearFb(p); setStatus(q, null); };
+  }
+  function parseIdx(spec, n) {
+    return String(spec || "").split(/[\s,;]+/).filter(Boolean).map(function (t) {
+      if (/^\d+$/.test(t)) return parseInt(t, 10) - 1;
+      return t.toUpperCase().charCodeAt(0) - 65;
+    }).filter(function (i) { return i >= 0 && i < n; });
+  }
+
+  /* ---------- multiple choice / multi-select / true-false ---------- */
+  function buildChoice(q, p, multi, tf) {
+    var items, ans;
+    if (tf) {
+      items = ["True", "False"];
+      var a = norm(attr(q, "answer"));
+      ans = [/^(t|true|yes|dogru)$/.test(a) ? 0 : 1];
+    } else {
+      var list = firstList(q);
+      if (!list) throw new Error("Expected a list of options.");
+      items = Array.prototype.map.call(list.children, function (li) { return unwrapP(li.innerHTML); });
+      list.remove();
+      ans = parseIdx(attr(q, "answer"), items.length);
+      if (!ans.length) throw new Error("answer= is missing or out of range.");
+    }
+    var wrap = h("div", "qz-options" + (tf ? " qz-inline" : ""));
+    var btns = items.map(function (html, i) {
+      var b = h("button", "qz-opt", '<span class="qz-letter">' + (tf ? (i ? "F" : "T") : String.fromCharCode(65 + i)) + '</span><span class="qz-opt-text">' + html + "</span>");
+      b.type = "button";
+      wrap.appendChild(b);
+      return b;
+    });
+    p.ui.appendChild(wrap);
+    function clear() { btns.forEach(function (b) { b.classList.remove("is-ok", "is-bad", "is-sel", "is-missed"); b.setAttribute("aria-pressed", "false"); }); }
+
+    if (!multi) {
+      btns.forEach(function (b, i) {
+        b.addEventListener("click", function () {
+          clear();
+          if (ans.indexOf(i) >= 0) {
+            b.classList.add("is-ok");
+            feedback(p, "ok", "✓ Correct!");
+            setStatus(q, "correct");
+            showExplain(p);
+          } else {
+            b.classList.add("is-bad");
+            feedback(p, "bad", "✗ Not quite. Try another option.");
+            setStatus(q, "wrong");
+          }
+        });
+      });
+      standardControls(p, q, null, function () {
+        clear();
+        ans.forEach(function (i) { btns[i].classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return tf ? items[i] : String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    } else {
+      btns.forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          var on = !b.classList.contains("is-sel");
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          b.classList.toggle("is-sel", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      });
+      standardControls(p, q, function () {
+        var hit = 0, wrong = 0;
+        btns.forEach(function (b, i) {
+          var sel = b.classList.contains("is-sel"), good = ans.indexOf(i) >= 0;
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          if (sel && good) { hit++; b.classList.add("is-ok"); }
+          if (sel && !good) { wrong++; b.classList.add("is-bad"); }
+        });
+        if (hit === ans.length && !wrong) { feedback(p, "ok", "✓ Correct, you found all " + ans.length + "!"); setStatus(q, "correct"); showExplain(p); }
+        else if (hit === 0 && wrong === 0) { feedback(p, "info", "Select at least one option first."); }
+        else {
+          feedback(p, hit ? "partial" : "bad", hit + " of " + ans.length + " correct options selected" + (wrong ? ", " + wrong + " wrong selection" + (wrong > 1 ? "s" : "") : "") + ".");
+          setStatus(q, hit ? "partial" : "wrong");
+        }
+      }, function () {
+        clear();
+        btns.forEach(function (b, i) { if (ans.indexOf(i) >= 0) b.classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    }
+  }
+
+  /* ---------- short answer ---------- */
+  function buildShort(q, p) {
+    var spec = attr(q, "answer"), tol = attr(q, "tol"), unit = attr(q, "unit");
+    if (!spec) throw new Error("answer= is missing.");
+    var row = h("div", "qz-short");
+    var input = h("input", "form-control qz-input");
+    input.type = "text";
+    input.placeholder = attr(q, "placeholder") || (tol !== null ? "Type a number…" : "Type your answer…");
+    input.setAttribute("aria-label", "Your answer");
+    row.appendChild(input);
+    if (unit) row.appendChild(h("span", "qz-unit", unit));
+    p.ui.appendChild(row);
+    function check() {
+      if (!input.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+      var ok = matches(input.value, spec, tol);
+      markEl(input, ok);
+      if (ok) { feedback(p, "ok", "✓ Correct!"); setStatus(q, "correct"); showExplain(p); }
+      else { feedback(p, "bad", "✗ Not quite. Try again" + (tol !== null ? " (check your rounding)." : ".")); setStatus(q, "wrong"); }
+    }
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+    standardControls(p, q, check, function () {
+      feedback(p, "info", "Answer: <strong>" + alts(spec)[0] + (unit ? " " + unit : "") + "</strong>");
+    }, function () { input.value = ""; markEl(input, null); });
+  }
+
+  /* ---------- fill in the blanks ---------- */
+  function buildFill(q, p) {
+    var blanks = Array.prototype.map.call(q.querySelectorAll(".blank"), function (span) {
+      var spec = attr(span, "answer"), tol = attr(span, "tol");
+      var input = h("input", "qz-blank-input");
+      input.type = "text";
+      input.setAttribute("aria-label", "blank");
+      var longest = alts(spec).reduce(function (m, x) { return Math.max(m, x.length); }, 4);
+      input.style.width = Math.min(longest + 3, 28) + "ch";
+      span.innerHTML = "";
+      span.appendChild(input);
+      return { input: input, spec: spec, tol: tol };
+    });
+    if (!blanks.length) throw new Error("No []{.blank answer=...} spans found.");
+    q.querySelectorAll(":scope > p").forEach(function (para) { if (para.querySelector(".blank")) para.classList.add("qz-fill-body"); });
+    function check() {
+      var ok = 0;
+      blanks.forEach(function (b) { var good = matches(b.input.value, b.spec, b.tol); markEl(b.input, good); if (good) ok++; });
+      scoreMsg(p, q, ok, blanks.length);
+    }
+    blanks.forEach(function (b) { b.input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); }); });
+    standardControls(p, q, check, function () {
+      blanks.forEach(function (b) { b.input.value = alts(b.spec)[0]; markEl(b.input, true); });
+      feedback(p, "info", "Answers filled in.");
+    }, function () { blanks.forEach(function (b) { b.input.value = ""; markEl(b.input, null); }); });
+  }
+
+  /* ---------- selectable control (segmented buttons or dropdown) ---------- */
+  function control(options, forceSelect) {
+    var longest = options.reduce(function (m, o) { return Math.max(m, o.length); }, 0);
+    if (!forceSelect && options.length <= 4 && longest <= 18) {
+      var seg = h("div", "qz-seg"), value = null;
+      seg.setAttribute("role", "group");
+      var bs = options.map(function (o) {
+        var b = h("button", null, o);
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () { set(o); markEl(seg, null); });
+        seg.appendChild(b);
+        return b;
+      });
+      function set(v) {
+        value = v;
+        bs.forEach(function (b, i) { b.setAttribute("aria-pressed", options[i] === v ? "true" : "false"); });
+      }
+      return { el: seg, get: function () { return value; }, set: set, mark: function (ok) { markEl(seg, ok); } };
+    }
+    var sel = h("select", "form-select form-select-sm qz-select");
+    sel.appendChild(h("option", null, "— choose —")).value = "";
+    options.forEach(function (o) { var op = h("option", null, o); op.value = o; sel.appendChild(op); });
+    sel.addEventListener("change", function () { markEl(sel, null); });
+    return { el: sel, get: function () { return sel.value || null; }, set: function (v) { sel.value = v == null ? "" : v; }, mark: function (ok) { markEl(sel, ok); } };
+  }
+
+  /* ---------- classify ---------- */
+  function buildClassify(q, p) {
+    var items = pairs(q);
+    var groupsSpec = attr(q, "options");
+    var groups;
+    if (groupsSpec) groups = groupsSpec.split(";").map(function (g) { return alts(g); });
+    else {
+      var seen = [];
+      items.forEach(function (it) { alts(it.answer).forEach(function (a) { if (seen.indexOf(a) < 0) seen.push(a); }); });
+      groups = [seen];
+    }
+    var cols = attr(q, "columns") ? attr(q, "columns").split(";").map(function (s) { return s.trim(); }) : null;
+    var grid = items.some(function (it) { return /<img/i.test(it.html); });
+    var container = h("div", grid ? "qz-grid" : "qz-rows");
+    if (cols && !grid) {
+      var hr = h("div", "qz-row qz-row-head", "<span></span>");
+      var hc = h("div", "qz-row-ctrls");
+      cols.forEach(function (c) { hc.appendChild(h("span", null, c)); });
+      hr.appendChild(hc);
+      container.appendChild(hr);
+    }
+    var rows = items.map(function (it, idx) {
+      var answers = it.answer.split(";").map(function (s) { return s.trim(); });
+      if (answers.length !== groups.length) throw new Error("Item '" + stripTags(it.html).slice(0, 40) + "' needs " + groups.length + " answer(s) separated by ';'.");
+      var ctrls = groups.map(function (g) { return control(g, grid); });
+      var row;
+      if (grid) {
+        row = h("div", "qz-card");
+        row.appendChild(h("div", "qz-card-tag", "Display " + (idx + 1)));
+        row.appendChild(h("div", "qz-card-media", it.html));
+        ctrls.forEach(function (c) { row.appendChild(c.el); });
+      } else {
+        row = h("div", "qz-row", "<div>" + it.html + "</div>");
+        var cw = h("div", "qz-row-ctrls");
+        ctrls.forEach(function (c) { cw.appendChild(c.el); });
+        row.appendChild(cw);
+      }
+      container.appendChild(row);
+      return { ctrls: ctrls, answers: answers };
+    });
+    p.ui.appendChild(container);
+    var total = rows.length * groups.length;
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) {
+        r.ctrls.forEach(function (c, i) {
+          var v = c.get(), good = v !== null && matches(v, r.answers[i]);
+          c.mark(v === null ? false : good);
+          if (good) ok++;
+        });
+      });
+      scoreMsg(p, q, ok, total);
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c, i) { c.set(alts(r.answers[i])[0]); c.mark(true); }); });
+      feedback(p, "info", "Correct answers selected.");
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c) { c.set(null); c.mark(null); }); });
+    });
+  }
+
+  /* ---------- matching ---------- */
+  function buildMatch(q, p) {
+    var items = pairs(q);
+    var rights = [];
+    items.forEach(function (it) { if (rights.indexOf(it.answer) < 0) rights.push(it.answer); });
+    rights = shuffle(rights);
+    var letters = rights.map(function (_, i) { return String.fromCharCode(65 + i); });
+    var wrap = h("div", "qz-match");
+    var left = h("div", "qz-match-left");
+    var right = h("ol", "qz-match-right");
+    rights.forEach(function (r, i) {
+      right.appendChild(h("li", null, '<span class="qz-letter">' + letters[i] + "</span><span>" + r + "</span>"));
+    });
+    var rows = items.map(function (it) {
+      var c = control(letters, true);
+      c.el.setAttribute("aria-label", "Match for " + stripTags(it.html));
+      var row = h("div", "qz-row");
+      row.appendChild(c.el);
+      row.appendChild(h("div", null, it.html));
+      left.appendChild(row);
+      return { c: c, letter: letters[rights.indexOf(it.answer)] };
+    });
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    p.ui.appendChild(wrap);
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) { var v = r.c.get(), good = v === r.letter; r.c.mark(v === null ? false : good); if (good) ok++; });
+      scoreMsg(p, q, ok, rows.length);
+    }, function () {
+      rows.forEach(function (r) { r.c.set(r.letter); r.c.mark(true); });
+      feedback(p, "info", "Answer: " + rows.map(function (r, i) { return (i + 1) + "→" + r.letter; }).join(", "));
+    }, function () { rows.forEach(function (r) { r.c.set(null); r.c.mark(null); }); });
+  }
+
+  /* ---------- ordering ---------- */
+  function buildOrder(q, p) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list written in the correct order.");
+    var items = Array.prototype.map.call(list.children, function (li, i) { return { html: unwrapP(li.innerHTML), idx: i }; });
+    list.remove();
+    var ul = h("ol", "qz-order");
+    var dragged = null;
+    function lis() { return Array.prototype.slice.call(ul.children); }
+    function make(it) {
+      var li = h("li");
+      li.draggable = true;
+      li._idx = it.idx;
+      li.innerHTML = '<span class="qz-letter qz-pos"></span><span class="qz-order-text">' + it.html + "</span>";
+      var up = h("button", "qz-move", "↑"); up.type = "button"; up.setAttribute("aria-label", "Move up");
+      var dn = h("button", "qz-move", "↓"); dn.type = "button"; dn.setAttribute("aria-label", "Move down");
+      up.addEventListener("click", function () { if (li.previousElementSibling) ul.insertBefore(li, li.previousElementSibling); changed(); });
+      dn.addEventListener("click", function () { if (li.nextElementSibling) ul.insertBefore(li.nextElementSibling, li); changed(); });
+      li.appendChild(up); li.appendChild(dn);
+      li.addEventListener("dragstart", function (e) { dragged = li; li.classList.add("is-drag"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", ""); } catch (_) {} });
+      li.addEventListener("dragend", function () { li.classList.remove("is-drag"); dragged = null; changed(); });
+      li.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        if (!dragged || dragged === li) return;
+        var r = li.getBoundingClientRect();
+        ul.insertBefore(dragged, (e.clientY - r.top) > r.height / 2 ? li.nextSibling : li);
+      });
+      return li;
+    }
+    function changed() {
+      lis().forEach(function (li, i) { li.querySelector(".qz-pos").textContent = i + 1; li.classList.remove("is-ok", "is-bad"); });
+    }
+    function fill(order) { ul.innerHTML = ""; order.forEach(function (it) { ul.appendChild(make(it)); }); changed(); }
+    function shuffled() {
+      var s = shuffle(items), tries = 0;
+      while (items.length > 1 && s.every(function (it, i) { return it.idx === i; }) && tries++ < 20) s = shuffle(items);
+      return s;
+    }
+    fill(shuffled());
+    p.ui.appendChild(ul);
+    standardControls(p, q, function () {
+      var ok = 0;
+      lis().forEach(function (li, i) { var good = li._idx === i; markEl(li, good); if (good) ok++; });
+      scoreMsg(p, q, ok, items.length);
+    }, function () {
+      fill(items);
+      lis().forEach(function (li) { markEl(li, true); });
+      feedback(p, "info", "Correct order shown.");
+    }, function () { fill(shuffled()); });
+  }
+
+  /* ---------- open-ended ---------- */
+  function buildOpen(q, p) {
+    var ta = h("textarea", "form-control");
+    ta.rows = parseInt(attr(q, "rows") || "4", 10);
+    ta.placeholder = "Type the class's answer here…";
+    var w = h("div", "qz-open");
+    w.appendChild(ta);
+    p.ui.appendChild(w);
+    var kw = attr(q, "keywords");
+    var groups = kw ? kw.split(";").map(function (g) { return alts(g); }).filter(function (g) { return g.length; }) : [];
+    var check = null;
+    if (groups.length) {
+      check = function () {
+        if (!ta.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+        var text = " " + norm(ta.value) + " ";
+        var found = groups.filter(function (g) { return g.some(function (a) { return text.indexOf(norm(a)) >= 0; }); });
+        var chips = found.map(function (g) { return '<span class="qz-chip qz-chip-ok">✓ ' + g[0] + "</span>"; }).join("");
+        var n = found.length, t = groups.length;
+        if (n === t) { feedback(p, "ok", "All " + t + " key ideas mentioned! " + chips); setStatus(q, "correct"); showExplain(p); }
+        else if (n) { feedback(p, "partial", n + " of " + t + " key ideas found. Something is still missing. " + chips); setStatus(q, "partial"); }
+        else { feedback(p, "bad", "None of the " + t + " key ideas found yet. Think about what the question asks for."); setStatus(q, "wrong"); }
+      };
+    }
+    standardControls(p, q, check, function () { feedback(p, "info", "Compare with the model answer below."); }, function () { ta.value = ""; });
+    if (check) p.controls.firstChild.textContent = "Check key ideas";
+  }
+
+  /* ---------- init ---------- */
+  function init() {
+    var quizzes = document.querySelectorAll("div.quiz");
+    var n = 0;
+    quizzes.forEach(function (q) {
+      var type = (attr(q, "type") || "").toLowerCase();
+      if (!type) Object.keys(LABELS).forEach(function (k) { if (q.classList.contains(k)) type = k; });
+      n++;
+      try {
+        var p = scaffold(q, type, n);
+        if (type === "mc") buildChoice(q, p, false, false);
+        else if (type === "ms") buildChoice(q, p, true, false);
+        else if (type === "tf") buildChoice(q, p, false, true);
+        else if (type === "short") buildShort(q, p);
+        else if (type === "fill") buildFill(q, p);
+        else if (type === "classify") buildClassify(q, p);
+        else if (type === "match") buildMatch(q, p);
+        else if (type === "order") buildOrder(q, p);
+        else if (type === "open") buildOpen(q, p);
+        else throw new Error("Unknown type '" + type + "'.");
+        registry.push(q);
+      } catch (err) {
+        q.appendChild(h("div", "qz-error", "Quiz error: " + err.message));
+        if (window.console) console.error("Quiz Q" + n, err);
+      }
+    });
+    document.querySelectorAll(".quiz-scoreboard").forEach(function (sb) {
+      sb.innerHTML = "";
+      var left = h("div", null, '<div class="qz-score-big"></div><div class="qz-score-tried" style="font-size:.85rem;color:var(--qz-muted)"></div>');
+      var bar = h("div", "qz-score-bar", "<span></span>");
+      sb.appendChild(left);
+      sb.appendChild(bar);
+      sb.appendChild(btn("Reset all", "btn-outline-secondary", function () {
+        if (!window.confirm("Clear every answer on this page?")) return;
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+      }));
+    });
+    if (registry.length && !document.querySelector(".qz-pill")) document.body.appendChild(h("div", "qz-pill"));
+    updateScore();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+<!--
+  STAT 112 review widgets (Recitation 5)
+  Lightning round, tick table, step-by-step, spot the mistake, click-on-the-graph,
+  slider estimate, draw-the-chart and readiness checklist.
+  Include it in a page's front matter, after _quiz.html:
+      include-after-body:
+        - _quiz.html
+        - _widgets.html
+-->
+<style>
+.rv { --rv-accent: var(--bs-primary, #2780e3); --rv-border: var(--bs-border-color, #dee2e6); --rv-soft: rgba(127,127,127,.07); --rv-muted: var(--bs-secondary-color, #6c757d);
+  --rv-ok: #1a7f37; --rv-ok-bg: rgba(26,127,55,.13); --rv-bad: #c0392b; --rv-bad-bg: rgba(192,57,43,.12); --rv-miss: #b9770e; --rv-miss-bg: rgba(185,119,14,.10);
+  border: 1px solid var(--rv-border); border-left: 5px solid #7c4dff; border-radius: 10px; padding: 1rem 1.25rem 1.1rem; margin: 1.6rem 0; background: var(--bs-body-bg, #fff); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.rv.rv-correct { border-left-color: var(--rv-ok); } .rv.rv-wrong { border-left-color: var(--rv-bad); }
+.rv-head { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.rv-num { font-weight: 700; font-size: .85rem; color: #fff; background: #7c4dff; border-radius: 6px; padding: .1rem .5rem; }
+.rv.rv-correct .rv-num { background: var(--rv-ok); } .rv.rv-wrong .rv-num { background: var(--rv-bad); }
+.rv-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--rv-muted); font-weight: 600; }
+.rv-controls { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .9rem; }
+.rv-feedback:empty { display: none; }
+.rv-feedback { margin-top: .7rem; padding: .5rem .75rem; border-radius: 8px; font-weight: 500; background: var(--rv-soft); }
+.rv-feedback.ok { background: var(--rv-ok-bg); color: var(--rv-ok); } .rv-feedback.bad { background: var(--rv-bad-bg); color: var(--rv-bad); }
+.rv-explain { margin-top: .9rem; padding: .8rem 1rem; border-radius: 8px; background: var(--rv-soft); }
+.rv-explain[hidden] { display: none; } .rv-explain p:last-child, .rv-explain ul:last-child { margin-bottom: 0; }
+/* lightning */
+.rv-stage .rv-big { font-size: 1.15rem; font-weight: 600; min-height: 3.2em; margin: .6rem 0; }
+.rv-timer { height: 8px; background: var(--rv-border); border-radius: 99px; overflow: hidden; margin: .4rem 0 .2rem; }
+.rv-timer span { display: block; height: 100%; background: #7c4dff; width: 100%; transition: width 1s linear; }
+.rv-meta { display: flex; justify-content: space-between; font-size: .85rem; color: var(--rv-muted); font-variant-numeric: tabular-nums; }
+.rv-tf { display: flex; gap: .6rem; margin-top: .5rem; }
+.rv-tf button { flex: 1; font-weight: 700; padding: .6rem; }
+.rv-review { margin: .6rem 0 0; padding-left: 1.2rem; } .rv-review li { margin: .45rem 0; }
+.rv-review .ok { color: var(--rv-ok); font-weight: 700; } .rv-review .bad { color: var(--rv-bad); font-weight: 700; }
+.rv-review .why { display: block; font-size: .9rem; color: var(--rv-muted); }
+.rv-items .why { display: none; }
+/* tick table */
+.tg-scroll { overflow-x: auto; }
+.tg-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 0; }
+.tg-table th, .tg-table td { border-bottom: 1px solid var(--rv-border); padding: 0; vertical-align: middle; }
+.tg-table thead th { font-weight: 700; text-align: center; padding: .55rem .4rem; border-bottom: 2px solid #7c4dff; }
+.tg-table th.tg-prop { text-align: left; font-weight: 500; padding: .55rem .75rem .55rem .25rem; width: 38%; }
+.tg-table thead th.tg-prop { font-weight: 700; }
+.tg-table tbody tr:nth-child(odd) { background: var(--rv-soft); }
+.tg-cell { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 2.75rem; border: 0; background: transparent; cursor: pointer; font-size: 1.3rem; line-height: 1; color: inherit; }
+.tg-cell:hover { background: rgba(124,77,255,.08); }
+.tg-cell .tg-box { display: inline-flex; align-items: center; justify-content: center; width: 1.7rem; height: 1.7rem; border: 2px solid var(--rv-border); border-radius: 6px; background: var(--bs-body-bg, #fff); font-weight: 700; }
+.tg-cell[aria-pressed="true"] .tg-box { border-color: #7c4dff; color: #7c4dff; }
+.tg-cell.is-ok .tg-box { border-color: var(--rv-ok); background: var(--rv-ok-bg); color: var(--rv-ok); }
+.tg-cell.is-bad .tg-box { border-color: var(--rv-bad); background: var(--rv-bad-bg); color: var(--rv-bad); }
+.tg-cell.is-miss .tg-box { border: 2px dashed var(--rv-miss); background: var(--rv-miss-bg); color: var(--rv-miss); }
+.tg-cell.is-miss .tg-box::after { content: "✔"; opacity: .6; }
+.tg-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .7rem; font-size: .85rem; color: var(--rv-muted); }
+.tg-legend[hidden] { display: none; }
+.tg-key { display: inline-flex; align-items: center; justify-content: center; width: 1.2rem; height: 1.2rem; border-radius: 4px; font-style: normal; font-size: .75rem; font-weight: 700; margin-right: .3rem; }
+.tg-key-ok { border: 2px solid var(--rv-ok); background: var(--rv-ok-bg); color: var(--rv-ok); }
+.tg-key-bad { border: 2px solid var(--rv-bad); background: var(--rv-bad-bg); color: var(--rv-bad); }
+.tg-key-miss { border: 2px dashed var(--rv-miss); background: var(--rv-miss-bg); color: var(--rv-miss); }
+.tg-ladder { padding: .5rem .7rem; border-left: 3px solid #7c4dff; background: var(--bs-body-bg, #fff); border-radius: 4px; }
+/* steps */
+.rv-step { display: none; align-items: center; flex-wrap: wrap; gap: .4rem; padding: .55rem .6rem; border-radius: 8px; margin: .35rem 0; border: 1px solid var(--rv-border); }
+.rv-step.is-open, .rv-step.is-done { display: flex; }
+.rv-step.is-done { background: var(--rv-ok-bg); border-color: transparent; }
+.rv-step-n { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: #7c4dff; color: #fff; font-weight: 700; font-size: .85rem; }
+.rv-step.is-done .rv-step-n { background: var(--rv-ok); }
+.rv-step input { width: 7rem; padding: .25rem .5rem; border: 1px solid var(--rv-border); border-radius: 6px; font: inherit; background: var(--bs-body-bg, #fff); color: inherit; }
+.rv-step.is-bad input { border-color: var(--rv-bad); background: var(--rv-bad-bg); }
+.rv-note { display: none; flex-basis: 100%; font-size: .92rem; color: var(--rv-muted); padding-left: 2rem; }
+.rv-step.is-done .rv-note { display: block; }
+/* spot the mistake */
+.rv-lines { padding-left: 0; list-style: none; counter-reset: ln; margin: .4rem 0 0; }
+.rv-lines li { counter-increment: ln; position: relative; padding: .5rem .7rem .5rem 2.6rem; margin: .3rem 0; border: 1px solid var(--rv-border); border-radius: 8px; cursor: pointer; }
+.rv-lines li::before { content: counter(ln); position: absolute; left: .7rem; top: .5rem; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--rv-soft); display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+.rv-lines li:hover { border-color: #7c4dff; }
+.rv-lines li.is-ok { border-color: var(--rv-ok); background: var(--rv-ok-bg); }
+.rv-lines li.is-bad { border-color: var(--rv-bad); background: var(--rv-bad-bg); text-decoration: none; }
+.rv-lines.locked li { cursor: default; }
+/* hotspot + slider svg */
+.rv-svg svg { width: 100%; max-width: 560px; height: auto; display: block; margin: .3rem auto; }
+.rv-svg .hs { cursor: pointer; transition: opacity .15s; }
+.rv-svg .hs:hover { opacity: .75; }
+.rv-svg .hs.is-ok { fill: #1a7f37 !important; stroke: #1a7f37 !important; }
+.rv-svg .hs.is-bad { fill: #c0392b !important; stroke: #c0392b !important; }
+.rv-slide { display: flex; align-items: center; gap: .6rem; max-width: 560px; margin: .4rem auto 0; font-variant-numeric: tabular-nums; }
+.rv-slide input { flex: 1; accent-color: #7c4dff; }
+.rv-slide output { font-weight: 700; min-width: 3.2rem; text-align: right; font-size: 1.1rem; }
+/* draw-the-chart */
+.rv-sliders { display: grid; gap: .35rem .9rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); max-width: 560px; margin: .2rem auto 0; }
+.rv-sliders label { display: flex; flex-direction: column; font-size: .88rem; font-weight: 600; }
+.rv-sliders label span { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.rv-sliders input { accent-color: #2a78d6; width: 100%; }
+.rv-sliders label.is-bad { color: var(--rv-bad); } .rv-sliders label.is-ok { color: var(--rv-ok); }
+/* checklist */
+.rv-list { list-style: none; padding: 0; margin: 0; }
+.rv-list li { padding: .3rem 0; }
+.rv-list label { display: flex; gap: .6rem; align-items: flex-start; cursor: pointer; }
+.rv-list input { margin-top: .35rem; width: 1.05rem; height: 1.05rem; accent-color: #1a7f37; flex: none; }
+@media (max-width: 600px) {
+  .rv { padding: .85rem .8rem 1rem; }
+  .tg-table th.tg-prop { width: auto; font-size: .88rem; padding-right: .4rem; }
+  .tg-table thead th { font-size: .74rem; padding: .5rem .1rem; }
+  .tg-cell { min-height: 2.5rem; } .tg-cell .tg-box { width: 1.45rem; height: 1.45rem; }
+  .rv-note { padding-left: 0; }
+}
+@media print { .rv-controls { display: none; } }
+</style>
+
+<script>
+(function () {
+  "use strict";
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function num(s) { s = String(s || "").trim().replace(/\s/g, "").replace(/%$/, ""); if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", "."); return /^-?\d*\.?\d+$/.test(s) ? parseFloat(s) : null; }
+  function say(w, kind, msg) { var f = q(".rv-feedback", w); f.className = "rv-feedback " + (kind || ""); f.innerHTML = msg; }
+  function mark(w, ok) { w.classList.remove("rv-correct", "rv-wrong"); if (ok === true) w.classList.add("rv-correct"); if (ok === false) w.classList.add("rv-wrong"); }
+  function explain(w, on) { var e = q(".rv-explain", w); if (e) e.hidden = !on; }
+  function act(w, name, fn) { var b = q('[data-act="' + name + '"]', w); if (b) b.addEventListener("click", fn); }
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function randn() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  var NS = "http://www.w3.org/2000/svg";
+  function svgEl(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function txt(parent, x, y, t, anchor, size, weight) { var e = svgEl("text", { x: x, y: y, "text-anchor": anchor || "middle", "font-size": size || 13, fill: "currentColor", "font-weight": weight || "normal" }, parent); e.textContent = t; return e; }
+
+  function safe(name, fn) { try { fn(); } catch (err) { if (window.console) console.error("Review widget (" + name + ") failed:", err); } }
+  /* skip widgets that another copy of this code has already built (e.g. an old script left in the page) */
+  function fresh(w) {
+    if (w.getAttribute("data-rv-init")) return false;
+    if (w.querySelector(".rv-stage > *, .tg-cell, .rv-step.is-open, .rv-svg svg, .rv-list label, .rv-sliders label, .rv-lines li[tabindex]")) return false;
+    w.setAttribute("data-rv-init", "1"); return true;
+  }
+  /* numbering */
+  var n = 0;
+  qa(".rv").forEach(function (w) { if (w.classList.contains("rv-check")) return; n++; q(".rv-num", w).textContent = "Challenge " + n; });
+
+  /* ---------------- lightning round ---------------- */
+  safe("lightning round", function () {
+  qa(".rv-lightning").filter(fresh).forEach(function (w) {
+    var items = qa(".rv-items li", w).map(function (li) { var why = q(".why", li); return { t: li.childNodes[0].textContent.trim(), a: li.getAttribute("data-a"), why: why ? why.innerHTML : "" }; });
+    var T = +w.getAttribute("data-time") || 90, stage = q(".rv-stage", w), timer = null;
+    function start() {
+      var i = 0, left = T, ans = [];
+      stage.innerHTML = '<div class="rv-timer"><span></span></div><div class="rv-meta"><span class="rv-count"></span><span class="rv-left"></span></div><div class="rv-big"></div><div class="rv-tf"><button type="button" class="btn btn-outline-success" data-v="T">True</button><button type="button" class="btn btn-outline-danger" data-v="F">False</button></div>';
+      var bar = q(".rv-timer span", stage);
+      function show() { q(".rv-big", stage).textContent = items[i].t; q(".rv-count", stage).textContent = "Statement " + (i + 1) + " / " + items.length; }
+      function tick() { left--; q(".rv-left", stage).textContent = left + " s left"; bar.style.width = (100 * left / T) + "%"; if (left <= 0) finish(); }
+      function finish() {
+        clearInterval(timer); var right = 0;
+        var html = items.map(function (it, k) { var a = ans[k], ok = a === it.a; if (ok) right++;
+          return "<li><b>" + it.t + "</b><br>Answer: <b>" + (it.a === "T" ? "True" : "False") + "</b> · you: " + (a ? '<span class="' + (ok ? "ok" : "bad") + '">' + (a === "T" ? "True" : "False") + (ok ? " ✓" : " ✗") + "</span>" : '<span class="bad">no answer</span>') + '<span class="why">' + it.why + "</span></li>"; }).join("");
+        stage.innerHTML = '<p class="rv-big" style="min-height:0">' + right + " / " + items.length + " correct" + (left > 0 ? " in " + (T - left) + " seconds" : " (time is up)") + '</p><ol class="rv-review">' + html + '</ol><div class="rv-controls"><button type="button" class="btn btn-sm btn-primary" data-act="again">Try again</button></div>';
+        mark(w, right >= 10 ? true : right < 7 ? false : null);
+        q('[data-act="again"]', stage).addEventListener("click", start);
+      }
+      qa(".rv-tf button", stage).forEach(function (b) { b.addEventListener("click", function () { ans[i] = b.getAttribute("data-v"); i++; if (i >= items.length) finish(); else show(); }); });
+      q(".rv-left", stage).textContent = T + " s left"; show(); mark(w, null);
+      clearInterval(timer); timer = setInterval(tick, 1000);
+    }
+    stage.innerHTML = '<div class="rv-controls" style="margin-top:.2rem"><button type="button" class="btn btn-primary" data-act="start">⚡ Start (' + T + ' s)</button></div>';
+    q('[data-act="start"]', stage).addEventListener("click", start);
+  });
+  });
+
+  /* ---------------- tick table ---------------- */
+  safe("tick table", function () {
+  qa(".rv.tg").filter(fresh).forEach(function (w) {
+    var SC = ["Nominal", "Ordinal", "Interval", "Ratio"], cells = [], legend = q(".tg-legend", w);
+    var tbl = document.createElement("table"); tbl.className = "tg-table";
+    tbl.innerHTML = '<thead><tr><th scope="col" class="tg-prop">Provides:</th>' + SC.map(function (s) { return '<th scope="col">' + s + "</th>"; }).join("") + "</tr></thead><tbody></tbody>";
+    qa(".tg-data li", w).forEach(function (li) { var tr = document.createElement("tr"); tr.setAttribute("data-answer", li.getAttribute("data-answer")); tr.innerHTML = '<th scope="row" class="tg-prop">' + li.innerHTML + "</th>"; q("tbody", tbl).appendChild(tr); });
+    q(".tg-scroll", w).appendChild(tbl);
+    qa("tbody tr", tbl).forEach(function (tr) {
+      var ansr = tr.getAttribute("data-answer"), prop = q("th", tr).textContent.trim();
+      SC.forEach(function (s, j) { var td = document.createElement("td"), b = document.createElement("button"); b.type = "button"; b.className = "tg-cell"; b.setAttribute("aria-pressed", "false"); b.setAttribute("aria-label", s + ": " + prop); b.innerHTML = '<span class="tg-box"></span>';
+        b.addEventListener("click", function () { set(b, b.getAttribute("aria-pressed") !== "true"); clear(); }); td.appendChild(b); tr.appendChild(td); cells.push({ el: b, want: ansr.charAt(j) === "1" }); });
+    });
+    function set(b, on) { b.setAttribute("aria-pressed", on ? "true" : "false"); q(".tg-box", b).textContent = on ? "✔" : ""; }
+    function on(c) { return c.el.getAttribute("aria-pressed") === "true"; }
+    function clear() { cells.forEach(function (c) { c.el.classList.remove("is-ok", "is-bad", "is-miss"); }); mark(w, null); legend.hidden = true; say(w, "", ""); }
+    act(w, "check", function () {
+      clear(); var r = 0, wr = 0, mi = 0;
+      cells.forEach(function (c) { var o = on(c); if (o && c.want) { c.el.classList.add("is-ok"); r++; } else if (o) { c.el.classList.add("is-bad"); wr++; } else if (c.want) { c.el.classList.add("is-miss"); mi++; } });
+      var tot = cells.filter(function (c) { return c.want; }).length;
+      if (!r && !wr) { say(w, "", "Tick at least one cell first."); return; }
+      legend.hidden = false;
+      if (!wr && !mi) { say(w, "ok", "✓ Perfect! All " + tot + " ticks are correct."); mark(w, true); explain(w, true); }
+      else { say(w, "bad", r + " / " + tot + " correct ticks" + (wr ? " · " + wr + " wrong (red)" : "") + (mi ? " · " + mi + " missing (dashed)" : "") + ". Fix them and check again."); mark(w, false); }
+    });
+    act(w, "show", function () { cells.forEach(function (c) { set(c.el, c.want); }); clear(); cells.forEach(function (c) { if (c.want) c.el.classList.add("is-ok"); }); say(w, "", "Correct answer shown."); explain(w, true); });
+    act(w, "reset", function () { cells.forEach(function (c) { set(c.el, false); }); clear(); explain(w, false); });
+  });
+  });
+
+  /* ---------------- step by step ---------------- */
+  safe("step by step", function () {
+  qa(".rv-steps").filter(fresh).forEach(function (w) {
+    var steps = qa(".rv-step", w);
+    function open(k) { steps.forEach(function (s, j) { s.classList.toggle("is-open", j === k); }); if (steps[k]) q("input", steps[k]).focus({ preventScroll: true }); }
+    function done(s) { s.classList.remove("is-open", "is-bad"); s.classList.add("is-done"); q("input", s).disabled = true; var k = steps.indexOf(s) + 1;
+      if (k < steps.length) open(k); else { say(w, "ok", "✓ All " + steps.length + " steps done. This is exactly the order to use on the exam."); mark(w, true); } }
+    steps.forEach(function (s) {
+      var inp = q("input", s);
+      inp.addEventListener("keydown", function (e) { if (e.key !== "Enter") return; e.preventDefault();
+        var v = num(inp.value), a = parseFloat(s.getAttribute("data-answer")), tol = parseFloat(s.getAttribute("data-tol") || "0");
+        if (v === null) { say(w, "", "Type a number first."); return; }
+        if (Math.abs(v - a) <= tol + 1e-9) { say(w, "", ""); done(s); } else { s.classList.add("is-bad"); say(w, "bad", "Not quite. Check this step, or press <b>Show this step</b>."); } });
+    });
+    act(w, "hint", function () { var s = steps.filter(function (x) { return x.classList.contains("is-open"); })[0]; if (!s) return; q("input", s).value = s.getAttribute("data-answer"); done(s); });
+    act(w, "reset", function () { steps.forEach(function (s) { s.classList.remove("is-done", "is-bad", "is-open"); var i = q("input", s); i.disabled = false; i.value = ""; }); say(w, "", ""); mark(w, null); open(0); });
+    steps[0].classList.add("is-open");
+  });
+  });
+
+  /* ---------------- spot the mistake ---------------- */
+  safe("spot the mistake", function () {
+  qa(".rv-spot").filter(fresh).forEach(function (w) {
+    var list = q(".rv-lines", w), lines = qa("li", list), tries = 0;
+    lines.forEach(function (li, k) { li.tabIndex = 0; li.setAttribute("role", "button");
+      function pickIt() { if (list.classList.contains("locked")) return; tries++;
+        if (li.getAttribute("data-wrong")) { li.classList.add("is-ok"); list.classList.add("locked"); say(w, "ok", "✓ Found it" + (tries === 1 ? " on the first try!" : " (attempt " + tries + ").")); mark(w, tries === 1); explain(w, true); }
+        else { li.classList.add("is-bad"); say(w, "bad", "Line " + (k + 1) + " is correct. Keep looking."); } }
+      li.addEventListener("click", pickIt); li.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickIt(); } }); });
+    act(w, "show", function () { lines.forEach(function (li) { li.classList.remove("is-bad"); if (li.getAttribute("data-wrong")) li.classList.add("is-ok"); }); list.classList.add("locked"); say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { lines.forEach(function (li) { li.classList.remove("is-ok", "is-bad"); }); list.classList.remove("locked"); tries = 0; say(w, "", ""); mark(w, null); explain(w, false); });
+  });
+  });
+
+  /* ---------------- hotspots ---------------- */
+  safe("hotspots", function () {
+  function drawHist(box, w) {
+    var f = w.getAttribute("data-freq").split(",").map(Number), e = w.getAttribute("data-edges").split(",").map(Number);
+    var W = 520, H = 300, L = 50, R = 15, T = 15, B = 50, mx = Math.max.apply(null, f) * 1.12;
+    var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "histogram" }, box);
+    var X = function (v) { return L + (v - e[0]) / (e[e.length - 1] - e[0]) * (W - L - R); }, Y = function (v) { return H - B - v / mx * (H - T - B); };
+    for (var g = 0; g <= mx; g += 2) { svgEl("line", { x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: "rgba(127,127,127,.25)" }, s); txt(s, L - 7, Y(g) + 4, g, "end", 11); }
+    f.forEach(function (v, i) { var r = svgEl("rect", { x: X(e[i]) + 1, y: Y(v), width: X(e[i + 1]) - X(e[i]) - 2, height: Y(0) - Y(v), fill: "#5b8def", class: "hs", "data-id": String(i), tabindex: "0" }, s);
+      var lab = svgEl("title", {}, r); lab.textContent = e[i] + "–" + e[i + 1] + ": " + v; txt(s, (X(e[i]) + X(e[i + 1])) / 2, Y(v) - 5, v, "middle", 11, "bold"); });
+    e.forEach(function (v) { txt(s, X(v), H - B + 16, v, "middle", 11); });
+    svgEl("line", { x1: L, x2: W - R, y1: Y(0), y2: Y(0), stroke: "currentColor" }, s);
+    txt(s, (L + W - R) / 2, H - 10, w.getAttribute("data-x") || "", "middle", 12.5);
+    var yl = txt(s, 14, (T + H - B) / 2, "frequency", "middle", 12.5); yl.setAttribute("transform", "rotate(-90 14 " + ((T + H - B) / 2) + ")");
+  }
+  function drawViolin(box) {
+    var W = 420, H = 320, cx = 150, s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "violin plot" }, box);
+    var pts = [], L = [], Rr = [];
+    for (var i = 0; i <= 60; i++) { var t = i / 60, y = 290 - t * 260, d = Math.exp(-.5 * Math.pow((t - .3) / .09, 2)) + .85 * Math.exp(-.5 * Math.pow((t - .72) / .09, 2)); L.push((cx - d * 95) + "," + y); Rr.push((cx + d * 95) + "," + y); }
+    svgEl("polygon", { points: L.concat(Rr.reverse()).join(" "), fill: "#8fd3b6", stroke: "#2b6b52", "stroke-width": 2, class: "hs", "data-id": "outline", tabindex: "0" }, s);
+    svgEl("rect", { x: cx - 4, y: 62, width: 8, height: 280 - 62, fill: "#1d2733", class: "hs", "data-id": "ci", tabindex: "0" }, s);
+    svgEl("rect", { x: cx - 10, y: 115, width: 20, height: 245 - 115, fill: "#1d2733", class: "hs", "data-id": "iqr", tabindex: "0" }, s);
+    svgEl("circle", { cx: cx, cy: 185, r: 8, fill: "#ffffff", stroke: "#1d2733", "stroke-width": 2, class: "hs", "data-id": "median", tabindex: "0" }, s);
+    txt(s, 300, 60, "Which part is the IQR?", "middle", 14, "bold");
+    txt(s, 300, 84, "(click directly on it)", "middle", 12);
+  }
+  qa(".rv-hot").filter(fresh).forEach(function (w) {
+    var box = q(".rv-svg", w), ans = w.getAttribute("data-answer"), done = false;
+    if (w.getAttribute("data-draw") === "hist") drawHist(box, w); else drawViolin(box);
+    var parts = qa(".hs", box);
+    function pick(p) { if (done) return; parts.forEach(function (x) { x.classList.remove("is-bad"); });
+      if (p.getAttribute("data-id") === ans) { p.classList.add("is-ok"); done = true; say(w, "ok", "✓ Correct!"); mark(w, true); explain(w, true); }
+      else { p.classList.add("is-bad"); say(w, "bad", w.getAttribute("data-msg") || "Not this one. Try again."); mark(w, false); } }
+    parts.forEach(function (p) { p.addEventListener("click", function () { pick(p); }); p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(p); } }); });
+    act(w, "show", function () { parts.forEach(function (x) { x.classList.remove("is-bad"); if (x.getAttribute("data-id") === ans) x.classList.add("is-ok"); }); done = true; say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { parts.forEach(function (x) { x.classList.remove("is-ok", "is-bad"); }); done = false; say(w, "", ""); mark(w, null); explain(w, false); });
+  });
+  });
+
+  /* ---------------- slider estimate ---------------- */
+  safe("slider estimate", function () {
+  qa(".rv-slider").filter(fresh).forEach(function (w) {
+    var box = q(".rv-svg", w), inp = q("input", w), out = q("output", w), r = 0, first = true;
+    var targets = [-0.85, -0.5, -0.2, 0, 0.3, 0.6, 0.9];
+    function plot(target) {
+      box.innerHTML = ""; var n = 45, x = [], y = [], i;
+      for (i = 0; i < n; i++) { var a = randn(), b = randn(); x.push(a); y.push(target * a + Math.sqrt(1 - target * target) * b); }
+      var mx = x.reduce(function (p, c) { return p + c; }, 0) / n, my = y.reduce(function (p, c) { return p + c; }, 0) / n, sxy = 0, sxx = 0, syy = 0;
+      for (i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += Math.pow(x[i] - mx, 2); syy += Math.pow(y[i] - my, 2); }
+      r = sxy / Math.sqrt(sxx * syy);
+      var W = 420, H = 300, P = 30, xs = Math.min.apply(null, x), xe = Math.max.apply(null, x), ys = Math.min.apply(null, y), ye = Math.max.apply(null, y);
+      var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "scatter plot" }, box);
+      svgEl("rect", { x: P, y: 10, width: W - P - 10, height: H - P - 10, fill: "none", stroke: "rgba(127,127,127,.5)" }, s);
+      for (i = 0; i < n; i++) svgEl("circle", { cx: P + 8 + (x[i] - xs) / (xe - xs) * (W - P - 26), cy: H - P - 8 - (y[i] - ys) / (ye - ys) * (H - P - 26), r: 5, fill: "#5b8def", "fill-opacity": .8 }, s);
+      txt(s, (W + P) / 2, H - 8, "x", "middle", 13); txt(s, 14, H / 2, "y", "middle", 13);
+      inp.value = 0; out.textContent = "0.00"; say(w, "", ""); mark(w, null);
+    }
+    inp.addEventListener("input", function () { out.textContent = (+inp.value).toFixed(2); });
+    act(w, "check", function () { var g = +inp.value, d = Math.abs(g - r);
+      if (d <= 0.15) { say(w, "ok", "✓ Great estimate! Your guess " + g.toFixed(2) + ", actual r = " + r.toFixed(2) + "."); mark(w, true); }
+      else say(w, "bad", "Actual r = " + r.toFixed(2) + " (your guess " + g.toFixed(2) + "). " + (Math.sign(g) !== Math.sign(r) && Math.abs(r) > .15 ? "Check the <b>direction</b>: does y go up or down as x increases? " : "Check the <b>strength</b>: how tightly do the points follow a straight line? ") + "Press <b>New plot</b> to try another.");
+      w.setAttribute("data-r", r.toFixed(3)); });
+    act(w, "new", function () { plot(targets[Math.floor(Math.random() * targets.length)]); });
+    plot(parseFloat(w.getAttribute("data-target")) || 0.6);
+  });
+  });
+
+  /* ---------------- draw the chart ---------------- */
+  safe("draw the chart", function () {
+  qa(".rv-draw").filter(fresh).forEach(function (w) {
+    var cats = w.getAttribute("data-cats").split("|"), tgt = w.getAttribute("data-target").split(",").map(Number), tol = +w.getAttribute("data-tol") || 0.02;
+    var stack = w.getAttribute("data-mode") === "stack", box = q(".rv-svg", w), sl = q(".rv-sliders", w), vals = cats.map(function () { return stack ? 0.5 : 0.1; });
+    var W = 520, H = 300, L = 56, R = 15, T = 15, B = 40, n = cats.length;
+    sl.innerHTML = cats.map(function (c, i) { return '<label><span>' + c + '<output>0%</output></span><input type="range" min="0" max="1" step="0.01" value="' + vals[i] + '" aria-label="' + c + '"></label>'; }).join("");
+    var inputs = qa("input", sl), labels = qa("label", sl);
+    function draw() {
+      box.innerHTML = ""; var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "your bar chart" }, box);
+      var Y = function (v) { return H - B - v * (H - T - B); }, bw = (W - L - R) / n;
+      [0, .25, .5, .75, 1].forEach(function (g) { svgEl("line", { x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: "rgba(127,127,127,.25)" }, s); txt(s, L - 7, Y(g) + 4, Math.round(g * 100) + "%", "end", 11); });
+      cats.forEach(function (c, i) { var x = L + i * bw + bw * .18, ww = bw * .64, v = vals[i];
+        svgEl("rect", { x: x, y: Y(v), width: ww, height: Y(0) - Y(v), fill: "#2a78d6" }, s);
+        if (stack) svgEl("rect", { x: x, y: Y(1), width: ww, height: Y(v) - Y(1), fill: "#eb6834" }, s);
+        txt(s, x + ww / 2, stack ? Y(v / 2) + 5 : Y(v) - 6, Math.round(v * 100) + "%", "middle", 12, "bold").setAttribute("fill", stack ? "#fff" : "currentColor");
+        if (stack) { var t2 = txt(s, x + ww / 2, Y((1 + v) / 2) + 5, Math.round((1 - v) * 100) + "%", "middle", 12, "bold"); t2.setAttribute("fill", "#fff"); }
+        txt(s, x + ww / 2, H - B + 17, c, "middle", 12); });
+      svgEl("line", { x1: L, x2: W - R, y1: Y(0), y2: Y(0), stroke: "currentColor" }, s);
+      var yl = txt(s, 13, (T + H - B) / 2, w.getAttribute("data-ylabel") || "", "middle", 11.5); yl.setAttribute("transform", "rotate(-90 13 " + ((T + H - B) / 2) + ")");
+      inputs.forEach(function (inp, i) { q("output", labels[i]).textContent = Math.round(vals[i] * 100) + "%"; });
+    }
+    inputs.forEach(function (inp, i) { inp.addEventListener("input", function () { vals[i] = +inp.value; labels.forEach(function (l) { l.classList.remove("is-ok", "is-bad"); }); say(w, "", ""); mark(w, null); draw(); }); });
+    act(w, "check", function () { var bad = 0;
+      vals.forEach(function (v, i) { var ok = Math.abs(v - tgt[i]) <= tol + 1e-9; labels[i].classList.toggle("is-ok", ok); labels[i].classList.toggle("is-bad", !ok); if (!ok) bad++; });
+      if (!bad) { say(w, "ok", "✓ Correct chart!"); mark(w, true); explain(w, true); }
+      else { say(w, "bad", bad + " bar" + (bad > 1 ? "s are" : " is") + " not right yet (red). " + (stack ? "Divide each faculty's dorm count by that faculty's total." : "Divide each count by the total number of students, n = 300.")); mark(w, false); } });
+    act(w, "show", function () { tgt.forEach(function (t, i) { vals[i] = t; inputs[i].value = t; }); draw(); labels.forEach(function (l) { l.classList.add("is-ok"); }); say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { vals = cats.map(function () { return stack ? 0.5 : 0.1; }); inputs.forEach(function (inp, i) { inp.value = vals[i]; }); labels.forEach(function (l) { l.classList.remove("is-ok", "is-bad"); }); say(w, "", ""); mark(w, null); explain(w, false); draw(); });
+    draw();
+  });
+  });
+
+  /* ---------------- readiness checklist ---------------- */
+  safe("readiness checklist", function () {
+  qa(".rv-check").filter(fresh).forEach(function (w) {
+    var KEY = "stat112-r5-ready", saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { saved = {}; }
+    var items = qa(".rv-list li", w);
+    items.forEach(function (li, k) { var t = li.innerHTML; li.innerHTML = '<label><input type="checkbox"' + (saved[k] ? " checked" : "") + "><span>" + t + "</span></label>"; q("input", li).addEventListener("change", update); });
+    function update() {
+      var st = {}, miss = [];
+      items.forEach(function (li, k) { var c = q("input", li).checked; st[k] = c; if (!c) miss.push(li); });
+      try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+      var done = items.length - miss.length;
+      if (!miss.length) say(w, "ok", "🎉 " + done + " / " + items.length + ": you are ready. Sleep well and good luck!");
+      else { var pages = {}; miss.forEach(function (li) { pages[li.getAttribute("data-href")] = 1; });
+        say(w, "", done + " / " + items.length + " ticked. Revise: " + Object.keys(pages).map(function (p) { return '<a href="' + p + '">' + p.replace("recitation-week", "Recitation ").replace(".html", "") + "</a>"; }).join(", ") + "."); }
+    }
+    update();
+  });
+  });
+
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/statserenay\.github\.io\/stat112-site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Made with ❤️ and Quarto · Emoji graphics: Twemoji (CC-BY 4.0)</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
