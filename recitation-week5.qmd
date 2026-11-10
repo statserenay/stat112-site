@@ -407,7 +407,7 @@ Overall, []{.blank answer="43.3|43.33|43" tol="0.4"} % of the 300 students live 
 <!-- ===================================================================== -->
 
 
-:::: {.quiz type="classify" options="Proximity|Similarity|Common region|Closure|Continuity|Figure-ground|Prägnanz|Focal point"}
+:::: {.quiz type="classify" options="Similarity|Common region|Prägnanz|Closure|Continuity|Figure-ground|Proximity|Focal point"}
 Which Gestalt principle is at work?
 
 - In a dashboard, three charts inside one light-grey container are read as one topic :: Common region
