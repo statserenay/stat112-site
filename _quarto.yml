@@ -24,6 +24,8 @@ website:
             href: recitation-week3.qmd
           - text: "Recitation 4"
             href: recitation-week4.qmd 
+          - text: "Recitation 5"
+            href: recitation-week5.qmd
       - text: "Homeworks"
         menu:
            - text: "Homework 1"
@@ -50,6 +52,7 @@ format:
   html:
     theme: [cosmo, styles.scss]
     toc: false
+    html-table-processing: none
     grid:
       sidebar-width: 0px
       body-width: 1000px

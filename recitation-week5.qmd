@@ -230,7 +230,8 @@ About []{.blank answer="2.5" tol="0.01"} % scored below 48.
 - 48 and 80 are $64 \pm 2(8)$: about **95%**.
 - 72 is $64 + 8$: 68% lie within $\pm 1s$, so $32\%$ are outside, half of them above: **16%**.
 - Below $64 - 2(8) = 48$: half of the 5% outside $\pm 2s$: **2.5%**.
-![](recitation5/images/r5-empirical.png){fig-alt="Top: a bell curve with mean 64 and standard deviation 8, with brackets showing about 68% between 56 and 72, about 95% between 48 and 80, and about 99.7% between 40 and 88. Bottom: three bell curves with shaded regions: between 48 and 80 is about 95%, above 72 is about 16%, below 48 is about 2.5%."}
+![](recitation5/images/r5-empirical.png){fig-alt="Top: a bell curve with mean 64 and standard deviation 8, with brackets showing about 68 percent between 56 and 72, about 95 percent between 48 and 80, and about 99.7 percent between 40 and 88. Bottom: three bell curves with shaded regions: between 48 and 80 is about 95 percent, above 72 is about 16 percent, below 48 is about 2.5 percent."}
+
 :::
 ::::
 
@@ -373,7 +374,8 @@ Overall, []{.blank answer="43.3|43.33|43" tol="0.4"} % of the 300 students live 
 </div>
 ```
 
-![](recitation5/images/r5-bars.png){fig-alt="The faculty by dormitory table drawn four ways. Chart 1: clustered bars of counts, with dorm and not-in-dorm side by side (60 and 90, 30 and 20, 40 and 60). Chart 2: stacked bars of counts with totals 150, 50 and 100. Chart 3: 100% stacked bars with dorm shares of 40%, 60% and 40%. Chart 4: clustered bars of the within-faculty percentages."}
+![](recitation5/images/r5-bars.png){fig-alt="The faculty by dormitory table drawn four ways. Chart 1: clustered bars of counts, with dorm and not-in-dorm side by side (60 and 90, 30 and 20, 40 and 60). Chart 2: stacked bars of counts with totals 150, 50 and 100. Chart 3: 100 percent stacked bars with dorm shares of 40, 60 and 40 percent. Chart 4: clustered bars of the within-faculty percentages."}
+
 
 ```{=html}
 <div class="rv rv-hot" data-draw="violin" data-answer="iqr" data-msg="Not this part. Look for the part that spans from Q1 to Q3.">
