@@ -1,5 +1,61 @@
 [
   {
+    "objectID": "ask.html",
+    "href": "ask.html",
+    "title": "Ask a Question",
+    "section": "",
+    "text": "TipHow it works\n\n\n\n\nPost your question with the + button. You can post anonymously, and no account is needed.\nSay where it comes from, e.g. “Recitation 2, Q20: how do I find Q1?”. Questions with a clear reference get faster answers.\nYou can attach one clear photo of your working (no PDFs or long files).\nCheck first whether someone has already asked the same thing. If so, add a ❤️ instead of posting again.\nAnswers appear as comments under each question, usually within a day or two.\nEverything here is public to everyone with the site link. Don’t write your name, student number or any personal information.\n\n\n\n\n\n\n\nThe wall doesn’t load? Open it in a new tab, or send your question by e-mail to serenay@metu.edu.tr."
+  },
+  {
+    "objectID": "recitation-week4.html",
+    "href": "recitation-week4.html",
+    "title": "Recitation 4",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\n\nProgress"
+  },
+  {
+    "objectID": "recitation-week4.html#how-to-use-this-page",
+    "href": "recitation-week4.html#how-to-use-this-page",
+    "title": "Recitation 4",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\n\nProgress"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "STAT 112",
+    "section": "",
+    "text": "Welcome! This site is the resource hub for STAT 112 — Introduction to Data Processing and Visualization at METU."
+  },
+  {
+    "objectID": "index.html#about-this-course",
+    "href": "index.html#about-this-course",
+    "title": "STAT 112",
+    "section": "About This Course",
+    "text": "About This Course\nSTAT 112 introduces the practical side of working with data: how to get it into shape, explore it, and communicate what it shows. The course covers the basic definitions and handling of different data types, and builds hands-on skills in:\n\nData manipulation: indexing, subsetting, reshaping, and transforming datasets\nData cleaning: dealing with common problems such as missing or inconsistent values\nVisualization: choosing and building effective graphs for different kinds of data\nMapping: displaying spatial data on maps\nAnalysis: summarizing and exploring data to answer questions"
+  },
+  {
+    "objectID": "index.html#some-useful-links-for-data-visualization",
+    "href": "index.html#some-useful-links-for-data-visualization",
+    "title": "STAT 112",
+    "section": "Some Useful Links for Data Visualization",
+    "text": "Some Useful Links for Data Visualization\nI will update this list as I discover new resources. Stay tuned!\n\n\n\n\n\n\nNote\n\n\n\nThese resources are curated to supplement the STAT 112: Introduction to Data Processing and Visualization syllabus. They span foundational design theory, color accessibility, Python plotting tools, and interactive dashboards.\n\n\n\nCore Theory & Chart Selection Guides\n\nFundamentals of Data Visualization — Claus O. Wilke’s open-access text on figure design, color selection, and effective visual layout.\nFrom Data to Viz — Interactive decision tree matching chart formats directly to specific variable and data structures.\nThe Data Visualisation Catalogue — A reference guide explaining chart functions, visual caveats, and alternative plot designs.\nData Visualization: A Practical Introduction — Kieran Healy’s online book detailing visual perception, chart rhetoric, and narrative design.\nStorytelling with Data Resources — Practical articles and exercises highlighting cognitive load, focal points, and decluttering.\n\n\n\nColor Systems & Accessibility\n\nColorBrewer 2.0 — Proven qualitative, sequential, and diverging palettes with colorblind-safe filters.\nCoblis (Color Blindness Simulator) — Online image checker to test how figures appear under various color deficiencies (deuteranopia, protanopia, tritanopia).\nAdobe Color Contrast Checker — Tool to evaluate background-to-text and shape contrast ratios against WCAG standards.\n\n\n\nPython Libraries (STAT 112 Curriculum)\n\nPython Graph Gallery — Reproducible examples categorized by plot type, built with Matplotlib and Seaborn.\nSeaborn Documentation & Tutorials — Statistical data visualization API focused on distribution and categorical relationships.\nMatplotlib User Guide — Foundational plotting interface in Python, essential for figure anatomy and custom formatting.\nPandas Visualization Guide — Quick built-in DataFrame plotting methods for exploratory data analysis.\n\n\n\nBI Tools & Interactive Dashboards\n\nTableau Public Resources & Learning — Sample datasets, tutorials, and community dashboards covering sheet design and dashboard actions.\nFlourish Studio Guides — Quick-start walkthroughs for animated charts, hierarchies, and scrollytelling presentations."
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "STAT 112",
+    "section": "Contact",
+    "text": "Contact\n Email: serenay@metu.edu.tr\n Office: Department of Statistics Room No: 234.\n Phone: +90 (312) 210-2979\n GitHub: github.com/statserenay\n LinkedIn: serenay-çakar"
+  },
+  {
+    "objectID": "flashcards.html",
+    "href": "flashcards.html",
+    "title": "Flashcards",
+    "section": "",
+    "text": "Choose a deck at the top of the box (Recitation 1, 2, 3 or all cards). Click a card (or press Space) to flip it, then mark Got it or Missed it. Your missed pile is saved in this browser. You can also open the flashcards in a full window."
+  },
+  {
     "objectID": "chats-tab/chats.html",
     "href": "chats-tab/chats.html",
     "title": "Student Chats",
@@ -19,6 +75,783 @@
     "title": "Student Chats",
     "section": "Recitation 2: numerical descriptive measures",
     "text": "Recitation 2: numerical descriptive measures\n\n\n\n\n\n\nMean or median salary? Right skew in real life\n\n\n\n\n\n\n\nThe Eskişehir trip and the harmonic mean\n\n\n\n\n\n\n\n\n\n\n\nWhy n − 1, squared units, and a potential outlier from Gölbaşı\n\n\n\n\n\n\nThe names and chats are made up. Emoji graphics: Twemoji, CC-BY 4.0."
+  },
+  {
+    "objectID": "homeworks.html",
+    "href": "homeworks.html",
+    "title": "Homeworks",
+    "section": "",
+    "text": "Homework assignments will be posted here as the semester progresses, and also on ODTUClass. Late homeworks are not accepted — see the Syllabus page for the full policy.\n\n\n\n#\nTopic\nAssigned\nDue\n\n\n\n\n1\nTBD\nTBD\nTBD\n\n\n2\nTBD\nTBD\nTBD"
+  },
+  {
+    "objectID": "recitation-week6.html",
+    "href": "recitation-week6.html",
+    "title": "Recitation 6",
+    "section": "",
+    "text": "Open slides in full screen ↗"
+  },
+  {
+    "objectID": "recitation-week6.html#datasets",
+    "href": "recitation-week6.html#datasets",
+    "title": "Recitation 6",
+    "section": "Datasets",
+    "text": "Datasets\n\n  \n    📊\n    Sample - Superstore.xlsxPart 1 · Orders sheet: 21 fields, 10,194 rows\n    ⬇\n  \n  \n    👥\n    customer_data.csvPart 2 · 1,000 customers, 8 variables\n    ⬇\n  \n  \n    🗺️\n    femicide.csvPart 3 · Dashboard: 3,096 records, 2008–2020\n    ⬇"
+  },
+  {
+    "objectID": "games-tab/games.html",
+    "href": "games-tab/games.html",
+    "title": "Games",
+    "section": "",
+    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n\n  \n  \n    Recitation 2\n    Dr. Outlier's Vault\n    Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.\n    Play now →\n  \n\n\n\n\n  \n  \n    Recitation 3\n    Dr. Plot's Graph Hospital\n    Sick graphs in the ER! Diagnose what's wrong (too many classes, gaps between boxes, overplotting, stretched scales…), prescribe the treatment and watch the graph get cured.\n    Play now →\n  \n\n\n\n  \n  \n    Recitation 4\n    Trick or Treat Street 🎃\n    A Halloween walk: name the chart hiding under a black costume, find the Gestalt principle behind each haunted window, and decide whether a chart is an honest treat or a misleading trick.\n    Play now →\n  \n\n\n\n  ?\n  \n    Recitation 5\n    Coming soon\n    A new game will appear here after the next recitation."
+  },
+  {
+    "objectID": "recitation-week3.html",
+    "href": "recitation-week3.html",
+    "title": "Recitation 3",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nNumbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
+  },
+  {
+    "objectID": "recitation-week3.html#how-to-use-this-page",
+    "href": "recitation-week3.html#how-to-use-this-page",
+    "title": "Recitation 3",
+    "section": "",
+    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nNumbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
+  },
+  {
+    "objectID": "computing-setup.html",
+    "href": "computing-setup.html",
+    "title": "Setup",
+    "section": "",
+    "text": "We will install the following tools later. If you will run into trouble, you can bring your laptop to office hours or a recitation."
+  },
+  {
+    "objectID": "computing-setup.html#tableau-public",
+    "href": "computing-setup.html#tableau-public",
+    "title": "Setup",
+    "section": "Tableau Public",
+    "text": "Tableau Public\n\nGo to public.tableau.com and create a free account.\nDownload and install Tableau Public Desktop for your OS.\nSign in and try opening a sample dataset to confirm it works."
+  },
+  {
+    "objectID": "computing-setup.html#flourish",
+    "href": "computing-setup.html#flourish",
+    "title": "Setup",
+    "section": "Flourish",
+    "text": "Flourish\n\nGo to flourish.studio and create a free account.\nNo local installation is needed — Flourish runs in the browser."
+  },
+  {
+    "objectID": "computing-setup.html#python",
+    "href": "computing-setup.html#python",
+    "title": "Setup",
+    "section": "Python",
+    "text": "Python\nWe won’t be using Anaconda in this course. You have two good options — Google Colab (nothing to install, runs in your browser) or Positron (a local IDE, if you’d rather work offline). Pick whichever suits you.\n\nOption A: Google Colab (no installation needed)\nGoogle Colab runs Python notebooks entirely in the browser, with NumPy, Pandas, Matplotlib, and Seaborn already installed — nothing to set up locally.\n\nGo to colab.research.google.com and sign in with a Google account.\nClick New notebook.\nIn the first cell, run the check below to confirm the packages are available.\nNotebooks save automatically to your Google Drive; use File → Download to save a .ipynb copy for submission if required.\n\n\n\nOption B: Positron (local install)\nPositron is a free IDE built specifically for data science in Python and R (from the makers of RStudio). It’s currently in public preview and runs fully offline once set up.\n1. Install Python\n\nDownload the latest Python 3.x installer from python.org/downloads.\nWindows: during setup, check “Add python.exe to PATH” before clicking Install.\nMac: run the downloaded .pkg installer and follow the prompts.\nVerify the install by opening a terminal (macOS: Terminal; Windows: Command Prompt or PowerShell) and running:\n\npython3 --version\n2. Install the required packages\nFrom the same terminal:\npip install numpy pandas matplotlib seaborn jupyter\n(On Windows, use pip instead of pip3 if pip3 isn’t recognized.)\n3. Install Positron\n\nMac: go to positron.posit.co/download.html, download the .dmg for your chip (Apple Silicon or Intel), open it, and drag Positron into your Applications folder.\nWindows: from the same download page, get the .exe installer and run it, following the setup wizard.\nOpen Positron, then in the bottom-right interpreter picker, select the Python 3.x you just installed.\nOpen or create a .py or .ipynb file and run a cell to confirm it works.\n\n\n\nConfirm the core packages are available\nRun this in a new Colab cell or Positron notebook/file:\nimport numpy, pandas, matplotlib, seaborn\nprint(\"All set!\")"
+  },
+  {
+    "objectID": "calculator.html",
+    "href": "calculator.html",
+    "title": "Calculator",
+    "section": "",
+    "text": "Every step stays hidden until you open it. Type your own answer first and press Check; open Show steps only when you are stuck. Quartiles use the percentile rule from the lecture notes. You can also open the calculator in a full window."
+  },
+  {
+    "objectID": "recitation6-slides.html#section",
+    "href": "recitation6-slides.html#section",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Tableau for Data Analysis\nA hands-on recitation with the Superstore dataset"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-1",
+    "href": "recitation6-slides.html#section-1",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "PART I: Getting Started with Tableau\nIn this recitation, the Superstore.xlsx dataset will be used. The Global Superstore dataset is a rich source of information about sales, shipping, and customer behavior across various markets and regions.\nSales\nShipping\nCustomer behavior\nMarkets & regions"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-2",
+    "href": "recitation6-slides.html#section-2",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Loading the data: Superstore goes from Excel into Tableau in three steps\nBefore building any chart, load the Orders data from Sample - Superstore.xlsx into Tableau Public.\n\nChoose a source: To a File or To a Server\nOpen the file: Sample - Superstore.xlsx\nPrepare the Orders sheet: add it, then check its fields\n\nResult: Orders holds 21 fields and 10,194 rows."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-3",
+    "href": "recitation6-slides.html#section-3",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 1: Tableau Public opens on the Connect screen\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nAfter you open Tableau Public, you will see a screen similar to this one. This is where you can import your data.\nWhere: the Connect panel on the left lists every source Tableau can read."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-4",
+    "href": "recitation6-slides.html#section-4",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 1: flat files such as Excel and CSV connect under To a File\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA\nYour data can come in multiple formats. It can be in a flat file such as Excel or CSV.\nA. To a File: local files such as Excel, CSV, JSON, PDF and spatial files"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-5",
+    "href": "recitation6-slides.html#section-5",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 1: databases and online sources connect under To a Server\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA\nB\nYour data can come in multiple formats. It can be in a flat file such as Excel or CSV, or you can load it directly from data servers.\nA. To a File: local files such as Excel, CSV, JSON, PDF and spatial files B. To a Server: live connections to databases and online sources"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-6",
+    "href": "recitation6-slides.html#section-6",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: click Microsoft Excel to import the Superstore file\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. In the Connect panel, find To a File. B. Click Microsoft Excel to import the Sample - Superstore.xlsx dataset.\nNext: Tableau opens a file browser where you pick the .xlsx file."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-7",
+    "href": "recitation6-slides.html#section-7",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: find the dataset folder in the file browser\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Tableau opens a file browser. Go to the folder that holds the dataset (here Datasources, folder 2026.3)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-8",
+    "href": "recitation6-slides.html#section-8",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: find the dataset folder in the file browser\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Tableau opens a file browser. Go to the folder that holds the dataset (here Datasources, folder 2026.3). B. Double-click 2026.3 to open it."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-9",
+    "href": "recitation6-slides.html#section-9",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: open the subfolder that holds the workbook\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Tableau opens a file browser. Go to the folder that holds the dataset (here Datasources, folder 2026.3). B. Double-click 2026.3 to open it. It contains the en_US-US folder."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-10",
+    "href": "recitation6-slides.html#section-10",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: open the subfolder that holds the workbook\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Tableau opens a file browser. Go to the folder that holds the dataset (here Datasources, folder 2026.3). B. Double-click 2026.3 to open it. It contains the en_US-US folder. C. Double-click en_US-US."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-11",
+    "href": "recitation6-slides.html#section-11",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: select Sample - Superstore.xlsx and click Open\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Go to the dataset folder (here Datasources, folder 2026.3). B. Double-click 2026.3, then en_US-US. C. Find Sample - Superstore.xlsx and click Open to load it."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-12",
+    "href": "recitation6-slides.html#section-12",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: Tableau loads the workbook once you click Open\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Go to the dataset folder (here Datasources, folder 2026.3). B. Double-click 2026.3, then en_US-US. C. Find Sample - Superstore.xlsx and click Open to load it.\nResult: Tableau loads the workbook and opens the Data Source page."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-13",
+    "href": "recitation6-slides.html#section-13",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 2: the Data Source page lists three sheets; we use Orders\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nThen, Tableau will switch to the Data Source panel where the Excel sheets in the data are listed on the left-hand side. You can see three sheets on the screen, but we will only work with Orders here.\nTip: The Data Source tab at the bottom left brings you back here any time to edit the data connection."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-14",
+    "href": "recitation6-slides.html#section-14",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: drag the Orders sheet onto the canvas\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Select the Orders sheet from the navigation menu on the left. B. Drag it onto the canvas that reads Drag tables here.\nNext: Tableau adds Orders to the canvas and previews its rows."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-15",
+    "href": "recitation6-slides.html#section-15",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: Orders sits on the canvas, with a preview of its rows\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Orders now sits on the canvas. B. The grid on the right previews the rows. The list on the left shows each field’s type, name and source table.\nResult: the data is loaded and ready to check."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-16",
+    "href": "recitation6-slides.html#section-16",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: an icon next to each field shows its data type\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. The Type column in the field list shows an icon for each field. B. The key below explains what each icon means."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-17",
+    "href": "recitation6-slides.html#section-17",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: Orders has 21 fields and 10,194 rows\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nThe count above the preview grid gives the size of the table:\n21 fields\n10,194 rows\nIn statistics terms: each field is a variable and each row is an observation."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-18",
+    "href": "recitation6-slides.html#section-18",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: the Data Type icon shows how Tableau reads a column\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Click the Data Type icon at the top of a column to check how the variable is defined. B. The menu lists the types Tableau can use; the checked one is the current type."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-19",
+    "href": "recitation6-slides.html#section-19",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: double-click a column name to rename the field\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nTo change the column name of a variable:\nA. Double-click the column name, for example Order ID. B. Type the new column name. C. Press Enter."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-20",
+    "href": "recitation6-slides.html#section-20",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: the Undo button reverts the last step\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nTo revert to the previous data transformation step or a data visualization step, we use the Undo button.\nA. Click Undo, the left arrow in the toolbar at the top left.\nShortcut: Ctrl+Z (Cmd+Z on a Mac) does the same."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-21",
+    "href": "recitation6-slides.html#section-21",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: change a field’s type from its Data Type icon\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nTo update a field to an appropriate data type:\nA. Click the Data Type icon at the top of the column, for example Ship Date. B. Choose the correct data type from the menu.\nMistake? the Undo button reverts the change."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-22",
+    "href": "recitation6-slides.html#section-22",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data step 3: click Sheet 1 to start building a chart\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Click Sheet 1 at the bottom of the window, or Go to Worksheet above it.\nNext: the worksheet opens, with the Orders fields listed in the Data pane."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-23",
+    "href": "recitation6-slides.html#section-23",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load data recap: set each field’s type, then open Sheet 1\n1 Choose a source\n2 Open the file\n3 Prepare the Orders sheet\nA. Data Type menu: choose how Tableau reads the column (number, date, string). B. Sheet 1: click it (or Go to Worksheet) to start building a chart."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-24",
+    "href": "recitation6-slides.html#section-24",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Understanding the Different Sections in Tableau\nSo far, we have loaded the Superstore data into Tableau. Now, click Sheet 1 in the tabs bar at the bottom of the window to create your first Tableau worksheet. Tableau worksheets consist of different sections. Let’s look at them before plotting.\nToolbar Save, undo, new sheet\nMarks Card Color, size, label, tooltip\nDimension Shelf Categorical fields\nMeasure Shelf Numerical fields\nShow Me Panel Suggested chart types\nFilters Shelf Include or exclude data\nWorksheet Where the chart appears\nPage Shelf Pages and animations"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-25",
+    "href": "recitation6-slides.html#section-25",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Page Shelf\nFilters Shelf\nMarks Card\nDimension Shelf\nMeasure Shelf\nWorksheet\nShow Me Panel\nToolbar Icon"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-26",
+    "href": "recitation6-slides.html#section-26",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Toolbar Icon\nThe toolbar contains a number of buttons that enable you to perform various tasks with a click, such as Save, Undo, and New Worksheet. In the toolbar, there are three important buttons: The Tableau icon: This brings you back to the start screen, where, among other things, you can add additional data sources. Undo: This allows you to go back a step so you can safely try out different ideas. You can go back as many steps as you like. Redo: This allows you to restore any undone actions."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-27",
+    "href": "recitation6-slides.html#section-27",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Marks Card: The visualization can be designed using the Marks card. The Marks card can be used to change the data components of the visualization, such as color, size, shape, path, label, and tooltip.\nDimension Shelf: This shelf contains all the categorical columns, for example, categories, segments, gender, and name.\nMeasure Shelf: This shelf contains all the numerical columns, such as profit, total sales, and discount."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-28",
+    "href": "recitation6-slides.html#section-28",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "The Show Me panel suggests suitable visuals for the chosen variable.\nFilters Shelf: You can choose which data to include and exclude using the Filters shelf. For example, you might want to analyze the profit for each customer segment, but only for certain shipping containers and delivery times. You can create a view like this by placing fields on the Filters shelf.\nWorksheet: In the workbook, the worksheet or canvas is where the actual visualization appears. The worksheet or canvas contains information about the visual’s design and functionality.\nPage Shelf: This shelf is used for joining pages and creating animations. We will come back to it later."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-29",
+    "href": "recitation6-slides.html#section-29",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "In Tableau, most interactions are achieved by dragging and dropping items onto the canvas. This makes interacting with Tableau easy and intuitive.\nDrag and drop drives almost every action in Tableau\nStep 1 Pick a field Find a dimension or measure in the Data pane.\nStep 2 Drag it to a shelf Drop it on Rows, Columns, Filters or the Marks card.\nStep 3 See the view Tableau draws the chart on the worksheet right away."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-30",
+    "href": "recitation6-slides.html#section-30",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "In Tableau, most interactions are achieved by dragging and dropping items onto the canvas. This makes interacting with Tableau easy and intuitive. Before starting the visualization, you need to know the aggregation functions in Tableau. These functions are similar to SQL aggregate functions. In Tableau, we use aggregate functions to summarize or change the granularity of the data.\nTable 1. Aggregate functions in Tableau\nAggregate functions summarize the data, much like SQL aggregates\nExample: AVG([Sales]) returns the average sale; next we save it as a calculated field."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-31",
+    "href": "recitation6-slides.html#section-31",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A. Click Analysis in the menu bar. B. Choose Create Calculated Field. Tableau opens the calculation editor. C. Name the calculated field and enter the formula.\nCalculated fields step 1: open the editor from the Analysis menu\nWhy: manual aggregate calculations are especially useful for displaying text variables.\n1 Open the editor\n2 Name and write the formula\n3 Create from a field"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-32",
+    "href": "recitation6-slides.html#section-32",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Calculated fields step 2: name the new field Mean_Sales\nA. Change Calculation1 into Mean_Sales, the name of the calculated statistic.\nGoal: calculate the average sales and save it as Mean_Sales.\n1 Open the editor\n2 Name and write the formula\n3 Create from a field"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-33",
+    "href": "recitation6-slides.html#section-33",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Calculated fields step 2: AVG([Sales]) returns the average sale\nB. Type your formula with the corresponding aggregate function and variable name: AVG([Sales]). Field names go in square brackets. C. Check for The calculation is valid, then click OK.\nResult: Mean_Sales becomes a new measure holding the average of Sales.\n1 Open the editor\n2 Name and write the formula\n3 Create from a field"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-34",
+    "href": "recitation6-slides.html#section-34",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Calculated fields step 2: Mean_Sales now appears with the other measures\nD. Check your newly created measure Mean_Sales under the Measures in the Data pane. The = sign before its icon marks a calculated field.\nNext: drag Mean_Sales onto a shelf like any other measure, or build more fields the same way.\n1 Open the editor\n2 Name and write the formula\n3 Create from a field"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-35",
+    "href": "recitation6-slides.html#section-35",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A. In the Data pane, click the dropdown menu for the Sales variable. B. Choose Create &gt; Calculated Field.\nCalculated fields step 3: open the same editor from a field’s menu\nResult: you get the same calculation editor as Analysis &gt; Create Calculated Field, with the selected field already in the formula.\n1 Open the editor\n2 Name and write the formula\n3 Create from a field"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-36",
+    "href": "recitation6-slides.html#section-36",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Calculated fields step 3: filter the function list to find SQRT\nC. Let’s now obtain the square root of the Sales variable in the same way: name the field SQRT_Sales and open the function list (ringed arrow). D. Set the filter to Number. Only the functions that can be implemented on a numerical variable remain, such as SQRT.\nExample: SQRT(25) = 5, so SQRT([Sales]) returns the square root of each sale.\n1 Open the editor\n2 Name and write the formula\n3 Create from a field"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-37",
+    "href": "recitation6-slides.html#section-37",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "PART II: Creating Visuals in Tableau\nNow that you are familiar with the Tableau interface and know where to find measures and dimensions in the Data pane, you can finally get started with your first data visualization! Often it makes sense to start a visualization by adding a measure to the view. Prior to data exploration, we establish the research questions for the dataset. These research questions are: RQ1: How are orders distributed across ship modes, and which mode accounts for the largest share? RQ2: Is product category associated with the ship mode customers choose? RQ3: What are the shape, central tendency and spread of shipping cost, and are there outliers? RQ4: Is there a linear relationship between Quantity and Log_Sales, and how strong is it? RQ5: What share of orders does each customer segment account for? RQ6: Does the distribution of discount differ across product categories?"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-38",
+    "href": "recitation6-slides.html#section-38",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ1: How are orders distributed across ship modes, and which mode accounts for the largest share?"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-39",
+    "href": "recitation6-slides.html#section-39",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ1 step 1: count the orders in each ship mode\nA. Double-click Ship Mode in the Data pane. Tableau adds it to Rows and lists the four ship modes. B. Right-click Ship Mode on Rows and choose Measure &gt; Count. Tableau counts the orders in each mode.\nRows now lists the four ship modes.\nResult: Ship Mode becomes the measure CNT(Ship Mode), the number of orders per mode.\n1 Count orders\n2 Build the bar chart\n3 Change the view"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-40",
+    "href": "recitation6-slides.html#section-40",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ1 step 1: you can also count from the Marks card\nB. Drag Ship Mode from Rows onto the Marks card.\nA. Start from the view with Ship Mode on Rows.\nC. Right-click the pill on Marks and choose Measure &gt; Count.\n1 Count orders\n2 Build the bar chart\n3 Change the view"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-41",
+    "href": "recitation6-slides.html#section-41",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "C. After you choose Measure &gt; Count, the pill on the Marks card becomes CNT(Ship Mode): a new measure holding the number of orders in each ship mode.\nRQ1 step 1: Count turns Ship Mode into the measure CNT(Ship Mode)\nNext: put CNT(Ship Mode) on a shelf to draw the bar chart.\n1 Count orders\n2 Build the bar chart\n3 Change the view"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-42",
+    "href": "recitation6-slides.html#section-42",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A. Drag Ship Mode to Columns and CNT(Ship Mode) to Rows. B. Tableau draws one bar per ship mode. Bar height is the number of orders.\nRQ1 step 2: Standard Class carries about 6 in 10 orders\n≈ 6,000 Standard Class orders\n≈ 2,000 Second Class orders\n≈ 1,500 First Class orders\n≈ 550 Same Day orders\nAnswer to RQ1: Standard Class accounts for the largest share of orders, about 60% of the total and three times Second Class.\n1 Count orders\n2 Build the bar chart\n3 Change the view"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-43",
+    "href": "recitation6-slides.html#section-43",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A. Click Swap Rows and Columns in the toolbar. B. Ship Mode moves to Rows and CNT(Ship Mode) to Columns, so the bars run horizontally.\nRQ1 step 3: one click swaps the columns into horizontal bars\nBefore: vertical bars\n1 Count orders\n2 Build the bar chart\n3 Change the view"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-44",
+    "href": "recitation6-slides.html#section-44",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A. Open the fit menu in the toolbar. B. Pick how the view fills the window:\nTip: Entire View fits all four bars on screen, which suits screenshots for a report.\nRQ1 step 3: the fit menu controls how the chart fills the window\nStandard Fixed size; scroll if the chart is large\nFit Width Fills the width; scroll vertically\nFit Height Fills the height; scroll horizontally\nEntire View Shows the whole chart with no scrolling\n1 Count orders\n2 Build the bar chart\n3 Change the view"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-45",
+    "href": "recitation6-slides.html#section-45",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: Is product category associated with the ship mode customers choose?"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-46",
+    "href": "recitation6-slides.html#section-46",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2 step 1: a stacked bar splits each ship mode by product category\nA. Drag Ship Mode to Columns and CNT(Ship Mode) to Rows. Tableau draws one bar per ship mode. B. Drag Category from the Data pane onto Color on the Marks card. Each bar now splits into one color per product category.\nWhat to look for: if every bar splits into roughly the same color proportions, Category and Ship Mode are not associated.\n1 Stacked bars\n2 Side-by-side bars\n3 Horizontal bars"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-47",
+    "href": "recitation6-slides.html#section-47",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2 step 1: mark labels put the order count on every segment\nC. Click Label on the Marks card and tick Show mark labels. Each segment now shows its order count. D. Under Label Appearance, adjust the font or alignment if numbers on small segments are hard to read.\nResult: Office Supplies (orange) is the largest segment in every ship mode, and the labels let you compare exact counts instead of bar heights.\nStep 1 view, before labels\n1 Stacked bars\n2 Side-by-side bars\n3 Horizontal bars"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-48",
+    "href": "recitation6-slides.html#section-48",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A. Under Show Me, select Side-by-side bars. B. Tableau puts Category and Ship Mode on Columns, CNT(Ship Mode) on Rows and Ship Mode on Color, so each category gets its own group of bars.\nSide-by-side bars: one bar per ship mode within each category.\nRQ2 step 2: side-by-side bars rank the ship modes the same way in every category\nResult: Furniture, Office Supplies and Technology all rank the ship modes in the same order: Standard, Second, First, Same Day.\n1 Stacked bars\n2 Side-by-side bars\n3 Horizontal bars"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-49",
+    "href": "recitation6-slides.html#section-49",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Horizontal bars: one bar per ship mode within each category.\nA. Under Show Me, select Horizontal bars. B. Tableau places Category and Ship Mode on Rows and CNT(Ship Mode) on Columns, so each ship mode becomes one bar inside its product category. C. Horizontal bars suit long category names: labels read left to right without rotating.\nRQ2 step 3: horizontal bars keep long ship mode labels readable\nResult: Standard Class is the most used ship mode in every category, and Same Day is the least used.\n1 Stacked bars\n2 Side-by-side bars\n3 Horizontal bars"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-50",
+    "href": "recitation6-slides.html#section-50",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Before: only Category is on Color, so all bars in a category share one color.\nAfter: drag Ship Mode onto Color on the Marks card. Each ship mode gets its own shade of its category’s color.\nShip Mode now sits on Color, below Category.\nRQ2 step 3: Ship Mode on Color gives every bar its own shade\nAnswer to RQ2: every category splits across ship modes in about the same proportions (around 60% Standard Class), so Category and Ship Mode show little association.\n1 Stacked bars\n2 Side-by-side bars\n3 Horizontal bars"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-51",
+    "href": "recitation6-slides.html#section-51",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: What are the shape, central tendency and spread of Sales, and are there outliers?"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-52",
+    "href": "recitation6-slides.html#section-52",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3 step 1: a histogram shows the shape of Sales\n2 Center and spread: Summary card\n3 Outliers: box plot\n1 Shape: histogram\nA. Select Sales in the Data pane and click Histogram in Show Me. Tableau puts Sales (bin) on Columns and CNT(Sales) on Rows.\nB. To change the bar width, right-click Sales (bin) &gt; Edit and set Size of bins. Sales ranges from $0 to $22,638, so nearly all orders land in the first few bins.\nMost orders are small; a few large orders form a long right tail."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-53",
+    "href": "recitation6-slides.html#section-53",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "YOUR TURN\nThe histogram shows very few orders at high Sales values, so the right side of the chart is almost empty. One way to handle this is to combine all large values into a single end bin, for example one bar for “$900 and above”. Check whether you can do this in Tableau.\nHint Create a calculated field that caps Sales, for example IF [Sales] &gt; 900 THEN 900 ELSE [Sales] END, then create bins from that field.\nCurrent histogram: the tail beyond $2K is barely visible."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-54",
+    "href": "recitation6-slides.html#section-54",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3 step 2: the Summary card gives the center and spread of Sales\nA. Open a new sheet, go to Analysis and uncheck Aggregate Measures so each order is plotted separately. B. Drag Sales to Rows. C. Open the Show/Hide Cards menu on the toolbar and tick Summary. The card lists count, mean, median, quartiles, standard deviation and skewness. D. Compare the mean with the median. The mean ($228) is four times the median ($54), which confirms the right skew, so the median is the better measure of the center.\n1 Shape: histogram\n2 Center and spread: Summary card\n3 Outliers: box plot\n$54 Median\n$228 Mean\n$193 IQR\n$620 Std deviation\nThe middle 50% of orders fall between $17 and $210, yet the standard deviation ($620) is larger than the mean: a few very large orders stretch the spread."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-55",
+    "href": "recitation6-slides.html#section-55",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3 step 3: on a log scale, the box plot shows only the real outliers\n1 Shape: histogram\n2 Center and spread: Summary card\n3 Outliers: box plot\nWhy take the log of Sales first? Sales is strongly right-skewed (skewness 13): half of all orders are under $54, but the largest is $22,638. On the raw scale the box is squashed near $0, and every order above about $500 (Q3 + 1.5 × IQR) is flagged as an outlier: hundreds of points. The log compresses large values, so the distribution becomes close to symmetric and the box becomes readable. Adding 1 avoids LOG(0), which is undefined; a $0 order maps to 0. A. Analysis &gt; Create Calculated Field: name it Log_Sales, enter LOG([Sales]+1). B. Drag Log_Sales to Rows and pick Box-and-whisker plot in Show Me.\nReading the log scale: 1 = $10, 2 = $100, 3 = $1,000, 4 = $10,000\n1.74 Median ≈ $54\n1.26–2.32 Box ≈ $17–$210\n3.93 Upper whisker ≈ $8,500\nOnly orders above about $8,500 remain outliers. Check these few very large orders before deciding whether to keep them."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-56",
+    "href": "recitation6-slides.html#section-56",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: Is there a linear relationship between Quantity and Log_Sales, and how strong is it?"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-57",
+    "href": "recitation6-slides.html#section-57",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4 step 1: the scatter plot suggests a weak positive link between quantity and sales\n1 Build the scatter plot\n2 Add a trend line\nA. Drag Quantity to Columns and Log_Sales to Rows.\nB. Double-click Sheet 6 and type the new title.\nC. In Marks &gt; Color, set opacity to 25% so dense areas show darker.\nWhat the plot shows: bigger orders rarely have very small sales. The lowest Log_Sales rises from about 0.2 at 1 item to 1.2 at 14, while the top stays near 3.5–4. The link looks positive but weak."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-58",
+    "href": "recitation6-slides.html#section-58",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4 step 2: adding the trend line\n1 Build the scatter plot\n2 Add a trend line\nA. Right-click the view and choose Trend Lines &gt; Show Trend Lines."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-59",
+    "href": "recitation6-slides.html#section-59",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: What share of orders does each customer segment account for?\nConsumer\nCorporate\nHome Office\n%\n%\n%"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-60",
+    "href": "recitation6-slides.html#section-60",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5 step 1: CNT(Segment) counts the orders in each segment\n1 Count orders\n2 Percent of total\n3 Pie chart\nA. Drag Segment onto both Columns and Rows. Tableau shows a text table of the three segments. B. Click the Segment pill on Columns and choose Measure &gt; Count. C. The pill becomes CNT(Segment) and Tableau draws one bar per segment.\nResult: each bar now shows the number of orders in a segment, ready to be turned into shares.\nSegment on Columns and Rows, before counting"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-61",
+    "href": "recitation6-slides.html#section-61",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5 step 2: Percent of Total turns the counts into shares\n1 Count orders\n2 Percent of total\n3 Pie chart\nA. Right-click the CNT(Segment) pill on Columns. B. Choose Quick Table Calculation &gt; Percent of Total. C. A Δ appears on the pill and the axis switches to % of Total Count of Segment.\nWhy: a pie chart shows parts of a whole, so the segment counts need to add up to 100% first.\nAfter: shares of all orders, adding up to 100%"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-62",
+    "href": "recitation6-slides.html#section-62",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5 step 3: consumers place just over half of all orders\n1 Count orders\n2 Percent of total\n3 Pie chart\nA. Open Show Me and click Pie chart. Segment goes to Color, CNT(Segment) to Angle.\nB. Click Size on the Marks card and drag the slider right to enlarge the pie.\nC. Drag Segment and CNT(Segment) onto Label, then double-click the title to rename it.\nAnswer to RQ5: Consumer accounts for 51.8% of orders, Corporate for 30.3% and Home Office for 17.9%. Consumers place more orders than the other two segments combined."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-63",
+    "href": "recitation6-slides.html#section-63",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ6: Does the distribution of discount differ across product categories?\nFurniture\nOffice Supplies\nTechnology"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-64",
+    "href": "recitation6-slides.html#section-64",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ6 step 1: turn off aggregation so each order line becomes one mark\n1 Disaggregate Discount\n2 Add a box plot\n3 Split by category\nA. Drag Discount onto Rows. Tableau sums it into one bar, SUM(Discount).\nB. Open Analysis and uncheck Aggregate Measures.\nC. Each order line is now its own mark on the Discount axis.\nWhy: a box plot needs every individual discount, not their total. With aggregation on, Tableau would draw one point."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-65",
+    "href": "recitation6-slides.html#section-65",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ6 step 2: three in four order lines get a discount of 20% or less\n1 Disaggregate Discount\n2 Add a box plot\n3 Split by category\nA. Right-click the Discount axis and choose Add Reference Line.\nB. Pick Box Plot, keep whiskers at 1.5 × IQR, tick Hide underlying marks.\nC. The box runs from 0 to 0.2 and the upper whisker stops at around 0.45.\nWhat the box shows: the median and upper quartile are both 0.2, so 75% of order lines get at most 20% off. Discounts of 50% or more fall outside the whisker as outliers."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-66",
+    "href": "recitation6-slides.html#section-66",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ6 step 3: Furniture gets deeper discounts than the other two categories\n1 Disaggregate Discount\n2 Add a box plot\n3 Split by category\nA. Optional: click Size on the Marks card to resize the outlier marks.\nB. Drag Category onto Columns for one box per category, then rename the title.\nFurniture: box to 0.3, whisker to 0.7 Office Supplies: box to 0.2, outliers at 0.6–0.8 Technology: box to 0.2, outliers at 0.5 and 0.7\nAnswer to RQ6: yes, but modestly. Most discounts are 0–20% in every category. Furniture is discounted more widely: a quarter of its order lines get 20–30% off."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-67",
+    "href": "recitation6-slides.html#section-67",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "What the data showed\nRQ1\nStandard Class carries about 60% of orders, three times Second Class.\nRQ2\nShip mode shares barely differ by category: about 60% Standard Class in each.\nRQ3\nOn a log scale, only orders above about $8,500 remain outliers.\nRQ4\nLarger orders bring higher sales, but quantity explains only 10% of the variation.\nRQ5\nConsumers place 51.8% of orders, more than Corporate and Home Office combined.\nRQ6\nMost discounts are 0–20% in every category; Furniture’s spread is widest."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-68",
+    "href": "recitation6-slides.html#section-68",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "PART 2 Customer data case study"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-69",
+    "href": "recitation6-slides.html#section-69",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "customer_data.csv: 1,000 customers described by 8 variables\n1,000 customers (rows)\n8 variables (fields)\nspending and purchase_frequency load as text: fix their types first."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-70",
+    "href": "recitation6-slides.html#section-70",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load the data: connect to customer_data.csv as a text file\n1 Connect\n2 Fix data types\n3 Research questions\n\nIn the Connect panel, under To a File, click Text file (CSV is a text file).\nBrowse to the folder that holds customer_data.csv, select it and click Open.\n\nResult: Tableau opens the Data Source page with a preview of the rows."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-71",
+    "href": "recitation6-slides.html#section-71",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Load the data: the Data Source page previews 8 fields and 1,000 rows\n1 Connect\n2 Fix data types\n3 Research questions\n\nCheck that customer_data.csv appears under Connections and Files.\nScan the preview grid: each column header shows the field type icon (Abc = text, # = number).\nClick Sheet 1 at the bottom to open a worksheet.\n\nCheck: The header reads 8 fields, 1,000 rows."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-72",
+    "href": "recitation6-slides.html#section-72",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Fix data types: spending must be a number before we can chart it\n1 Connect\n2 Fix data types\n3 Research questions\n\nIn the Data pane, click the Abc icon next to spending and choose Number (decimal).\nRight-click spending and choose Convert to Measure. Repeat both steps for purchase_frequency.\n\nWhy: Text fields are dimensions; only numeric measures can be binned, averaged or plotted on an axis."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-73",
+    "href": "recitation6-slides.html#section-73",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Research questions\n1 Connect\n2 Fix data types\n3 Research questions"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-74",
+    "href": "recitation6-slides.html#section-74",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 1 - Show Me builds a histogram of annual spending in one click\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n\nSelect spending in the Data pane, open Show Me and click Histogram.\nTableau creates spending (bin) on Columns and CNT(spending) on Rows.\n\nReading: Spending ranges from about 0 to 26K and is mildly right-skewed: counts thin out above about 17K."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-75",
+    "href": "recitation6-slides.html#section-75",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 2 - Gender on Columns gives one histogram per group\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n\nDrag gender onto Columns, in front of spending (bin): Tableau draws a Female and a Male panel.\nDrag gender onto the Marks card and set it to Color so the two groups are easy to tell apart.\n\nAnswer to RQ1: Both genders show the same mildly right-skewed shape over 0 to 25K; spending distributions look very similar."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-76",
+    "href": "recitation6-slides.html#section-76",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 1 - Build a pie chart of education counts\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nDrag education to Rows and again to Columns; right-click the Columns pill and choose Measure &gt; Count.\nIn Show Me, click Pie chart. Education goes to Color and CNT(education) to Angle.\n\nIdea: A donut is just a pie with a smaller white circle on top of it."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-77",
+    "href": "recitation6-slides.html#section-77",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nDouble-click Columns, type 0 and press Enter (SUM(0)); repeat to get two pies.\nOn the second SUM(0) card, change the mark to Circle, then right-click its pill and choose Dual Axis.\n\nResult: The circle now sits on top of the pie, sharing the same center."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-78",
+    "href": "recitation6-slides.html#section-78",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nOn the circle card, drag the Size slider down so the circle is smaller than the pie.\nClick Color on the circle card and choose white. Enlarge the pie with its own Size slider.\n\nTip: Uncheck Show Header on the axis to hide the 0 labels."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-79",
+    "href": "recitation6-slides.html#section-79",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nFormat &gt; Borders and Lines: set grid and zero lines to None. Edit Colors and assign the Blue-Teal palette.\nAdd education and CNT(education) to Label, then Quick Table Calculation &gt; Percent of Total.\n\nAnswer to RQ2: Bachelor 27.1%, PhD 24.8%, High School 24.5%, Master 23.6%: education levels are nearly balanced."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-80",
+    "href": "recitation6-slides.html#section-80",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 1 - Average income by country, not total income\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nDrag country to Columns and income to Rows.\nRight-click SUM(income) and choose Measure &gt; Average. Countries with many customers no longer look richer just because of their count.\n\nWhy average: SUM rewards countries with more customers; AVG compares a typical customer."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-81",
+    "href": "recitation6-slides.html#section-81",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 2 - A Top filter keeps the 10 highest-average countries\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nDrag country to the Filters card and open the Top tab.\nChoose By field: Top 10 by income, Average, then click OK.\n\nResult: Only 10 bars remain, still in alphabetical order."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-82",
+    "href": "recitation6-slides.html#section-82",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nClick the sort icon on the y-axis to sort from largest to smallest.\nDrag income onto Marks, set it to Average, and choose Color.\n\nAnswer to RQ3: Saint Helena, Uzbekistan, Dominica, Indonesia and Slovakia lead (about 83K to 95K). Caution: about 4 customers per country, so these averages are unstable."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-83",
+    "href": "recitation6-slides.html#section-83",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 1 - Disaggregate measures to plot one point per customer\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n\nDrag spending to Columns and income to Rows: Tableau shows one aggregated point.\nOpen the Analysis menu and uncheck Aggregate Measures: now there are 1,000 points.\n\nReading: The cloud of points is patternless: income and spending show no clear relationship."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-84",
+    "href": "recitation6-slides.html#section-84",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n\nDrag purchase_frequency onto Marks and choose Size; pick an open circle under Shape.\nDrag purchase_frequency onto Marks again and choose Color.\n\nAnswer to RQ4: More frequent buyers (darker) spend more; income is unrelated to both. This is association, not cause."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-85",
+    "href": "recitation6-slides.html#section-85",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 1 - Tableau generates latitude and longitude from country names\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nDouble-click Longitude (generated) and Latitude (generated): an empty world map appears.\nDrag country onto Detail on the Marks card: one point per country.\n\nNote: 8 unknown means 8 country names Tableau could not match to a location."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-86",
+    "href": "recitation6-slides.html#section-86",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nOpen Show Me and choose Choropleth (filled map); drag country to Color.\nDrag country onto Label to print the country names.\n\nTip: A filled map colors whole areas, so it suits a value per country."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-87",
+    "href": "recitation6-slides.html#section-87",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 3 - Color each country by the average income of its customers\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nRemove the two country pills from Marks, then drag country back onto Detail.\nDrag income onto Color, right-click SUM(income) and choose Measure &gt; Average.\nDarker blue = higher average income.\n\nReading: Average income ranges from about 22.8K to 94.6K, with no clear regional pattern."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-88",
+    "href": "recitation6-slides.html#section-88",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nDrag country to Filters &gt; Top tab: By field, Top 8 by income, Average.\nDrag AVG(income) onto Label so each country shows its value.\n\nAnswer: Uzbekistan, Indonesia, Saint Helena and Slovakia are among the 8, with averages up to about 94.6K."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-89",
+    "href": "recitation6-slides.html#section-89",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "PART 3 Building a dashboard\nFemicide in Turkey, 2008–2020: four worksheets combined into one interactive dashboard and published to Tableau Public."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-90",
+    "href": "recitation6-slides.html#section-90",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A dashboard combines several views so viewers can compare them at once\nA good dashboard aligns attention on the key message, uncovers insights and speeds up decisions. Four rules:\nKnow purpose and audience\nDecide what the dashboard must say, and how familiar viewers are with the topic.\nUse the top-left corner\nViewers scan from the top left, so put the most important view there.\nLimit the content\nAt most four views; more makes the dashboard hard to read.\nAdd interactivity\nFilters and highlight actions invite viewers to explore."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-91",
+    "href": "recitation6-slides.html#section-91",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "femicide.csv: 3,096 recorded killings of women in Turkey, 2008–2020\nKey fields: year, city, killer1, killingway1 (12 fields in total).\nResearch questions\nQ1\nHow has the annual number of women killed changed from 2008 to 2020? Line chart\nQ2\nHow does the number of women killed vary across cities? Symbol map\nQ3\nWho were the most frequent perpetrators? Bar chart\nQ4\nWhich methods were most often used? Frequency table\nName each worksheet after its question so it is easy to find when building the dashboard."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-92",
+    "href": "recitation6-slides.html#section-92",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 1: count records per year to get the yearly totals\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nChange year to a Date type, then drag year to both Columns and Rows.\nRight-click YEAR(year) on Rows and choose Measure &gt; Count: the line now shows killings per year.\n\nResult: CNT(year) on Rows, YEAR(year) on Columns: one line point per year."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-93",
+    "href": "recitation6-slides.html#section-93",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag year to Rows again and set it to Count; change this second card’s mark to Circle.\nRight-click the second CNT(year) pill &gt; Dual Axis, then right-click the right axis &gt; Synchronize Axis.\n\nAnswer to Q1: Cases rose from under 100 (2008) to over 400 (2019). The 2020 drop may reflect incomplete records."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-94",
+    "href": "recitation6-slides.html#section-94",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag city onto Detail. Click 2 unknown &gt; Edit Locations; for Çorum (Ambiguous) enter latitude 40.5499 and longitude 34.9537.\nDrag city to Filters and uncheck Null.\n\nWhy: Tableau cannot place ambiguous or missing names, so they must be fixed or excluded."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-95",
+    "href": "recitation6-slides.html#section-95",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 2: size each city’s circle by the number of records\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag city onto Marks, right-click it and choose Measure &gt; Count; set CNT(city) to Size.\nAdd city to Color and rename the sheet title: The Number of Women Killed by City.\n\nAnswer to Q2: Istanbul has the largest circle (about 300 cases); most other cities record far fewer."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-96",
+    "href": "recitation6-slides.html#section-96",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag killer1 to Columns and to Rows; set the Rows pill to Measure &gt; Count.\nDrag killer1 to Filters &gt; Top: Top 15 by Count. Add CNT(killer1) to Color and Label; sort descending.\n\nAnswer to Q3: Husbands are the most frequent (1,032), then unidentified (504) and boyfriends (306)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-97",
+    "href": "recitation6-slides.html#section-97",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag killingway1 to Rows and Count of killingway1 onto Text.\nRight-click the count &gt; Quick Table Calculation &gt; Percent of Total; sort descending.\n\nAnswer to Q4: Firearms account for 46.2% and cutting tools for 26.3%; 9.2% are undetectable."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-98",
+    "href": "recitation6-slides.html#section-98",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nClick New Dashboard. Under Size, choose the target screen size.\nDrag the most important view (methods table) to the top left first, then the map, line chart and bar chart.\n\nLayout: Four views, the most important at the top left, consistent titles in one color."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-99",
+    "href": "recitation6-slides.html#section-99",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Publish: Save to Tableau Public makes the dashboard shareable online\n\nClick Save to Tableau Public in the toolbar (Tableau Public saves only online).\nEnter a workbook title and click Save; the dashboard opens in your browser.\n\nRemember: A published workbook is public. Never upload private or confidential data.\nChart types covered in Part II\nHistogram by group\nDonut chart\nTop-N bar chart\nBubble plot\nChoropleth and symbol maps\nDual-axis line chart\nFrequency table\nDashboard"
   },
   {
     "objectID": "recitation-week2.html",
@@ -68,76 +901,6 @@
     "title": "Recitation 2",
     "section": "Reading box plots",
     "text": "Reading box plots\nA market researcher studies the annual revenue of the stores of a retail chain.\n\n\n\n\n\n\n\nRead the box plot (in millions of ₺; approximate values are fine).\nMedian ≈  M, \\(\\;Q_1\\) ≈  M, \\(\\;Q_3\\) ≈  M, \\(\\;IQR\\) ≈  M\nNumber of stores flagged as potential outliers: \n\n\nThe box runs from about 0.88 M (\\(Q_1\\)) to about 1.38 M (\\(Q_3\\)), so \\(IQR \\approx 0.5\\) M. The median line is at about 1.1 M.\nFences: \\(0.88 - 1.5(0.5) \\approx 0.13\\) M and \\(1.38 + 1.5(0.5) \\approx 2.13\\) M.\nFour stores lie outside: two low (about 0.13 M and 0) and two high (about 2.15 M and 2.6 M).\nThe median is close to the centre of the box and the whiskers have similar lengths, so the distribution is roughly symmetric, apart from a few unusual stores.\nA store with zero revenue deserves a closer look. Was it newly opened, closed for renovation, or is it a data-entry error?\n\n\n\n\n\nWrite a 2–3 sentence interpretation of the single revenue box plot above, as you would write it in a report for the store manager.\n\nModel answer: The median annual revenue is about ₺1.1 million, so half of the stores earn less than this and half earn more. The middle 50% of stores earn between roughly ₺0.9 and ₺1.4 million (IQR ≈ ₺0.5 million), and the distribution is roughly symmetric. Four stores are potential outliers: two earn unusually little (one about ₺0) and two earn unusually much (up to about ₺2.6 million). These four should be investigated.\n\n\n\n\n\n\n\n\n\nThe same stores, now split by region. Which statements are supported by the plot? Select all that apply.\n\nThe median revenue is roughly the same (about 1.1 M) in all four regions.\nEvery region has at least one store flagged as a potential outlier.\nThe Southern region’s median revenue is clearly the highest.\nBetween the whisker ends, the Southern region shows the widest spread.\nThe Central region has a store with revenue above 2.5 M.\nThe Bay Area has potential outliers on both the low and the high side.\n\n\n\na. True. All the median lines are close to 1.1 M.\nb. True. Each region has points beyond its whiskers.\nc. False. The Northern median is, if anything, slightly higher, and the differences are tiny.\nd. True. The Southern whiskers run from about 0.1 M to 2.1 M.\ne. False. Central’s highest point is about 2.2 M.\nf. True. It has a store near 0 and two above 2.2 M.\n\nOverall: region does not seem to make much difference to typical revenue. The boxes overlap almost completely.\n\n\n\n\n\n\n\n\n\nDescribe the distribution in each panel.\n\nLeft panel :: Symmetric\nMiddle panel :: Positively skewed\nRight panel :: Negatively skewed\n\n\n\nLeft: the median is in the middle of the box and the whiskers are equal: symmetric.\nMiddle: the long tail is on the right; the median is closer to \\(Q_1\\) and the right whisker is longer: positively (right) skewed.\nRight: the mirror image, with a long tail on the left; the median is closer to \\(Q_3\\): negatively (left) skewed.\n\nBox plot shortcut: the longer whisker and the larger half of the box point toward the tail.\n\n\n\n\n\n\n\n\n\nEach histogram shows the same data as one of the box plots. Which box plot belongs to each histogram?\n\nHistogram A :: Box plot 3\nHistogram B :: Box plot 4\nHistogram C :: Box plot 1\nHistogram D :: Box plot 2\n\n\n\nA (right-skewed) → Box plot 3: the median sits near the left of the box, there is a long right whisker, and the high values are flagged as outliers.\nB (symmetric, bell-shaped) → Box plot 4: a narrow box in the centre with balanced whiskers. Most data are near the middle, so the IQR is small.\nC (left-skewed) → Box plot 1: the mirror image of box plot 3.\nD (flat, uniform) → Box plot 2: a very wide box, because the values are spread evenly, and a median exactly in the middle.\n\nBox plots 2 and 4 are both symmetric. The width of the box (the IQR) tells them apart.\n\n\n\n\nPut the steps for constructing a box plot by hand in the correct order.\n\nSort the data from smallest to largest\nFind the median, \\(Q_1\\) and \\(Q_3\\)\nCompute \\(IQR = Q_3 - Q_1\\)\nCompute the fences \\(Q_1 - 1.5\\,IQR\\) and \\(Q_3 + 1.5\\,IQR\\)\nFlag the observations outside the fences as potential outliers\nDraw the box from \\(Q_1\\) to \\(Q_3\\) with a line at the median\nDraw the whiskers to the most extreme observations inside the fences and plot the outliers as points\n\n\nYou need the quartiles before the IQR, the IQR before the fences, and the fences before you know where the whiskers stop."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "STAT 112",
-    "section": "",
-    "text": "Welcome! This site is the resource hub for STAT 112 — Introduction to Data Processing and Visualization at METU."
-  },
-  {
-    "objectID": "index.html#about-this-course",
-    "href": "index.html#about-this-course",
-    "title": "STAT 112",
-    "section": "About This Course",
-    "text": "About This Course\nSTAT 112 introduces the practical side of working with data: how to get it into shape, explore it, and communicate what it shows. The course covers the basic definitions and handling of different data types, and builds hands-on skills in:\n\nData manipulation: indexing, subsetting, reshaping, and transforming datasets\nData cleaning: dealing with common problems such as missing or inconsistent values\nVisualization: choosing and building effective graphs for different kinds of data\nMapping: displaying spatial data on maps\nAnalysis: summarizing and exploring data to answer questions"
-  },
-  {
-    "objectID": "index.html#some-useful-links-for-data-visualization",
-    "href": "index.html#some-useful-links-for-data-visualization",
-    "title": "STAT 112",
-    "section": "Some Useful Links for Data Visualization",
-    "text": "Some Useful Links for Data Visualization\nI will update this list as I discover new resources. Stay tuned!\n\n\n\n\n\n\nNote\n\n\n\nThese resources are curated to supplement the STAT 112: Introduction to Data Processing and Visualization syllabus. They span foundational design theory, color accessibility, Python plotting tools, and interactive dashboards.\n\n\n\nCore Theory & Chart Selection Guides\n\nFundamentals of Data Visualization — Claus O. Wilke’s open-access text on figure design, color selection, and effective visual layout.\nFrom Data to Viz — Interactive decision tree matching chart formats directly to specific variable and data structures.\nThe Data Visualisation Catalogue — A reference guide explaining chart functions, visual caveats, and alternative plot designs.\nData Visualization: A Practical Introduction — Kieran Healy’s online book detailing visual perception, chart rhetoric, and narrative design.\nStorytelling with Data Resources — Practical articles and exercises highlighting cognitive load, focal points, and decluttering.\n\n\n\nColor Systems & Accessibility\n\nColorBrewer 2.0 — Proven qualitative, sequential, and diverging palettes with colorblind-safe filters.\nCoblis (Color Blindness Simulator) — Online image checker to test how figures appear under various color deficiencies (deuteranopia, protanopia, tritanopia).\nAdobe Color Contrast Checker — Tool to evaluate background-to-text and shape contrast ratios against WCAG standards.\n\n\n\nPython Libraries (STAT 112 Curriculum)\n\nPython Graph Gallery — Reproducible examples categorized by plot type, built with Matplotlib and Seaborn.\nSeaborn Documentation & Tutorials — Statistical data visualization API focused on distribution and categorical relationships.\nMatplotlib User Guide — Foundational plotting interface in Python, essential for figure anatomy and custom formatting.\nPandas Visualization Guide — Quick built-in DataFrame plotting methods for exploratory data analysis.\n\n\n\nBI Tools & Interactive Dashboards\n\nTableau Public Resources & Learning — Sample datasets, tutorials, and community dashboards covering sheet design and dashboard actions.\nFlourish Studio Guides — Quick-start walkthroughs for animated charts, hierarchies, and scrollytelling presentations."
-  },
-  {
-    "objectID": "index.html#contact",
-    "href": "index.html#contact",
-    "title": "STAT 112",
-    "section": "Contact",
-    "text": "Contact\n Email: serenay@metu.edu.tr\n Office: Department of Statistics Room No: 234.\n Phone: +90 (312) 210-2979\n GitHub: github.com/statserenay\n LinkedIn: serenay-çakar"
-  },
-  {
-    "objectID": "computing-setup.html",
-    "href": "computing-setup.html",
-    "title": "Setup",
-    "section": "",
-    "text": "We will install the following tools later. If you will run into trouble, you can bring your laptop to office hours or a recitation."
-  },
-  {
-    "objectID": "computing-setup.html#tableau-public",
-    "href": "computing-setup.html#tableau-public",
-    "title": "Setup",
-    "section": "Tableau Public",
-    "text": "Tableau Public\n\nGo to public.tableau.com and create a free account.\nDownload and install Tableau Public Desktop for your OS.\nSign in and try opening a sample dataset to confirm it works."
-  },
-  {
-    "objectID": "computing-setup.html#flourish",
-    "href": "computing-setup.html#flourish",
-    "title": "Setup",
-    "section": "Flourish",
-    "text": "Flourish\n\nGo to flourish.studio and create a free account.\nNo local installation is needed — Flourish runs in the browser."
-  },
-  {
-    "objectID": "computing-setup.html#python",
-    "href": "computing-setup.html#python",
-    "title": "Setup",
-    "section": "Python",
-    "text": "Python\nWe won’t be using Anaconda in this course. You have two good options — Google Colab (nothing to install, runs in your browser) or Positron (a local IDE, if you’d rather work offline). Pick whichever suits you.\n\nOption A: Google Colab (no installation needed)\nGoogle Colab runs Python notebooks entirely in the browser, with NumPy, Pandas, Matplotlib, and Seaborn already installed — nothing to set up locally.\n\nGo to colab.research.google.com and sign in with a Google account.\nClick New notebook.\nIn the first cell, run the check below to confirm the packages are available.\nNotebooks save automatically to your Google Drive; use File → Download to save a .ipynb copy for submission if required.\n\n\n\nOption B: Positron (local install)\nPositron is a free IDE built specifically for data science in Python and R (from the makers of RStudio). It’s currently in public preview and runs fully offline once set up.\n1. Install Python\n\nDownload the latest Python 3.x installer from python.org/downloads.\nWindows: during setup, check “Add python.exe to PATH” before clicking Install.\nMac: run the downloaded .pkg installer and follow the prompts.\nVerify the install by opening a terminal (macOS: Terminal; Windows: Command Prompt or PowerShell) and running:\n\npython3 --version\n2. Install the required packages\nFrom the same terminal:\npip install numpy pandas matplotlib seaborn jupyter\n(On Windows, use pip instead of pip3 if pip3 isn’t recognized.)\n3. Install Positron\n\nMac: go to positron.posit.co/download.html, download the .dmg for your chip (Apple Silicon or Intel), open it, and drag Positron into your Applications folder.\nWindows: from the same download page, get the .exe installer and run it, following the setup wizard.\nOpen Positron, then in the bottom-right interpreter picker, select the Python 3.x you just installed.\nOpen or create a .py or .ipynb file and run a cell to confirm it works.\n\n\n\nConfirm the core packages are available\nRun this in a new Colab cell or Positron notebook/file:\nimport numpy, pandas, matplotlib, seaborn\nprint(\"All set!\")"
-  },
-  {
-    "objectID": "games-tab/games.html",
-    "href": "games-tab/games.html",
-    "title": "Games",
-    "section": "",
-    "text": "Recitation 1\n    Pie-thagoras' Data Panic\n    Sort falling data cards before they hit the floor: population or sample, data types, discrete or continuous, scales of measurement, parameter or statistic.\n    Play now →\n  \n\n\n\n  \n  \n    Recitation 2\n    Dr. Outlier's Vault\n    Escape room: crack six locks with a balance-beam mean, a median, the 1.5 × IQR fences, the right kind of mean, a standard deviation and a histogram's shape.\n    Play now →\n  \n\n\n\n\n  \n  \n    Recitation 3\n    Dr. Plot's Graph Hospital\n    Sick graphs in the ER! Diagnose what's wrong (too many classes, gaps between boxes, overplotting, stretched scales…), prescribe the treatment and watch the graph get cured.\n    Play now →\n  \n\n\n\n  \n  \n    Recitation 4\n    Trick or Treat Street 🎃\n    A Halloween walk: name the chart hiding under a black costume, find the Gestalt principle behind each haunted window, and decide whether a chart is an honest treat or a misleading trick.\n    Play now →\n  \n\n\n\n  ?\n  \n    Recitation 5\n    Coming soon\n    A new game will appear here after the next recitation."
-  },
-  {
-    "objectID": "recitation-week5.html",
-    "href": "recitation-week5.html",
-    "title": "Recitation 5",
-    "section": "",
-    "text": "⚡ Warm-up: lightning round\n\n  ChallengeLightning round · 12 statements · 90 seconds\n  True or false? Answer as fast as you can; the review at the end explains every statement.\n  \n    A parameter is a numerical summary of a sample.A parameter describes the population; a statistic describes a sample.\n    Temperature in °C is measured on an interval scale.Differences are meaningful, but 0 °C is not \"no temperature\": no true zero.\n    The median is more robust to outliers than the mean.The mean uses every value, so one extreme value can pull it far away; the median only depends on the middle.\n    The sample variance divides the sum of squared deviations by n.The sample variance divides by n − 1.\n    If every value is multiplied by 2, the standard deviation is multiplied by 2.For y = a + bx, sy = |b| sx.\n    A histogram is a good graph for the blood types of 300 donors.Blood type is categorical; histograms are not suitable for qualitative data.\n    In a right-skewed distribution the mean is usually larger than the median.The long right tail pulls the mean up.\n    r = −0.9 shows a weaker linear relationship than r = 0.5.Strength is |r|: 0.9 &gt; 0.5. The sign only gives the direction.\n    A box plot always shows whether a distribution is bimodal.A box plot uses only five numbers; a violin plot is needed to see two peaks.\n    Time-series data are collected at successive points in time.Cross-sectional data are collected once; time-series data at successive points in time.\n    By the proximity principle, objects that are close together are seen as one group.That is the Gestalt law of proximity.\n    Starting a bar chart's y-axis at a non-zero value can exaggerate differences.A bar's length represents its value; cutting the axis makes small differences look huge.\n  \n  \n\n\n\nMETU wants to know the average weekly study time of all its 30,000 students. A survey of 500 students finds an average of 14.2 hours. Classify each item.\n\nAll 30,000 METU students :: Population\nThe 500 surveyed students :: Sample\nThe average weekly study time of all 30,000 students (unknown) :: Parameter\n14.2 hours :: Statistic\nWeekly study time :: Variable\n\n\nPopulation ↔︎ Parameter, Sample ↔︎ Statistic. The 14.2 hours is computed from the sample, so it is a statistic used to estimate the unknown parameter.\n\n\n\n  ChallengeTick table · Nominal · Ordinal · Interval · Ratio\n  Tick (✔) a cell whenever the scale provides that property. Click a cell to add or remove a tick, then press Check.\n  \n    \n      The “order” of values is known\n      “Counts”, aka “Frequency distribution”\n      Mode\n      Median\n      Mean\n      Can quantify the difference between each value\n      Can add or subtract values\n      Can multiply and divide values\n      Has a “true zero”\n    \n  \n  ✔ correct tick✔ wrong tick✔ missing tick\n  CheckShow answerReset\n  \n  \n    Each scale keeps everything the previous one provides and adds one new property:\n    Nominal (labels, counts, mode) → Ordinal (+ order, median) → Interval (+ measurable differences, mean, + and −) → Ratio (+ true zero, × and ÷)\n    \n      Nominal (blood type, city): only counts and the mode.\n      Ordinal (letter grades, satisfaction 1–5): ranked, so the median exists; the gaps are not measurable, so no mean.\n      Interval (°C, calendar year): 30 °C − 20 °C = 10 °C makes sense, but 40 °C is not twice as hot as 20 °C (no true zero).\n      Ratio (height, income, time): 0 means \"none\", so 180 cm is twice 90 cm.\n    \n  \n\n\n\nChoose the scale and the type of data for each variable.\n\nA student’s hometown :: Nominal ; Qualitative\nT-shirt size (S, M, L, XL) :: Ordinal ; Qualitative\nYear of birth :: Interval ; Quantitative\nMonthly rent in ₺ :: Ratio ; Quantitative\nNumber of siblings :: Ratio ; Quantitative\nCourse evaluation from 1 (poor) to 5 (excellent) :: Ordinal ; Qualitative\n\n\n\nYear of birth has no true zero (year 0 is not “no time”), so it is interval.\nNumber of siblings is a count with a true zero (0 = no siblings): ratio, and it is discrete.\nA 1–5 rating is ordered, but the gaps between the categories are not measurable: ordinal.\n\n\n\n\n\nWhich one doesn’t belong? Three of these variables are measured on the same scale.\n\nEye colour\nMarital Status\nJob Seniority\nCar Brands\nNationality\n\n\nJob Seniority is ordinal (Junior &lt; Mid-level &lt; Senior &lt; Executive); the other four are nominal: categories with no natural order.\n\n\n\n\n  ChallengeStep by step · each correct step unlocks the next\n  Six students report how much they spent on coffee last week (₺): 40, 55, 35, 70, 45, 55. Type each answer and press Enter. Round to 2 decimals.\n  1 The sum of the values, Σx = Then x̄ = 300 / 6 = 50 ₺.\n  2 The median (order the data first!) = Ordered: 35, 40, 45, 55, 55, 70. With n = 6 (even), median = (45 + 55) / 2 = 50. The mode is 55, the range is 70 − 35 = 35.\n  3 The sum of squared deviations, Σ(x − x̄)² = Deviations: −10, 5, −15, 20, −5, 5 (they sum to 0). Squares: 100 + 25 + 225 + 400 + 25 + 25 = 800.\n  4 The sample variance, s² = s² = 800 / (n − 1) = 800 / 5 = 160 ₺². (Dividing by 6 is the most common exam mistake!)\n  5 The standard deviation, s = s = √160 = 12.65 ₺, in the same units as the data.\n  6 The coefficient of variation, CV =  %CV = 12.65 / 50 × 100% = 25.3%: the typical deviation is about a quarter of the mean.\n  Show this stepReset\n  \n\n\n  ChallengeSpot the mistake · click the first wrong line\n  A student found the quartiles and fences of these 12 ordered values:12, 15, 18, 20, 22, 25, 27, 30, 31, 35, 40, 58.Click the first line that contains a mistake.\n  \n    For Q1: np = 12 × 0.25 = 3.\n    np = 3 is a whole number, so Q1 is the 3rd ordered value: Q1 = 18.\n    For Q3: np = 12 × 0.75 = 9, a whole number, so Q3 = (31 + 35) / 2 = 33.\n    IQR = 33 − 18 = 15.\n    Upper fence = 33 + 1.5 × 15 = 55.5, so 58 is a potential outlier.\n  \n  Show answerReset\n  \n  \n    Line 2 is wrong. Q1 is the median of the lower half of the data, and Q3 is the median of the upper half of the data. By the lecture rule, when np is an integer we average the np-th and (np+1)-th values: Q1 = (18 + 20) / 2 = 19. Line 3 does this correctly for Q3.\n    Fence formulas:\n    Lower fence = Q1 − 1.5 × IQR\n    Upper fence = Q3 + 1.5 × IQR\n    Any value below the lower fence or above the upper fence is a potential outlier.\n    Corrected: IQR = Q3 − Q1 = 33 − 19 = 14, so 1.5 × IQR = 21.\n    Lower fence = 19 − 21 = −2\n    Upper fence = 33 + 21 = 54\n    No value is below −2, but 58 is above 54, so 58 is a potential outlier.\n  \n\n\n\nA box plot is drawn from this five-number summary: minimum 12, \\(Q_1\\) = 30, median 38, \\(Q_3\\) = 46, maximum 80.\n\\(IQR =\\) , lower fence \\(=\\) , upper fence \\(=\\) .\nThe number of potential outliers you can be sure about from this summary is : the maximum, 80.\n\n\\(IQR = 46 - 30 = 16\\); \\(1.5 \\times 16 = 24\\); fences \\(30 - 24 = 6\\) and \\(46 + 24 = 70\\). The minimum 12 is inside, the maximum 80 is outside: it is drawn as a separate point.$.\n\n\n\n\nWhich mean should you use?\n\nThe average of your five midterm scores :: Arithmetic mean\nThe average yearly growth of an investment that changed by +10%, −5% and +20% :: Geometric mean\nThe average speed for a trip with three equal 100 km legs at 60, 90 and 120 km/h :: Harmonic mean\nThe average price per litre when you spend exactly ₺1,000 on fuel each week :: Harmonic mean\nThe average height of a basketball team :: Arithmetic mean\nThe average yearly growth factor of a city’s population :: Geometric mean\n\n\nValues that add up → arithmetic; values that multiply (growth factors 1.10 × 0.95 × 1.20) → geometric; rates over equal amounts of the “per” quantity (equal distances, equal money) → harmonic.\n\n\n\n\nDaily maximum temperatures in a city have mean \\(\\bar{x} = 20\\) °C and standard deviation \\(s = 5\\) °C. Converted with \\(F = 32 + 1.8\\,C\\):\nmean \\(=\\)  °F, standard deviation \\(=\\)  °F, variance \\(=\\)  °F².\nCan we compare the variability with the coefficient of variation?  (yes / no)\n\n\\(\\bar{y} = 32 + 1.8(20) = 68\\); \\(s_y = |1.8| \\times 5 = 9\\); \\(s_y^2 = 1.8^2 \\times 25 = 81\\). Adding 32 moves the data but does not change the spread.\nNo: temperature in °C or °F is an interval scale with no true zero, and the CV is meaningful only for ratio-scale data. (In °C the CV would be 25%, in °F 13.2%: the same data, two different “CVs”.)\n\n\n\n\nExam scores are mound-shaped with mean 64 and standard deviation 8. By the empirical rule:\nAbout  % of the students scored between 48 and 80.\nAbout  % scored above 72.\nAbout  % scored below 48.\n\n\n48 and 80 are \\(64 \\pm 2(8)\\): about 95%.\n72 is \\(64 + 8\\): 68% lie within \\(\\pm 1s\\), so \\(32\\%\\) are outside, half of them above: 16%.\nBelow \\(64 - 2(8) = 48\\): half of the 5% outside \\(\\pm 2s\\): 2.5%. \n\n\n\n\n\nUse the mean and the median to decide the shape.\n\nHouse prices: mean ₺4.2 M, median ₺3.1 M :: Positively (right) skewed\nScores on a very easy quiz: mean 8.1, median 8.8 (out of 10) :: Negatively (left) skewed\nHeights of adult women: mean = median = mode = 163 cm :: Symmetric\nWaiting times at a bank: mean 9 min, median 6 min :: Positively (right) skewed\n\n\nThe mean is pulled towards the long tail: mean &gt; median → right tail; mean &lt; median → left tail. Prices and waiting times cannot go below 0 but can be very large; easy-quiz scores have a natural maximum.\n\n\n\n\n  ChallengeClick on the graph\n  40 students reported how many minutes they spend on social media before breakfast. Click the modal class.\n  \n  Show answerReset\n  \n  The modal class is the class with the highest frequency: 10–20 minutes (12 students). The long tail on the right makes the histogram positively skewed.\n\n\n  ChallengeClick on the graph\n  Same histogram (n = 40). Click the class that contains the median.\n  \n  Show answerReset\n  \n  With n = 40, the median is the average of the 20th and 21st ordered values. Cumulative frequencies: 4, 16, 25, … The first 16 values are below 20 minutes and values 17–25 are in 20–30, so the median class is 20–30, one class to the right of the modal class, because of the right skew.\n\n\n  ChallengeEstimate r with the slider · within ±0.15 counts as correct\n  Move the slider to your best guess of the correlation coefficient r, then press Check. New plot gives you another one.\n  \n  −1+10.00\n  CheckNew plot\n  \n\n\n\nCompute \\(r\\) by hand for these four points.\n\n\n\n\\(x\\)\n2\n4\n6\n8\n\n\n\n\n\\(y\\)\n3\n7\n5\n9\n\n\n\n\\(\\bar{x} =\\) , \\(\\bar{y} =\\) , \\(\\sum(x-\\bar{x})(y-\\bar{y}) =\\) , \\(\\sum(x-\\bar{x})^2 =\\) , \\(\\sum(y-\\bar{y})^2 =\\) \n\\(r =\\) : a strong  linear relationship.\n\nDeviations: \\(x - \\bar{x} = -3, -1, 1, 3\\); \\(y - \\bar{y} = -3, 1, -1, 3\\). Products: \\(9 - 1 - 1 + 9 = 16\\). \\(\\sum (x-\\bar{x})^2 = 20\\), \\(\\sum (y-\\bar{y})^2 = 20\\).\n\\[r = \\frac{16}{\\sqrt{20}\\sqrt{20}} = \\frac{16}{20} = 0.8\\]\n\n\n\n\nChoose the best option.\n\n500 students’ number of siblings vs number of pets: only 20 dots are visible :: Add jitter\nHistograms of a class of 30 and a class of 150 drawn with frequencies :: Use relative frequencies\nHeight, weight and age must be shown in one graph :: Bubble chart\nTip vs bill for cash and card payers, drawn with different y-axes :: Comparative scatter plots, same scales\nA histogram of 400 values with only 3 classes looks flat and boring :: Use more, narrower classes\n36 monthly sales values were drawn as a histogram :: Line chart\nTwo sections with identical box plots; one may have two groups of students :: Violin plot\n\n\nOverplotting → jitter; different group sizes → relative frequencies; three numerical variables → bubble chart; groups compared → same scales; too few classes hide the shape → more classes (400 values → 9–10); time order matters → line chart; a box plot hides bimodality → violin plot.\n\n\n\nA survey asked 300 students for their faculty and whether they live in a dormitory:\n\n\n\nFaculty\nLives in dorm\nNot in dorm\nTotal\n\n\n\n\nEngineering\n60\n90\n150\n\n\nArts & Sciences\n30\n20\n50\n\n\nEconomics\n40\n60\n100\n\n\nTotal\n130\n170\n300\n\n\n\n\n\nUse the table above.\nRelative frequency of Engineering students: ; of Arts & Sciences students: ; of Economics students: .\nWithin each faculty, the percentage who live in a dorm: Engineering  %, Arts & Sciences  %, Economics  %.\nOverall,  % of the 300 students live in a dorm.\n\n\nFaculty: \\(150/300 = 0.50\\), \\(50/300 \\approx 0.17\\), \\(100/300 \\approx 0.33\\) (they sum to 1).\nWithin a faculty, divide by that faculty’s total (the row total): \\(60/150 = 40\\%\\), \\(30/50 = 60\\%\\), \\(40/100 = 40\\%\\).\nOverall: \\(130/300 \\approx 43.3\\%\\).\n\n\n\n\n  ChallengeDraw the chart · move the sliders to set each bar\n  Draw the relative-frequency bar chart of Faculty (all 300 students). Set the height of each bar, then press Check (±2 percentage points counts as correct).\n  \n  \n  CheckShow answerReset\n  \n  Heights: 150/300 = 50%, 50/300 ≈ 17%, 100/300 ≈ 33%. With frequencies the bars would be 150, 50 and 100: exactly the same shape, only the y-axis labels change, because every count is divided by the same n = 300.\n\n\n  ChallengeDraw the chart · 100% stacked bar chart\n  Draw the 100% stacked bar chart of dorm use within each faculty. Each slider sets the dorm part; the not in dorm part fills the rest up to 100%.\n  \n  \n  CheckShow answerReset\n  \n  Dorm shares: 60/150 = 40%, 30/50 = 60%, 40/100 = 40%. Every bar is 100% tall, so a 100% stacked bar chart compares the proportions within groups, but it no longer shows how big each group is.\n\n\n\n  ChallengeClick on the graph\n  Click the part of this violin plot that shows the interquartile range.\n  \n  Show answerReset\n  \n  Inside a violin: the thick black bar is the IQR, the thin line is the 95% confidence interval, the white dot is the median, and the width of the outline is the density (wide = many values). This violin is bimodal, which a box plot could not show.\n\n\n  ChallengeSpot the mistake · click the wrong sentence\n  A student describes a correlation heatmap and the scatter plot matrix of four variables. One sentence is wrong. Click it.\n  \n    The heatmap shows r = 0.62 for study hours and GPA: a positive linear relationship.\n    All values on the diagonal are 1, because each variable is perfectly correlated with itself.\n    The heatmap is symmetric: the value for (study, GPA) equals the value for (GPA, study).\n    Since r = 0.03 for sleep and GPA, sleep and GPA are not related in any way.\n  \n  Show answerReset\n  \n  Sentence 4 is wrong. r ≈ 0 only means there is no linear relationship. The drawback of correlation plots: they give no information about nonlinearity. The scatter plot could show a strong curved (e.g. upside-down U) relationship.\n\n\n\nWhich Gestalt principle is at work?\n\nIn a dashboard, three charts inside one light-grey container are read as one topic :: Common region\nA chart without its border and background still looks complete :: Closure\nIn a line chart, one country is orange and all others are grey :: Focal point\nLabels placed right next to their bars are read together with them :: Proximity\nThe same colour is used for “2026” in every chart of a report :: Similarity\nThe eye follows a smooth trend line through the data points :: Continuity\nA white logo shape is seen “cut out” of a dark background :: Figure-ground\nThree overlapping rings are seen as three simple circles :: Prägnanz\n\n\nCommon region (enclosure) groups what is inside one boundary; closure fills in missing lines; focal point captures the eye with what is different; proximity groups what is close; similarity groups what looks alike; continuity follows smooth paths; figure–ground separates the object from the background; Prägnanz reduces shapes to the simplest form.\n\n\n\n\nA bar chart shows a pass rate of 61% in 2025 and 64% in 2026, with the y-axis starting at 60.\nThe 2026 bar looks  times as tall as the 2025 bar, although the real increase is only  percentage points. This is the misleading non-zero  trick.\n\nHeights above 60: 1 vs 4 units, so the bar looks 4 times as tall; \\(64/61 \\approx 1.05\\). Bars should start at zero. (The other bad example in Lecture 4: an upside-down axis, which makes rising values look like falling ones.)\n\n\n\n\n[18 pts] The waiting times (minutes) of 10 students at the ring-bus stop, ordered:\n8, 11, 13, 14, 16, 17, 19, 21, 24, 41\n(a) Median \\(=\\) \n(b) \\(Q_1\\): \\(np = 10 \\times 0.25 =\\) , so \\(Q_1\\) is the  ordered value: \\(Q_1 =\\) .\n(c) \\(Q_3\\): \\(np = 7.5\\), so \\(Q_3 =\\) .\n(d) \\(IQR =\\) ; lower fence \\(=\\) ; upper fence \\(=\\) .\n(e) Potential outlier(s): .\n(f) Will the mean be larger or smaller than the median? \n\n(a) \\(n = 10\\) is even: \\((16 + 17)/2 = 16.5\\).\n(b) \\(np = 2.5\\) is not a whole number, so round up to 3: \\(Q_1\\) = 3rd value = 13.\n(c) \\(np = 7.5\\) → 8th value = 21.\n(d) \\(IQR = 8\\), \\(1.5 \\times 8 = 12\\): fences \\(13 - 12 = 1\\) and \\(21 + 12 = 33\\).\n(e) 41 &gt; 33 → potential outlier.\n(f) The mean is \\(184/10 = 18.4\\) &gt; 16.5: the outlier pulls the mean up (right skew).\nMarking: (a) 2, (b) 4, (c) 2, (d) 5, (e) 2, (f) 3.\n\n\n\n\n[12 pts] A real-estate report says: “The average flat in our city costs ₺4.2 million.” The median price is ₺3.1 million.\n(a) What is the shape of the distribution of prices? (b) Which measure of centre would you report, and why? (c) Which graph would you draw to show the distribution?\n\nModel answer:\n(a) Mean &gt; median, so the distribution is positively (right) skewed: a few very expensive flats form a long right tail. (4 pts)\n(b) The median (₺3.1 M): it is robust to the few extreme prices, while the mean is pulled up by them and overstates what a typical flat costs. (4 pts)\n(c) A histogram (shape, modal class, the long right tail) or a box plot (median, IQR, potential outliers beyond the upper fence). A violin plot also works. (4 pts)\n\n\n\n\n[10 pts] Which statements are true? (+2 for each correct choice, −2 for each wrong choice, minimum 0.)\n\nThe IQR is not affected by an extreme maximum value.\nThe coefficient of variation is suitable for comparing temperatures in °C.\nA histogram should have gaps between its boxes.\nIf r = 0, the points can still follow a strong curved pattern.\nRelative frequencies allow you to compare two groups of different sizes.\nA pie chart is the best graph for 36 months of sales.\nIn a split violin plot, the two halves of each violin show two groups.\n\n\n\nb is false: °C is interval (no true zero); the CV needs ratio data.\nc is false: a histogram has adjoining boxes.\nf is false: time-series data → line chart.\na: the IQR uses only \\(Q_1\\) and \\(Q_3\\), so the maximum doesn’t change it.\n\n\n\n\n\n[12 pts] A student’s bar chart compares the average GPA of 12 faculties. The bars are in random order, each bar has a different colour, the chart has a thick border and a grey background, and the y-axis starts at 2.0. The message should be: “Our faculty has the highest average GPA.”\nGive four improvements and name the principle behind each.\n\nModel answer (3 pts each):\n\nSimplicity: sort the bars from highest to lowest.\nFocus point: colour only our faculty’s bar; make the others grey.\nClosure: remove the border and background shading; the chart still looks complete.\nNon-zero baseline (bad example): start the y-axis at 0 so the differences are not exaggerated.\nProximity: put the message title / value label right next to our faculty’s bar.\n\n\n\n\n\n[8 pts] Choose the most appropriate graph.\n\nShape of the distribution of 300 students’ commute times :: Histogram\nCompare the exam scores of 5 sections (centre, spread, outliers) :: Box plots side by side\nRelationship between hours studied and exam score :: Scatter plot\nMonthly number of library visitors over 3 years :: Line chart\nSize, rent and age of flats in one graph :: Bubble chart\nAre faculty and dormitory use (yes/no) related? :: Mosaic plot\nUnusual values among 12 measurements of a boiling point :: Dot diagram\nRent vs distance to campus for 160 flats :: Scatter plot\n\n\n1 pt each. One numerical variable → histogram; groups → side-by-side box plots; two numerical variables → scatter plot; three → bubble chart; over time → line chart; two categorical variables → mosaic plot; a small data set and unusual values → dot diagram.\n\n\n\nAll data sets on this page were created for this recitation. Good luck in the exam! 🍀"
   },
   {
     "objectID": "homework1.html",
@@ -196,62 +959,6 @@
     "text": "Check your own numbers\nEnter your own values below. Everything is recomputed with the STAT 112 methods (\\(n-1\\) in the variance, \\((n+1)p\\) quartile positions). Nothing you type leaves this page.\n\n\nQuestion 1 checker\n\n  \n    Variable\n      Screen time (minutes)Steps\n    Reset to example\n  \n  \n  \n  \n\n\nQuestion 2 checker\n\n  Student ID"
   },
   {
-    "objectID": "flashcards.html",
-    "href": "flashcards.html",
-    "title": "Flashcards",
-    "section": "",
-    "text": "Choose a deck at the top of the box (Recitation 1, 2, 3 or all cards). Click a card (or press Space) to flip it, then mark Got it or Missed it. Your missed pile is saved in this browser. You can also open the flashcards in a full window."
-  },
-  {
-    "objectID": "recitation-week4.html",
-    "href": "recitation-week4.html",
-    "title": "Recitation 4",
-    "section": "",
-    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\n\nProgress"
-  },
-  {
-    "objectID": "recitation-week4.html#how-to-use-this-page",
-    "href": "recitation-week4.html#how-to-use-this-page",
-    "title": "Recitation 4",
-    "section": "",
-    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\n\nProgress"
-  },
-  {
-    "objectID": "recitation-week3.html",
-    "href": "recitation-week3.html",
-    "title": "Recitation 3",
-    "section": "",
-    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nNumbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
-  },
-  {
-    "objectID": "recitation-week3.html#how-to-use-this-page",
-    "href": "recitation-week3.html#how-to-use-this-page",
-    "title": "Recitation 3",
-    "section": "",
-    "text": "Each question below is interactive. Click an option or type an answer, then press Check (or Enter). Show answer reveals the solution and the explanation, and Reset clears the question so you can try again.\nNumbers can be typed with a dot or a comma (3.2 or 3,2); round to 2 decimals unless a question says otherwise.\n\nProgress"
-  },
-  {
-    "objectID": "calculator.html",
-    "href": "calculator.html",
-    "title": "Calculator",
-    "section": "",
-    "text": "Every step stays hidden until you open it. Type your own answer first and press Check; open Show steps only when you are stuck. Quartiles use the percentile rule from the lecture notes. You can also open the calculator in a full window."
-  },
-  {
-    "objectID": "homeworks.html",
-    "href": "homeworks.html",
-    "title": "Homeworks",
-    "section": "",
-    "text": "Homework assignments will be posted here as the semester progresses, and also on ODTUClass. Late homeworks are not accepted — see the Syllabus page for the full policy.\n\n\n\n#\nTopic\nAssigned\nDue\n\n\n\n\n1\nTBD\nTBD\nTBD\n\n\n2\nTBD\nTBD\nTBD"
-  },
-  {
-    "objectID": "ask.html",
-    "href": "ask.html",
-    "title": "Ask a Question",
-    "section": "",
-    "text": "TipHow it works\n\n\n\n\nPost your question with the + button. You can post anonymously, and no account is needed.\nSay where it comes from, e.g. “Recitation 2, Q20: how do I find Q1?”. Questions with a clear reference get faster answers.\nYou can attach one clear photo of your working (no PDFs or long files).\nCheck first whether someone has already asked the same thing. If so, add a ❤️ instead of posting again.\nAnswers appear as comments under each question, usually within a day or two.\nEverything here is public to everyone with the site link. Don’t write your name, student number or any personal information.\n\n\n\n\n\n\n\nThe wall doesn’t load? Open it in a new tab, or send your question by e-mail to serenay@metu.edu.tr."
-  },
-  {
     "objectID": "recitation-week1.html",
     "href": "recitation-week1.html",
     "title": "Recitation 1",
@@ -285,5 +992,12 @@
     "title": "Recitation 1",
     "section": "Part C — Displaying categorical data",
     "text": "Part C — Displaying categorical data\n\n\n\n\n\n\n\nChoose the name of each display.\n\n :: Frequency table\n :: Contingency table\n :: Bar chart\n :: Clustered bar chart\n :: Pie chart\n :: Stacked bar chart\n :: Doughnut chart\n :: Mosaic plot\n :: Waffle chart\n :: Spine plot | Stacked bar chart\n :: Population pyramid\n\n\n\nClustered bars put the groups side by side. Stacked bars put them on top of each other.\nA spine plot is a 100% stacked bar chart in which the width of each bar is proportional to the group size. A mosaic plot extends this idea to more than two variables.\nA waffle chart shows a percentage as filled squares in a 10 × 10 grid (each square = 1%).\n\n\n\n\n\nIs each display used for one categorical variable, or to show the relationship between two or more categorical variables?\n\nFrequency table :: One variable\nPie chart :: One variable\nContingency (two-way) table :: Two or more\nWaffle chart :: One variable\nClustered bar chart :: Two or more\nDoughnut chart :: One variable\nMosaic plot :: Two or more\nBar chart :: One variable\nSpine plot :: Two or more\n\n\nTo compare two categorical variables you need a display that crosses them: a contingency table, or clustered, stacked, spine or mosaic plots. The population pyramid from the previous question also shows two variables (age group and sex) as back-to-back bars.\n\n\n\nThe student performance dataset\nThe Center of Assessment and Evaluation wants to study the factors that affect student performance. Information on 110 students from a high school in Seoul was collected. The first six rows of the data:\n\n\n\n\n\nLunch: free/reduced or standard lunch. Test: “completed” if the student completed a test preparation course, otherwise “uncompleted”. Education_Level is the parents’ education level.\n\n\nClassify each variable in the dataset.\n\nGender :: Nominal\nEducation_Level (parents’ education) :: Ordinal\nLunch :: Nominal\nTest (preparation course) :: Nominal\nMath_score :: Quantitative\n\n\nEducation level has a natural order: some high school &lt; high school &lt; some college &lt; associate’s &lt; bachelor’s &lt; master’s. That makes it ordinal, so a bar chart of it should keep that order rather than sorting the bars alphabetically. Gender, Lunch and Test are labels with no order (Lunch and Test are binary).\n\n\n\n\nUse the frequency table of parents’ education level.\n\n\n\n\n\nThe total number of students is n = . The most common (modal) education level is . The relative frequency of “master’s degree” is 7/110 =  (4 decimals), which is about  %.\n\nn = 29 + 10 + 19 + 7 + 23 + 22 = 110. The largest frequency is 29, for associate’s degree. The relative frequency of master’s degree is 7/110 ≈ 0.0636, or 6.36%.\nInterpretation: the parents of 29 students (26.4%) have an associate’s degree, and the parents of 7 students (6.4%) have a master’s degree.\n\n\n\n\nHere is the relative frequency table and the bar chart of the same variable.\n\n\n\n\n\n\n\n\n\n\nIf we re-draw the bar chart using relative frequencies instead of counts, how does it change?\n\nThe tallest bar becomes a different category.\nThe bars get closer together, because the proportions are all smaller than 1.\nOnly the y-axis scale changes. The bars keep exactly the same shape.\nIt must be redrawn as a pie chart, because proportions add up to 1.\n\n\nEvery relative frequency is the count divided by the same number (n = 110), so every bar is scaled by the same factor. Only the y-axis labels change, from 0–30 to 0–0.27. Also notice that this chart orders the bars alphabetically. Because education level is ordinal, a better chart would order the bars from some high school to master’s degree.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing the charts and n = 110, answer: about  students completed the test preparation course, and about  students are male.\n\n\nCompleted: 0.345 × 110 = 37.95 ≈ 38 students (so 72 did not complete it)\nMale: 0.527 × 110 = 57.97 ≈ 58 students (and 52 female)\n\nCharts that show only percentages hide the sample size, so always report n alongside the percentages.\n\n\n\n\nWrite a short interpretation (2–3 sentences) of the doughnut chart and the pie chart above.\n\nThe doughnut chart shows that 65.5% of the students did not complete the test preparation course, while 34.5% completed it. So roughly two out of three students did not take the course. The pie chart shows that 52.7% of the students in the study are male and 47.3% are female, so the sample is fairly balanced by gender.\nWatch out: read the labels carefully. The larger (orange) slice is uncompleted, not completed.\n\n\n\n\nThe contingency table shows handedness by sex for 100 people.\n\n\n\n\n\nThe total number of left-handed people is . The percentage of males who are left-handed is  % (1 decimal). The percentage of left-handed people who are female is  % (1 decimal).\n\n\nLeft-handed total: 9 + 4 = 13\nAmong males: 9 / 52 = 0.173 → 17.3% (we divide by the row total, 52)\nAmong left-handers: 4 / 13 = 0.308 → 30.8% (we divide by the column total, 13)\n\nThe two percentages answer different questions, so always ask “percent of what?” For comparison, only 4/48 = 8.3% of females are left-handed, which suggests that left-handedness is more common among males in this group.\n\n\n\n\nUsing the same table, we want to compare the proportion of left-handed people among males and among females. Which display is the best choice?\n\nA pie chart of handedness\nA clustered bar chart of the counts\nA 100% stacked bar chart (or spine plot) of handedness within each sex\nA frequency table of sex\n\n\nTo compare proportions within groups, every group should be scaled to 100%. That is exactly what a 100% stacked bar chart / spine plot does, and a spine plot also shows group size through the bar width. A pie chart and a frequency table each show only one variable. A clustered bar chart of counts can mislead when the groups have different sizes."
+  },
+  {
+    "objectID": "recitation-week5.html",
+    "href": "recitation-week5.html",
+    "title": "Recitation 5",
+    "section": "",
+    "text": "⚡ Warm-up: lightning round\n\n  ChallengeLightning round · 12 statements · 90 seconds\n  True or false? Answer as fast as you can; the review at the end explains every statement.\n  \n    A parameter is a numerical summary of a sample.A parameter describes the population; a statistic describes a sample.\n    Temperature in °C is measured on an interval scale.Differences are meaningful, but 0 °C is not \"no temperature\": no true zero.\n    The median is more robust to outliers than the mean.The mean uses every value, so one extreme value can pull it far away; the median only depends on the middle.\n    The sample variance divides the sum of squared deviations by n.The sample variance divides by n − 1.\n    If every value is multiplied by 2, the standard deviation is multiplied by 2.For y = a + bx, sy = |b| sx.\n    A histogram is a good graph for the blood types of 300 donors.Blood type is categorical; histograms are not suitable for qualitative data.\n    In a right-skewed distribution the mean is usually larger than the median.The long right tail pulls the mean up.\n    r = −0.9 shows a weaker linear relationship than r = 0.5.Strength is |r|: 0.9 &gt; 0.5. The sign only gives the direction.\n    A box plot always shows whether a distribution is bimodal.A box plot uses only five numbers; a violin plot is needed to see two peaks.\n    Time-series data are collected at successive points in time.Cross-sectional data are collected once; time-series data at successive points in time.\n    By the proximity principle, objects that are close together are seen as one group.That is the Gestalt law of proximity.\n    Starting a bar chart's y-axis at a non-zero value can exaggerate differences.A bar's length represents its value; cutting the axis makes small differences look huge.\n  \n  \n\n\n\nMETU wants to know the average weekly study time of all its 30,000 students. A survey of 500 students finds an average of 14.2 hours. Classify each item.\n\nAll 30,000 METU students :: Population\nThe 500 surveyed students :: Sample\nThe average weekly study time of all 30,000 students (unknown) :: Parameter\n14.2 hours :: Statistic\nWeekly study time :: Variable\n\n\nPopulation ↔︎ Parameter, Sample ↔︎ Statistic. The 14.2 hours is computed from the sample, so it is a statistic used to estimate the unknown parameter.\n\n\n\n  ChallengeTick table · Nominal · Ordinal · Interval · Ratio\n  Tick (✔) a cell whenever the scale provides that property. Click a cell to add or remove a tick, then press Check.\n  \n    \n      The “order” of values is known\n      “Counts”, aka “Frequency distribution”\n      Mode\n      Median\n      Mean\n      Can quantify the difference between each value\n      Can add or subtract values\n      Can multiply and divide values\n      Has a “true zero”\n    \n  \n  ✔ correct tick✔ wrong tick✔ missing tick\n  CheckShow answerReset\n  \n  \n    Each scale keeps everything the previous one provides and adds one new property:\n    Nominal (labels, counts, mode) → Ordinal (+ order, median) → Interval (+ measurable differences, mean, + and −) → Ratio (+ true zero, × and ÷)\n    \n      Nominal (blood type, city): only counts and the mode.\n      Ordinal (letter grades, satisfaction 1–5): ranked, so the median exists; the gaps are not measurable, so no mean.\n      Interval (°C, calendar year): 30 °C − 20 °C = 10 °C makes sense, but 40 °C is not twice as hot as 20 °C (no true zero).\n      Ratio (height, income, time): 0 means \"none\", so 180 cm is twice 90 cm.\n    \n  \n\n\n\nChoose the scale and the type of data for each variable.\n\nA student’s hometown :: Nominal ; Qualitative\nT-shirt size (S, M, L, XL) :: Ordinal ; Qualitative\nYear of birth :: Interval ; Quantitative\nMonthly rent in ₺ :: Ratio ; Quantitative\nNumber of siblings :: Ratio ; Quantitative\nCourse evaluation from 1 (poor) to 5 (excellent) :: Ordinal ; Qualitative\n\n\n\nYear of birth has no true zero (year 0 is not “no time”), so it is interval.\nNumber of siblings is a count with a true zero (0 = no siblings): ratio, and it is discrete.\nA 1–5 rating is ordered, but the gaps between the categories are not measurable: ordinal.\n\n\n\n\n\nWhich one doesn’t belong? Three of these variables are measured on the same scale.\n\nEye colour\nMarital Status\nJob Seniority\nCar Brands\nNationality\n\n\nJob Seniority is ordinal (Junior &lt; Mid-level &lt; Senior &lt; Executive); the other four are nominal: categories with no natural order.\n\n\n\n\n  ChallengeStep by step · each correct step unlocks the next\n  Six students report how much they spent on coffee last week (₺): 40, 55, 35, 70, 45, 55. Type each answer and press Enter. Round to 2 decimals.\n  1 The sum of the values, Σx = Then x̄ = 300 / 6 = 50 ₺.\n  2 The median (order the data first!) = Ordered: 35, 40, 45, 55, 55, 70. With n = 6 (even), median = (45 + 55) / 2 = 50. The mode is 55, the range is 70 − 35 = 35.\n  3 The sum of squared deviations, Σ(x − x̄)² = Deviations: −10, 5, −15, 20, −5, 5 (they sum to 0). Squares: 100 + 25 + 225 + 400 + 25 + 25 = 800.\n  4 The sample variance, s² = s² = 800 / (n − 1) = 800 / 5 = 160 ₺². (Dividing by 6 is the most common exam mistake!)\n  5 The standard deviation, s = s = √160 = 12.65 ₺, in the same units as the data.\n  6 The coefficient of variation, CV =  %CV = 12.65 / 50 × 100% = 25.3%: the typical deviation is about a quarter of the mean.\n  Show this stepReset\n  \n\n\n  ChallengeSpot the mistake · click the first wrong line\n  A student found the quartiles and fences of these 12 ordered values:12, 15, 18, 20, 22, 25, 27, 30, 31, 35, 40, 58.Click the first line that contains a mistake.\n  \n    For Q1: np = 12 × 0.25 = 3.\n    np = 3 is a whole number, so Q1 is the 3rd ordered value: Q1 = 18.\n    For Q3: np = 12 × 0.75 = 9, a whole number, so Q3 = (31 + 35) / 2 = 33.\n    IQR = 33 − 18 = 15.\n    Upper fence = 33 + 1.5 × 15 = 55.5, so 58 is a potential outlier.\n  \n  Show answerReset\n  \n  \n    Line 2 is wrong. Q1 is the median of the lower half of the data, and Q3 is the median of the upper half of the data. By the lecture rule, when np is an integer we average the np-th and (np+1)-th values: Q1 = (18 + 20) / 2 = 19. Line 3 does this correctly for Q3.\n    Fence formulas:\n    Lower fence = Q1 − 1.5 × IQR\n    Upper fence = Q3 + 1.5 × IQR\n    Any value below the lower fence or above the upper fence is a potential outlier.\n    Corrected: IQR = Q3 − Q1 = 33 − 19 = 14, so 1.5 × IQR = 21.\n    Lower fence = 19 − 21 = −2\n    Upper fence = 33 + 21 = 54\n    No value is below −2, but 58 is above 54, so 58 is a potential outlier.\n  \n\n\n\nA box plot is drawn from this five-number summary: minimum 12, \\(Q_1\\) = 30, median 38, \\(Q_3\\) = 46, maximum 80.\n\\(IQR =\\) , lower fence \\(=\\) , upper fence \\(=\\) .\nThe number of potential outliers you can be sure about from this summary is : the maximum, 80.\n\n\\(IQR = 46 - 30 = 16\\); \\(1.5 \\times 16 = 24\\); fences \\(30 - 24 = 6\\) and \\(46 + 24 = 70\\). The minimum 12 is inside, the maximum 80 is outside: it is drawn as a separate point.$.\n\n\n\n\nWhich mean should you use?\n\nThe average of your five midterm scores :: Arithmetic mean\nThe average yearly growth of an investment that changed by +10%, −5% and +20% :: Geometric mean\nThe average speed for a trip with three equal 100 km legs at 60, 90 and 120 km/h :: Harmonic mean\nThe average price per litre when you spend exactly ₺1,000 on fuel each week :: Harmonic mean\nThe average height of a basketball team :: Arithmetic mean\nThe average yearly growth factor of a city’s population :: Geometric mean\n\n\nValues that add up → arithmetic; values that multiply (growth factors 1.10 × 0.95 × 1.20) → geometric; rates over equal amounts of the “per” quantity (equal distances, equal money) → harmonic.\n\n\n\n\nDaily maximum temperatures in a city have mean \\(\\bar{x} = 20\\) °C and standard deviation \\(s = 5\\) °C. Converted with \\(F = 32 + 1.8\\,C\\):\nmean \\(=\\)  °F, standard deviation \\(=\\)  °F, variance \\(=\\)  °F².\nCan we compare the variability with the coefficient of variation?  (yes / no)\n\n\\(\\bar{y} = 32 + 1.8(20) = 68\\); \\(s_y = |1.8| \\times 5 = 9\\); \\(s_y^2 = 1.8^2 \\times 25 = 81\\). Adding 32 moves the data but does not change the spread.\nNo: temperature in °C or °F is an interval scale with no true zero, and the CV is meaningful only for ratio-scale data. (In °C the CV would be 25%, in °F 13.2%: the same data, two different “CVs”.)\n\n\n\n\nExam scores are mound-shaped with mean 64 and standard deviation 8. By the empirical rule:\nAbout  % of the students scored between 48 and 80.\nAbout  % scored above 72.\nAbout  % scored below 48.\n\n\n48 and 80 are \\(64 \\pm 2(8)\\): about 95%.\n72 is \\(64 + 8\\): 68% lie within \\(\\pm 1s\\), so \\(32\\%\\) are outside, half of them above: 16%.\nBelow \\(64 - 2(8) = 48\\): half of the 5% outside \\(\\pm 2s\\): 2.5%. \n\n\n\n\n\nUse the mean and the median to decide the shape.\n\nHouse prices: mean ₺4.2 M, median ₺3.1 M :: Positively (right) skewed\nScores on a very easy quiz: mean 8.1, median 8.8 (out of 10) :: Negatively (left) skewed\nHeights of adult women: mean = median = mode = 163 cm :: Symmetric\nWaiting times at a bank: mean 9 min, median 6 min :: Positively (right) skewed\n\n\nThe mean is pulled towards the long tail: mean &gt; median → right tail; mean &lt; median → left tail. Prices and waiting times cannot go below 0 but can be very large; easy-quiz scores have a natural maximum.\n\n\n\n\n  ChallengeClick on the graph\n  40 students reported how many minutes they spend on social media before breakfast. Click the modal class.\n  \n  Show answerReset\n  \n  The modal class is the class with the highest frequency: 10–20 minutes (12 students). The long tail on the right makes the histogram positively skewed.\n\n\n  ChallengeClick on the graph\n  Same histogram (n = 40). Click the class that contains the median.\n  \n  Show answerReset\n  \n  With n = 40, the median is the average of the 20th and 21st ordered values. Cumulative frequencies: 4, 16, 25, … The first 16 values are below 20 minutes and values 17–25 are in 20–30, so the median class is 20–30, one class to the right of the modal class, because of the right skew.\n\n\n  ChallengeEstimate r with the slider · within ±0.15 counts as correct\n  Move the slider to your best guess of the correlation coefficient r, then press Check. New plot gives you another one.\n  \n  −1+10.00\n  CheckNew plot\n  \n\n\n\nCompute \\(r\\) by hand for these four points.\n\n\n\n\\(x\\)\n2\n4\n6\n8\n\n\n\n\n\\(y\\)\n3\n7\n5\n9\n\n\n\n\\(\\bar{x} =\\) , \\(\\bar{y} =\\) , \\(\\sum(x-\\bar{x})(y-\\bar{y}) =\\) , \\(\\sum(x-\\bar{x})^2 =\\) , \\(\\sum(y-\\bar{y})^2 =\\) \n\\(r =\\) : a strong  linear relationship.\n\nDeviations: \\(x - \\bar{x} = -3, -1, 1, 3\\); \\(y - \\bar{y} = -3, 1, -1, 3\\). Products: \\(9 - 1 - 1 + 9 = 16\\). \\(\\sum (x-\\bar{x})^2 = 20\\), \\(\\sum (y-\\bar{y})^2 = 20\\).\n\\[r = \\frac{16}{\\sqrt{20}\\sqrt{20}} = \\frac{16}{20} = 0.8\\]\n\n\n\n\nChoose the best option.\n\n500 students’ number of siblings vs number of pets: only 20 dots are visible :: Add jitter\nHistograms of a class of 30 and a class of 150 drawn with frequencies :: Use relative frequencies\nHeight, weight and age must be shown in one graph :: Bubble chart\nTip vs bill for cash and card payers, drawn with different y-axes :: Comparative scatter plots, same scales\nA histogram of 400 values with only 3 classes looks flat and boring :: Use more, narrower classes\n36 monthly sales values were drawn as a histogram :: Line chart\nTwo sections with identical box plots; one may have two groups of students :: Violin plot\n\n\nOverplotting → jitter; different group sizes → relative frequencies; three numerical variables → bubble chart; groups compared → same scales; too few classes hide the shape → more classes (400 values → 9–10); time order matters → line chart; a box plot hides bimodality → violin plot.\n\n\n\nA survey asked 300 students for their faculty and whether they live in a dormitory:\n\n\n\nFaculty\nLives in dorm\nNot in dorm\nTotal\n\n\n\n\nEngineering\n60\n90\n150\n\n\nArts & Sciences\n30\n20\n50\n\n\nEconomics\n40\n60\n100\n\n\nTotal\n130\n170\n300\n\n\n\n\n\nUse the table above.\nRelative frequency of Engineering students: ; of Arts & Sciences students: ; of Economics students: .\nWithin each faculty, the percentage who live in a dorm: Engineering  %, Arts & Sciences  %, Economics  %.\nOverall,  % of the 300 students live in a dorm.\n\n\nFaculty: \\(150/300 = 0.50\\), \\(50/300 \\approx 0.17\\), \\(100/300 \\approx 0.33\\) (they sum to 1).\nWithin a faculty, divide by that faculty’s total (the row total): \\(60/150 = 40\\%\\), \\(30/50 = 60\\%\\), \\(40/100 = 40\\%\\).\nOverall: \\(130/300 \\approx 43.3\\%\\).\n\n\n\n\n  ChallengeDraw the chart · move the sliders to set each bar\n  Draw the relative-frequency bar chart of Faculty (all 300 students). Set the height of each bar, then press Check (±2 percentage points counts as correct).\n  \n  \n  CheckShow answerReset\n  \n  Heights: 150/300 = 50%, 50/300 ≈ 17%, 100/300 ≈ 33%. With frequencies the bars would be 150, 50 and 100: exactly the same shape, only the y-axis labels change, because every count is divided by the same n = 300.\n\n\n  ChallengeDraw the chart · 100% stacked bar chart\n  Draw the 100% stacked bar chart of dorm use within each faculty. Each slider sets the dorm part; the not in dorm part fills the rest up to 100%.\n  \n  \n  CheckShow answerReset\n  \n  Dorm shares: 60/150 = 40%, 30/50 = 60%, 40/100 = 40%. Every bar is 100% tall, so a 100% stacked bar chart compares the proportions within groups, but it no longer shows how big each group is.\n\n\n\n  ChallengeClick on the graph\n  Click the part of this violin plot that shows the interquartile range.\n  \n  Show answerReset\n  \n  Inside a violin: the thick black bar is the IQR, the thin line is the 95% confidence interval, the white dot is the median, and the width of the outline is the density (wide = many values). This violin is bimodal, which a box plot could not show.\n\n\n  ChallengeSpot the mistake · click the wrong sentence\n  A student describes a correlation heatmap and the scatter plot matrix of four variables. One sentence is wrong. Click it.\n  \n    The heatmap shows r = 0.62 for study hours and GPA: a positive linear relationship.\n    All values on the diagonal are 1, because each variable is perfectly correlated with itself.\n    The heatmap is symmetric: the value for (study, GPA) equals the value for (GPA, study).\n    Since r = 0.03 for sleep and GPA, sleep and GPA are not related in any way.\n  \n  Show answerReset\n  \n  Sentence 4 is wrong. r ≈ 0 only means there is no linear relationship. The drawback of correlation plots: they give no information about nonlinearity. The scatter plot could show a strong curved (e.g. upside-down U) relationship.\n\n\n\nWhich Gestalt principle is at work?\n\nIn a dashboard, three charts inside one light-grey container are read as one topic :: Common region\nA chart without its border and background still looks complete :: Closure\nIn a line chart, one country is orange and all others are grey :: Focal point\nLabels placed right next to their bars are read together with them :: Proximity\nThe same colour is used for “2026” in every chart of a report :: Similarity\nThe eye follows a smooth trend line through the data points :: Continuity\nA white logo shape is seen “cut out” of a dark background :: Figure-ground\nThree overlapping rings are seen as three simple circles :: Prägnanz\n\n\nCommon region (enclosure) groups what is inside one boundary; closure fills in missing lines; focal point captures the eye with what is different; proximity groups what is close; similarity groups what looks alike; continuity follows smooth paths; figure–ground separates the object from the background; Prägnanz reduces shapes to the simplest form.\n\n\n\n\nA bar chart shows a pass rate of 61% in 2025 and 64% in 2026, with the y-axis starting at 60.\nThe 2026 bar looks  times as tall as the 2025 bar, although the real increase is only  percentage points. This is the misleading non-zero  trick.\n\nHeights above 60: 1 vs 4 units, so the bar looks 4 times as tall; \\(64/61 \\approx 1.05\\). Bars should start at zero. (The other bad example in Lecture 4: an upside-down axis, which makes rising values look like falling ones.)\n\n\n\n\n[18 pts] The waiting times (minutes) of 10 students at the ring-bus stop, ordered:\n8, 11, 13, 14, 16, 17, 19, 21, 24, 41\n(a) Median \\(=\\) \n(b) \\(Q_1\\): \\(np = 10 \\times 0.25 =\\) , so \\(Q_1\\) is the  ordered value: \\(Q_1 =\\) .\n(c) \\(Q_3\\): \\(np = 7.5\\), so \\(Q_3 =\\) .\n(d) \\(IQR =\\) ; lower fence \\(=\\) ; upper fence \\(=\\) .\n(e) Potential outlier(s): .\n(f) Will the mean be larger or smaller than the median? \n\n(a) \\(n = 10\\) is even: \\((16 + 17)/2 = 16.5\\).\n(b) \\(np = 2.5\\) is not a whole number, so round up to 3: \\(Q_1\\) = 3rd value = 13.\n(c) \\(np = 7.5\\) → 8th value = 21.\n(d) \\(IQR = 8\\), \\(1.5 \\times 8 = 12\\): fences \\(13 - 12 = 1\\) and \\(21 + 12 = 33\\).\n(e) 41 &gt; 33 → potential outlier.\n(f) The mean is \\(184/10 = 18.4\\) &gt; 16.5: the outlier pulls the mean up (right skew).\nMarking: (a) 2, (b) 4, (c) 2, (d) 5, (e) 2, (f) 3.\n\n\n\n\n[12 pts] A real-estate report says: “The average flat in our city costs ₺4.2 million.” The median price is ₺3.1 million.\n(a) What is the shape of the distribution of prices? (b) Which measure of centre would you report, and why? (c) Which graph would you draw to show the distribution?\n\nModel answer:\n(a) Mean &gt; median, so the distribution is positively (right) skewed: a few very expensive flats form a long right tail. (4 pts)\n(b) The median (₺3.1 M): it is robust to the few extreme prices, while the mean is pulled up by them and overstates what a typical flat costs. (4 pts)\n(c) A histogram (shape, modal class, the long right tail) or a box plot (median, IQR, potential outliers beyond the upper fence). A violin plot also works. (4 pts)\n\n\n\n\n[10 pts] Which statements are true? (+2 for each correct choice, −2 for each wrong choice, minimum 0.)\n\nThe IQR is not affected by an extreme maximum value.\nThe coefficient of variation is suitable for comparing temperatures in °C.\nA histogram should have gaps between its boxes.\nIf r = 0, the points can still follow a strong curved pattern.\nRelative frequencies allow you to compare two groups of different sizes.\nA pie chart is the best graph for 36 months of sales.\nIn a split violin plot, the two halves of each violin show two groups.\n\n\n\nb is false: °C is interval (no true zero); the CV needs ratio data.\nc is false: a histogram has adjoining boxes.\nf is false: time-series data → line chart.\na: the IQR uses only \\(Q_1\\) and \\(Q_3\\), so the maximum doesn’t change it.\n\n\n\n\n\n[12 pts] A student’s bar chart compares the average GPA of 12 faculties. The bars are in random order, each bar has a different colour, the chart has a thick border and a grey background, and the y-axis starts at 2.0. The message should be: “Our faculty has the highest average GPA.”\nGive four improvements and name the principle behind each.\n\nModel answer (3 pts each):\n\nSimplicity: sort the bars from highest to lowest.\nFocus point: colour only our faculty’s bar; make the others grey.\nClosure: remove the border and background shading; the chart still looks complete.\nNon-zero baseline (bad example): start the y-axis at 0 so the differences are not exaggerated.\nProximity: put the message title / value label right next to our faculty’s bar.\n\n\n\n\n\n[8 pts] Choose the most appropriate graph.\n\nShape of the distribution of 300 students’ commute times :: Histogram\nCompare the exam scores of 5 sections (centre, spread, outliers) :: Box plots side by side\nRelationship between hours studied and exam score :: Scatter plot\nMonthly number of library visitors over 3 years :: Line chart\nSize, rent and age of flats in one graph :: Bubble chart\nAre faculty and dormitory use (yes/no) related? :: Mosaic plot\nUnusual values among 12 measurements of a boiling point :: Dot diagram\nRent vs distance to campus for 160 flats :: Scatter plot\n\n\n1 pt each. One numerical variable → histogram; groups → side-by-side box plots; two numerical variables → scatter plot; three → bubble chart; over time → line chart; two categorical variables → mosaic plot; a small data set and unusual values → dot diagram.\n\n\n\nAll data sets on this page were created for this recitation. Good luck in the exam! 🍀"
   }
 ]
