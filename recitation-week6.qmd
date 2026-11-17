@@ -1,0 +1,47 @@
+---
+title: "Recitation 6"
+---
+
+```{=html}
+<div class="r6-deck">
+  <iframe src="recitation6-slides.html" allowfullscreen loading="lazy" title="Recitation 6 slides"></iframe>
+</div>
+<p><a class="btn btn-primary" href="recitation6-slides.html" target="_blank">Open slides in full screen ↗</a></p>
+<style>
+.r6-deck{position:relative;width:100%;aspect-ratio:16/9;border:1px solid #ddd;border-radius:10px;overflow:hidden}
+.r6-deck iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+```
+
+## Datasets
+
+```{=html}
+<div class="r6-data">
+  <a class="r6-card" href="files/recitation6/Sample - Superstore.xlsx" download="Sample - Superstore.xlsx">
+    <span class="r6-ico">📊</span>
+    <span class="r6-txt"><strong>Sample - Superstore.xlsx</strong><small>Part 1 · Orders sheet: 21 fields, 10,194 rows</small></span>
+    <span class="r6-dl">⬇</span>
+  </a>
+  <a class="r6-card" href="files/recitation6/customer_data.csv" download>
+    <span class="r6-ico">👥</span>
+    <span class="r6-txt"><strong>customer_data.csv</strong><small>Part 2 · 1,000 customers, 8 variables</small></span>
+    <span class="r6-dl">⬇</span>
+  </a>
+  <a class="r6-card" href="files/recitation6/femicide.csv" download>
+    <span class="r6-ico">🗺️</span>
+    <span class="r6-txt"><strong>femicide.csv</strong><small>Part 3 · Dashboard: 3,096 records, 2008–2020</small></span>
+    <span class="r6-dl">⬇</span>
+  </a>
+</div>
+<style>
+.r6-data{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:1rem 0 2rem}
+.r6-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #e3e3e3;border-radius:12px;
+  text-decoration:none;color:inherit;background:#fff;transition:transform .15s,box-shadow .15s,border-color .15s}
+.r6-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);border-color:var(--bs-primary)}
+.r6-ico{font-size:1.8rem}
+.r6-txt{display:flex;flex-direction:column;flex:1;min-width:0}
+.r6-txt strong{font-size:.98rem;word-break:break-word}
+.r6-txt small{color:#6c757d;font-size:.82rem}
+.r6-dl{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--bs-primary);color:#fff;font-weight:700}
+</style>
+```

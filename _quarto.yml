@@ -2,8 +2,7 @@ project:
   type: website
   output-dir: docs
   resources:
-    - games-tab/games/
-
+    - files/recitation6/
 website:
   title: "STAT 112"
   open-graph: true
@@ -26,6 +25,8 @@ website:
             href: recitation-week4.qmd 
           - text: "Recitation 5"
             href: recitation-week5.qmd
+          - text: "Recitation 6"
+            href: recitation-week6.qmd
       - text: "Homeworks"
         menu:
            - text: "Homework 1"
