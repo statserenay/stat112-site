@@ -662,196 +662,1134 @@
     "href": "recitation6-slides.html#section-72",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Fix data types: spending must be a number before we can chart it\n1 Connect\n2 Fix data types\n3 Research questions\n\nIn the Data pane, click the Abc icon next to spending and choose Number (decimal).\nRight-click spending and choose Convert to Measure. Repeat both steps for purchase_frequency.\n\nWhy: Text fields are dimensions; only numeric measures can be binned, averaged or plotted on an axis."
+    "text": "Load the data: the Data Source page previews 8 fields and 1,000 rows\n1 Connect\n2 Fix data types\n3 Research questions\n4\nLOAD THE DATA · 3 / 3 The Data Source page\nDo this: customer_data.csv appears under Files and on the canvas; the preview shows 8 fields and 1,000 rows. Click Sheet 1 to open a worksheet."
   },
   {
     "objectID": "recitation6-slides.html#section-73",
     "href": "recitation6-slides.html#section-73",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Research questions\n1 Connect\n2 Fix data types\n3 Research questions"
+    "text": "Fix data types: spending must be a number before we can chart it\n1 Connect\n2 Fix data types\n3 Research questions\n\nIn the Data pane, click the Abc icon next to spending and choose Number (decimal).\nRight-click spending and choose Convert to Measure. Repeat both steps for purchase_frequency.\n\nWhy: Text fields are dimensions; only numeric measures can be binned, averaged or plotted on an axis."
   },
   {
     "objectID": "recitation6-slides.html#section-74",
     "href": "recitation6-slides.html#section-74",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 1 - Show Me builds a histogram of annual spending in one click\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n\nSelect spending in the Data pane, open Show Me and click Histogram.\nTableau creates spending (bin) on Columns and CNT(spending) on Rows.\n\nReading: Spending ranges from about 0 to 26K and is mildly right-skewed: counts thin out above about 17K."
+    "text": "Fix data types: spending must be a number before we can chart it\n1 Connect\n2 Fix data types\n3 Research questions\n5\nFIX DATA TYPES · 1 / 4 spending: Number (decimal)\nDo this: spending and purchase_frequency were read as text. Click the Abc icon of spending and choose Number (decimal)."
   },
   {
     "objectID": "recitation6-slides.html#section-75",
     "href": "recitation6-slides.html#section-75",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 2 - Gender on Columns gives one histogram per group\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n\nDrag gender onto Columns, in front of spending (bin): Tableau draws a Female and a Male panel.\nDrag gender onto the Marks card and set it to Color so the two groups are easy to tell apart.\n\nAnswer to RQ1: Both genders show the same mildly right-skewed shape over 0 to 25K; spending distributions look very similar."
+    "text": "Fix data types: spending must be a number before we can chart it\n1 Connect\n2 Fix data types\n3 Research questions\n5\nFIX DATA TYPES · 2 / 4 Convert spending to a measure\nDo this: Right-click spending and choose Convert to Measure, because it is a numerical variable."
   },
   {
     "objectID": "recitation6-slides.html#section-76",
     "href": "recitation6-slides.html#section-76",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ2: How are customers distributed across education levels?\u000bStep 1 - Build a pie chart of education counts\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nDrag education to Rows and again to Columns; right-click the Columns pill and choose Measure &gt; Count.\nIn Show Me, click Pie chart. Education goes to Color and CNT(education) to Angle.\n\nIdea: A donut is just a pie with a smaller white circle on top of it."
+    "text": "Fix data types: spending must be a number before we can chart it\n1 Connect\n2 Fix data types\n3 Research questions\n5\nFIX DATA TYPES · 3 / 4 purchase_frequency: Number (decimal)\nDo this: Click the Abc icon of purchase_frequency and choose Number (decimal)."
   },
   {
     "objectID": "recitation6-slides.html#section-77",
     "href": "recitation6-slides.html#section-77",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nDouble-click Columns, type 0 and press Enter (SUM(0)); repeat to get two pies.\nOn the second SUM(0) card, change the mark to Circle, then right-click its pill and choose Dual Axis.\n\nResult: The circle now sits on top of the pie, sharing the same center."
+    "text": "Fix data types: spending must be a number before we can chart it\n1 Connect\n2 Fix data types\n3 Research questions\n5\nFIX DATA TYPES · 4 / 4 Convert purchase_frequency to a measure\nDo this: Right-click purchase_frequency and choose Convert to Measure."
   },
   {
     "objectID": "recitation6-slides.html#section-78",
     "href": "recitation6-slides.html#section-78",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nOn the circle card, drag the Size slider down so the circle is smaller than the pie.\nClick Color on the circle card and choose white. Enlarge the pie with its own Size slider.\n\nTip: Uncheck Show Header on the axis to hide the 0 labels."
+    "text": "Research questions\n1 Connect\n2 Fix data types\n3 Research questions"
   },
   {
     "objectID": "recitation6-slides.html#section-79",
     "href": "recitation6-slides.html#section-79",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nFormat &gt; Borders and Lines: set grid and zero lines to None. Edit Colors and assign the Blue-Teal palette.\nAdd education and CNT(education) to Label, then Quick Table Calculation &gt; Percent of Total.\n\nAnswer to RQ2: Bachelor 27.1%, PhD 24.8%, High School 24.5%, Master 23.6%: education levels are nearly balanced."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 1 - Show Me builds a histogram of annual spending in one click\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n\nSelect spending in the Data pane, open Show Me and click Histogram.\nTableau creates spending (bin) on Columns and CNT(spending) on Rows.\n\nReading: Spending ranges from about 0 to 26K and is mildly right-skewed: counts thin out above about 17K."
   },
   {
     "objectID": "recitation6-slides.html#section-80",
     "href": "recitation6-slides.html#section-80",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 1 - Average income by country, not total income\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nDrag country to Columns and income to Rows.\nRight-click SUM(income) and choose Measure &gt; Average. Countries with many customers no longer look richer just because of their count.\n\nWhy average: SUM rewards countries with more customers; AVG compares a typical customer."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 1 - Show Me builds a histogram of annual spending in one click\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n7\nRQ1 WALKTHROUGH · 1 / 6 Show Me › Histogram\nDo this: Select spending in the Data pane, open Show Me and click the histogram."
   },
   {
     "objectID": "recitation6-slides.html#section-81",
     "href": "recitation6-slides.html#section-81",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 2 - A Top filter keeps the 10 highest-average countries\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nDrag country to the Filters card and open the Top tab.\nChoose By field: Top 10 by income, Average, then click OK.\n\nResult: Only 10 bars remain, still in alphabetical order."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 1 - Show Me builds a histogram of annual spending in one click\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n7\nRQ1 WALKTHROUGH · 2 / 6 Histogram of spending\nDo this: Tableau puts spending (bin) on Columns and CNT(spending) on Rows. Annual spending is right-skewed."
   },
   {
     "objectID": "recitation6-slides.html#section-82",
     "href": "recitation6-slides.html#section-82",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nClick the sort icon on the y-axis to sort from largest to smallest.\nDrag income onto Marks, set it to Average, and choose Color.\n\nAnswer to RQ3: Saint Helena, Uzbekistan, Dominica, Indonesia and Slovakia lead (about 83K to 95K). Caution: about 4 customers per country, so these averages are unstable."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 2 - Gender on Columns gives one histogram per group\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n\nDrag gender onto Columns, in front of spending (bin): Tableau draws a Female and a Male panel.\nDrag gender onto the Marks card and set it to Color so the two groups are easy to tell apart.\n\nAnswer to RQ1: Both genders show the same mildly right-skewed shape over 0 to 25K; spending distributions look very similar."
   },
   {
     "objectID": "recitation6-slides.html#section-83",
     "href": "recitation6-slides.html#section-83",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 1 - Disaggregate measures to plot one point per customer\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n\nDrag spending to Columns and income to Rows: Tableau shows one aggregated point.\nOpen the Analysis menu and uncheck Aggregate Measures: now there are 1,000 points.\n\nReading: The cloud of points is patternless: income and spending show no clear relationship."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 2 - Gender on Columns gives one histogram per group\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n8\nRQ1 WALKTHROUGH · 3 / 6 Drag gender to Columns\nDo this: Drag gender onto the Columns shelf, in front of spending (bin)."
   },
   {
     "objectID": "recitation6-slides.html#section-84",
     "href": "recitation6-slides.html#section-84",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n\nDrag purchase_frequency onto Marks and choose Size; pick an open circle under Shape.\nDrag purchase_frequency onto Marks again and choose Color.\n\nAnswer to RQ4: More frequent buyers (darker) spend more; income is unrelated to both. This is association, not cause."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 2 - Gender on Columns gives one histogram per group\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n8\nRQ1 WALKTHROUGH · 4 / 6 One histogram per gender\nDo this: Columns now hold gender and spending (bin): a Female panel and a Male panel."
   },
   {
     "objectID": "recitation6-slides.html#section-85",
     "href": "recitation6-slides.html#section-85",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ5: How does average customer income vary across countries?\u000bStep 1 - Tableau generates latitude and longitude from country names\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nDouble-click Longitude (generated) and Latitude (generated): an empty world map appears.\nDrag country onto Detail on the Marks card: one point per country.\n\nNote: 8 unknown means 8 country names Tableau could not match to a location."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 2 - Gender on Columns gives one histogram per group\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n8\nRQ1 WALKTHROUGH · 5 / 6 gender on Color\nDo this: Drag gender onto the Marks card, click the icon at its left and choose Color."
   },
   {
     "objectID": "recitation6-slides.html#section-86",
     "href": "recitation6-slides.html#section-86",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nOpen Show Me and choose Choropleth (filled map); drag country to Color.\nDrag country onto Label to print the country names.\n\nTip: A filled map colors whole areas, so it suits a value per country."
+    "text": "RQ1: How is annual spending distributed for female and male customers?\u000bStep 2 - Gender on Columns gives one histogram per group\n1 Histogram of spending\n2 Split by gender\n3 Color and read\n8\nRQ1 WALKTHROUGH · 6 / 6 Coloured by gender\nDo this: Both distributions are right-skewed: most spending values lie between 0 and 10,000 for women and for men."
   },
   {
     "objectID": "recitation6-slides.html#section-87",
     "href": "recitation6-slides.html#section-87",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ5: How does average customer income vary across countries?\u000bStep 3 - Color each country by the average income of its customers\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nRemove the two country pills from Marks, then drag country back onto Detail.\nDrag income onto Color, right-click SUM(income) and choose Measure &gt; Average.\nDarker blue = higher average income.\n\nReading: Average income ranges from about 22.8K to 94.6K, with no clear regional pattern."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 1 - Build a pie chart of education counts\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nDrag education to Rows and again to Columns; right-click the Columns pill and choose Measure &gt; Count.\nIn Show Me, click Pie chart. Education goes to Color and CNT(education) to Angle.\n\nIdea: A donut is just a pie with a smaller white circle on top of it."
   },
   {
     "objectID": "recitation6-slides.html#section-88",
     "href": "recitation6-slides.html#section-88",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nDrag country to Filters &gt; Top tab: By field, Top 8 by income, Average.\nDrag AVG(income) onto Label so each country shows its value.\n\nAnswer: Uzbekistan, Indonesia, Saint Helena and Slovakia are among the 8, with averages up to about 94.6K."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 1 - Build a pie chart of education counts\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n9\nRQ2 DONUT WALKTHROUGH · 1 / 39 Drag education to Rows\nDo this: Tableau lists the four education levels as text."
   },
   {
     "objectID": "recitation6-slides.html#section-89",
     "href": "recitation6-slides.html#section-89",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "PART 3 Building a dashboard\nFemicide in Turkey, 2008–2020: four worksheets combined into one interactive dashboard and published to Tableau Public."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 1 - Build a pie chart of education counts\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n9\nRQ2 DONUT WALKTHROUGH · 2 / 39 Count education on Columns\nDo this: Drag education to Columns too, open the pill’s dropdown and choose Measure › Count."
   },
   {
     "objectID": "recitation6-slides.html#section-90",
     "href": "recitation6-slides.html#section-90",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "A dashboard combines several views so viewers can compare them at once\nA good dashboard aligns attention on the key message, uncovers insights and speeds up decisions. Four rules:\nKnow purpose and audience\nDecide what the dashboard must say, and how familiar viewers are with the topic.\nUse the top-left corner\nViewers scan from the top left, so put the most important view there.\nLimit the content\nAt most four views; more makes the dashboard hard to read.\nAdd interactivity\nFilters and highlight actions invite viewers to explore."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 1 - Build a pie chart of education counts\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n9\nRQ2 DONUT WALKTHROUGH · 3 / 39 Pick the pie in Show Me\nDo this: CNT(education) first gives horizontal bars. Open Show Me and click the pie chart."
   },
   {
     "objectID": "recitation6-slides.html#section-91",
     "href": "recitation6-slides.html#section-91",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "femicide.csv: 3,096 recorded killings of women in Turkey, 2008–2020\nKey fields: year, city, killer1, killingway1 (12 fields in total).\nResearch questions\nQ1\nHow has the annual number of women killed changed from 2008 to 2020? Line chart\nQ2\nHow does the number of women killed vary across cities? Symbol map\nQ3\nWho were the most frequent perpetrators? Bar chart\nQ4\nWhich methods were most often used? Frequency table\nName each worksheet after its question so it is easy to find when building the dashboard."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 1 - Build a pie chart of education counts\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n9\nRQ2 DONUT WALKTHROUGH · 4 / 39 The pie is ready\nDo this: education is on Color and CNT(education) on Angle. This pie becomes the coloured ring."
   },
   {
     "objectID": "recitation6-slides.html#section-92",
     "href": "recitation6-slides.html#section-92",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Q1 step 1: count records per year to get the yearly totals\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nChange year to a Date type, then drag year to both Columns and Rows.\nRight-click YEAR(year) on Rows and choose Measure &gt; Count: the line now shows killings per year.\n\nResult: CNT(year) on Rows, YEAR(year) on Columns: one line point per year."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nDouble-click Columns, type 0 and press Enter (SUM(0)); repeat to get two pies.\nOn the second SUM(0) card, change the mark to Circle, then right-click its pill and choose Dual Axis.\n\nResult: The circle now sits on top of the pie, sharing the same center."
   },
   {
     "objectID": "recitation6-slides.html#section-93",
     "href": "recitation6-slides.html#section-93",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag year to Rows again and set it to Count; change this second card’s mark to Circle.\nRight-click the second CNT(year) pill &gt; Dual Axis, then right-click the right axis &gt; Synchronize Axis.\n\nAnswer to Q1: Cases rose from under 100 (2008) to over 400 (2019). The 2020 drop may reflect incomplete records."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 5 / 39 Type 0 on Columns\nDo this: Double-click the empty Columns shelf, type 0 and press Enter."
   },
   {
     "objectID": "recitation6-slides.html#section-94",
     "href": "recitation6-slides.html#section-94",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag city onto Detail. Click 2 unknown &gt; Edit Locations; for Çorum (Ambiguous) enter latitude 40.5499 and longitude 34.9537.\nDrag city to Filters and uncheck Null.\n\nWhy: Tableau cannot place ambiguous or missing names, so they must be fixed or excluded."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 6 / 39 SUM(0) appears\nDo this: The pie now sits on a zero axis. This dummy axis is what lets us stack two charts."
   },
   {
     "objectID": "recitation6-slides.html#section-95",
     "href": "recitation6-slides.html#section-95",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Q2 step 2: size each city’s circle by the number of records\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag city onto Marks, right-click it and choose Measure &gt; Count; set CNT(city) to Size.\nAdd city to Color and rename the sheet title: The Number of Women Killed by City.\n\nAnswer to Q2: Istanbul has the largest circle (about 300 cases); most other cities record far fewer."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 7 / 39 Type 0 a second time\nDo this: Double-click next to SUM(0) and type 0 again."
   },
   {
     "objectID": "recitation6-slides.html#section-96",
     "href": "recitation6-slides.html#section-96",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag killer1 to Columns and to Rows; set the Rows pill to Measure &gt; Count.\nDrag killer1 to Filters &gt; Top: Top 15 by Count. Add CNT(killer1) to Color and Label; sort descending.\n\nAnswer to Q3: Husbands are the most frequent (1,032), then unidentified (504) and boyfriends (306)."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 8 / 39 Two identical pies\nDo this: The Marks card now has three tabs: All, SUM(0) and SUM(0), one card per chart."
   },
   {
     "objectID": "recitation6-slides.html#section-97",
     "href": "recitation6-slides.html#section-97",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag killingway1 to Rows and Count of killingway1 onto Text.\nRight-click the count &gt; Quick Table Calculation &gt; Percent of Total; sort descending.\n\nAnswer to Q4: Firearms account for 46.2% and cutting tools for 26.3%; 9.2% are undetectable."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 9 / 39 Open the second card\nDo this: Click the second SUM(0) tab and open the mark-type dropdown."
   },
   {
     "objectID": "recitation6-slides.html#section-98",
     "href": "recitation6-slides.html#section-98",
     "title": "Recitation 6: Tableau",
     "section": "",
-    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nClick New Dashboard. Under Size, choose the target screen size.\nDrag the most important view (methods table) to the top left first, then the map, line chart and bar chart.\n\nLayout: Four views, the most important at the top left, consistent titles in one color."
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 10 / 39 Choose Circle\nDo this: Change the mark type from Pie to Circle."
   },
   {
     "objectID": "recitation6-slides.html#section-99",
     "href": "recitation6-slides.html#section-99",
     "title": "Recitation 6: Tableau",
     "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 11 / 39 It still has the education pills\nDo this: The circle still carries education and CNT(education), so it behaves like a copy of the pie."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-100",
+    "href": "recitation6-slides.html#section-100",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 12 / 39 Remove those pills\nDo this: Drag education and both CNT(education) pills off this card. The circle turns grey: one plain mark that you can size freely."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-101",
+    "href": "recitation6-slides.html#section-101",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 2 - Duplicate the pie on two axes and overlay them\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n10\nRQ2 DONUT WALKTHROUGH · 13 / 39 Dual Axis\nDo this: Right-click the second SUM(0) pill on Columns and choose Dual Axis."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-102",
+    "href": "recitation6-slides.html#section-102",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nOn the circle card, drag the Size slider down so the circle is smaller than the pie.\nClick Color on the circle card and choose white. Enlarge the pie with its own Size slider.\n\nTip: Uncheck Show Header on the axis to hide the 0 labels."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-103",
+    "href": "recitation6-slides.html#section-103",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 14 / 39 Shrink the circle\nDo this: With the second SUM(0) card selected, drag the Size slider to the left."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-104",
+    "href": "recitation6-slides.html#section-104",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 15 / 39 Enlarge the pie\nDo this: Select the first SUM(0) card (the pie) and drag its Size slider to the right."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-105",
+    "href": "recitation6-slides.html#section-105",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 16 / 39 Balance the ring\nDo this: Back on the circle card, fine-tune Size until the ring is as thick as you want."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-106",
+    "href": "recitation6-slides.html#section-106",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 17 / 39 Paint the hole white\nDo this: On the circle card, click Color and choose white."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-107",
+    "href": "recitation6-slides.html#section-107",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 18 / 39 It’s a donut!\nDo this: The white circle covers the centre of the pie."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-108",
+    "href": "recitation6-slides.html#section-108",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 19 / 39 Hide the headers\nDo this: Right-click the 0 axis at the bottom and untick Show Header. Do the same for the top axis."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-109",
+    "href": "recitation6-slides.html#section-109",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 20 / 39 No more axes\nDo this: The headers are gone, but the donut is small."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-110",
+    "href": "recitation6-slides.html#section-110",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 21 / 39 Make the pie bigger\nDo this: On the pie card, drag Size further to the right."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-111",
+    "href": "recitation6-slides.html#section-111",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 22 / 39 Keep the ring\nDo this: On the circle card, increase Size too so the hole stays in proportion."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-112",
+    "href": "recitation6-slides.html#section-112",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 3 - A smaller white circle turns the pie into a donut\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n11\nRQ2 DONUT WALKTHROUGH · 23 / 39 A bigger donut\nDo this: Both charts grew together."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-113",
+    "href": "recitation6-slides.html#section-113",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n\nFormat &gt; Borders and Lines: set grid and zero lines to None. Edit Colors and assign the Blue-Teal palette.\nAdd education and CNT(education) to Label, then Quick Table Calculation &gt; Percent of Total.\n\nAnswer to RQ2: Bachelor 27.1%, PhD 24.8%, High School 24.5%, Master 23.6%: education levels are nearly balanced."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-114",
+    "href": "recitation6-slides.html#section-114",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 24 / 39 Open Format\nDo this: Right-click an empty part of the view and choose Format…"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-115",
+    "href": "recitation6-slides.html#section-115",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 25 / 39 Shading\nDo this: In the Format pane, click the paint-bucket icon (Shading)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-116",
+    "href": "recitation6-slides.html#section-116",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 26 / 39 No background colour\nDo this: Set the worksheet and pane colours to None."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-117",
+    "href": "recitation6-slides.html#section-117",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 27 / 39 Borders\nDo this: Click the borders icon (the grid)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-118",
+    "href": "recitation6-slides.html#section-118",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 28 / 39 Row divider: None\nDo this: Set Row Divider › Pane to None."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-119",
+    "href": "recitation6-slides.html#section-119",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 29 / 39 Column divider: None\nDo this: Set Column Divider › Pane to None."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-120",
+    "href": "recitation6-slides.html#section-120",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 30 / 39 Lines\nDo this: Click the Lines icon and set Grid Lines and Axis Rulers to None."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-121",
+    "href": "recitation6-slides.html#section-121",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 31 / 39 Zero lines: None\nDo this: Set Zero Lines to None. This removes the vertical line through the donut."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-122",
+    "href": "recitation6-slides.html#section-122",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 32 / 39 Clean view\nDo this: Set any remaining line to None until only the donut is left."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-123",
+    "href": "recitation6-slides.html#section-123",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 33 / 39 Edit Colors…\nDo this: Open the dropdown of the education legend and choose Edit Colors…"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-124",
+    "href": "recitation6-slides.html#section-124",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 34 / 39 Pick a palette\nDo this: Open Select Color Palette and choose one, e.g. Blue-Teal."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-125",
+    "href": "recitation6-slides.html#section-125",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 35 / 39 Assign Palette\nDo this: Click Assign Palette, then OK."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-126",
+    "href": "recitation6-slides.html#section-126",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 36 / 39 New colours\nDo this: The four education levels now use the palette."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-127",
+    "href": "recitation6-slides.html#section-127",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 37 / 39 Labels on the pie card\nDo this: Drag education and CNT(education) onto Label on the pie (first SUM(0)) card."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-128",
+    "href": "recitation6-slides.html#section-128",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 38 / 39 Percent of Total\nDo this: Right-click the CNT(education) label pill › Quick Table Calculation › Percent of Total."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-129",
+    "href": "recitation6-slides.html#section-129",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ2: How are customers distributed across education levels?\u000bStep 4 - Remove lines, recolor and label with percent of total\n1 Pie chart\n2 Two pies, dual axis\n3 Make the hole\n4 Polish and label\n12\nRQ2 DONUT WALKTHROUGH · 39 / 39 Finished donut chart\nDo this: Each slice is labelled with its education level and its share of all customers."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-130",
+    "href": "recitation6-slides.html#section-130",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 1 - Average income by country, not total income\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nDrag country to Columns and income to Rows.\nRight-click SUM(income) and choose Measure &gt; Average. Countries with many customers no longer look richer just because of their count.\n\nWhy average: SUM rewards countries with more customers; AVG compares a typical customer."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-131",
+    "href": "recitation6-slides.html#section-131",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 1 - Average income by country, not total income\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n13\nRQ3 WALKTHROUGH · 1 / 12 Drag country to Columns\nDo this: Drag country onto the Columns shelf."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-132",
+    "href": "recitation6-slides.html#section-132",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 1 - Average income by country, not total income\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n13\nRQ3 WALKTHROUGH · 2 / 12 Drag income to Rows\nDo this: Drag income onto Rows: Tableau shows SUM(income) for every country."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-133",
+    "href": "recitation6-slides.html#section-133",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 1 - Average income by country, not total income\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n13\nRQ3 WALKTHROUGH · 3 / 12 Switch SUM to Average\nDo this: Click SUM(income) › Measure › Average. A sum rewards countries that simply have more customers."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-134",
+    "href": "recitation6-slides.html#section-134",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 2 - A Top filter keeps the 10 highest-average countries\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nDrag country to the Filters card and open the Top tab.\nChoose By field: Top 10 by income, Average, then click OK.\n\nResult: Only 10 bars remain, still in alphabetical order."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-135",
+    "href": "recitation6-slides.html#section-135",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 2 - A Top filter keeps the 10 highest-average countries\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n14\nRQ3 WALKTHROUGH · 4 / 12 Drag country to Filters\nDo this: Drag country onto the Filters card."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-136",
+    "href": "recitation6-slides.html#section-136",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 2 - A Top filter keeps the 10 highest-average countries\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n14\nRQ3 WALKTHROUGH · 5 / 12 Open the Top tab\nDo this: In the Filter [country] dialog, click the Top tab."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-137",
+    "href": "recitation6-slides.html#section-137",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 2 - A Top filter keeps the 10 highest-average countries\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n14\nRQ3 WALKTHROUGH · 6 / 12 Top 10 by average income\nDo this: Choose By field: Top 10, by income, Average, then click OK."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-138",
+    "href": "recitation6-slides.html#section-138",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 2 - A Top filter keeps the 10 highest-average countries\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n14\nRQ3 WALKTHROUGH · 7 / 12 Ten countries remain\nDo this: Only the ten countries with the highest average income are left, still in alphabetical order."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-139",
+    "href": "recitation6-slides.html#section-139",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n\nClick the sort icon on the y-axis to sort from largest to smallest.\nDrag income onto Marks, set it to Average, and choose Color.\n\nAnswer to RQ3: Saint Helena, Uzbekistan, Dominica, Indonesia and Slovakia lead (about 83K to 95K). Caution: about 4 customers per country, so these averages are unstable."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-140",
+    "href": "recitation6-slides.html#section-140",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n15\nRQ3 WALKTHROUGH · 8 / 12 Sort the bars\nDo this: Click the sort icon on the axis (yellow) to sort from largest to smallest."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-141",
+    "href": "recitation6-slides.html#section-141",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n15\nRQ3 WALKTHROUGH · 9 / 12 Ranked by average income\nDo this: The countries are now ranked from the highest to the lowest average income."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-142",
+    "href": "recitation6-slides.html#section-142",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n15\nRQ3 WALKTHROUGH · 10 / 12 income onto the Marks card\nDo this: Drag income onto the Marks card and set it to Measure › Average."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-143",
+    "href": "recitation6-slides.html#section-143",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n15\nRQ3 WALKTHROUGH · 11 / 12 AVG(income) on Color\nDo this: Click the icon at the left of AVG(income) and choose Color."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-144",
+    "href": "recitation6-slides.html#section-144",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ3: Which 10 countries have the highest average customer income?\u000bStep 3 - Sort and color by average income to rank the top 10\n1 Average income bars\n2 Top 10 filter\n3 Sort and color\n15\nRQ3 WALKTHROUGH · 12 / 12 Coloured by average income\nDo this: Darker bars mean higher average income: Saint Helena, Uzbekistan, Dominica and Indonesia lead."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-145",
+    "href": "recitation6-slides.html#section-145",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 1 - Disaggregate measures to plot one point per customer\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n\nDrag spending to Columns and income to Rows: Tableau shows one aggregated point.\nOpen the Analysis menu and uncheck Aggregate Measures: now there are 1,000 points.\n\nReading: The cloud of points is patternless: income and spending show no clear relationship."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-146",
+    "href": "recitation6-slides.html#section-146",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 1 - Disaggregate measures to plot one point per customer\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n16\nRQ4 WALKTHROUGH · 1 / 10 spending and income\nDo this: Drag spending to Columns and income to Rows. Tableau sums both, so you see one single point."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-147",
+    "href": "recitation6-slides.html#section-147",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 1 - Disaggregate measures to plot one point per customer\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n16\nRQ4 WALKTHROUGH · 2 / 10 Untick Aggregate Measures\nDo this: Open the Analysis menu and untick Aggregate Measures."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-148",
+    "href": "recitation6-slides.html#section-148",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 1 - Disaggregate measures to plot one point per customer\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n16\nRQ4 WALKTHROUGH · 3 / 10 One point per customer\nDo this: 1,000 points with a random pattern: annual income and spending show no relationship."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-149",
+    "href": "recitation6-slides.html#section-149",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n\nDrag purchase_frequency onto Marks and choose Size; pick an open circle under Shape.\nDrag purchase_frequency onto Marks again and choose Color.\n\nAnswer to RQ4: More frequent buyers (darker) spend more; income is unrelated to both. This is association, not cause."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-150",
+    "href": "recitation6-slides.html#section-150",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n17\nRQ4 WALKTHROUGH · 4 / 10 Change the shape\nDo this: To change the marks, click Shape on the Marks card and pick a shape."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-151",
+    "href": "recitation6-slides.html#section-151",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n17\nRQ4 WALKTHROUGH · 5 / 10 Filled circles\nDo this: The points now use the chosen filled shape."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-152",
+    "href": "recitation6-slides.html#section-152",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n17\nRQ4 WALKTHROUGH · 6 / 10 purchase_frequency on Size\nDo this: Drag purchase_frequency onto the Marks card, click the icon at its left and choose Size."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-153",
+    "href": "recitation6-slides.html#section-153",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n17\nRQ4 WALKTHROUGH · 7 / 10 Pick an open shape\nDo this: Bigger marks overlap, so choose an open circle under Shape to keep every point visible."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-154",
+    "href": "recitation6-slides.html#section-154",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n17\nRQ4 WALKTHROUGH · 8 / 10 Bubble sizes\nDo this: Bubble size now shows purchase frequency; the legend appears on the right."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-155",
+    "href": "recitation6-slides.html#section-155",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n17\nRQ4 WALKTHROUGH · 9 / 10 purchase_frequency on Color\nDo this: Drag purchase_frequency onto the Marks card again and choose Color."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-156",
+    "href": "recitation6-slides.html#section-156",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ4: How are income, spending and purchase frequency related?\u000bStep 2 - A third numeric variable on Size and Color makes a bubble plot\n1 Scatter plot\n2 Size by frequency\n3 Color by frequency\n17\nRQ4 WALKTHROUGH · 10 / 10 The bubble plot\nDo this: Colour gets darker to the right: customers who buy more often also spend more."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-157",
+    "href": "recitation6-slides.html#section-157",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 1 - Tableau generates latitude and longitude from country names\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nDouble-click Longitude (generated) and Latitude (generated): an empty world map appears.\nDrag country onto Detail on the Marks card: one point per country.\n\nNote: 8 unknown means 8 country names Tableau could not match to a location."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-158",
+    "href": "recitation6-slides.html#section-158",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 1 - Tableau generates latitude and longitude from country names\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n18\nRQ5 MAP WALKTHROUGH · 1 / 17 Generated coordinates\nDo this: Tableau generates Latitude and Longitude from country; they appear in the Data pane in italics."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-159",
+    "href": "recitation6-slides.html#section-159",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 1 - Tableau generates latitude and longitude from country names\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n18\nRQ5 MAP WALKTHROUGH · 2 / 17 An empty map\nDo this: Put Longitude (generated) on Columns and Latitude (generated) on Rows: an empty world map."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-160",
+    "href": "recitation6-slides.html#section-160",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 1 - Tableau generates latitude and longitude from country names\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n18\nRQ5 MAP WALKTHROUGH · 3 / 17 Point map\nDo this: Drag country onto Detail on the Marks card: one point per country (8 unknown)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-161",
+    "href": "recitation6-slides.html#section-161",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nOpen Show Me and choose Choropleth (filled map); drag country to Color.\nDrag country onto Label to print the country names.\n\nTip: A filled map colors whole areas, so it suits a value per country."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-162",
+    "href": "recitation6-slides.html#section-162",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 4 / 17 country on Color\nDo this: Drag country onto the Marks card and choose Color."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-163",
+    "href": "recitation6-slides.html#section-163",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 5 / 17 Coloured points\nDo this: Every country point gets its own colour."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-164",
+    "href": "recitation6-slides.html#section-164",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 6 / 17 Show Me › Filled map\nDo this: Open Show Me and choose the filled (choropleth) map."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-165",
+    "href": "recitation6-slides.html#section-165",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 7 / 17 Colour the areas\nDo this: The filled map starts in one colour; click the icon at the left of country and choose Color."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-166",
+    "href": "recitation6-slides.html#section-166",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 8 / 17 Coloured countries\nDo this: Each country area now has its own colour."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-167",
+    "href": "recitation6-slides.html#section-167",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 9 / 17 country on Label\nDo this: Drag country onto the Marks card again and choose Label."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-168",
+    "href": "recitation6-slides.html#section-168",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 10 / 17 Country names\nDo this: The country names are printed on the map."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-169",
+    "href": "recitation6-slides.html#section-169",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 2 - Switch to a choropleth (filled) map and label countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n19\nRQ5 MAP WALKTHROUGH · 11 / 17 A fresh copy\nDo this: On a duplicated sheet, keep only country on Color before changing the colouring."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-170",
+    "href": "recitation6-slides.html#section-170",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 3 - Color each country by the average income of its customers\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nRemove the two country pills from Marks, then drag country back onto Detail.\nDrag income onto Color, right-click SUM(income) and choose Measure &gt; Average.\nDarker blue = higher average income.\n\nReading: Average income ranges from about 22.8K to 94.6K, with no clear regional pattern."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-171",
+    "href": "recitation6-slides.html#section-171",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 3 - Color each country by the average income of its customers\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n20\nRQ5 MAP WALKTHROUGH · 12 / 17 Colour by average income\nDo this: Remove the country pills, drag country onto Detail and income onto Color, then Measure › Average. Darker = higher average income."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-172",
+    "href": "recitation6-slides.html#section-172",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n\nDrag country to Filters &gt; Top tab: By field, Top 8 by income, Average.\nDrag AVG(income) onto Label so each country shows its value.\n\nAnswer: Uzbekistan, Indonesia, Saint Helena and Slovakia are among the 8, with averages up to about 94.6K."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-173",
+    "href": "recitation6-slides.html#section-173",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n21\nRQ5 MAP WALKTHROUGH · 13 / 17 Set up the Top 8 map\nDo this: The Marks card holds country on Color and AVG(income) on Detail."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-174",
+    "href": "recitation6-slides.html#section-174",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n21\nRQ5 MAP WALKTHROUGH · 14 / 17 Drag country to Filters\nDo this: Drag country onto the Filters card."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-175",
+    "href": "recitation6-slides.html#section-175",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n21\nRQ5 MAP WALKTHROUGH · 15 / 17 Top 8 by average income\nDo this: In the Top tab choose By field: Top 8, by income, Average, then click OK."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-176",
+    "href": "recitation6-slides.html#section-176",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n21\nRQ5 MAP WALKTHROUGH · 16 / 17 AVG(income) on Label\nDo this: Click the icon next to AVG(income) and choose Label."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-177",
+    "href": "recitation6-slides.html#section-177",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "RQ5: How does average customer income vary across countries?\u000bStep 4 - A Top 8 filter highlights the highest-income countries\n1 Point map\n2 Choropleth\n3 Average income\n4 Top 8\n21\nRQ5 MAP WALKTHROUGH · 17 / 17 The Top 8 map\nDo this: Only the eight highest-income countries stay coloured, each labelled with its average income."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-178",
+    "href": "recitation6-slides.html#section-178",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "PART 3 Building a dashboard\nFemicide in Turkey, 2008–2020: four worksheets combined into one interactive dashboard and published to Tableau Public."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-179",
+    "href": "recitation6-slides.html#section-179",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "A dashboard combines several views so viewers can compare them at once\nA good dashboard aligns attention on the key message, uncovers insights and speeds up decisions. Four rules:\nKnow purpose and audience\nDecide what the dashboard must say, and how familiar viewers are with the topic.\nUse the top-left corner\nViewers scan from the top left, so put the most important view there.\nLimit the content\nAt most four views; more makes the dashboard hard to read.\nAdd interactivity\nFilters and highlight actions invite viewers to explore."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-180",
+    "href": "recitation6-slides.html#section-180",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "femicide.csv: 3,096 recorded killings of women in Turkey, 2008–2020\nKey fields: year, city, killer1, killingway1 (12 fields in total).\nResearch questions\nQ1\nHow has the annual number of women killed changed from 2008 to 2020? Line chart\nQ2\nHow does the number of women killed vary across cities? Symbol map\nQ3\nWho were the most frequent perpetrators? Bar chart\nQ4\nWhich methods were most often used? Frequency table\nName each worksheet after its question so it is easy to find when building the dashboard."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-181",
+    "href": "recitation6-slides.html#section-181",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "femicide.csv: 3,096 recorded killings of women in Turkey, 2008–2020\n24\nFEMICIDE DATA · 1 / 1 Load femicide.csv\nDo this: Connect to femicide.csv as a text file: 12 fields and 3,097 rows. Name each worksheet after its question."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-182",
+    "href": "recitation6-slides.html#section-182",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 1: count records per year to get the yearly totals\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nChange year to a Date type, then drag year to both Columns and Rows.\nRight-click YEAR(year) on Rows and choose Measure &gt; Count: the line now shows killings per year.\n\nResult: CNT(year) on Rows, YEAR(year) on Columns: one line point per year."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-183",
+    "href": "recitation6-slides.html#section-183",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 1: count records per year to get the yearly totals\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n25\nQ1 WALKTHROUGH · 1 / 11 year as a Date\nDo this: Click the type icon of year and choose Date."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-184",
+    "href": "recitation6-slides.html#section-184",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 1: count records per year to get the yearly totals\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n25\nQ1 WALKTHROUGH · 2 / 11 year on Columns and Rows\nDo this: Drag year onto Columns and onto Rows: YEAR(year) on both shelves."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-185",
+    "href": "recitation6-slides.html#section-185",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 1: count records per year to get the yearly totals\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n25\nQ1 WALKTHROUGH · 3 / 11 Measure › Count\nDo this: Right-click YEAR(year) on Rows and choose Measure › Count."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-186",
+    "href": "recitation6-slides.html#section-186",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 1: count records per year to get the yearly totals\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n25\nQ1 WALKTHROUGH · 4 / 11 The yearly line chart\nDo this: CNT(year) on Rows gives the number of women killed in each year."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-187",
+    "href": "recitation6-slides.html#section-187",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag year to Rows again and set it to Count; change this second card’s mark to Circle.\nRight-click the second CNT(year) pill &gt; Dual Axis, then right-click the right axis &gt; Synchronize Axis.\n\nAnswer to Q1: Cases rose from under 100 (2008) to over 400 (2019). The 2020 drop may reflect incomplete records."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-188",
+    "href": "recitation6-slides.html#section-188",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n26\nQ1 WALKTHROUGH · 5 / 11 year on Rows again\nDo this: Drag year to Rows a second time and set it to Count: two identical line charts."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-189",
+    "href": "recitation6-slides.html#section-189",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n26\nQ1 WALKTHROUGH · 6 / 11 Choose Circle\nDo this: On the CNT(year) (2) card, change the mark type to Circle."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-190",
+    "href": "recitation6-slides.html#section-190",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n26\nQ1 WALKTHROUGH · 7 / 11 Points instead of a line\nDo this: The second chart now shows one point per year."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-191",
+    "href": "recitation6-slides.html#section-191",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n26\nQ1 WALKTHROUGH · 8 / 11 Dual Axis\nDo this: Right-click the second CNT(year) pill on Rows and choose Dual Axis."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-192",
+    "href": "recitation6-slides.html#section-192",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n26\nQ1 WALKTHROUGH · 9 / 11 Line and points together\nDo this: The points now sit on top of the line."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-193",
+    "href": "recitation6-slides.html#section-193",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n26\nQ1 WALKTHROUGH · 10 / 11 Synchronize Axis\nDo this: Right-click the right y-axis and choose Synchronize Axis so both axes use the same scale."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-194",
+    "href": "recitation6-slides.html#section-194",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q1 step 2: a dual axis adds point markers on top of the line\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n26\nQ1 WALKTHROUGH · 11 / 11 The final line chart\nDo this: Cases rose from under 100 in 2008 to over 400 in 2019; the 2020 drop may reflect incomplete records."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-195",
+    "href": "recitation6-slides.html#section-195",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag city onto Detail. Click 2 unknown &gt; Edit Locations; for Çorum (Ambiguous) enter latitude 40.5499 and longitude 34.9537.\nDrag city to Filters and uncheck Null.\n\nWhy: Tableau cannot place ambiguous or missing names, so they must be fixed or excluded."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-196",
+    "href": "recitation6-slides.html#section-196",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 1 / 13 city onto the Marks card\nDo this: Drag city onto the Marks card: a point map of Turkey. Note the 2 unknown label at the bottom right."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-197",
+    "href": "recitation6-slides.html#section-197",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 2 / 13 Edit Locations\nDo this: Click 2 unknown and choose Edit Locations…"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-198",
+    "href": "recitation6-slides.html#section-198",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 3 / 13 Two unmatched values\nDo this: Çorum is Ambiguous and Null is Unrecognized."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-199",
+    "href": "recitation6-slides.html#section-199",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 4 / 13 Enter a latitude and longitude\nDo this: For Çorum, open the Matching Location list and choose Enter a Latitude and Longitude…"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-200",
+    "href": "recitation6-slides.html#section-200",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 5 / 13 Çorum’s coordinates\nDo this: Type latitude 40.5499 and longitude 34.9537, then click OK."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-201",
+    "href": "recitation6-slides.html#section-201",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 6 / 13 One unknown left\nDo this: Çorum is now on the map; only Null is still unknown."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-202",
+    "href": "recitation6-slides.html#section-202",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 7 / 13 Drag city to Filters\nDo this: Drag city onto the Filters card."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-203",
+    "href": "recitation6-slides.html#section-203",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 8 / 13 Untick Null\nDo this: In the Filter [city] dialog, untick Null and click OK."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-204",
+    "href": "recitation6-slides.html#section-204",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 1: fix unmatched cities with Edit Locations, then filter Null\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n27\nQ2 WALKTHROUGH · 9 / 13 A clean map\nDo this: Every remaining city is placed and no unknown values are left."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-205",
+    "href": "recitation6-slides.html#section-205",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 2: size each city’s circle by the number of records\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag city onto Marks, right-click it and choose Measure &gt; Count; set CNT(city) to Size.\nAdd city to Color and rename the sheet title: The Number of Women Killed by City.\n\nAnswer to Q2: Istanbul has the largest circle (about 300 cases); most other cities record far fewer."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-206",
+    "href": "recitation6-slides.html#section-206",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 2: size each city’s circle by the number of records\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n28\nQ2 WALKTHROUGH · 10 / 13 city on Color\nDo this: Drag city onto the Marks card and choose Color, so each city has its own colour."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-207",
+    "href": "recitation6-slides.html#section-207",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 2: size each city’s circle by the number of records\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n28\nQ2 WALKTHROUGH · 11 / 13 Count on Size\nDo this: Drag city onto Marks again, set it to Measure › Count and choose Size: a bigger circle means more women killed."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-208",
+    "href": "recitation6-slides.html#section-208",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 2: size each city’s circle by the number of records\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n28\nQ2 WALKTHROUGH · 12 / 13 Size and colour\nDo this: The circles now show the city (colour) and the number of records (size)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-209",
+    "href": "recitation6-slides.html#section-209",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q2 step 2: size each city’s circle by the number of records\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n28\nQ2 WALKTHROUGH · 13 / 13 Rename the title\nDo this: Double-click the sheet title and rename it: The Number of Women Killed by cities."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-210",
+    "href": "recitation6-slides.html#section-210",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag killer1 to Columns and to Rows; set the Rows pill to Measure &gt; Count.\nDrag killer1 to Filters &gt; Top: Top 15 by Count. Add CNT(killer1) to Color and Label; sort descending.\n\nAnswer to Q3: Husbands are the most frequent (1,032), then unidentified (504) and boyfriends (306)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-211",
+    "href": "recitation6-slides.html#section-211",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n29\nQ3 WALKTHROUGH · 1 / 7 killer1 on Columns and Rows\nDo this: Drag killer1 to Columns and Rows, set the Rows pill to Measure › Count and sort descending."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-212",
+    "href": "recitation6-slides.html#section-212",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n29\nQ3 WALKTHROUGH · 2 / 7 Drag killer1 to Filters\nDo this: Drag killer1 onto the Filters card."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-213",
+    "href": "recitation6-slides.html#section-213",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n29\nQ3 WALKTHROUGH · 3 / 7 Top 15 by count\nDo this: In the Top tab choose By field: Top 15, by killer1, Count, then click OK."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-214",
+    "href": "recitation6-slides.html#section-214",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n29\nQ3 WALKTHROUGH · 4 / 7 The Top 15\nDo this: Only the 15 most frequent perpetrators remain."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-215",
+    "href": "recitation6-slides.html#section-215",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n29\nQ3 WALKTHROUGH · 5 / 7 Colour by count\nDo this: Drag killer1 onto the Marks card, set it to Count and choose Color: darker means more cases."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-216",
+    "href": "recitation6-slides.html#section-216",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n29\nQ3 WALKTHROUGH · 6 / 7 Show mark labels\nDo this: Click Label on the Marks card and tick Show mark labels."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-217",
+    "href": "recitation6-slides.html#section-217",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q3: a Top 15 bar chart of perpetrators, colored by count\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n29\nQ3 WALKTHROUGH · 7 / 7 The labelled bar chart\nDo this: Husbands are the most frequent perpetrators (1,032), followed by undetectable (504) and boyfriends (306)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-218",
+    "href": "recitation6-slides.html#section-218",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nDrag killingway1 to Rows and Count of killingway1 onto Text.\nRight-click the count &gt; Quick Table Calculation &gt; Percent of Total; sort descending.\n\nAnswer to Q4: Firearms account for 46.2% and cutting tools for 26.3%; 9.2% are undetectable."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-219",
+    "href": "recitation6-slides.html#section-219",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n30\nQ4 WALKTHROUGH · 1 / 5 A table of counts\nDo this: Drag killingway1 to Rows and its count onto Text: a frequency table."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-220",
+    "href": "recitation6-slides.html#section-220",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n30\nQ4 WALKTHROUGH · 2 / 5 Rename the column\nDo this: Right-click the column header, choose Edit Alias… and call it Frequency."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-221",
+    "href": "recitation6-slides.html#section-221",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n30\nQ4 WALKTHROUGH · 3 / 5 Percent of Total\nDo this: Right-click CNT(killingway1) › Quick Table Calculation › Percent of Total."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-222",
+    "href": "recitation6-slides.html#section-222",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n30\nQ4 WALKTHROUGH · 4 / 5 Sort descending\nDo this: Use the sort button on the header to sort the methods by percent of total."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-223",
+    "href": "recitation6-slides.html#section-223",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Q4: a relative frequency table ranks the methods\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n30\nQ4 WALKTHROUGH · 5 / 5 Relative frequency table\nDo this: Firearms 46.21%, cutting tools 26.32%, undetectable 9.17%. Next, click New Dashboard at the bottom."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-224",
+    "href": "recitation6-slides.html#section-224",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n\nClick New Dashboard. Under Size, choose the target screen size.\nDrag the most important view (methods table) to the top left first, then the map, line chart and bar chart.\n\nLayout: Four views, the most important at the top left, consistent titles in one color."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-225",
+    "href": "recitation6-slides.html#section-225",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n31\nDASHBOARD WALKTHROUGH · 1 / 6 A new dashboard\nDo this: Click New Dashboard and set the Size on the left (for example a range up to 1550 × 860 px)."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-226",
+    "href": "recitation6-slides.html#section-226",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n31\nDASHBOARD WALKTHROUGH · 2 / 6 Most important view first\nDo this: Drag the Table sheet (How were women killed?) to the top left of the canvas."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-227",
+    "href": "recitation6-slides.html#section-227",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n31\nDASHBOARD WALKTHROUGH · 3 / 6 Add the map\nDo this: Drag the Map sheet next to the table."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-228",
+    "href": "recitation6-slides.html#section-228",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n31\nDASHBOARD WALKTHROUGH · 4 / 6 Add the line chart\nDo this: Drop the Line Chart sheet below the map."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-229",
+    "href": "recitation6-slides.html#section-229",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n31\nDASHBOARD WALKTHROUGH · 5 / 6 Add the bar chart\nDo this: Drop the Bar Chart sheet on the right."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-230",
+    "href": "recitation6-slides.html#section-230",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Dashboard: set the size, then drag the four worksheets onto the canvas\n1 Line chart\n2 City map\n3 Perpetrators\n4 Methods\n5 Dashboard\n31\nDASHBOARD WALKTHROUGH · 6 / 6 The finished dashboard\nDo this: Four views, with the most important one at the top left."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-231",
+    "href": "recitation6-slides.html#section-231",
+    "title": "Recitation 6: Tableau",
+    "section": "",
     "text": "Publish: Save to Tableau Public makes the dashboard shareable online\n\nClick Save to Tableau Public in the toolbar (Tableau Public saves only online).\nEnter a workbook title and click Save; the dashboard opens in your browser.\n\nRemember: A published workbook is public. Never upload private or confidential data.\nChart types covered in Part II\nHistogram by group\nDonut chart\nTop-N bar chart\nBubble plot\nChoropleth and symbol maps\nDual-axis line chart\nFrequency table\nDashboard"
+  },
+  {
+    "objectID": "recitation6-slides.html#section-232",
+    "href": "recitation6-slides.html#section-232",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Publish: Save to Tableau Public makes the dashboard shareable online\n32\nPUBLISH WALKTHROUGH · 1 / 2 Save to Tableau Public\nDo this: Click Save to Tableau Public in the toolbar."
+  },
+  {
+    "objectID": "recitation6-slides.html#section-233",
+    "href": "recitation6-slides.html#section-233",
+    "title": "Recitation 6: Tableau",
+    "section": "",
+    "text": "Publish: Save to Tableau Public makes the dashboard shareable online\n32\nPUBLISH WALKTHROUGH · 2 / 2 Name it and save\nDo this: Enter a workbook title and click Save; the dashboard opens in your browser."
   },
   {
     "objectID": "recitation-week2.html",
