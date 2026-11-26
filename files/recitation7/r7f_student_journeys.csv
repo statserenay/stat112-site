@@ -1,0 +1,31 @@
+Source,Target,Students
+Science track,Engineering,310
+Science track,Arts & Sciences,150
+Science track,Architecture,40
+Equal-weight track,Economics,170
+Equal-weight track,Arts & Sciences,60
+Equal-weight track,Architecture,30
+Language track,Arts & Sciences,45
+Language track,Education,55
+Equal-weight track,Education,40
+Science track,Education,20
+Language track,Economics,10
+Science track,Economics,70
+Engineering,Technology & software,150
+Engineering,Manufacturing,95
+Engineering,Public sector,30
+Engineering,Graduate school,35
+Arts & Sciences,Technology & software,55
+Arts & Sciences,Graduate school,90
+Arts & Sciences,Education & research,70
+Arts & Sciences,Finance & consulting,40
+Economics,Finance & consulting,140
+Economics,Public sector,55
+Economics,Technology & software,30
+Economics,Graduate school,25
+Architecture,Construction & design,55
+Architecture,Graduate school,10
+Architecture,Public sector,5
+Education,Education & research,95
+Education,Public sector,15
+Education,Graduate school,5
