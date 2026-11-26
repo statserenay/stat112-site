@@ -46,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-15badf4cf1737931c9205f535846352a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-234c5df7d2a976f6fa1d3324505248df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -169,6 +169,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="./recitation-week6.html">
  <span class="dropdown-text">Recitation 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week7.html">
+ <span class="dropdown-text">Recitation 7</span></a>
   </li>  
     </ul>
   </li>
@@ -1625,10 +1629,10 @@ All data sets on this page were created for this recitation. The patterns are re
 .qz-card-tag { font-size: .75rem; color: var(--qz-muted); font-weight: 600; }
 
 /* matching */
-.qz-match { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1.25rem; margin-top: .7rem; }
+.qz-match { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1.25rem; margin-top: .7rem; }
 .qz-match-left { display: grid; gap: .4rem; align-content: start; }
 .qz-match-left .qz-row { grid-template-columns: auto minmax(0, 1fr); }
-.qz-match-left .qz-select { min-width: 4.6rem; }
+.qz-match-left .qz-select { min-width: 4.6rem; width: 4.8rem; }
 .qz-match-right { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; align-content: start; }
 .qz-match-right li { display: flex; gap: .6rem; align-items: flex-start; padding: .45rem .7rem; border: 1px solid var(--qz-border); border-radius: 8px; }
 .qz-match-right li p { margin: 0; }
@@ -1821,7 +1825,8 @@ All data sets on this page were created for this recitation. The patterns are re
   }
   function standardControls(p, q, check, reveal, reset) {
     if (check) p.controls.appendChild(btn("Check", "btn-primary", check));
-    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); }));
+    q._reveal = function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); };
+    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", q._reveal));
     p.controls.appendChild(btn("Reset", "btn-outline-secondary", function () { reset(); clearFb(p); setStatus(q, null); }));
     q._reset = function () { reset(); clearFb(p); setStatus(q, null); };
   }
@@ -2064,6 +2069,7 @@ All data sets on this page were created for this recitation. The patterns are re
     });
     var rows = items.map(function (it) {
       var c = control(letters, true);
+      c.el.options[0].text = "—";
       c.el.setAttribute("aria-label", "Match for " + stripTags(it.html));
       var row = h("div", "qz-row");
       row.appendChild(c.el);
@@ -2197,6 +2203,14 @@ All data sets on this page were created for this recitation. The patterns are re
       sb.appendChild(btn("Reset all", "btn-outline-secondary", function () {
         if (!window.confirm("Clear every answer on this page?")) return;
         registry.forEach(function (q) { if (q._reset) q._reset(); });
+      }));
+      sb.appendChild(btn("Show all answers", "btn-primary", function () {
+        registry.forEach(function (q) { if (q._reveal) q._reveal(); });
+        document.querySelectorAll('.rv [data-act="show"]').forEach(function (b) { b.click(); });
+      }));
+      sb.appendChild(btn("Hide all answers", "btn-outline-secondary", function () {
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+        document.querySelectorAll('.rv [data-act="reset"]').forEach(function (b) { b.click(); });
       }));
     });
     if (registry.length && !document.querySelector(".qz-pill")) document.body.appendChild(h("div", "qz-pill"));

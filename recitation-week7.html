@@ -1,0 +1,2984 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Recitation 7 – STAT 112</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-234c5df7d2a976f6fa1d3324505248df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Recitation 7 – STAT 112">
+<meta property="og:description" content="Clean Data, Better Charts">
+<meta property="og:image" content="https://statserenay.github.io/stat112-site/images/recitation7/r7-clean-gender.png">
+<meta property="og:site_name" content="STAT 112">
+<meta property="og:image:alt" content="Two horizontal bar charts. Left: the raw Gender field has nine values: Male 26, Female 15, and seven values with one student each: female, M, space Male, Fmale, fem., MALE and m. Right: after cleaning, Male has 30 students and Female 18.">
+<meta property="og:image:height" content="682">
+<meta property="og:image:width" content="1847">
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 112</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-computing">    
+        <li>
+    <a class="dropdown-item" href="./computing-setup.html">
+ <span class="dropdown-text">Setup</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-recitations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Recitations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-recitations">    
+        <li>
+    <a class="dropdown-item" href="./recitation-week1.html">
+ <span class="dropdown-text">Recitation 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week2.html">
+ <span class="dropdown-text">Recitation 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week3.html">
+ <span class="dropdown-text">Recitation 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week4.html">
+ <span class="dropdown-text">Recitation 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week5.html">
+ <span class="dropdown-text">Recitation 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week6.html">
+ <span class="dropdown-text">Recitation 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./recitation-week7.html">
+ <span class="dropdown-text">Recitation 7</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homeworks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homeworks</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homeworks">    
+        <li>
+    <a class="dropdown-item" href="./homework1.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./games-tab/games.html"> 
+<span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chats-tab/chats.html"> 
+<span class="menu-text">Student Chats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./flashcards.html"> 
+<span class="menu-text">Flashcards</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calculator.html"> 
+<span class="menu-text">Calculator</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ask.html"> 
+<span class="menu-text">Ask a Question</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/statserenay"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:serenay@metu.edu.tr"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#what-we-do-today" id="toc-what-we-do-today" class="nav-link active" data-scroll-target="#what-we-do-today">What we do today</a></li>
+  <li><a href="#warm-up-lightning-round" id="toc-warm-up-lightning-round" class="nav-link" data-scroll-target="#warm-up-lightning-round">⚡ Warm-up: lightning round</a></li>
+  <li><a href="#part-a-data-cleaning" id="toc-part-a-data-cleaning" class="nav-link" data-scroll-target="#part-a-data-cleaning">Part A — Data cleaning</a>
+  <ul class="collapse">
+  <li><a href="#a1.-five-criteria-of-data-quality" id="toc-a1.-five-criteria-of-data-quality" class="nav-link" data-scroll-target="#a1.-five-criteria-of-data-quality">A1. Five criteria of data quality</a></li>
+  <li><a href="#a2.-find-the-dirty-cells" id="toc-a2.-find-the-dirty-cells" class="nav-link" data-scroll-target="#a2.-find-the-dirty-cells">A2. Find the dirty cells</a></li>
+  <li><a href="#a3.-the-workflow-and-the-five-steps" id="toc-a3.-the-workflow-and-the-five-steps" class="nav-link" data-scroll-target="#a3.-the-workflow-and-the-five-steps">A3. The workflow and the five steps</a></li>
+  <li><a href="#a4.-cleaning-the-survey-in-tableau" id="toc-a4.-cleaning-the-survey-in-tableau" class="nav-link" data-scroll-target="#a4.-cleaning-the-survey-in-tableau">A4. Cleaning the survey in Tableau</a></li>
+  </ul></li>
+  <li><a href="#part-b-making-your-visualizations-better" id="toc-part-b-making-your-visualizations-better" class="nav-link" data-scroll-target="#part-b-making-your-visualizations-better">Part B — Making your visualizations better</a>
+  <ul class="collapse">
+  <li><a href="#b1.-colour" id="toc-b1.-colour" class="nav-link" data-scroll-target="#b1.-colour">B1. Colour</a></li>
+  <li><a href="#b2.-text-tables-and-heatmaps" id="toc-b2.-text-tables-and-heatmaps" class="nav-link" data-scroll-target="#b2.-text-tables-and-heatmaps">B2. Text, tables and heatmaps</a></li>
+  <li><a href="#b3.-what-to-avoid" id="toc-b3.-what-to-avoid" class="nav-link" data-scroll-target="#b3.-what-to-avoid">B3. What to avoid</a></li>
+  <li><a href="#b4.-decluttering-step-by-step" id="toc-b4.-decluttering-step-by-step" class="nav-link" data-scroll-target="#b4.-decluttering-step-by-step">B4. Decluttering, step by step</a></li>
+  </ul></li>
+  <li><a href="#part-c-two-useful-charts-in-tableau" id="toc-part-c-two-useful-charts-in-tableau" class="nav-link" data-scroll-target="#part-c-two-useful-charts-in-tableau">Part C — Two useful charts in Tableau</a>
+  <ul class="collapse">
+  <li><a href="#c1.-treemap" id="toc-c1.-treemap" class="nav-link" data-scroll-target="#c1.-treemap">C1. Treemap</a></li>
+  <li><a href="#c2.-slope-chart" id="toc-c2.-slope-chart" class="nav-link" data-scroll-target="#c2.-slope-chart">C2. Slope chart</a></li>
+  </ul></li>
+  <li><a href="#part-d-make-it-better-challenge" id="toc-part-d-make-it-better-challenge" class="nav-link" data-scroll-target="#part-d-make-it-better-challenge">Part D — Make it better challenge</a></li>
+  <li><a href="#part-e-flourish" id="toc-part-e-flourish" class="nav-link" data-scroll-target="#part-e-flourish">Part E — Flourish</a>
+  <ul class="collapse">
+  <li><a href="#e1.-the-workflow-for-every-chart" id="toc-e1.-the-workflow-for-every-chart" class="nav-link" data-scroll-target="#e1.-the-workflow-for-every-chart">E1. The workflow for every chart</a></li>
+  <li><a href="#e2.-read-it-then-beat-it-a-radar-chart" id="toc-e2.-read-it-then-beat-it-a-radar-chart" class="nav-link" data-scroll-target="#e2.-read-it-then-beat-it-a-radar-chart">E2. Read it, then beat it: a radar chart</a></li>
+  <li><a href="#e3.-your-turn-four-research-questions" id="toc-e3.-your-turn-four-research-questions" class="nav-link" data-scroll-target="#e3.-your-turn-four-research-questions">E3. Your turn: four research questions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Recitation 7</h1>
+<p class="subtitle lead">Clean Data, Better Charts</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.pts { font-weight: 700; color: #0f7c74; }
+.tb-steps { border: 1px solid #d9e2f0; border-left: 5px solid #4e79a7; border-radius: 10px; padding: .8rem 1.1rem .4rem; margin: 1.2rem 0; background: #f7f9fd; }
+.tb-steps > p:first-child { font-weight: 700; color: #2b4f7e; margin-bottom: .4rem; }
+.tb-steps code { background: #eaf0f9; color: #1f3d66; }
+main :not(pre) > code { white-space: pre-wrap; overflow-wrap: anywhere; }
+.tb-shelf { display: inline-block; font-size: .78rem; font-weight: 700; padding: 0 .45rem; border-radius: 4px; background: #e3eefb; color: #174a85; }
+.tb-shelf.m { background: #e2f4e9; color: #17643a; }
+.r7-data { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 1rem 0 1.5rem; }
+.r7-card { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid #e3e3e3; border-radius: 12px; text-decoration: none; color: inherit; background: #fff; transition: transform .15s, box-shadow .15s, border-color .15s; }
+.r7-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); border-color: var(--bs-primary); color: inherit; }
+.r7-card .ico { font-size: 1.6rem; }
+.r7-card .txt { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.r7-card .txt strong { font-size: .92rem; word-break: break-word; }
+.r7-card .txt small { color: #6c757d; font-size: .8rem; }
+.r7-card .dl { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--bs-primary); color: #fff; font-weight: 700; flex: none; }
+@media (max-width: 700px) { main table { display: block; max-width: 100%; overflow-x: auto; } }
+</style>
+<section id="what-we-do-today" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-do-today">What we do today</h2>
+<p>This week we learn:</p>
+<ul>
+<li><strong>Part A — Data cleaning.</strong> The five data quality criteria, the cleaning workflow, and a full cleaning session in Tableau on a messy student survey.</li>
+<li><strong>Part B — Making charts better.</strong> Graphic design, Tufte’s data-ink ratio, ugly/bad/wrong figures, colour palettes and colour-vision deficiency, tables and heatmaps, what to avoid, contrast, preattentive attributes and decluttering, again with the Tableau steps.</li>
+<li><strong>Part C — Two useful charts in Tableau.</strong> A treemap and a slope chart.</li>
+<li><strong>Part D — Make it better challenge.</strong> Redesign a bad chart from start to finish.</li>
+<li><strong>Part E — Flourish.</strong> Read and criticise a radar chart made in Flourish, suggest better charts, then answer four research questions with your own Flourish visualizations.</li>
+</ul>
+<p>Download the data sets and follow along in Tableau Public. All data on this page were created for this recitation.</p>
+<div class="r7-data">
+  <a class="r7-card" href="files/recitation7/r7_survey_dirty.csv" download="">
+    <span class="ico">🧹</span><span class="txt"><strong>r7_survey_dirty.csv</strong><small>Part A · 50 survey responses with problems to clean</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7_applications.csv" download="">
+    <span class="ico">📈</span><span class="txt"><strong>r7_applications.csv</strong><small>Part B · applications received vs processed, 2025</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7_cafeteria.csv" download="">
+    <span class="ico">🍲</span><span class="txt"><strong>r7_cafeteria.csv</strong><small>Part C · cafeteria orders for the treemap</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7_pass_rates.csv" download="">
+    <span class="ico">↗️</span><span class="txt"><strong>r7_pass_rates.csv</strong><small>Part C · pass rates of 8 courses for the slope chart</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7_rent.csv" download="">
+    <span class="ico">🏠</span><span class="txt"><strong>r7_rent.csv</strong><small>Part D · average rents of 10 cities for the makeover</small></span><span class="dl">⬇</span></a>
+</div>
+<div class="quiz-scoreboard">
+<p>Progress</p>
+</div>
+</section>
+<section id="warm-up-lightning-round" class="level1">
+<h1>⚡ Warm-up: lightning round</h1>
+<div class="rv rv-lightning" data-time="90">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Lightning round · 12 statements · 90 seconds</span></div>
+  <p>True or false? Answer as fast as you can; the review at the end explains every statement.</p>
+  <ol class="rv-items" hidden="">
+    <li data-a="T">If the data are dirty, a chart can look correct and still be wrong.<span class="why">Lecture 6: with incorrect data, outcomes are unreliable "even though they may look correct".</span></li>
+    <li data-a="F">Every outlier is a data error and should be deleted.<span class="why">An outlier is not necessarily incorrect. First decide whether it is valid; remove it only if it is a mistake or irrelevant.</span></li>
+    <li data-a="T">"m", "Male" and "MALE" are counted as three different categories until they are cleaned.<span class="why">Every different string is a separate class, so a bar chart shows three bars.</span></li>
+    <li data-a="F">A valid value is always an accurate value.<span class="why">Validity means the value follows the rules; accuracy means it is close to the true value. Blue eyes can be valid but not true.</span></li>
+    <li data-a="T">Heights recorded partly in metres and partly in centimetres are a uniformity problem.<span class="why">Uniformity: the same unit or format for every record.</span></li>
+    <li data-a="F">Data cleaning is a strictly one-way, step-by-step process.<span class="why">It is iterative: after verifying you can go back to inspection when you find new flaws.</span></li>
+    <li data-a="T">A diverging palette needs a meaningful midpoint, such as 0 or 50%.<span class="why">Two sequential palettes meet at the central value.</span></li>
+    <li data-a="F">Red and green are a safe colour pair for colour-blind readers.<span class="why">Red–green is the most problematic pair; use blue–orange instead.</span></li>
+    <li data-a="T">A bar chart must start at zero.<span class="why">We compare the lengths of bars, so a non-zero baseline gives a false comparison.</span></li>
+    <li data-a="F">Data-ink ratio says: add decoration so the chart is not boring.<span class="why">Tufte: maximise the ink that shows data and minimise non-data ink.</span></li>
+    <li data-a="T">A chart for your own exploration can be less polished than one for an audience.<span class="why">Exploratory charts are for the analyst; explanatory charts communicate to others and need clarity and design.</span></li>
+    <li data-a="F">A pie chart is the easiest way to compare four shares that are close in size.<span class="why">Our eyes are poor at comparing angles and areas; a sorted bar chart is easier.</span></li>
+  </ol>
+  <div class="rv-stage"></div>
+</div>
+</section>
+<section id="part-a-data-cleaning" class="level1">
+<h1>Part A — Data cleaning</h1>
+<section id="a1.-five-criteria-of-data-quality" class="level2">
+<h2 class="anchored" data-anchor-id="a1.-five-criteria-of-data-quality">A1. Five criteria of data quality</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterion</th>
+<th>The question it asks</th>
+<th>Example of a problem</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Validity</strong></td>
+<td>Does the value follow the rules of the field?</td>
+<td>Age = 180; CGPA = 5.1 on a 0–4 scale</td>
+</tr>
+<tr class="even">
+<td><strong>Accuracy</strong></td>
+<td>Is the value close to the true value?</td>
+<td>A valid but wrong address</td>
+</tr>
+<tr class="odd">
+<td><strong>Completeness</strong></td>
+<td>Is everything we need there?</td>
+<td>An empty monthly spending cell</td>
+</tr>
+<tr class="even">
+<td><strong>Consistency</strong></td>
+<td>Do the values agree with each other?</td>
+<td>Age 10 and marital status “divorced”</td>
+</tr>
+<tr class="odd">
+<td><strong>Uniformity</strong></td>
+<td>Are the units and formats the same?</td>
+<td>Heights in metres and in centimetres</td>
+</tr>
+</tbody>
+</table>
+<!-- ===================================================================== -->
+<div class="quiz" type="classify" data-options="Accuracy|Uniformity|Completeness|Consistency|Validity">
+<p>A dormitory office checks its residents’ records. Which quality criterion does each problem break?</p>
+<ul>
+<li>A resident’s room number is 9999, but the dorm only has rooms 1–450 :: Validity</li>
+<li>The system lists a resident’s blood type as A+, but her real blood type is 0+ :: Accuracy</li>
+<li>37 residents have no emergency contact phone number :: Completeness</li>
+<li>A resident’s check-in date is in the dorm system and a different date is in the payment system :: Consistency</li>
+<li>Monthly fees are entered in TL for some residents and in euros for others :: Uniformity</li>
+<li>Two residents have the same student ID :: Validity</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Room 9999</strong> breaks a <em>range constraint</em>, so the value is invalid.</li>
+<li><strong>A+ instead of 0+</strong> is a valid blood type, but not the true one: an accuracy problem.</li>
+<li><strong>Missing phone numbers:</strong> completeness.</li>
+<li><strong>Two systems with different dates:</strong> consistency (data contradict each other across data sets).</li>
+<li><strong>TL and euros:</strong> uniformity (one unit for everyone).</li>
+<li><strong>Same student ID twice</strong> breaks a <em>unique constraint</em>, which is part of validity.</li>
+</ul>
+</div>
+</div>
+<!-- ===================================================================== -->
+<div class="quiz" type="match">
+<p>Validity is checked with <strong>constraints</strong>. Match each rule from a student database with the type of constraint.</p>
+<ul>
+<li>CGPA must be a number, not text :: Data-type constraint</li>
+<li>CGPA must be between 0 and 4 :: Range constraint</li>
+<li>Every record must have a Student ID :: Mandatory constraint</li>
+<li>No two students may have the same Student ID :: Unique constraint</li>
+<li>Faculty must be one of the university’s faculties :: Set-membership constraint</li>
+<li>A grade’s course code must exist in the Courses table :: Foreign-key constraint</li>
+<li>A phone number must look like (999) 999-9999 :: Regular expression pattern</li>
+<li>The graduation year cannot be before the enrolment year :: Cross-field validation</li>
+</ul>
+<div class="explain">
+<p>Cross-field validation checks a condition that involves <strong>two or more fields</strong> (enrolment and graduation year), like the hospital example in the lecture: the discharge date cannot be earlier than the admission date. A foreign key must point to a value that exists in the referenced table.</p>
+</div>
+</div>
+</section>
+<section id="a2.-find-the-dirty-cells" class="level2">
+<h2 class="anchored" data-anchor-id="a2.-find-the-dirty-cells">A2. Find the dirty cells</h2>
+<style>
+#r7-dirty .r7-tbl thead th {
+  background: #14223f !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: .82rem;
+  letter-spacing: .02em;
+  padding: .5rem .55rem !important;
+  border-bottom: 0 !important;
+  white-space: nowrap;
+}
+#r7-dirty .r7-tbl thead th:first-child { border-top-left-radius: 8px; }
+#r7-dirty .r7-tbl thead th:last-child  { border-top-right-radius: 8px; }
+#r7-dirty .r7-tbl tbody td { color: #1d2433 !important; }
+#r7-dirty .r7-tbl tbody tr:nth-child(even) td { background-color: #f7f8fb; }
+</style>
+<div class="rv r7-dirty" id="r7-dirty">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Inspection · click every cell with a problem</span></div>
+  <p>These 11 rows come from <b>r7_survey_dirty.csv</b>. The data must follow these rules: Student ID has <b>6 digits</b>, Age is between <b>18 and 100</b>, CGPA is between <b>0 and 4</b>, Height is in <b>cm</b>, and every student appears <b>once</b>. Click every cell that breaks a rule or needs cleaning.</p>
+  <div class="r7-tablewrap"><table class="r7-tbl">
+    <thead><tr><th>Response</th><th>Student ID</th><th>Faculty</th><th>Gender</th><th>Age</th><th>Height</th><th>CGPA</th><th>Enroll year</th><th>Exp. grad year</th><th>Spending (₺)</th></tr></thead>
+    <tbody>
+      <tr><td>6</td><td>313474</td><td>Engineering</td><td>Male</td><td>26</td><td data-err="Uniformity: 1.76 is in metres; every other height is in cm. Convert it: 1.76 × 100 = 176 cm.">1.76</td><td>2.89</td><td>2023</td><td>2027</td><td>8900</td></tr>
+      <tr><td>7</td><td>733519</td><td>Engineering</td><td>Male</td><td>23</td><td>181</td><td>2.59</td><td>2023</td><td>2027</td><td>11700</td></tr>
+      <tr><td>9</td><td data-err="Syntax: the ID lost its leading zeros (it should be 004021). Pad it to 6 digits.">4021</td><td>Engineering</td><td>Male</td><td>23</td><td>183</td><td>3.33</td><td>2025</td><td>2029</td><td>9100</td></tr>
+      <tr><td>13</td><td>170574</td><td>Engineering</td><td>Male</td><td>22</td><td>178</td><td>2.58</td><td>2022</td><td>2026</td><td data-trap="Unusual, but not necessarily wrong! ₺48,000 is far above the others, but a student may really spend this much. Investigate it, don't delete it automatically.">48000</td></tr>
+      <tr><td>16</td><td>551953</td><td>Arts &amp; Sciences</td><td data-err="Structural error (typo): 'Fmale' should be 'Female', otherwise it becomes a separate category.">Fmale</td><td>24</td><td>182</td><td>3.94</td><td>2022</td><td>2026</td><td>11900</td></tr>
+      <tr><td>18</td><td data-err="Syntax: 28568 lost its leading zero (028568). Pad it to 6 digits.">28568</td><td data-err="Syntax: '  Economics' starts with two white spaces, so Tableau shows it as a different member from 'Economics'.">&nbsp;&nbsp;Economics</td><td>Female</td><td>23</td><td>168</td><td>3.15</td><td>2025</td><td>2029</td><td>9400</td></tr>
+      <tr><td>22</td><td>764220</td><td>Engineering</td><td>Male</td><td>24</td><td>180</td><td>2.68</td><td>2023</td><td data-err="Cross-field validation: the expected graduation year (2022) is before the enrolment year (2023).">2022</td><td>8600</td></tr>
+      <tr><td>27</td><td>204784</td><td>Arts &amp; Sciences</td><td>Female</td><td>22</td><td>153</td><td>2.60</td><td>2023</td><td>2027</td><td data-err="Completeness: the spending value is missing. Find out why, then drop or impute.">&nbsp;</td></tr>
+      <tr><td>31</td><td data-err="Duplicate: response 31 is an exact copy of response 7 (same student, same answers). The form was submitted twice; remove one copy.">733519</td><td>Engineering</td><td>Male</td><td>23</td><td>181</td><td>2.59</td><td>2023</td><td>2027</td><td>11700</td></tr>
+      <tr><td>35</td><td>175562</td><td>Economics</td><td>Female</td><td data-err="Validity (range constraint): age 150 is outside 18–100.">150</td><td>175</td><td>1.70</td><td>2024</td><td>2028</td><td>13300</td></tr>
+      <tr><td>46</td><td data-err="Syntax: 71885 lost its leading zero (071885). Pad it to 6 digits.">71885</td><td>Engineering</td><td>Male</td><td>26</td><td>183</td><td data-err="Validity (range constraint): a CGPA of 4.6 is impossible on a 0–4 scale.">4.6</td><td>2021</td><td>2025</td><td>8700</td></tr>
+    </tbody>
+  </table></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show all problems</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="r7-log"></div>
+</div>
+</section>
+<section id="a3.-the-workflow-and-the-five-steps" class="level2">
+<h2 class="anchored" data-anchor-id="a3.-the-workflow-and-the-five-steps">A3. The workflow and the five steps</h2>
+<div class="quiz" type="order">
+<p>Put the stages of the data cleaning <strong>workflow</strong> in order.</p>
+<ul>
+<li>Inspection: detect unexpected, incorrect and inconsistent data</li>
+<li>Cleaning: fix or remove the anomalies</li>
+<li>Verifying: inspect the results to check that they are correct</li>
+<li>Reporting: record the changes made and the quality of the data</li>
+</ul>
+<div class="explain">
+<p>The lecture warns that this sequence is <strong>iterative</strong>: when verifying reveals new flaws, you go back to inspection.</p>
+</div>
+</div>
+<div class="quiz" type="ms" data-answer="a,c,e">
+<p>Which questions belong to the final <strong>validation</strong> step? Select all that apply.</p>
+<ul>
+<li>Does the data make sense?</li>
+<li>Which colour palette should the dashboard use?</li>
+<li>Does the data follow the appropriate rules for its field?</li>
+<li>How many decimals should the axis labels show?</li>
+<li>Can you find trends that help you form your next theory, and if not, is that because of a data quality issue?</li>
+</ul>
+<div class="explain">
+<p>Colour palettes and decimals are design questions (Lecture 7). Validation asks whether the data make sense, follow the rules, support or disprove your working theory, and reveal trends, and whether a missing pattern is caused by a data quality issue.</p>
+</div>
+</div>
+</section>
+<section id="a4.-cleaning-the-survey-in-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="a4.-cleaning-the-survey-in-tableau">A4. Cleaning the survey in Tableau</h2>
+<p>Connect to <strong>r7_survey_dirty.csv</strong> (Connect › To a File › <strong>Text file</strong>). Tableau reports <strong>11 fields and 50 rows</strong>. We follow the five steps.</p>
+<section id="step-0-inspect-with-profiling-and-charts" class="level3">
+<h3 class="anchored" data-anchor-id="step-0-inspect-with-profiling-and-charts">Step 0: Inspect with profiling and charts</h3>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li>On the <strong>Data Source</strong> page, look at every type icon. <code>Student ID</code> is read as a <strong>number</strong> (#), so Tableau will SUM it. Click the icon › <strong>String</strong>, because an ID is a label, not a quantity. <em>(type conversion)</em></li>
+<li>Open a sheet. Drag <code>Gender</code> to <span class="tb-shelf">Rows</span> and <code>Gender</code> again to <span class="tb-shelf m">Columns</span>, then <strong>Measure › Count</strong>. A bar chart is the quickest way to see all the unique values.</li>
+<li>Drag <code>Height</code> to <span class="tb-shelf m">Columns</span>, untick <strong>Analysis › Aggregate Measures</strong>, and look at the points. Do the same for <code>Age</code> and <code>CGPA</code>, or hover over the axis to read the minimum and maximum.</li>
+</ol>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-clean-gender.png" class="img-fluid figure-img" alt="Two horizontal bar charts. Left: the raw Gender field has nine values: Male 26, Female 15, and seven values with one student each: female, M, space Male, Fmale, fem., MALE and m. Right: after cleaning, Male has 30 students and Female 18."></p>
+<figcaption>Inspection in Tableau: a bar chart of the raw Gender values shows nine categories; after cleaning only Male (30) and Female (18) remain.</figcaption>
+</figure>
+</div>
+<div class="quiz" type="fill">
+<p>Use the left chart above.</p>
+<p>The variable Gender should have <span class="blank" data-answer="2|two"></span> classes, but Tableau finds <span class="blank" data-answer="9|nine"></span>. The value <code>" Male"</code> differs from <code>"Male"</code> only by a leading <span class="blank" data-answer="space|white space|whitespace|blank"></span>, and <code>"MALE"</code> differs only by <span class="blank" data-answer="capitalization|capitalisation|case|upper case|uppercase"></span>. These are called <span class="blank" data-answer="structural|syntax|structural errors|syntax errors"></span> errors.</p>
+<div class="explain">
+<p>Every different string is a separate class, exactly like the lecture’s <em>m, Male, fem., FemalE, Femle</em> example. Leading or trailing spaces and capitalization are <strong>syntax errors</strong>; Tableau’s guide calls such mistakes <strong>structural errors</strong>.</p>
+</div>
+</div>
+</section>
+<section id="step-1-remove-duplicate-or-irrelevant-observations" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-remove-duplicate-or-irrelevant-observations">Step 1: Remove duplicate or irrelevant observations</h3>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li>Drag <code>Student ID</code> (now a string dimension) to <span class="tb-shelf">Rows</span> and <code>Response No</code> to <span class="tb-shelf">Text</span>, set it to <strong>Measure › Count</strong>, and sort descending. Two students appear <strong>twice</strong>: 733519 (responses 7 and 31) and 368717 (responses 26 and 50).</li>
+<li>Quick check: drag <code>Student ID</code> onto a new sheet’s Text, choose <strong>Measure › Count</strong> and then <strong>Count (Distinct)</strong>: CNT = <strong>50</strong> rows, CNTD = <strong>48</strong> students.</li>
+<li>Remove the second copy: drag <code>Response No</code> to <span class="tb-shelf">Filters</span> (as a dimension), untick <strong>31</strong> and <strong>50</strong>.</li>
+<li><strong>Irrelevant column:</strong> <code>Shoe Size</code> has nothing to do with CGPA or spending. Right-click it in the Data pane › <strong>Hide</strong>.</li>
+</ol>
+</div>
+<div class="quiz" type="fill">
+<p>After removing the duplicates the data have <span class="blank" data-answer="48"></span> rows. Hiding <code>Shoe Size</code> removes irrelevant data <strong>column</strong>-wise; keeping only Engineering students for an Engineering report would remove irrelevant data <span class="blank" data-answer="row-wise|row|rows|row wise"></span>.</p>
+<div class="explain">
+<p>50 − 2 = <strong>48</strong> responses, one per student. The lecture’s examples: shoe size is not needed when analysing CGPA (column-wise); studying only surgery patients means not including everyone (row-wise). Drop a column only if you are sure it is unimportant, and ask a domain expert when unsure.</p>
+</div>
+</div>
+</section>
+<section id="step-2-fix-structural-errors" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-fix-structural-errors">Step 2: Fix structural errors</h3>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li><p><strong>Gender:</strong> right-click in the Data pane › <strong>Create › Calculated Field…</strong>, name it <code>Gender_clean</code>:</p>
+<pre><code>IF LEFT(UPPER(TRIM([Gender])), 1) = "F" THEN "Female"
+ELSEIF LEFT(UPPER(TRIM([Gender])), 1) = "M" THEN "Male"
+END</code></pre>
+<p><code>TRIM</code> removes the spaces, <code>UPPER</code> standardizes the case, and the first letter decides the class.</p></li>
+<li><p><strong>Faculty:</strong> create <code>Faculty_upper</code> = <code>UPPER(TRIM([Faculty]))</code>. This merges “Economics”, “Economics␣” (with a trailing space) and “ECONOMICS”. Then right-click <code>Faculty_upper</code> › <strong>Create › Group…</strong>: select ENGINEERING and ENG. › <strong>Group</strong>, name it <em>Engineering</em>; group ARTS &amp; SCIENCES with ARTS AND SCIENCES.</p></li>
+<li><p><strong>Student ID:</strong> pad the IDs back to 6 digits: <code>ID_6</code> = <code>RIGHT("000000" + STR([Student ID]), 6)</code>. (If you already changed the type to String, use <code>[Student ID]</code> instead of <code>STR([Student ID])</code>.)</p></li>
+<li><p><strong>Height (uniformity):</strong> <code>Height_cm</code> = <code>IF [Height] &lt; 3 THEN [Height] * 100 ELSE [Height] END</code>.</p></li>
+</ol>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-height.png" class="img-fluid figure-img" alt="Two dot plots of height. Left: 43 students between 153 and 186 and five students near zero, recorded in metres (1.61 to 1.85). Right: after conversion all 48 students lie between 153 and 186 cm; the five converted values are highlighted in orange."></p>
+<figcaption>The five heights recorded in metres sit near zero (left); after the calculated field they join the other students (right).</figcaption>
+</figure>
+</div>
+<div class="quiz" type="fill">
+<p>Before cleaning, the average height is 154.9; after <code>Height_cm</code> it is 173.1. The 5 values recorded in metres pulled the mean <strong>down</strong> by about <span class="blank" data-answer="18.2|18" data-tol="0.3"></span> cm. <code>RIGHT("000000" + STR(4021), 6)</code> returns <span class="blank" data-answer="004021"></span>. After <code>UPPER(TRIM([Faculty]))</code> the 8 raw faculty values shrink to <span class="blank" data-answer="5|five"></span>, and after grouping to <span class="blank" data-answer="3|three"></span>.</p>
+<div class="explain">
+<ul>
+<li>173.1 − 154.9 = <strong>18.2 cm</strong>: a few unit errors can move the mean a lot, and the chart still “looks” fine.</li>
+<li>“000000” + “4021” = “0000004021”; the right-most 6 characters are <strong>004021</strong>.</li>
+<li>Raw faculty values: Engineering, engineering, Eng., Arts &amp; Sciences, Arts and Sciences, Economics, “Economics”, ECONOMICS (8). After TRIM + UPPER: ENGINEERING, ENG., ARTS &amp; SCIENCES, ARTS AND SCIENCES, ECONOMICS (5). Grouping fixes the last two typos: <strong>3</strong>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-3-filter-unwanted-outliers" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-filter-unwanted-outliers">Step 3: Filter unwanted outliers</h3>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li><strong>Range constraints:</strong> drag <code>Age</code> to <span class="tb-shelf">Filters</span> › <strong>All values</strong> › <strong>Range of values</strong> from 18 to 100. One response (age 150) leaves. Do the same for <code>CGPA</code> (0 to 4): one response (4.6) leaves.</li>
+<li><strong>Cross-field check:</strong> create <code>Years_ok</code> = <code>[Expected Grad Year] &gt;= [Enroll Year]</code> and drop it on <span class="tb-shelf">Color</span> of a text table of students: one response is <strong>False</strong> (enrolled 2023, graduating 2022). Fix it at the source or exclude it.</li>
+<li><strong>True outliers:</strong> a box plot of <code>Monthly Spending</code> shows one student at <strong>₺48,000</strong>. That is not impossible, so we keep it and note it. Removing it just because it is far away would hide real information.</li>
+</ol>
+</div>
+<div class="quiz" type="mc" data-answer="b">
+<p>After the range filter on Age, the average age of the 48 students drops from <strong>25.06</strong> to <strong>22.40</strong>. What is the best way to describe the age 150?</p>
+<ul>
+<li>A true outlier: a valid but extreme age that must be kept</li>
+<li>An invalid value that breaks a range constraint; probably a typing mistake</li>
+<li>A missing value, so it should be imputed with the mean</li>
+<li>A uniformity problem, because it is measured in months</li>
+</ul>
+<div class="explain">
+<p>Nobody at university is 150, so the value is <strong>invalid</strong>, not just extreme. A single invalid value moved the mean by more than 2.5 years. The ₺48,000 spending is different: unusual, but possible, so it is kept and investigated.</p>
+</div>
+</div>
+</section>
+<section id="step-4-handle-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-handle-missing-data">Step 4: Handle missing data</h3>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li>Drag <code>Monthly Spending</code> to <span class="tb-shelf m">Columns</span>, aggregation off. A small <strong>“4 nulls”</strong> indicator appears at the bottom right of the view. Click it to filter them out or show them at the default position.</li>
+<li><code>AVG(Monthly Spending)</code> already <strong>ignores</strong> the 4 nulls: it averages the 44 known values.</li>
+<li>To impute with the mean (one of the lecture’s methods): <code>Spending_imp</code> = <code>IFNULL([Monthly Spending], {AVG([Monthly Spending])})</code>.</li>
+</ol>
+</div>
+<div class="rv rv-spot">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Spot the mistake · click the wrong line</span></div>
+  <p>A student handles the 4 missing spending values. <b>One</b> line is wrong. Click it.</p>
+  <ol class="rv-lines">
+    <li>Of the 48 students, 44 reported their monthly spending and 4 did not.</li>
+    <li>Before deciding, I ask why the values are missing: did very high or very low spenders skip the question?</li>
+    <li>AVG(Monthly Spending) in Tableau gives ₺9,670, the mean of the 44 known values.</li>
+    <li data-wrong="1">To keep all 48 students, I replace the nulls with ZN([Monthly Spending]); the mean becomes ₺8,865, which is more accurate because it uses everyone.</li>
+    <li>Dropping the 4 students is acceptable here, but with a small data set it loses information.</li>
+  </ol>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="show">Show answer</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="reset">Reset</button></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+  <div class="rv-explain" hidden=""><p><b>Line 4 is wrong.</b> <code>ZN()</code> turns a null into <b>zero</b>, as if those 4 students spent nothing. That is a made-up value, and it pulls the mean down to 425,500 / 48 = ₺8,865. Mean imputation, <code>IFNULL([Monthly Spending], {AVG([Monthly Spending])})</code>, keeps the mean at ₺9,670 (but makes the spread look a little smaller).</p></div>
+</div>
+<div class="quiz" type="mc" data-answer="c">
+<p>A survey on income has many missing answers, mostly from very rich people. Why is it important to know this <strong>before</strong> handling the missing data?</p>
+<ul>
+<li>Because Tableau cannot draw charts with nulls</li>
+<li>Because the missing values must then be replaced with 0</li>
+<li>Because dropping or mean-imputing would make the average income look lower than it really is</li>
+<li>Because missing data only matters in data sets with more than 1,000 rows</li>
+</ul>
+<div class="explain">
+<p>The lecture asks: <em>“Is the income variable missing for very rich people?”</em> If yes, the missingness is not random: the known values are mostly lower incomes, so both dropping and mean imputation bias the average downward. Understanding the <strong>reason</strong> for missingness comes first.</p>
+</div>
+</div>
+</section>
+<section id="step-5-scale-transform-and-validate" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-scale-transform-and-validate">Step 5: Scale, transform and validate</h3>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li><strong>Scaling:</strong> <code>CGPA_pct</code> = <code>[CGPA] / 4 * 100</code> turns CGPA (0–4) into a percentage (0–100).</li>
+<li><strong>Transformation:</strong> <code>Log_Spending</code> = <code>LOG([Monthly Spending])</code> pulls in the long right tail caused by the ₺48,000 student, so the histogram is easier to read.</li>
+<li><strong>Validate:</strong> rebuild the Gender, Height and Age charts with the clean fields. Two genders, three faculties, all heights in 153–186 cm, all ages 18–27, and CNT = CNTD = 46 after the filters.</li>
+</ol>
+</div>
+<div class="quiz" type="fill">
+<p>A student’s CGPA is 3.2. On the 0–100 scale, <code>CGPA_pct</code> = <span class="blank" data-answer="80" data-tol="0.01"></span>. An SAT score of 1000 on the 400–1600 scale, rescaled to 0–1 with (score − 400) / (1600 − 400), is <span class="blank" data-answer="0.5" data-tol="0.001"></span>, so it can be compared with an ACT score rescaled the same way.</p>
+<div class="explain">
+<p>3.2 / 4 × 100 = <strong>80</strong>. (1000 − 400) / 1200 = <strong>0.5</strong>. SAT (400–1600) and ACT (1–36) are on different scales, so they can only be compared after rescaling, as in the lecture.</p>
+</div>
+</div>
+<div class="quiz" type="open" data-keywords="duplicate; trim|upper|typo|structural|group; metre|meter|unit|uniform|cm; 150|range|invalid|cgpa; null|missing|imput">
+<p>Write a short <strong>cleaning report</strong> (the last stage of the workflow) for r7_survey_dirty.csv: list the problems you found and what you did with each.</p>
+<div class="explain">
+<p><strong>Model answer:</strong></p>
+<ol type="1">
+<li><strong>Duplicates:</strong> 50 rows but 48 distinct IDs. Responses 31 and 50 were second submissions; removed.</li>
+<li><strong>Irrelevant data:</strong> Shoe Size hidden.</li>
+<li><strong>Structural errors:</strong> 9 Gender values and 8 Faculty values. Cleaned with TRIM, UPPER and a group, leaving 2 genders and 3 faculties. Student IDs padded to 6 digits.</li>
+<li><strong>Uniformity:</strong> 5 heights in metres converted to cm (mean 154.9 → 173.1).</li>
+<li><strong>Validity:</strong> age 150 and CGPA 4.6 removed by range filters; one graduation year before the enrolment year flagged.</li>
+<li><strong>Outlier kept:</strong> ₺48,000 spending is plausible; kept and noted.</li>
+<li><strong>Missing data:</strong> 4 spending values missing; mean of the 44 known values is ₺9,670. Not replaced with 0.</li>
+<li><strong>Verification:</strong> all charts rebuilt with the clean fields; 46 students remain.</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="part-b-making-your-visualizations-better" class="level1">
+<h1>Part B — Making your visualizations better</h1>
+<div class="quiz" type="ms" data-answer="a,b,d">
+<p>You build a dashboard with four views in Tableau. Which choices follow the lecture’s <strong>grid and alignment</strong> advice? Select all that apply.</p>
+<ul>
+<li>Put the most important view in the top left corner</li>
+<li>Place the title at the top left</li>
+<li>Draw a thick border around every view so the grid is clearly visible</li>
+<li>Put the least important information (e.g.&nbsp;data source note) at the bottom right</li>
+<li>Arrange the views in a circle so the eye can start anywhere</li>
+</ul>
+<div class="explain">
+<p>Readers of left-to-right languages start at the <strong>top left</strong> and finish at the <strong>bottom right</strong>. The grid should be <strong>invisible</strong>: borders around every element give a “boxy” design and add non-data ink.</p>
+</div>
+</div>
+<div class="quiz" type="match">
+<p>Match each of Tufte’s ideas with what it means for your Tableau chart.</p>
+<ul>
+<li>Data-ink ratio :: Remove borders, heavy gridlines and decoration that show no data</li>
+<li>Data-dense graphs :: Show a lot of information in a simple chart</li>
+<li>Strategic use of colour :: Colour only what matters, not everything for decoration</li>
+<li>Importance of context :: Add a title and notes that say what the data mean and why they matter</li>
+</ul>
+<div class="explain">
+<p>These four ideas are the backbone of the decluttering steps in B6.</p>
+</div>
+</div>
+<div class="quiz" type="mc" data-answer="c">
+<p>A chart shows the <strong>monthly</strong> mean temperature (colour) of <strong>four cities</strong>, with month on the x-axis and city on the y-axis. Which statement is correct?</p>
+<ul>
+<li>Both position scales are continuous, so the months should be spaced by their number of days</li>
+<li>The city axis must be in alphabetical order, because it is an ordered factor</li>
+<li>Both position scales are discrete: months must keep their natural order, but the cities can be placed in any order</li>
+<li>Temperature can’t be shown as colour, only on a position scale</li>
+</ul>
+<div class="explain">
+<p>Month is an <strong>ordered</strong> factor with 12 levels and city an <strong>unordered</strong> factor with 4 levels, so both axes are discrete with equal spacing. The months need their natural order; the order of the cities is our choice (for example sorted by temperature). Mapping the key variable to colour is allowed, but then the coloured areas must be large enough to read.</p>
+</div>
+</div>
+<div class="quiz" type="tf" data-answer="true">
+<p>In a correct one-to-one mapping, each data value corresponds to exactly one aesthetic value (for example one colour), and each colour corresponds to exactly one data value.</p>
+<div class="explain">
+<p>That is the definition of a one-to-one scale. Reusing a colour for two categories (“colour looping”) breaks it, which is why qualitative palettes should not repeat colours.</p>
+</div>
+</div>
+<section id="b1.-colour" class="level2">
+<h2 class="anchored" data-anchor-id="b1.-colour">B1. Colour</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-palettes.png" class="img-fluid figure-img" alt="Chart A: bars for students by faculty in three distinct colours, blue, orange and red. Chart B: a heatmap of library visitors by weekday and time slot in shades of blue from light (few) to dark (many). Chart C: horizontal bars of the change in pass rate of eight courses, from plus 16 for STAT 112 to minus 7 for PHYS 105; gains are blue, losses are red, and values close to zero are pale."></p>
+<figcaption>Three charts that need three different palette types.</figcaption>
+</figure>
+</div>
+<div class="quiz" type="classify" data-options="Qualitative|Sequential|Diverging">
+<p>Which palette type does each chart above use, and which would you use for the other situations?</p>
+<ul>
+<li>Chart A: students by faculty :: Qualitative</li>
+<li>Chart B: library visitors by day and time :: Sequential</li>
+<li>Chart C: change in pass rate (+ and −) :: Diverging</li>
+<li>Ways of coming to campus: bus, ring, walk, car :: Qualitative</li>
+<li>Satisfaction levels from “very low” to “very high” :: Sequential</li>
+<li>Percentage of female students per department, centred on 50% :: Diverging</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Categorical</strong> variable → qualitative (distinct colours, at most about 10).</li>
+<li><strong>Ordinal</strong> or numerical without a meaningful centre → sequential (light = low, dark = high).</li>
+<li>Numerical <strong>with a meaningful midpoint</strong> (0 change, or 50% as in the lecture’s Texas map) → diverging.</li>
+</ul>
+</div>
+</div>
+<div class="rv r7-pal" id="r7-pal">
+  <div class="rv-head"><span class="rv-num">Challenge</span><span class="rv-type">Pick the palette · watch the chart change</span></div>
+  <p>For each data set, choose the palette type. The chart recolours immediately, so you can see why the right choice reads better.</p>
+  <div class="r7-pal-grid"></div>
+  <div class="rv-feedback" role="status" aria-live="polite"></div>
+</div>
+<div class="tb-steps">
+<p>Colour in Tableau</p>
+<ul>
+<li><strong>Change a palette:</strong> click <span class="tb-shelf">Color</span> on the Marks card › <strong>Edit Colors…</strong>. For a dimension pick a categorical palette such as <em>Tableau 10</em>; for a measure pick a sequential palette (<em>Blue</em>) or a diverging one (<em>Orange-Blue Diverging</em>).</li>
+<li><strong>Centre a diverging palette:</strong> in Edit Colors tick <strong>Advanced</strong> › <strong>Center:</strong> and type the midpoint (0 or 50).</li>
+<li><strong>Colour-blind friendly:</strong> choose the built-in <strong>Color Blind</strong> palette (blue and orange tones).</li>
+<li><strong>Highlight one thing:</strong> create <code>Highlight</code> = <code>IF [Course] = "STAT 112" THEN "STAT 112" ELSE "Other" END</code>, drop it on Color, and set <em>Other</em> to light grey and <em>STAT 112</em> to a strong colour.</li>
+</ul>
+</div>
+<div class="quiz" type="ms" data-answer="a,c,d,f">
+<p>Which pieces of colour advice come from the lecture? Select all that apply.</p>
+<ul>
+<li>Use 10 or fewer colours in a qualitative palette; bundle the rest into “Other”</li>
+<li>Use a different bright colour for every bar so the chart looks lively</li>
+<li>Keep the baseline colours subtle so they don’t compete with the highlight colour</li>
+<li>Avoid red–green combinations; blue–orange is the safest pair</li>
+<li>Re-use the same colour for two categories when you run out of colours</li>
+<li>Colours are easier to tell apart on large areas than on small points or thin lines</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>b</strong> is the opposite of “use colour purposefully, not just for decoration”.</li>
+<li><strong>e</strong> is colour looping, which leads to misinterpretation.</li>
+<li><strong>f:</strong> small marks and thin lines make colours hard to distinguish, and colour-vision deficiency makes it worse.</li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-cvd.png" class="img-fluid figure-img" alt="Four line charts of applications received and processed by month. Top row, red and green lines: with normal vision they are easy to tell apart, but in the deuteranopia simulation both lines become a similar olive brown. Bottom row, Okabe–Ito blue and orange lines: they stay clearly different in both versions."></p>
+<figcaption>The same line chart with a red–green and a blue–orange palette, as seen with normal colour vision and with deuteranopia (simulated).</figcaption>
+</figure>
+</div>
+<div class="quiz" type="fill">
+<p>In the simulation above, the red and green lines turn into almost the same <span class="blank" data-answer="brown|olive|olive brown|yellow|khaki|mustard"></span> colour, while the blue and <span class="blank" data-answer="orange|yellow"></span> lines stay different. Besides colour, we can help colour-blind readers with patterns, shapes or text <span class="blank" data-answer="labels|label"></span>, for example labelling each line directly.</p>
+<div class="explain">
+<p>Deuteranopia (no green-sensitive cones) is the most common form of colour-vision deficiency, especially among males. Blue–orange (Okabe &amp; Ito) survives it; red–green does not. Direct labels make the colour itself unnecessary.</p>
+</div>
+</div>
+</section>
+<section id="b2.-text-tables-and-heatmaps" class="level2">
+<h2 class="anchored" data-anchor-id="b2.-text-tables-and-heatmaps">B2. Text, tables and heatmaps</h2>
+<div class="quiz" type="mc" data-answer="d">
+<p>The student council wants to share one fact: <em>“In 2026, 38% of students used the ring bus, compared to 61% in 2016.”</em> What is the best visual?</p>
+<ul>
+<li>A clustered bar chart of the two percentages</li>
+<li>A pie chart for each year</li>
+<li>A line chart with two points</li>
+<li>Simple text: the two numbers in large font with a short sentence</li>
+</ul>
+<div class="explain">
+<p><strong>Simple text.</strong> “The fact that you have some numbers does not mean that you need a graph!” With one or two numbers, use the numbers directly. In Tableau: put the value on Text and make the font large (a “big number”).</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-table-heatmap.png" class="img-fluid figure-img" alt="Left: a text table of average quiz scores for five sections and four quizzes, with light grey lines between rows. Right: the same numbers as a highlight table where darker orange cells mean higher scores; Section 3 is darkest and the Section 4, Quiz 2 cell (52) is very pale."></p>
+<figcaption>The same quiz averages as a plain text table and as a highlight table.</figcaption>
+</figure>
+</div>
+<div class="quiz" type="fill">
+<p>Use the highlight table. The highest average is in Section <span class="blank" data-answer="3|three"></span>, Quiz <span class="blank" data-answer="4|four"></span>. The cell that stands out as unusually low is Section <span class="blank" data-answer="4|four"></span>, Quiz 2 with a score of <span class="blank" data-answer="52"></span>.</p>
+<div class="explain">
+<p>Colour saturation helps the eye target the points of interest quickly: the dark cell (85) and the pale cell (52) jump out in the heatmap, while in the text table you must read every number. Always add a legend to explain the colour scale.</p>
+<p><strong>In Tableau:</strong> Section on Rows, Quiz on Columns, AVG(Score) on Text, then <strong>Show Me › highlight table</strong> (or set the mark type to Square and drop AVG(Score) on Color).</p>
+</div>
+</div>
+</section>
+<section id="b3.-what-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="b3.-what-to-avoid">B3. What to avoid</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-pie.png" class="img-fluid figure-img" alt="A pie chart with four slices for Brand A, Brand B, Brand C and Brand D, with no numbers. The slices look roughly the same size."></p>
+<figcaption>Market share of four coffee brands on campus.</figcaption>
+</figure>
+</div>
+<div class="quiz" type="mc" data-answer="b">
+<p>Look at the pie chart above for a few seconds. Which brand has the largest market share?</p>
+<ul>
+<li>Brand A</li>
+<li>Brand B</li>
+<li>Brand D</li>
+<li>They are all exactly equal</li>
+</ul>
+<div class="explain">
+<p><img src="images/recitation7/r7-pie-bar.png" class="img-fluid" alt="Left: the same pie with labels: Brand A 24.6 percent, Brand B 27.2 percent, Brand C 22.4 percent, Brand D 25.8 percent. Right: a sorted horizontal bar chart with Brand B (27.2 percent) highlighted in orange and the others in grey."></p>
+<p><strong>Brand B (27.2%)</strong>, but very few people can tell from the slices alone, because the human eye is poor at comparing angles and areas. Labels fix it, but then the numbers do all the work and the pie isn’t worth its space. A <strong>sorted horizontal bar chart</strong> shows the ranking instantly. <em>(In Recitation 6 we built a donut chart in Tableau as practice; Lecture 7 explains why donuts are even harder to read: comparing arc lengths.)</em></p>
+</div>
+</div>
+<div class="quiz" type="match">
+<p>Match each thing to avoid with the lecture’s better alternative.</p>
+<ul>
+<li>Pie chart :: A sorted horizontal bar chart</li>
+<li>Donut chart :: A bar chart; arc lengths are hard to compare</li>
+<li>3D chart :: The same chart in 2D, unless a third dimension is really plotted</li>
+<li>Secondary y-axis :: Label the second series directly, or pull the charts apart with a shared x-axis</li>
+<li>Bar chart with the y-axis starting at 60 :: The same bar chart with a zero baseline</li>
+<li>Long category names on a vertical bar chart :: A horizontal bar chart</li>
+</ul>
+<div class="explain">
+<p>In Tableau: avoid <strong>Dual Axis</strong> for two different units. If you must, use two separate rows with the same x-axis instead. For a zero baseline: right-click the axis › <strong>Edit Axis…</strong> › tick <strong>Include zero</strong>.</p>
+</div>
+</div>
+<div class="quiz" type="tf" data-answer="false">
+<p>For bar charts, the bars should be narrower than the white space between them, so that the chart looks light.</p>
+<div class="explain">
+<p><strong>False.</strong> In general the bars should be <strong>wider</strong> than the gaps between them, but not so wide that readers compare areas instead of lengths. In Tableau, drag the <strong>Size</strong> slider on the Marks card.</p>
+</div>
+</div>
+</section>
+<section id="b4.-decluttering-step-by-step" class="level2">
+<h2 class="anchored" data-anchor-id="b4.-decluttering-step-by-step">B4. Decluttering, step by step</h2>
+<p>Your student-affairs office lost two staff members in June. You want a chart that supports hiring new staff, using <strong>r7_applications.csv</strong>. Turn on the steps one by one and watch the chart change.</p>
+<div class="rv r7-dec" id="r7-dec">
+  <div class="rv-head"><span class="rv-num">Interactive</span><span class="rv-type">Declutter · tick each step</span></div>
+  <div class="r7-dec-steps"></div>
+  <div class="r7-dec-chart"></div>
+  <div class="r7-dec-note"></div>
+  <div class="rv-controls"><button type="button" class="btn btn-sm btn-outline-secondary" data-act="all">Apply all steps</button><button type="button" class="btn btn-sm btn-outline-secondary" data-act="none">Back to the original</button></div>
+</div>
+<div class="tb-steps">
+<p>The same steps in Tableau</p>
+<ol start="0" type="1">
+<li><code>Month</code> to <span class="tb-shelf">Columns</span> (as an exact date, continuous), <code>Measure Values</code> to <span class="tb-shelf m">Rows</span>, <code>Measure Names</code> to <span class="tb-shelf">Color</span>; keep only Received and Processed.</li>
+<li><strong>Remove the border:</strong> Format › <strong>Borders</strong> › Sheet › Row and Column Divider: <em>None</em>.</li>
+<li><strong>Remove gridlines:</strong> right-click the view › <strong>Format…</strong> › Lines icon › Grid Lines: <em>None</em> (or a thin light grey).</li>
+<li><strong>Remove data markers:</strong> click <span class="tb-shelf">Color</span> › Markers: choose the option <em>without</em> markers.</li>
+<li><strong>Clean up the axes:</strong> right-click the date axis › Format › Dates: custom <code>mmm</code> (Jan, Feb, …); right-click the value axis › Format › Numbers: <em>Number (Custom)</em> with 0 decimals.</li>
+<li><strong>Label the data directly:</strong> <span class="tb-shelf">Label</span> › <strong>Show mark labels</strong> › Marks to Label: <strong>Line Ends</strong>, and tick <em>Label end of line</em> only for the name; then hide the legend.</li>
+<li><strong>Consistent colour:</strong> Label › Font › <strong>Match Mark Color</strong>. Make <em>Received</em> grey and <em>Processed</em> a strong blue, and write a title that states the message.</li>
+</ol>
+</div>
+</section>
+</section>
+<section id="part-c-two-useful-charts-in-tableau" class="level1">
+<h1>Part C — Two useful charts in Tableau</h1>
+<section id="c1.-treemap" class="level2">
+<h2 class="anchored" data-anchor-id="c1.-treemap">C1. Treemap</h2>
+<p>A <strong>treemap</strong> shows a part-to-whole relationship with nested rectangles: the <strong>area</strong> of each rectangle is proportional to its value, and groups (parents) contain their subgroups (children). It works well when there are <strong>many categories</strong>, the data are <strong>hierarchical</strong>, and <strong>precise</strong> comparisons are not important.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-treemap.png" class="img-fluid figure-img" alt="A treemap of 5,200 cafeteria orders. Main dishes (blue, 36.5 percent) is the largest block, split into Köfte 610, Kuru fasulye 520, Chicken şiş 470 and Mantı 300. Sides (orange, 19.2 percent): Rice pilaf 560, Bulgur pilaf 240, Seasonal salad 200. Drinks (red, 18.3 percent): Ayran 450, Tea 380, Lemonade 120. Soups (teal, 15.4 percent): Lentil 412, Tomato 238, Yayla 150. Desserts (green, 10.6 percent): Sütlaç 260, Baklava 180, Revani 110."></p>
+<figcaption>A treemap of one week’s cafeteria orders: five categories, each split into its menu items.</figcaption>
+</figure>
+</div>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li>Connect to <strong>r7_cafeteria.csv</strong>. Ctrl/Cmd-click <code>Category</code>, <code>Item</code> and <code>Orders</code> in the Data pane, open <strong>Show Me</strong> and click <strong>Treemap</strong>.</li>
+<li>Tableau puts <code>SUM(Orders)</code> on <span class="tb-shelf m">Size</span> and <span class="tb-shelf m">Color</span>. Drag <code>Category</code> onto <span class="tb-shelf">Color</span> instead, so each category gets one colour and its items are grouped together.</li>
+<li>Drag <code>Item</code> and <code>SUM(Orders)</code> onto <span class="tb-shelf">Label</span>. Add <code>Orders</code> once more to Label and choose <strong>Quick Table Calculation › Percent of Total</strong>.</li>
+<li>Give it a title that says what to look at, for example <em>“Main dishes make up over a third of all orders”</em>.</li>
+</ol>
+</div>
+<div class="quiz" type="fill">
+<p>Read the treemap. Main dishes account for <span class="blank" data-answer="36.5" data-tol="0.1"></span> % of all orders. The single most ordered item is <span class="blank" data-answer="Köfte|kofte|köfte"></span>. Within Soups, lentil soup makes up about <span class="blank" data-answer="51.5|52|51" data-tol="0.6"></span> % of the soup orders (412 of 800).</p>
+<div class="explain">
+<p>Main dishes: 1,900 / 5,200 = <strong>36.5%</strong>. Köfte has the largest rectangle (610). Lentil: 412 / 800 = <strong>51.5%</strong>: more than half of the soups. Note how the hierarchy lets us tell a story at two levels (category, then item).</p>
+</div>
+</div>
+<div class="quiz" type="tf" data-answer="false">
+<p>A treemap is the best chart when we need to tell whether Tea (380) or Lentil soup (412) was ordered more often.</p>
+<div class="explain">
+<p><strong>False.</strong> Treemaps are for part-to-whole views of many hierarchical categories, when <strong>precise comparisons are not important</strong>. Comparing two rectangles of different shapes is hard; a sorted bar chart answers this question better.</p>
+</div>
+</div>
+</section>
+<section id="c2.-slope-chart" class="level2">
+<h2 class="anchored" data-anchor-id="c2.-slope-chart">C2. Slope chart</h2>
+<p>A <strong>slope chart</strong> is a line chart that keeps only <strong>two points in time</strong>. Each category is one line, so it shows the change in <strong>value</strong>, the change in <strong>ranking</strong>, and who grew or fell the most: ideal for “before and after” stories.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-slope.png" class="img-fluid figure-img" alt="A slope chart with eight grey lines and one orange line. STAT 112 rises from 62 percent in Fall 2024 to 78 percent in Fall 2025. HIST 2201 rises from 88 to 90, ENG 101 from 74 to 83, CENG 140 from 68 to 74 and MATH 119 from 55 to 58. ECON 101 falls from 80 to 77, PHYS 105 from 71 to 64 and CHEM 107 from 58 to 52."></p>
+<figcaption>Pass rates of eight courses in Fall 2024 and Fall 2025, with STAT 112 highlighted.</figcaption>
+</figure>
+</div>
+<div class="tb-steps">
+<p>Tableau steps</p>
+<ol type="1">
+<li>Connect to <strong>r7_pass_rates.csv</strong>. Drag <code>Term</code> to <span class="tb-shelf">Columns</span> and <code>Pass Rate</code> to <span class="tb-shelf m">Rows</span>.</li>
+<li>Drag <code>Course</code> onto <span class="tb-shelf">Detail</span>: one line per course. Set the mark type to <strong>Line</strong>.</li>
+<li>Drag <code>Course</code> and <code>Pass Rate</code> onto <span class="tb-shelf">Label</span>. In Label choose <strong>Line Ends</strong>, and untick <em>Allow labels to overlap other marks</em>.</li>
+<li><strong>Contrast:</strong> create <code>Highlight</code> = <code>IF [Course] = "STAT 112" THEN "STAT 112" ELSE "Other" END</code>, put it on Color, make <em>Other</em> light grey and <em>STAT 112</em> orange.</li>
+<li>Hide the vertical axis (right-click › untick <strong>Show Header</strong>) and remove the gridlines, as in B8.</li>
+</ol>
+</div>
+<div class="quiz" type="fill">
+<p>STAT 112 rose by <span class="blank" data-answer="16"></span> percentage points and moved from rank <span class="blank" data-answer="6|6th|sixth"></span> to rank <span class="blank" data-answer="3|3rd|third"></span> among the 8 courses. The largest fall was in <span class="blank" data-answer="PHYS 105|PHYS105|phys 105"></span> (<span class="blank" data-answer="-7|7|−7"></span> points).</p>
+<div class="explain">
+<p>78 − 62 = <strong>16</strong>. Ranks in Fall 2024: HIST 88, ECON 80, ENG 74, PHYS 71, CENG 68, <strong>STAT 62 (6th)</strong>, CHEM 58, MATH 55. In Fall 2025: HIST 90, ENG 83, <strong>STAT 78 (3rd)</strong>, ECON 77, … PHYS 105 fell from 71 to 64 (<strong>−7</strong>).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-d-make-it-better-challenge" class="level1">
+<h1>Part D — Make it better challenge</h1>
+<p>The chart below was made with a data visualization tool. The message it should send: <strong>“Ankara’s rent is above the average of the 10 cities.”</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-makeover-before.png" class="img-fluid figure-img" alt="A vertical bar chart titled Avg_Rent_TL by City. Each of the 10 bars has a different bright rainbow colour with a black outline, the background is light blue-grey with white gridlines, the y-axis starts at 10,000, city names are in capitals and rotated 60 degrees, and each bar has a rotated label with three decimals such as 21500.000. The bars are in no particular order."></p>
+<figcaption>The original chart: average rents of 10 cities.</figcaption>
+</figure>
+</div>
+<div class="quiz" type="open" data-keywords="sort|order|rank; horizontal|rotat|turn|head|diagonal; zero|baseline|10000|10,000; colour|color|rainbow|grey|gray|highlight|ankara; decimal|precision|label|format|k; title|message|average|reference|line; grid|background|border|clutter">
+<p>List <strong>at least five</strong> problems in this chart, name the principle behind each, and say how you would fix it in Tableau.</p>
+<div class="explain">
+<p><strong>Model answer:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Principle</th>
+<th>Fix in Tableau</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>y-axis starts at 10,000</td>
+<td>Bars need a <strong>zero baseline</strong> (bad figure)</td>
+<td>Edit Axis › Include zero</td>
+</tr>
+<tr class="even">
+<td>Bars in random order</td>
+<td>Easy comparison, simplicity</td>
+<td>Sort descending</td>
+</tr>
+<tr class="odd">
+<td>Rotated, capitalized city names</td>
+<td>Don’t make readers turn their heads</td>
+<td>Swap to <strong>horizontal bars</strong>; keep normal case</td>
+</tr>
+<tr class="even">
+<td>Ten rainbow colours</td>
+<td>Colour purposefully; <strong>contrast</strong></td>
+<td><code>Highlight</code> calc: Ankara orange, others grey</td>
+</tr>
+<tr class="odd">
+<td>Labels with 3 decimals, rotated</td>
+<td>No unnecessary precision</td>
+<td>Format › Numbers › Currency (Custom): ₺ prefix, Thousands (K), 1 decimal</td>
+</tr>
+<tr class="even">
+<td>No reference to the average</td>
+<td><strong>Context</strong></td>
+<td>Analytics pane › <strong>Average Line</strong></td>
+</tr>
+<tr class="odd">
+<td>Title “Avg_Rent_TL by City”</td>
+<td>Explanatory charts state the message</td>
+<td>Title: <em>“Ankara’s average rent is 10% above the 10-city average”</em></td>
+</tr>
+<tr class="even">
+<td>Grey background, gridlines, outlines</td>
+<td><strong>Data-ink ratio</strong>, clutter</td>
+<td>Format › Shading: None; Lines: None; Borders: None</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/recitation7/r7-makeover-after.png" class="img-fluid figure-img" alt="A sorted horizontal bar chart with the message title Ankara's average rent is 10 percent above the 10-city average and the subtitle average monthly rent of a 2+1 flat in TL, fictional data. İstanbul 34.8K, İzmir 27.4K and Antalya 26.1K are grey, Ankara 21.5K is orange with an orange bold name, then grey bars for Bursa 17.9K, Eskişehir 15.2K, Trabzon 14.3K, Konya 13.1K, Kayseri 12.6K and Gaziantep 11.8K. A dashed vertical line marks the 10-city average of 19.5K."></p>
+<figcaption>After the makeover.</figcaption>
+</figure>
+</div>
+<div class="tb-steps">
+<p>Tableau steps for the makeover</p>
+<ol type="1">
+<li>Connect to <strong>r7_rent.csv</strong>. <code>City</code> to <span class="tb-shelf">Rows</span>, <code>Avg Rent TL</code> to <span class="tb-shelf m">Columns</span>: horizontal bars with a zero baseline by default. Sort descending.</li>
+<li>Create <code>Highlight</code> = <code>IF [City] = "Ankara" THEN "Ankara" ELSE "Other" END</code> › <span class="tb-shelf">Color</span>; Edit Colors: Ankara orange, Other light grey.</li>
+<li>Analytics pane › drag <strong>Average Line</strong> onto the view (Table). Edit it: label <em>“average of the 10 cities”</em>, dashed, dark grey.</li>
+<li><code>Avg Rent TL</code> onto <span class="tb-shelf">Label</span>; right-click a label › <strong>Format…</strong> › Numbers › Currency (Custom): prefix ₺, Display Units <em>Thousands (K)</em>, 1 decimal.</li>
+<li>Right-click the bottom axis › untick <strong>Show Header</strong> (the labels carry the numbers). Right-click the <em>City</em> field label › <strong>Hide Field Labels for Rows</strong>.</li>
+<li>Format › Shading: <em>None</em>; Lines: Grid Lines <em>None</em>; Borders: <em>None</em>.</li>
+<li>Double-click the title: <em>“Ankara’s average rent is 10% above the 10-city average”</em> (bold), with the data note in small grey text below.</li>
+</ol>
+</div>
+<div class="quiz" type="fill">
+<p>Check the title: the 10-city average is ₺<span class="blank" data-answer="19470|19,470|19.47K|19.5K|19500"></span> and Ankara’s rent is ₺21,500, so Ankara is about <span class="blank" data-answer="10|10.4" data-tol="0.5"></span> % above the average. In the ranking, Ankara is in <span class="blank" data-answer="4th|4|fourth"></span> place.</p>
+<div class="explain">
+<p>Average = 194,700 / 10 = <strong>₺19,470</strong>. (21,500 − 19,470) / 19,470 ≈ <strong>10.4%</strong>. Ankara is 4th after İstanbul, İzmir and Antalya. Always check that a message title is supported by the numbers.</p>
+</div>
+</div>
+</section>
+<section id="part-e-flourish" class="level1">
+<h1>Part E — Flourish</h1>
+<p>Flourish is a <strong>browser-based, drag-and-drop</strong> tool for tidy tables, built for <strong>storytelling with data</strong>. In this part you first <strong>read and criticise</strong> a chart made in Flourish, then build your own charts for four new research questions. All data sets are clean and fictional, created for this recitation.</p>
+<div class="r7-data">
+  <a class="r7-card" href="files/recitation7/r7f_social_media.csv" download=""><span class="ico">🕸️</span><span class="txt"><strong>r7f_social_media.csv</strong><small>E2 · daily use of 12 apps, 2014–2025</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7f_semester_life.csv" download=""><span class="ico">😴</span><span class="txt"><strong>r7f_semester_life.csv</strong><small>E3 · sleep, study, coffee over 16 weeks</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7f_satisfaction.csv" download=""><span class="ico">📊</span><span class="txt"><strong>r7f_satisfaction.csv</strong><small>E3 · satisfaction with 8 services, 2024–2025</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7f_international_students.csv" download=""><span class="ico">🌍</span><span class="txt"><strong>r7f_international_students.csv</strong><small>E3 · 2,458 students from 30 countries</small></span><span class="dl">⬇</span></a>
+  <a class="r7-card" href="files/recitation7/r7f_student_journeys.csv" download=""><span class="ico">🔀</span><span class="txt"><strong>r7f_student_journeys.csv</strong><small>E3 · high school → faculty → first job</small></span><span class="dl">⬇</span></a>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Free accounts are public
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Anything published from a free account can be seen by anyone with the link, so use only non-sensitive data.</p>
+</div>
+</div>
+<section id="e1.-the-workflow-for-every-chart" class="level2">
+<h2 class="anchored" data-anchor-id="e1.-the-workflow-for-every-chart">E1. The workflow for every chart</h2>
+<ol type="1">
+<li>Log in at <strong>app.flourish.studio</strong> › <strong>New visualization</strong> › choose a <strong>template</strong>. Look at its sample data first.</li>
+<li>Switch <strong>Preview / Data</strong> to <em>Data</em> › <strong>Upload data</strong> › choose the CSV (Flourish also reads Excel, TSV, JSON and GeoJSON). Flourish reads the <strong>first row as headings</strong>.</li>
+<li>On the right, assign the <strong>columns</strong> (e.g.&nbsp;Labels/time, Values). These change from template to template.</li>
+<li>Switch back to <strong>Preview</strong> and improve the chart in the settings panel: <strong>Colours</strong>, <strong>Labels</strong>, <strong>Legend</strong>, <strong>Controls &amp; filters</strong>, <strong>Header</strong> (title, subtitle) and <strong>Footer</strong> (source).</li>
+<li><strong>Export &amp; publish</strong> › <strong>Publish to share and embed</strong>.</li>
+</ol>
+</section>
+<section id="e2.-read-it-then-beat-it-a-radar-chart" class="level2">
+<h2 class="anchored" data-anchor-id="e2.-read-it-then-beat-it-a-radar-chart">E2. Read it, then beat it: a radar chart</h2>
+<p>Data: <strong>r7f_social_media.csv</strong>, the share of students (%) who use each of 12 apps daily, 2014–2025, with each app’s <strong>Type</strong> (Social network, Photo &amp; video, News &amp; text, Messaging, Career).</p>
+<blockquote class="blockquote">
+<p><strong>Research question:</strong> <em>How did students’ daily use of social media apps change between 2014 and 2025?</em></p>
+</blockquote>
+<p>I answered this research question in Flourish with a <strong>radar chart</strong>: one polygon per app, one spoke per year, and one small chart per app type (the <em>Separate</em> view).</p>
+<p>Five radar charts made in Flourish, one per app type, with spokes for the years 2014 to 2023 and rings at 0, 20, 40, 60 and 80 percent. Social network: one polygon that is large at 2014 to 2017 and shrinks to about 20 by 2023. Photo and video: six overlapping blue polygons that cannot be told apart. News and text: one fairly round polygon between about 40 and 58. Messaging: one very large polygon near 90 in every year and two small ones. Career: one small polygon that grows towards 2022 and 2023.”</p>
+<p>Explore the interactive version below:</p>
+<iframe src="https://flo.uri.sh/visualisation/31036809/embed" title="Radar chart of daily app use (Flourish)" style="width:100%;height:650px;border:0" scrolling="no"></iframe>
+<section id="interpret-the-chart" class="level3">
+<h3 class="anchored" data-anchor-id="interpret-the-chart">Interpret the chart</h3>
+<div class="quiz" type="mc" data-answer="c">
+<p>In the <strong>Social network</strong> panel (Facebook only), the polygon is large on the 2014–2017 spokes and small on the 2021–2023 spokes. What does that mean?</p>
+<ul>
+<li>Facebook use was low at first and grew over time</li>
+<li>Facebook use stayed about the same</li>
+<li>Facebook use was high at first and fell steadily</li>
+<li>Facebook was used more in winter than in summer</li>
+</ul>
+<div class="explain">
+<p>On a radar chart the <strong>distance from the centre</strong> is the value. Facebook is near 80–90% on the early spokes and near 20% on the late ones: daily use fell steadily (from 88% in 2014 to 21% in 2023). The last option is a trap: the spokes are <strong>years</strong>, not seasons, even though the circle makes time look like a cycle.</p>
+</div>
+</div>
+<div class="quiz" type="tf" data-answer="false">
+<p>In the <strong>Messaging</strong> panel, the large polygon close to the outer ring tells us that every messaging app was used by about 90% of students.</p>
+<div class="explain">
+<p><strong>False.</strong> Only <strong>one</strong> app (WhatsApp, 70% → 97%) draws the large polygon. The two small polygons are Telegram and Discord, which stay below 50%. Without app labels the reader can’t tell which polygon belongs to which app, which is one of the chart’s main problems.</p>
+</div>
+</div>
+<div class="quiz" type="ms" data-answer="a,b,c,e">
+<p>Which <strong>problems</strong> does this radar chart have? Select all that apply.</p>
+<ul>
+<li>In <em>Photo &amp; video</em>, six overlapping polygons can’t be told apart, and the apps aren’t labelled</li>
+<li>The spokes only go up to 2023, so 2024 and 2025 are missing even though the research question asks about 2014–2025</li>
+<li>Time is drawn as a circle, so 2023 is joined back to 2014 as if the years formed a cycle</li>
+<li>Each panel uses the same scale (0–80), so values can’t be compared</li>
+<li>The <strong>area</strong> of a polygon grows much faster than the values, so changes look bigger than they are</li>
+</ul>
+<div class="explain">
+<ul>
+<li><strong>Overlap and missing labels:</strong> the eye can’t follow six lines on a web.</li>
+<li><strong>Missing years:</strong> the Values setting probably included only the 2014–2023 columns. Always check the <strong>column settings</strong> in the Data tab!</li>
+<li><strong>Circular time:</strong> the closing line from 2023 back to 2014 means nothing.</li>
+<li><strong>Area exaggerates:</strong> a polygon’s area grows roughly with the <em>square</em> of the values.</li>
+<li><strong>The same scale in every panel is not a problem;</strong> it is what makes the panels comparable.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="suggest-better-charts" class="level3">
+<h3 class="anchored" data-anchor-id="suggest-better-charts">Suggest better charts</h3>
+<div class="quiz" type="open" data-keywords="line; small multiple|grid|panel|facet; highlight|grey|gray|colour|color; race|rank; slope|2014 vs 2025|two years; label|legend">
+<p><span class="pts">Discussion</span> I answered the research question with a radar chart. Which <strong>other charts</strong> would answer it better for these variables (App, Type, one value per year)? Say <strong>why</strong>, and how you would build each in Flourish.</p>
+<div class="explain">
+<p><strong>Model answer:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Better chart</th>
+<th>Why it is better</th>
+<th>In Flourish</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Line chart</strong> (years on the x-axis), with 2–3 apps highlighted and the rest grey</td>
+<td>Time stays a straight, ordered axis; trends and crossings (WhatsApp passing Facebook in 2016) are easy to see</td>
+<td><em>Line, bar and pie charts</em> › Line chart. Flourish wants each <strong>line as a column</strong>, so first transpose the table (Year as rows, apps as columns). Then colour overrides, line labels, no legend.</td>
+</tr>
+<tr class="even">
+<td><strong>Small multiples of line charts</strong> (one panel per app or type)</td>
+<td>No overlap at all; every app is readable</td>
+<td>Same template, with <em>Type</em> in <strong>Charts grid</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Bar chart race</strong></td>
+<td>The question is about <strong>changing rankings</strong>; the race shows who passes whom</td>
+<td><em>Bar chart race</em>: Label = App, Values = 2014…2025, Category = Type</td>
+</tr>
+<tr class="even">
+<td><strong>Slope chart</strong> of 2014 vs 2025</td>
+<td>Compares start and end for all 12 apps at once</td>
+<td><em>Slope chart</em> template, or a line chart with only the two years</td>
+</tr>
+</tbody>
+</table>
+<p>Common to all of them: include <strong>all years (2014–2025)</strong>, label the apps directly, and write a message title such as <em>“Facebook fell from 1st to 11th while TikTok rose from 0% to 77%”</em>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="e3.-your-turn-four-research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="e3.-your-turn-four-research-questions">E3. Your turn: four research questions</h2>
+<p>Answer each research question with <strong>one</strong> Flourish visualization. For each one:</p>
+<ol type="1">
+<li>Choose the template.</li>
+<li>Assign the columns.</li>
+<li>Improve the chart: colours, labels, title, source.</li>
+<li>Write two or three sentences that answer the question.</li>
+</ol>
+<p>Open the model answer only after you have tried.</p>
+<div class="quiz" type="open" data-keywords="line; week|time; sleep; coffee; midterm|final|exam|annotation|highlight">
+<p><strong>RQ 1 · r7f_semester_life.csv.</strong> <em>How do sleep and coffee consumption change during exam weeks?</em></p>
+<div class="explain">
+<p><strong>Chart:</strong> <em>Line, bar and pie charts</em> › <strong>Line chart</strong>.</p>
+<ul>
+<li><strong>Columns:</strong> Labels/time = Week; Values = Sleep and Coffee only. Four measures with different units on one axis would mislead. To show all four, use <strong>Charts grid</strong> instead.</li>
+<li><strong>Improve:</strong> line labels, annotations or axis highlights at week 8 (<em>Midterms</em>) and weeks 15–16 (<em>Finals</em>), y-axis titles with units.</li>
+</ul>
+<p><strong>Answer:</strong> sleep falls from 7.6 hours (week 1) to 5.6 in midterm week and 5.1 in the last week of finals, while coffee rises from 1.4 to 4.1 cups a day. The two move in opposite directions and react sharply at exam times. This is an association, not proof that coffee causes less sleep.</p>
+</div>
+</div>
+<div class="quiz" type="open" data-keywords="stacked|100|likert; diverging|red|blue; library; wi-fi|wifi; student affairs; 2024|2025|filter|button">
+<p><strong>RQ 2 · r7f_satisfaction.csv.</strong> <em>Which campus services are students most and least satisfied with, and what changed from 2024 to 2025?</em></p>
+<div class="explain">
+<p><strong>Chart:</strong> <em>Line, bar and pie charts</em> › <strong>Bar chart (stacked %)</strong>, also called a Likert chart.</p>
+<ul>
+<li><strong>Columns:</strong> Labels/time = Service; Values = the 5 levels in order; Row filter = Year, shown as <strong>buttons</strong>.</li>
+<li><strong>Improve:</strong> diverging colours (dark red → grey → dark blue) with custom overrides; the rows are already sorted by 2025 satisfaction; data point labels with %.</li>
+</ul>
+<p><strong>Answer:</strong> - <strong>Most satisfied:</strong> Library (75% satisfied or very satisfied), Sports centre (67%). - <strong>Least satisfied:</strong> Wi-Fi (27%), the ring buses (32%) and the cafeteria (33%). - <strong>Biggest changes:</strong> Wi-Fi fell from 44% to 27% satisfied, while student affairs rose from 32% to 44%.</p>
+</div>
+</div>
+<div class="quiz" type="open" data-keywords="map|projection; point|bubble|size; asia; azerbaijan; bar|sorted">
+<p><strong>RQ 3 · r7f_international_students.csv.</strong> <em>Which countries and regions do the university’s international students come from?</em></p>
+<div class="explain">
+<p><strong>Chart:</strong> <em>Projection map</em> with <strong>points</strong>.</p>
+<ul>
+<li><strong>Columns:</strong> Latitude/Longitude = the coordinates; Name = Country; Size = Students; Color = Region.</li>
+<li><strong>Improve:</strong> a size legend, labels for the largest countries only, and a sorted <strong>bar chart</strong> of the top 15 next to the map for exact comparisons.</li>
+</ul>
+<p><strong>Answer:</strong> - Asia sends 77.7% of the 2,458 students (1,910). - The top three countries are Azerbaijan (412), Turkmenistan (265) and Pakistan (198), together 35.6%. - Africa (263) and Europe (253) each send about 10%; the Americas only 32.</p>
+</div>
+</div>
+<div class="quiz" type="open" data-keywords="sankey|flow; science; engineering; technology|software; graduate">
+<p><strong>RQ 4 · r7f_student_journeys.csv.</strong> <em>How do students flow from their high-school track to their faculty and their first destination after graduation?</em></p>
+<div class="explain">
+<p><strong>Chart:</strong> <strong>Sankey</strong>.</p>
+<ul>
+<li><strong>Columns:</strong> Source, Target, Value = Students.</li>
+<li><strong>Improve:</strong> colour the links by their source, keep the stages in order (tracks → faculties → destinations), show values on the nodes.</li>
+</ul>
+<p><strong>Answer:</strong> - 590 of the 1,000 students come from the science track, which feeds mainly engineering (310 students in total). - The largest first destination is technology &amp; software (235): 150 from engineering, 55 from arts &amp; sciences, 30 from economics. - Finance &amp; consulting is second (180), and 165 students go on to graduate school.</p>
+</div>
+</div>
+<p style="font-size:.85rem;color:#6c757d;margin-top:2rem">
+All data sets and charts on this page were created for this recitation.
+</p>
+<style>
+.r7-tablewrap { overflow-x: auto; margin: .6rem 0; }
+.r7-tbl { border-collapse: collapse; font-size: .86rem; width: 100%; min-width: 680px; }
+.r7-tbl th { background: #f1f3f7; padding: .35rem .45rem; text-align: left; border-bottom: 2px solid #cfd5e1; white-space: nowrap; }
+.r7-tbl td { padding: .32rem .45rem; border-bottom: 1px solid #e6e9ef; cursor: pointer; white-space: pre; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.r7-tbl td:hover { background: #fff7df; }
+.r7-tbl td.r7-ok { background: #dff3e6; box-shadow: inset 0 0 0 2px #1a7f37; }
+.r7-tbl td.r7-no { background: #fdecec; }
+.r7-tbl td.r7-trap { background: #fff1d6; box-shadow: inset 0 0 0 2px #b9770e; }
+.r7-tbl td.r7-show { box-shadow: inset 0 0 0 2px #1a7f37; background: #eef9f2; }
+.r7-log { margin-top: .5rem; font-size: .9rem; }
+.r7-log ol { margin: .3rem 0 0 1.1rem; padding: 0; }
+.r7-log li { margin: .15rem 0; }
+.r7-pal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin: .6rem 0; }
+.r7-pal-card { border: 1px solid var(--rv-border, #dee2e6); border-radius: 10px; padding: .6rem .7rem; }
+.r7-pal-card h5 { font-size: .92rem; margin: 0 0 .3rem; }
+.r7-pal-card svg { width: 100%; height: auto; display: block; }
+.r7-pal-btns { display: flex; flex-wrap: wrap; gap: 4px; margin-top: .4rem; }
+.r7-pal-btns button { font-size: .78rem; padding: .15rem .5rem; }
+.r7-pal-msg { font-size: .83rem; margin-top: .35rem; min-height: 2.4em; }
+.r7-pre-box { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.15rem; letter-spacing: .18em; line-height: 1.7; background: #f7f8fa; border-radius: 8px; padding: .8rem 1rem; margin: .6rem 0; min-height: 4.5rem; word-break: break-all; }
+.r7-pre-box b { color: #e8663a; font-weight: 800; }
+.r7-dec-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 4px 14px; margin: .4rem 0 .6rem; font-size: .9rem; }
+.r7-dec-steps label { display: flex; gap: .45rem; align-items: flex-start; cursor: pointer; }
+.r7-dec-steps input { margin-top: .25rem; }
+.r7-dec-chart svg { width: 100%; height: auto; display: block; }
+.r7-dec-note { font-size: .88rem; color: #4a5263; min-height: 2.6em; margin-top: .4rem; }
+</style>
+<script>
+(function () {
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function mk(el) { var b = el && el.closest ? el.closest(".rv") : null; return b; }
+
+  /* ---------- A2: find the dirty cells ---------- */
+  var D = q("#r7-dirty");
+  if (D && !D.dataset.ready) {
+    D.dataset.ready = "1";
+    var errs = qa("td[data-err]", D), log = q(".r7-log", D), fb = q(".rv-feedback", D), found = [];
+    function render() {
+      fb.className = "rv-feedback" + (found.length === errs.length ? " ok" : "");
+      fb.textContent = found.length === errs.length ? "✓ All " + errs.length + " problems found!" : found.length + " / " + errs.length + " problems found.";
+      log.innerHTML = found.length ? "<ol>" + found.map(function (td) { return "<li>" + td.getAttribute("data-err") + "</li>"; }).join("") + "</ol>" : "";
+    }
+    qa("tbody td", D).forEach(function (td) {
+      td.addEventListener("click", function () {
+        if (td.hasAttribute("data-err")) {
+          if (found.indexOf(td) < 0) { found.push(td); td.classList.add("r7-ok"); }
+          render();
+        } else if (td.hasAttribute("data-trap")) {
+          td.classList.add("r7-trap"); fb.className = "rv-feedback"; fb.textContent = td.getAttribute("data-trap");
+        } else {
+          td.classList.add("r7-no"); setTimeout(function () { td.classList.remove("r7-no"); }, 600);
+          fb.className = "rv-feedback bad"; fb.textContent = "This cell follows the rules. " + found.length + " / " + errs.length + " problems found.";
+        }
+      });
+    });
+    q('[data-act="show"]', D).addEventListener("click", function () { errs.forEach(function (td) { if (found.indexOf(td) < 0) { found.push(td); td.classList.add("r7-show"); } }); render(); });
+    q('[data-act="reset"]', D).addEventListener("click", function () { found = []; qa("td", D).forEach(function (td) { td.classList.remove("r7-ok", "r7-no", "r7-trap", "r7-show"); }); fb.textContent = ""; log.innerHTML = ""; });
+  }
+
+  /* ---------- B4: palette picker ---------- */
+  var P = q("#r7-pal");
+  if (P && !P.dataset.ready) {
+    P.dataset.ready = "1";
+    var QUAL = ["#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f", "#edc948"];
+    function seq(t) { var a = [239, 243, 255], b = [8, 69, 148]; return "rgb(" + a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }).join(",") + ")"; }
+    function div(t) { /* t in [-1,1]: orange(-) → light → blue(+) */
+      var mid = [247, 247, 247], neg = [230, 97, 1], pos = [33, 102, 172], e = t < 0 ? neg : pos, s = Math.abs(t);
+      return "rgb(" + mid.map(function (v, i) { return Math.round(v + (e[i] - v) * s); }).join(",") + ")"; }
+    var SETS = [
+      { title: "Way to campus (share of students, %)", cats: ["Bus", "Ring", "Walk", "Car"], vals: [38, 27, 22, 13], want: "Qualitative", why: { Qualitative: "✓ Right: four unordered categories, so four distinct colours.", Sequential: "Light-to-dark suggests Car < Walk < Ring < Bus in some order, but the modes have no natural order.", Diverging: "There is no midpoint: 'Ring' is not a neutral centre between bus and car." } },
+      { title: "Average daily study hours by year of study", cats: ["Prep", "1st", "2nd", "3rd", "4th"], vals: [2.1, 2.6, 3.0, 3.4, 4.2], want: "Sequential", why: { Qualitative: "Five unrelated colours hide the order: the reader can't see that the values increase.", Sequential: "✓ Right: light = few hours, dark = many hours, following the natural order.", Diverging: "A diverging palette suggests a meaningful centre (e.g. 0), which these hours don't have." } },
+      { title: "Change in enrolment vs last year (%)", cats: ["Math", "Phys", "Stat", "Chem", "Biol"], vals: [-12, -4, 15, 3, -8], want: "Diverging", why: { Qualitative: "Different colours per department hide the most important thing: gain or loss.", Sequential: "A single light-to-dark scale makes −12% look 'small' and +15% 'big', but 0 is the meaningful centre.", Diverging: "✓ Right: 0% is the meaningful midpoint; one hue for gains, another for losses." } }
+    ];
+    var grid = q(".r7-pal-grid", P), done = {};
+    SETS.forEach(function (S, k) {
+      var card = document.createElement("div"); card.className = "r7-pal-card";
+      card.innerHTML = "<h5>" + S.title + "</h5><div class=\"svg\"></div><div class=\"r7-pal-btns\">" + ["Qualitative", "Sequential", "Diverging"].map(function (p) { return '<button type="button" class="btn btn-outline-secondary" data-p="' + p + '">' + p + "</button>"; }).join("") + "</div><div class=\"r7-pal-msg\"></div>";
+      grid.appendChild(card);
+      function draw(pal) {
+        var W = 300, H = 150, n = S.cats.length, bw = 220 / n, max = Math.max.apply(null, S.vals.map(Math.abs)), hasNeg = S.vals.some(function (v) { return v < 0; });
+        var zero = hasNeg ? 66 : 125, scale = hasNeg ? 46 / max : 105 / max, svg = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + S.title + '">';
+        S.vals.forEach(function (v, i) {
+          var c = "#9aa3b5";
+          if (pal === "Qualitative") c = QUAL[i % QUAL.length];
+          if (pal === "Sequential") { var mn = Math.min.apply(null, S.vals), mx = Math.max.apply(null, S.vals); c = seq(0.15 + 0.85 * (v - mn) / ((mx - mn) || 1)); }
+          if (pal === "Diverging") c = div(v / max);
+          var x = 50 + i * bw + bw * 0.15, h = Math.abs(v) * scale, y = v >= 0 ? zero - h : zero;
+          svg += '<rect x="' + x + '" y="' + y + '" width="' + (bw * 0.7) + '" height="' + Math.max(h, 1) + '" fill="' + c + '" stroke="#8a93a5" stroke-width="0.5"/>';
+          svg += '<text x="' + (x + bw * 0.35) + '" y="' + (H - 6) + '" font-size="11" text-anchor="middle" fill="#444">' + S.cats[i] + "</text>";
+          svg += '<text x="' + (x + bw * 0.35) + '" y="' + (v >= 0 ? y - 3 : y + h + 11) + '" font-size="10" text-anchor="middle" fill="#333">' + v + "</text>";
+        });
+        svg += '<line x1="45" x2="280" y1="' + zero + '" y2="' + zero + '" stroke="#555"/></svg>';
+        q(".svg", card).innerHTML = svg;
+      }
+      draw(null);
+      qa("button", card).forEach(function (b) {
+        b.addEventListener("click", function () {
+          var p = b.getAttribute("data-p"); draw(p);
+          qa("button", card).forEach(function (x) { x.classList.toggle("btn-primary", x === b); x.classList.toggle("btn-outline-secondary", x !== b); });
+          var m = q(".r7-pal-msg", card); m.textContent = S.why[p]; m.style.color = p === S.want ? "#1a7f37" : "#c0392b";
+          if (p === S.want) done[k] = 1;
+          var fbk = q(".rv-feedback", P), nd = Object.keys(done).length;
+          fbk.className = "rv-feedback" + (nd === SETS.length ? " ok" : ""); fbk.textContent = nd === SETS.length ? "✓ All three palettes chosen correctly." : nd + " / 3 correct so far.";
+        });
+      });
+    });
+  }
+
+  /* ---------- B7: preattentive attributes ---------- */
+  var R = q("#r7-pre");
+  if (R && !R.dataset.ready) {
+    R.dataset.ready = "1";
+    var digits = "38591726740935862917345078921635847926153907284613578209648137529064".split(""), box = q(".r7-pre-box", R), fb2 = q(".rv-feedback", R), t0 = 0, n7 = digits.filter(function (d) { return d === "7"; }).length;
+    box.textContent = "Press Start …";
+    function show(hl) { box.innerHTML = digits.map(function (d) { return hl && d === "7" ? "<b>7</b>" : d; }).join(""); }
+    q('[data-act="start"]', R).addEventListener("click", function () { show(false); t0 = Date.now(); q('[data-act="done"]', R).disabled = false; fb2.textContent = "Count the 7s …"; });
+    q('[data-act="done"]', R).addEventListener("click", function () { var s = ((Date.now() - t0) / 1000).toFixed(1); fb2.className = "rv-feedback"; fb2.textContent = "That took " + s + " s. The answer is " + n7 + ". Now try version 2."; q('[data-act="hl"]', R).disabled = false; this.disabled = true; });
+    q('[data-act="hl"]', R).addEventListener("click", function () { show(true); fb2.className = "rv-feedback ok"; fb2.textContent = "With colour you see the " + n7 + " sevens almost instantly: colour is a preattentive attribute, processed by iconic memory before you consciously search."; });
+  }
+
+  /* ---------- B8: declutter ---------- */
+  var C = q("#r7-dec");
+  if (C && !C.dataset.ready) {
+    C.dataset.ready = "1";
+    var REC = [160, 184, 237, 148, 181, 150, 123, 156, 126, 104, 124, 140], PRO = [160, 184, 237, 148, 181, 150, 110, 96, 88, 82, 90, 94];
+    var MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var STEPS = [
+      ["border", "1. Remove the chart border", "Closure: the white space already separates the chart; the border adds nothing."],
+      ["grid", "2. Remove gridlines", "Gridlines compete with the data. If you keep them, make them thin and light grey."],
+      ["markers", "3. Remove data markers", "Every marker adds cognitive load for data the line already shows."],
+      ["axes", "4. Clean up axis labels", "No needless '.00' on the y-axis, and short month names so nobody has to turn their head."],
+      ["labels", "5. Label data directly", "Proximity: the labels sit next to the lines, so the legend (and the eye movement) disappears."],
+      ["color", "6. Consistent colour + message", "Similarity: labels in the line's colour; grey for context, blue for the story, and a title that states it."]
+    ];
+    var on = {}, stBox = q(".r7-dec-steps", C), chart = q(".r7-dec-chart", C), note = q(".r7-dec-note", C);
+    STEPS.forEach(function (s) {
+      var l = document.createElement("label"); l.innerHTML = '<input type="checkbox" data-k="' + s[0] + '"> <span>' + s[1] + "</span>"; stBox.appendChild(l);
+      q("input", l).addEventListener("change", function (e) { on[s[0]] = e.target.checked; note.textContent = e.target.checked ? s[2] : ""; draw(); });
+    });
+    function draw() {
+      var W = 640, H = 330, L = 70, R = on.labels ? 120 : 160, T = on.color ? 62 : 34, B = on.axes ? 40 : 78, pw = W - L - R, ph = H - T - B;
+      var X = function (i) { return L + i * pw / 11; }, Y = function (v) { return T + ph - v / 250 * ph; };
+      var cR = on.color ? "#a0a7b4" : "#4e79a7", cP = on.color ? "#1f5fbf" : "#f28e2b", s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Applications received and processed by month, 2025">';
+      if (!on.border) s += '<rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" fill="none" stroke="#222" stroke-width="2"/>';
+      if (on.color) {
+        s += '<text x="' + L + '" y="24" font-size="15" font-weight="700" fill="#222">Since two staff left in June, we process fewer applications than we receive</text>';
+        s += '<text x="' + L + '" y="44" font-size="11.5" fill="#6b7487">Applications per month, 2025 · the gap is the growing backlog</text>';
+      } else s += '<text x="' + L + '" y="22" font-size="14" fill="#222">Applications 2025</text>';
+      [0, 50, 100, 150, 200, 250].forEach(function (v) {
+        if (!on.grid) s += '<line x1="' + L + '" x2="' + (L + pw) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="#c9ced8" stroke-width="1"/>';
+        s += '<text x="' + (L - 8) + '" y="' + (Y(v) + 4) + '" font-size="11" text-anchor="end" fill="#555">' + (on.axes ? v : v.toFixed(2)) + "</text>";
+      });
+      s += '<line x1="' + L + '" x2="' + (L + pw) + '" y1="' + Y(0) + '" y2="' + Y(0) + '" stroke="#555"/>';
+      MON.forEach(function (m, i) {
+        if (on.axes) s += '<text x="' + X(i) + '" y="' + (Y(0) + 18) + '" font-size="11" text-anchor="middle" fill="#555">' + m.slice(0, 3) + "</text>";
+        else s += '<text transform="translate(' + X(i) + "," + (Y(0) + 10) + ') rotate(-45)" font-size="11" text-anchor="end" fill="#555">' + m + "</text>";
+      });
+      function line(arr, c, w) { return '<polyline fill="none" stroke="' + c + '" stroke-width="' + w + '" points="' + arr.map(function (v, i) { return X(i) + "," + Y(v); }).join(" ") + '"/>'; }
+      if (on.color) s += '<line x1="' + X(5) + '" x2="' + X(5) + '" y1="' + Y(240) + '" y2="' + Y(0) + '" stroke="#c9ced8" stroke-dasharray="3 3"/><text x="' + (X(5) + 4) + '" y="' + Y(236) + '" font-size="10.5" fill="#6b7487">2 staff left</text>';
+      s += line(REC, cR, 2.5) + line(PRO, cP, on.color ? 3.5 : 2.5);
+      if (!on.markers) { REC.forEach(function (v, i) { s += '<circle cx="' + X(i) + '" cy="' + Y(v) + '" r="4" fill="' + cR + '"/>'; }); PRO.forEach(function (v, i) { s += '<rect x="' + (X(i) - 4) + '" y="' + (Y(v) - 4) + '" width="8" height="8" fill="' + cP + '"/>'; }); }
+      if (on.labels) {
+        var lc1 = on.color ? cR : "#333", lc2 = on.color ? cP : "#333";
+        s += '<text x="' + (X(11) + 8) + '" y="' + (Y(140) - 2) + '" font-size="12" font-weight="700" fill="' + lc1 + '">Received 140</text>';
+        s += '<text x="' + (X(11) + 8) + '" y="' + (Y(94) + 10) + '" font-size="12" font-weight="700" fill="' + lc2 + '">Processed 94</text>';
+      } else {
+        var lx = L + pw + 22;
+        s += '<rect x="' + lx + '" y="' + (T + 10) + '" width="120" height="52" fill="#fff" stroke="#999"/>';
+        s += '<line x1="' + (lx + 8) + '" x2="' + (lx + 30) + '" y1="' + (T + 27) + '" y2="' + (T + 27) + '" stroke="' + cR + '" stroke-width="2.5"/><text x="' + (lx + 36) + '" y="' + (T + 31) + '" font-size="11">Received</text>';
+        s += '<line x1="' + (lx + 8) + '" x2="' + (lx + 30) + '" y1="' + (T + 47) + '" y2="' + (T + 47) + '" stroke="' + cP + '" stroke-width="2.5"/><text x="' + (lx + 36) + '" y="' + (T + 51) + '" font-size="11">Processed</text>';
+      }
+      chart.innerHTML = s + "</svg>";
+    }
+    q('[data-act="all"]', C).addEventListener("click", function () { qa("input", C).forEach(function (i) { i.checked = true; on[i.getAttribute("data-k")] = true; }); note.textContent = "Before and after: the same data, but now the story (a growing backlog since June) is impossible to miss."; draw(); });
+    q('[data-act="none"]', C).addEventListener("click", function () { qa("input", C).forEach(function (i) { i.checked = false; }); on = {}; note.textContent = ""; draw(); });
+    draw();
+  }
+})();
+</script>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!--
+  STAT 112 interactive quiz engine
+  ---------------------------------
+  Include in any page with (front matter):
+      format:
+        html:
+          include-after-body: _quiz.html
+
+  Question types (write them as fenced divs in the .qmd):
+    type=mc        one correct option        answer="b"
+    type=ms        select all that apply     answer="a,c,e"
+    type=tf        single true/false         answer="true"
+    type=short     typed answer              answer="ratio|ratio scale"   (add tol="0.5" for numbers)
+    type=fill      inline blanks             []{.blank answer="parameter"}
+    type=match     "term :: definition" list
+    type=classify  "item :: category" list   options="A|B|C"  (several columns: options="A|B ; X|Y" columns="Scale ; Type")
+    type=order     list written in the correct order (shown shuffled)
+    type=open      free text + model answer  keywords="idea one|alt ; idea two"
+  Put explanations / model answers in a nested  ::: explain  div.
+-->
+<style>
+:root {
+  --qz-accent: var(--bs-primary, #2780e3);
+  --qz-border: var(--bs-border-color, #dee2e6);
+  --qz-soft: rgba(127, 127, 127, 0.07);
+  --qz-muted: var(--bs-secondary-color, #6c757d);
+  --qz-ok: #1a7f37;
+  --qz-ok-bg: rgba(26, 127, 55, 0.11);
+  --qz-bad: #c0392b;
+  --qz-bad-bg: rgba(192, 57, 43, 0.10);
+  --qz-partial: #b9770e;
+}
+.qz {
+  position: relative;
+  border: 1px solid var(--qz-border);
+  border-left: 5px solid var(--qz-accent);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.1rem;
+  margin: 1.6rem 0;
+  background: var(--bs-body-bg, #fff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color .2s;
+}
+.qz.qz-correct { border-left-color: var(--qz-ok); }
+.qz.qz-wrong { border-left-color: var(--qz-bad); }
+.qz.qz-partial { border-left-color: var(--qz-partial); }
+.qz > p:last-of-type { margin-bottom: .4rem; }
+.qz-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.qz-num {
+  font-weight: 700; font-size: .85rem; color: #fff; background: var(--qz-accent);
+  border-radius: 6px; padding: .1rem .5rem; font-variant-numeric: tabular-nums;
+}
+.qz-correct .qz-num { background: var(--qz-ok); }
+.qz-wrong .qz-num { background: var(--qz-bad); }
+.qz-partial .qz-num { background: var(--qz-partial); }
+.qz-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--qz-muted); font-weight: 600; }
+.qz img { max-width: 100%; height: auto; }
+
+/* options (mc / ms / tf) */
+.qz-options { display: grid; gap: .5rem; margin: .7rem 0 .2rem; }
+.qz-options.qz-inline { grid-template-columns: repeat(auto-fit, minmax(120px, 200px)); }
+.qz-opt {
+  display: flex; align-items: flex-start; gap: .65rem; width: 100%; text-align: left;
+  border: 1px solid var(--qz-border); background: var(--bs-body-bg, #fff); color: inherit;
+  border-radius: 8px; padding: .55rem .75rem; cursor: pointer; font: inherit; line-height: 1.4;
+  transition: border-color .15s, background-color .15s;
+}
+.qz-opt:hover { border-color: var(--qz-accent); background: var(--qz-soft); }
+.qz-opt:focus-visible { outline: 2px solid var(--qz-accent); outline-offset: 2px; }
+.qz-letter {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--qz-border);
+  display: grid; place-items: center; font-weight: 600; font-size: .8rem;
+}
+.qz-opt-text { flex: 1; padding-top: .05rem; }
+.qz-opt-text p { margin: 0; }
+.qz-opt.is-sel { border-color: var(--qz-accent); box-shadow: inset 0 0 0 1px var(--qz-accent); }
+.qz-opt.is-sel .qz-letter { background: var(--qz-accent); border-color: var(--qz-accent); color: #fff; }
+.qz-opt.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); box-shadow: inset 0 0 0 1px var(--qz-ok); }
+.qz-opt.is-ok .qz-letter { background: var(--qz-ok); border-color: var(--qz-ok); color: #fff; }
+.qz-opt.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); box-shadow: inset 0 0 0 1px var(--qz-bad); }
+.qz-opt.is-bad .qz-letter { background: var(--qz-bad); border-color: var(--qz-bad); color: #fff; }
+.qz-opt.is-missed { border: 1px dashed var(--qz-ok); }
+
+/* controls & feedback */
+.qz-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; align-items: center; }
+.qz-controls .btn { border-radius: 6px; }
+.qz-feedback { margin-top: .65rem; font-weight: 500; padding: .45rem .75rem; border-radius: 6px; }
+.qz-feedback:empty { display: none; }
+.qz-fb-ok { color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-fb-bad { color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fb-partial { color: var(--qz-partial); background: rgba(185, 119, 14, .10); }
+.qz-fb-info { background: var(--qz-soft); }
+.qz-explain {
+  margin-top: .75rem; padding: .75rem 1rem; background: var(--qz-soft);
+  border-radius: 8px; border-left: 3px solid var(--qz-accent);
+}
+.qz-explain > :last-child { margin-bottom: 0; }
+.qz-explain-title { font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); margin-bottom: .35rem; }
+
+/* typed inputs */
+.qz-short { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .6rem; }
+.qz-input { max-width: 24rem; }
+.qz-input.is-ok, .qz-select.is-ok, textarea.is-ok { border-color: var(--qz-ok); background-color: var(--qz-ok-bg); }
+.qz-input.is-bad, .qz-select.is-bad { border-color: var(--qz-bad); background-color: var(--qz-bad-bg); }
+.qz-unit { color: var(--qz-muted); }
+.qz-blank-input {
+  border: 0; border-bottom: 2px solid var(--qz-accent); background: var(--qz-soft); color: inherit;
+  font: inherit; padding: 0 .3rem; margin: 0 .15rem; text-align: center; border-radius: 4px 4px 0 0;
+  min-width: 5ch;
+}
+.qz-blank-input:focus { outline: 2px solid var(--qz-accent); outline-offset: 1px; }
+.qz-blank-input.is-ok { border-bottom-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-blank-input.is-bad { border-bottom-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-fill-body { line-height: 2.3; }
+
+/* classify rows */
+.qz-rows { display: grid; gap: .4rem; margin-top: .7rem; }
+.qz-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; align-items: center;
+  padding: .45rem .7rem; border-radius: 8px; background: var(--qz-soft);
+}
+.qz-row-head { background: transparent; padding-top: 0; padding-bottom: 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--qz-muted); font-weight: 600; }
+.qz-row-ctrls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+.qz-row-head .qz-row-ctrls span { min-width: 9rem; text-align: center; }
+.qz-row p { margin: 0; }
+.qz-seg { display: inline-flex; border: 1px solid var(--qz-border); border-radius: 8px; overflow: hidden; background: var(--bs-body-bg, #fff); }
+.qz-seg button {
+  border: 0; border-right: 1px solid var(--qz-border); background: transparent; color: inherit;
+  padding: .3rem .7rem; font: inherit; font-size: .88rem; cursor: pointer; white-space: nowrap;
+}
+.qz-seg button:last-child { border-right: 0; }
+.qz-seg button:hover { background: var(--qz-soft); }
+.qz-seg button[aria-pressed="true"] { background: var(--qz-accent); color: #fff; }
+.qz-seg.is-ok { border-color: var(--qz-ok); box-shadow: 0 0 0 1px var(--qz-ok); }
+.qz-seg.is-ok button[aria-pressed="true"] { background: var(--qz-ok); }
+.qz-seg.is-bad { border-color: var(--qz-bad); box-shadow: 0 0 0 1px var(--qz-bad); }
+.qz-seg.is-bad button[aria-pressed="true"] { background: var(--qz-bad); }
+.qz-select { width: auto; min-width: 9rem; display: inline-block; }
+
+/* image grid (classify with pictures) */
+.qz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .8rem; margin-top: .7rem; }
+.qz-card { border: 1px solid var(--qz-border); border-radius: 8px; padding: .5rem; display: flex; flex-direction: column; gap: .5rem; background: var(--bs-body-bg, #fff); }
+.qz-card-media { height: 170px; display: grid; place-items: center; background: #fff; border-radius: 6px; overflow: hidden; }
+.qz-card-media img { max-height: 166px; max-width: 100%; width: auto; object-fit: contain; }
+.qz-card-media p { margin: 0; }
+.qz-card .qz-select { width: 100%; }
+.qz-card-tag { font-size: .75rem; color: var(--qz-muted); font-weight: 600; }
+
+/* matching */
+.qz-match { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1.25rem; margin-top: .7rem; }
+.qz-match-left { display: grid; gap: .4rem; align-content: start; }
+.qz-match-left .qz-row { grid-template-columns: auto minmax(0, 1fr); }
+.qz-match-left .qz-select { min-width: 4.6rem; width: 4.8rem; }
+.qz-match-right { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; align-content: start; }
+.qz-match-right li { display: flex; gap: .6rem; align-items: flex-start; padding: .45rem .7rem; border: 1px solid var(--qz-border); border-radius: 8px; }
+.qz-match-right li p { margin: 0; }
+
+/* ordering */
+.qz-order { list-style: none; padding: 0; margin: .7rem 0 0; }
+.qz-order li {
+  display: flex; align-items: center; gap: .6rem; padding: .45rem .6rem; margin: .35rem 0;
+  border: 1px solid var(--qz-border); border-radius: 8px; background: var(--bs-body-bg, #fff); cursor: grab;
+}
+.qz-order li.is-drag { opacity: .45; }
+.qz-order li.is-ok { border-color: var(--qz-ok); background: var(--qz-ok-bg); }
+.qz-order li.is-bad { border-color: var(--qz-bad); background: var(--qz-bad-bg); }
+.qz-order .qz-order-text { flex: 1; }
+.qz-order .qz-order-text p { margin: 0; }
+.qz-move { border: 1px solid var(--qz-border); background: transparent; color: inherit; border-radius: 6px; width: 2rem; height: 2rem; cursor: pointer; line-height: 1; }
+.qz-move:hover { background: var(--qz-soft); }
+
+/* open */
+.qz-open textarea { margin-top: .6rem; }
+.qz-chip { display: inline-block; padding: .05rem .55rem; border-radius: 999px; margin: .15rem .2rem 0 0; font-size: .85rem; font-weight: 500; }
+.qz-chip-ok { background: var(--qz-ok-bg); color: var(--qz-ok); }
+
+/* scoreboard */
+.quiz-scoreboard {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+  padding: .75rem 1rem; border: 1px solid var(--qz-border); border-radius: 10px; background: var(--qz-soft); margin: 1.25rem 0 1.5rem;
+}
+.qz-score-big { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.qz-score-bar { flex: 1 1 160px; height: 8px; background: var(--qz-border); border-radius: 99px; overflow: hidden; min-width: 120px; }
+.qz-score-bar span { display: block; height: 100%; width: 0; background: var(--qz-ok); transition: width .3s; }
+.qz-pill {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 1030; background: var(--bs-body-bg, #fff);
+  border: 1px solid var(--qz-border); border-radius: 999px; padding: .35rem .85rem; font-weight: 600;
+  font-size: .9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); font-variant-numeric: tabular-nums;
+}
+.qz-error { color: var(--qz-bad); font-family: monospace; font-size: .85rem; }
+
+@media (max-width: 700px) {
+  .qz { padding: .85rem .9rem 1rem; }
+  .qz-row { grid-template-columns: 1fr; }
+  .qz-row-ctrls { justify-content: flex-start; }
+  .qz-row-head { display: none; }
+  .qz-match { grid-template-columns: 1fr; }
+  .qz-seg button { padding: .3rem .5rem; font-size: .82rem; }
+}
+@media print {
+  .qz-controls, .qz-pill, .quiz-scoreboard { display: none !important; }
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var LABELS = {
+    mc: "Multiple choice", ms: "Select all that apply", tf: "True / False",
+    short: "Short answer", fill: "Fill in the blanks", match: "Matching",
+    classify: "Classify", order: "Put in order", open: "Open-ended"
+  };
+  var registry = [];
+
+  /* ---------- helpers ---------- */
+  function attr(el, name) {
+    var v = el.getAttribute("data-" + name);
+    if (v === null) v = el.getAttribute(name);
+    return v;
+  }
+  function h(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function btn(label, cls, fn) {
+    var b = h("button", "btn btn-sm " + cls, label);
+    b.type = "button";
+    b.addEventListener("click", fn);
+    return b;
+  }
+  function norm(s) {
+    return String(s == null ? "" : s).toLowerCase()
+      .replace(/ı/g, "i").normalize("NFKD").replace(/[̀-ͯ]/g, "")
+      .replace(/[‘’'`"“”]/g, "")
+      .replace(/[^a-z0-9.%\s-]/g, " ")
+      .replace(/^(a|an|the)\s+/, "")
+      .replace(/\s+/g, " ").trim();
+  }
+  function num(s) {
+    s = String(s == null ? "" : s).trim().replace(/\s/g, "").replace(/%$/, "");
+    if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", ".");
+    var frac = s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+    if (frac) return parseFloat(frac[1]) / parseFloat(frac[2]);
+    if (!/^-?\d*\.?\d+(e-?\d+)?$/i.test(s)) return null;
+    return parseFloat(s);
+  }
+  function alts(spec) {
+    return String(spec == null ? "" : spec).split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function matches(input, spec, tol) {
+    var a = alts(spec);
+    if (tol !== null && tol !== undefined) {
+      var v = num(input), t = parseFloat(tol) || 0;
+      if (v === null) return false;
+      return a.some(function (x) { var y = num(x); return y !== null && Math.abs(v - y) <= t + 1e-9; });
+    }
+    var n = norm(input);
+    return n !== "" && a.some(function (x) { return norm(x) === n; });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function stripTags(html) { var d = h("div", null, html); return d.textContent.trim(); }
+  function unwrapP(html) { return html.trim().replace(/^<p>/, "").replace(/<\/p>$/, ""); }
+  function firstList(q) { return q.querySelector(":scope > ol, :scope > ul"); }
+  function pairs(q) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list of 'item :: answer' lines.");
+    var out = Array.prototype.map.call(list.children, function (li) {
+      var html = li.innerHTML, i = html.lastIndexOf("::");
+      if (i < 0) throw new Error("List item is missing '::' — " + stripTags(html).slice(0, 60));
+      return { html: unwrapP(html.slice(0, i)), answer: stripTags(html.slice(i + 2)) };
+    });
+    list.remove();
+    return out;
+  }
+  function markEl(el, ok) {
+    el.classList.remove("is-ok", "is-bad");
+    if (ok === true) el.classList.add("is-ok");
+    if (ok === false) el.classList.add("is-bad");
+  }
+
+  /* ---------- status + scoreboard ---------- */
+  function setStatus(q, s) {
+    q._status = s;
+    q.classList.remove("qz-correct", "qz-wrong", "qz-partial");
+    if (s) q.classList.add("qz-" + s);
+    updateScore();
+  }
+  function updateScore() {
+    var total = registry.length, correct = 0, tried = 0;
+    registry.forEach(function (q) {
+      if (q._status === "correct") correct++;
+      if (q._status) tried++;
+    });
+    document.querySelectorAll(".qz-score-big").forEach(function (e) { e.textContent = correct + " / " + total + " correct"; });
+    document.querySelectorAll(".qz-score-tried").forEach(function (e) { e.textContent = tried + " attempted"; });
+    document.querySelectorAll(".qz-score-bar span").forEach(function (e) { e.style.width = (total ? 100 * correct / total : 0) + "%"; });
+    var pill = document.querySelector(".qz-pill");
+    if (pill) pill.textContent = "✓ " + correct + " / " + total;
+  }
+  function feedback(p, kind, msg) {
+    p.fb.className = "qz-feedback qz-fb-" + kind;
+    p.fb.innerHTML = msg;
+  }
+  function showExplain(p) { if (p.explain) p.explain.hidden = false; }
+  function clearFb(p) { p.fb.className = "qz-feedback"; p.fb.innerHTML = ""; if (p.explain) p.explain.hidden = true; }
+  function scoreMsg(p, q, ok, total) {
+    if (ok === total) { feedback(p, "ok", "✓ All " + total + " correct!"); setStatus(q, "correct"); showExplain(p); }
+    else if (ok > 0) { feedback(p, "partial", ok + " / " + total + " correct. Fix the red ones and check again."); setStatus(q, "partial"); }
+    else { feedback(p, "bad", "0 / " + total + " correct. Have another go."); setStatus(q, "wrong"); }
+  }
+
+  /* ---------- scaffold ---------- */
+  function scaffold(q, type, n) {
+    q.classList.add("qz", "qz-t-" + type);
+    var explain = q.querySelector(":scope > .explain");
+    if (explain) explain.remove();
+    var head = h("div", "qz-head",
+      '<span class="qz-num">Q' + n + '</span><span class="qz-type">' + (attr(q, "label") || LABELS[type] || type) + "</span>");
+    q.insertBefore(head, q.firstChild);
+    var p = { ui: h("div", "qz-ui"), controls: h("div", "qz-controls"), fb: h("div", "qz-feedback"), explain: explain };
+    p.fb.setAttribute("role", "status");
+    p.fb.setAttribute("aria-live", "polite");
+    q.appendChild(p.ui);
+    q.appendChild(p.controls);
+    q.appendChild(p.fb);
+    if (explain) {
+      explain.classList.add("qz-explain");
+      explain.hidden = true;
+      explain.insertBefore(h("div", "qz-explain-title", type === "open" ? "Model answer" : "Explanation"), explain.firstChild);
+      q.appendChild(explain);
+    }
+    return p;
+  }
+  function standardControls(p, q, check, reveal, reset) {
+    if (check) p.controls.appendChild(btn("Check", "btn-primary", check));
+    q._reveal = function () { reveal(); showExplain(p); if (!q._status) setStatus(q, null); };
+    p.controls.appendChild(btn("Show answer", "btn-outline-secondary", q._reveal));
+    p.controls.appendChild(btn("Reset", "btn-outline-secondary", function () { reset(); clearFb(p); setStatus(q, null); }));
+    q._reset = function () { reset(); clearFb(p); setStatus(q, null); };
+  }
+  function parseIdx(spec, n) {
+    return String(spec || "").split(/[\s,;]+/).filter(Boolean).map(function (t) {
+      if (/^\d+$/.test(t)) return parseInt(t, 10) - 1;
+      return t.toUpperCase().charCodeAt(0) - 65;
+    }).filter(function (i) { return i >= 0 && i < n; });
+  }
+
+  /* ---------- multiple choice / multi-select / true-false ---------- */
+  function buildChoice(q, p, multi, tf) {
+    var items, ans;
+    if (tf) {
+      items = ["True", "False"];
+      var a = norm(attr(q, "answer"));
+      ans = [/^(t|true|yes|dogru)$/.test(a) ? 0 : 1];
+    } else {
+      var list = firstList(q);
+      if (!list) throw new Error("Expected a list of options.");
+      items = Array.prototype.map.call(list.children, function (li) { return unwrapP(li.innerHTML); });
+      list.remove();
+      ans = parseIdx(attr(q, "answer"), items.length);
+      if (!ans.length) throw new Error("answer= is missing or out of range.");
+    }
+    var wrap = h("div", "qz-options" + (tf ? " qz-inline" : ""));
+    var btns = items.map(function (html, i) {
+      var b = h("button", "qz-opt", '<span class="qz-letter">' + (tf ? (i ? "F" : "T") : String.fromCharCode(65 + i)) + '</span><span class="qz-opt-text">' + html + "</span>");
+      b.type = "button";
+      wrap.appendChild(b);
+      return b;
+    });
+    p.ui.appendChild(wrap);
+    function clear() { btns.forEach(function (b) { b.classList.remove("is-ok", "is-bad", "is-sel", "is-missed"); b.setAttribute("aria-pressed", "false"); }); }
+
+    if (!multi) {
+      btns.forEach(function (b, i) {
+        b.addEventListener("click", function () {
+          clear();
+          if (ans.indexOf(i) >= 0) {
+            b.classList.add("is-ok");
+            feedback(p, "ok", "✓ Correct!");
+            setStatus(q, "correct");
+            showExplain(p);
+          } else {
+            b.classList.add("is-bad");
+            feedback(p, "bad", "✗ Not quite. Try another option.");
+            setStatus(q, "wrong");
+          }
+        });
+      });
+      standardControls(p, q, null, function () {
+        clear();
+        ans.forEach(function (i) { btns[i].classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return tf ? items[i] : String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    } else {
+      btns.forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          var on = !b.classList.contains("is-sel");
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          b.classList.toggle("is-sel", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      });
+      standardControls(p, q, function () {
+        var hit = 0, wrong = 0;
+        btns.forEach(function (b, i) {
+          var sel = b.classList.contains("is-sel"), good = ans.indexOf(i) >= 0;
+          b.classList.remove("is-ok", "is-bad", "is-missed");
+          if (sel && good) { hit++; b.classList.add("is-ok"); }
+          if (sel && !good) { wrong++; b.classList.add("is-bad"); }
+        });
+        if (hit === ans.length && !wrong) { feedback(p, "ok", "✓ Correct, you found all " + ans.length + "!"); setStatus(q, "correct"); showExplain(p); }
+        else if (hit === 0 && wrong === 0) { feedback(p, "info", "Select at least one option first."); }
+        else {
+          feedback(p, hit ? "partial" : "bad", hit + " of " + ans.length + " correct options selected" + (wrong ? ", " + wrong + " wrong selection" + (wrong > 1 ? "s" : "") : "") + ".");
+          setStatus(q, hit ? "partial" : "wrong");
+        }
+      }, function () {
+        clear();
+        btns.forEach(function (b, i) { if (ans.indexOf(i) >= 0) b.classList.add("is-ok"); });
+        feedback(p, "info", "Answer: <strong>" + ans.map(function (i) { return String.fromCharCode(65 + i); }).join(", ") + "</strong>");
+      }, clear);
+    }
+  }
+
+  /* ---------- short answer ---------- */
+  function buildShort(q, p) {
+    var spec = attr(q, "answer"), tol = attr(q, "tol"), unit = attr(q, "unit");
+    if (!spec) throw new Error("answer= is missing.");
+    var row = h("div", "qz-short");
+    var input = h("input", "form-control qz-input");
+    input.type = "text";
+    input.placeholder = attr(q, "placeholder") || (tol !== null ? "Type a number…" : "Type your answer…");
+    input.setAttribute("aria-label", "Your answer");
+    row.appendChild(input);
+    if (unit) row.appendChild(h("span", "qz-unit", unit));
+    p.ui.appendChild(row);
+    function check() {
+      if (!input.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+      var ok = matches(input.value, spec, tol);
+      markEl(input, ok);
+      if (ok) { feedback(p, "ok", "✓ Correct!"); setStatus(q, "correct"); showExplain(p); }
+      else { feedback(p, "bad", "✗ Not quite. Try again" + (tol !== null ? " (check your rounding)." : ".")); setStatus(q, "wrong"); }
+    }
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+    standardControls(p, q, check, function () {
+      feedback(p, "info", "Answer: <strong>" + alts(spec)[0] + (unit ? " " + unit : "") + "</strong>");
+    }, function () { input.value = ""; markEl(input, null); });
+  }
+
+  /* ---------- fill in the blanks ---------- */
+  function buildFill(q, p) {
+    var blanks = Array.prototype.map.call(q.querySelectorAll(".blank"), function (span) {
+      var spec = attr(span, "answer"), tol = attr(span, "tol");
+      var input = h("input", "qz-blank-input");
+      input.type = "text";
+      input.setAttribute("aria-label", "blank");
+      var longest = alts(spec).reduce(function (m, x) { return Math.max(m, x.length); }, 4);
+      input.style.width = Math.min(longest + 3, 28) + "ch";
+      span.innerHTML = "";
+      span.appendChild(input);
+      return { input: input, spec: spec, tol: tol };
+    });
+    if (!blanks.length) throw new Error("No []{.blank answer=...} spans found.");
+    q.querySelectorAll(":scope > p").forEach(function (para) { if (para.querySelector(".blank")) para.classList.add("qz-fill-body"); });
+    function check() {
+      var ok = 0;
+      blanks.forEach(function (b) { var good = matches(b.input.value, b.spec, b.tol); markEl(b.input, good); if (good) ok++; });
+      scoreMsg(p, q, ok, blanks.length);
+    }
+    blanks.forEach(function (b) { b.input.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); }); });
+    standardControls(p, q, check, function () {
+      blanks.forEach(function (b) { b.input.value = alts(b.spec)[0]; markEl(b.input, true); });
+      feedback(p, "info", "Answers filled in.");
+    }, function () { blanks.forEach(function (b) { b.input.value = ""; markEl(b.input, null); }); });
+  }
+
+  /* ---------- selectable control (segmented buttons or dropdown) ---------- */
+  function control(options, forceSelect) {
+    var longest = options.reduce(function (m, o) { return Math.max(m, o.length); }, 0);
+    if (!forceSelect && options.length <= 4 && longest <= 18) {
+      var seg = h("div", "qz-seg"), value = null;
+      seg.setAttribute("role", "group");
+      var bs = options.map(function (o) {
+        var b = h("button", null, o);
+        b.type = "button";
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () { set(o); markEl(seg, null); });
+        seg.appendChild(b);
+        return b;
+      });
+      function set(v) {
+        value = v;
+        bs.forEach(function (b, i) { b.setAttribute("aria-pressed", options[i] === v ? "true" : "false"); });
+      }
+      return { el: seg, get: function () { return value; }, set: set, mark: function (ok) { markEl(seg, ok); } };
+    }
+    var sel = h("select", "form-select form-select-sm qz-select");
+    sel.appendChild(h("option", null, "— choose —")).value = "";
+    options.forEach(function (o) { var op = h("option", null, o); op.value = o; sel.appendChild(op); });
+    sel.addEventListener("change", function () { markEl(sel, null); });
+    return { el: sel, get: function () { return sel.value || null; }, set: function (v) { sel.value = v == null ? "" : v; }, mark: function (ok) { markEl(sel, ok); } };
+  }
+
+  /* ---------- classify ---------- */
+  function buildClassify(q, p) {
+    var items = pairs(q);
+    var groupsSpec = attr(q, "options");
+    var groups;
+    if (groupsSpec) groups = groupsSpec.split(";").map(function (g) { return alts(g); });
+    else {
+      var seen = [];
+      items.forEach(function (it) { alts(it.answer).forEach(function (a) { if (seen.indexOf(a) < 0) seen.push(a); }); });
+      groups = [seen];
+    }
+    var cols = attr(q, "columns") ? attr(q, "columns").split(";").map(function (s) { return s.trim(); }) : null;
+    var grid = items.some(function (it) { return /<img/i.test(it.html); });
+    var container = h("div", grid ? "qz-grid" : "qz-rows");
+    if (cols && !grid) {
+      var hr = h("div", "qz-row qz-row-head", "<span></span>");
+      var hc = h("div", "qz-row-ctrls");
+      cols.forEach(function (c) { hc.appendChild(h("span", null, c)); });
+      hr.appendChild(hc);
+      container.appendChild(hr);
+    }
+    var rows = items.map(function (it, idx) {
+      var answers = it.answer.split(";").map(function (s) { return s.trim(); });
+      if (answers.length !== groups.length) throw new Error("Item '" + stripTags(it.html).slice(0, 40) + "' needs " + groups.length + " answer(s) separated by ';'.");
+      var ctrls = groups.map(function (g) { return control(g, grid); });
+      var row;
+      if (grid) {
+        row = h("div", "qz-card");
+        row.appendChild(h("div", "qz-card-tag", "Display " + (idx + 1)));
+        row.appendChild(h("div", "qz-card-media", it.html));
+        ctrls.forEach(function (c) { row.appendChild(c.el); });
+      } else {
+        row = h("div", "qz-row", "<div>" + it.html + "</div>");
+        var cw = h("div", "qz-row-ctrls");
+        ctrls.forEach(function (c) { cw.appendChild(c.el); });
+        row.appendChild(cw);
+      }
+      container.appendChild(row);
+      return { ctrls: ctrls, answers: answers };
+    });
+    p.ui.appendChild(container);
+    var total = rows.length * groups.length;
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) {
+        r.ctrls.forEach(function (c, i) {
+          var v = c.get(), good = v !== null && matches(v, r.answers[i]);
+          c.mark(v === null ? false : good);
+          if (good) ok++;
+        });
+      });
+      scoreMsg(p, q, ok, total);
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c, i) { c.set(alts(r.answers[i])[0]); c.mark(true); }); });
+      feedback(p, "info", "Correct answers selected.");
+    }, function () {
+      rows.forEach(function (r) { r.ctrls.forEach(function (c) { c.set(null); c.mark(null); }); });
+    });
+  }
+
+  /* ---------- matching ---------- */
+  function buildMatch(q, p) {
+    var items = pairs(q);
+    var rights = [];
+    items.forEach(function (it) { if (rights.indexOf(it.answer) < 0) rights.push(it.answer); });
+    rights = shuffle(rights);
+    var letters = rights.map(function (_, i) { return String.fromCharCode(65 + i); });
+    var wrap = h("div", "qz-match");
+    var left = h("div", "qz-match-left");
+    var right = h("ol", "qz-match-right");
+    rights.forEach(function (r, i) {
+      right.appendChild(h("li", null, '<span class="qz-letter">' + letters[i] + "</span><span>" + r + "</span>"));
+    });
+    var rows = items.map(function (it) {
+      var c = control(letters, true);
+      c.el.options[0].text = "—";
+      c.el.setAttribute("aria-label", "Match for " + stripTags(it.html));
+      var row = h("div", "qz-row");
+      row.appendChild(c.el);
+      row.appendChild(h("div", null, it.html));
+      left.appendChild(row);
+      return { c: c, letter: letters[rights.indexOf(it.answer)] };
+    });
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    p.ui.appendChild(wrap);
+    standardControls(p, q, function () {
+      var ok = 0;
+      rows.forEach(function (r) { var v = r.c.get(), good = v === r.letter; r.c.mark(v === null ? false : good); if (good) ok++; });
+      scoreMsg(p, q, ok, rows.length);
+    }, function () {
+      rows.forEach(function (r) { r.c.set(r.letter); r.c.mark(true); });
+      feedback(p, "info", "Answer: " + rows.map(function (r, i) { return (i + 1) + "→" + r.letter; }).join(", "));
+    }, function () { rows.forEach(function (r) { r.c.set(null); r.c.mark(null); }); });
+  }
+
+  /* ---------- ordering ---------- */
+  function buildOrder(q, p) {
+    var list = firstList(q);
+    if (!list) throw new Error("Expected a list written in the correct order.");
+    var items = Array.prototype.map.call(list.children, function (li, i) { return { html: unwrapP(li.innerHTML), idx: i }; });
+    list.remove();
+    var ul = h("ol", "qz-order");
+    var dragged = null;
+    function lis() { return Array.prototype.slice.call(ul.children); }
+    function make(it) {
+      var li = h("li");
+      li.draggable = true;
+      li._idx = it.idx;
+      li.innerHTML = '<span class="qz-letter qz-pos"></span><span class="qz-order-text">' + it.html + "</span>";
+      var up = h("button", "qz-move", "↑"); up.type = "button"; up.setAttribute("aria-label", "Move up");
+      var dn = h("button", "qz-move", "↓"); dn.type = "button"; dn.setAttribute("aria-label", "Move down");
+      up.addEventListener("click", function () { if (li.previousElementSibling) ul.insertBefore(li, li.previousElementSibling); changed(); });
+      dn.addEventListener("click", function () { if (li.nextElementSibling) ul.insertBefore(li.nextElementSibling, li); changed(); });
+      li.appendChild(up); li.appendChild(dn);
+      li.addEventListener("dragstart", function (e) { dragged = li; li.classList.add("is-drag"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", ""); } catch (_) {} });
+      li.addEventListener("dragend", function () { li.classList.remove("is-drag"); dragged = null; changed(); });
+      li.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        if (!dragged || dragged === li) return;
+        var r = li.getBoundingClientRect();
+        ul.insertBefore(dragged, (e.clientY - r.top) > r.height / 2 ? li.nextSibling : li);
+      });
+      return li;
+    }
+    function changed() {
+      lis().forEach(function (li, i) { li.querySelector(".qz-pos").textContent = i + 1; li.classList.remove("is-ok", "is-bad"); });
+    }
+    function fill(order) { ul.innerHTML = ""; order.forEach(function (it) { ul.appendChild(make(it)); }); changed(); }
+    function shuffled() {
+      var s = shuffle(items), tries = 0;
+      while (items.length > 1 && s.every(function (it, i) { return it.idx === i; }) && tries++ < 20) s = shuffle(items);
+      return s;
+    }
+    fill(shuffled());
+    p.ui.appendChild(ul);
+    standardControls(p, q, function () {
+      var ok = 0;
+      lis().forEach(function (li, i) { var good = li._idx === i; markEl(li, good); if (good) ok++; });
+      scoreMsg(p, q, ok, items.length);
+    }, function () {
+      fill(items);
+      lis().forEach(function (li) { markEl(li, true); });
+      feedback(p, "info", "Correct order shown.");
+    }, function () { fill(shuffled()); });
+  }
+
+  /* ---------- open-ended ---------- */
+  function buildOpen(q, p) {
+    var ta = h("textarea", "form-control");
+    ta.rows = parseInt(attr(q, "rows") || "4", 10);
+    ta.placeholder = "Type the class's answer here…";
+    var w = h("div", "qz-open");
+    w.appendChild(ta);
+    p.ui.appendChild(w);
+    var kw = attr(q, "keywords");
+    var groups = kw ? kw.split(";").map(function (g) { return alts(g); }).filter(function (g) { return g.length; }) : [];
+    var check = null;
+    if (groups.length) {
+      check = function () {
+        if (!ta.value.trim()) { feedback(p, "info", "Type an answer first."); return; }
+        var text = " " + norm(ta.value) + " ";
+        var found = groups.filter(function (g) { return g.some(function (a) { return text.indexOf(norm(a)) >= 0; }); });
+        var chips = found.map(function (g) { return '<span class="qz-chip qz-chip-ok">✓ ' + g[0] + "</span>"; }).join("");
+        var n = found.length, t = groups.length;
+        if (n === t) { feedback(p, "ok", "All " + t + " key ideas mentioned! " + chips); setStatus(q, "correct"); showExplain(p); }
+        else if (n) { feedback(p, "partial", n + " of " + t + " key ideas found. Something is still missing. " + chips); setStatus(q, "partial"); }
+        else { feedback(p, "bad", "None of the " + t + " key ideas found yet. Think about what the question asks for."); setStatus(q, "wrong"); }
+      };
+    }
+    standardControls(p, q, check, function () { feedback(p, "info", "Compare with the model answer below."); }, function () { ta.value = ""; });
+    if (check) p.controls.firstChild.textContent = "Check key ideas";
+  }
+
+  /* ---------- init ---------- */
+  function init() {
+    var quizzes = document.querySelectorAll("div.quiz");
+    var n = 0;
+    quizzes.forEach(function (q) {
+      var type = (attr(q, "type") || "").toLowerCase();
+      if (!type) Object.keys(LABELS).forEach(function (k) { if (q.classList.contains(k)) type = k; });
+      n++;
+      try {
+        var p = scaffold(q, type, n);
+        if (type === "mc") buildChoice(q, p, false, false);
+        else if (type === "ms") buildChoice(q, p, true, false);
+        else if (type === "tf") buildChoice(q, p, false, true);
+        else if (type === "short") buildShort(q, p);
+        else if (type === "fill") buildFill(q, p);
+        else if (type === "classify") buildClassify(q, p);
+        else if (type === "match") buildMatch(q, p);
+        else if (type === "order") buildOrder(q, p);
+        else if (type === "open") buildOpen(q, p);
+        else throw new Error("Unknown type '" + type + "'.");
+        registry.push(q);
+      } catch (err) {
+        q.appendChild(h("div", "qz-error", "Quiz error: " + err.message));
+        if (window.console) console.error("Quiz Q" + n, err);
+      }
+    });
+    document.querySelectorAll(".quiz-scoreboard").forEach(function (sb) {
+      sb.innerHTML = "";
+      var left = h("div", null, '<div class="qz-score-big"></div><div class="qz-score-tried" style="font-size:.85rem;color:var(--qz-muted)"></div>');
+      var bar = h("div", "qz-score-bar", "<span></span>");
+      sb.appendChild(left);
+      sb.appendChild(bar);
+      sb.appendChild(btn("Reset all", "btn-outline-secondary", function () {
+        if (!window.confirm("Clear every answer on this page?")) return;
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+      }));
+      sb.appendChild(btn("Show all answers", "btn-primary", function () {
+        registry.forEach(function (q) { if (q._reveal) q._reveal(); });
+        document.querySelectorAll('.rv [data-act="show"]').forEach(function (b) { b.click(); });
+      }));
+      sb.appendChild(btn("Hide all answers", "btn-outline-secondary", function () {
+        registry.forEach(function (q) { if (q._reset) q._reset(); });
+        document.querySelectorAll('.rv [data-act="reset"]').forEach(function (b) { b.click(); });
+      }));
+    });
+    if (registry.length && !document.querySelector(".qz-pill")) document.body.appendChild(h("div", "qz-pill"));
+    updateScore();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+<!--
+  STAT 112 review widgets (Recitation 5)
+  Lightning round, tick table, step-by-step, spot the mistake, click-on-the-graph,
+  slider estimate, draw-the-chart and readiness checklist.
+  Include it in a page's front matter, after _quiz.html:
+      include-after-body:
+        - _quiz.html
+        - _widgets.html
+-->
+<style>
+.rv { --rv-accent: var(--bs-primary, #2780e3); --rv-border: var(--bs-border-color, #dee2e6); --rv-soft: rgba(127,127,127,.07); --rv-muted: var(--bs-secondary-color, #6c757d);
+  --rv-ok: #1a7f37; --rv-ok-bg: rgba(26,127,55,.13); --rv-bad: #c0392b; --rv-bad-bg: rgba(192,57,43,.12); --rv-miss: #b9770e; --rv-miss-bg: rgba(185,119,14,.10);
+  border: 1px solid var(--rv-border); border-left: 5px solid #7c4dff; border-radius: 10px; padding: 1rem 1.25rem 1.1rem; margin: 1.6rem 0; background: var(--bs-body-bg, #fff); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.rv.rv-correct { border-left-color: var(--rv-ok); } .rv.rv-wrong { border-left-color: var(--rv-bad); }
+.rv-head { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.rv-num { font-weight: 700; font-size: .85rem; color: #fff; background: #7c4dff; border-radius: 6px; padding: .1rem .5rem; }
+.rv.rv-correct .rv-num { background: var(--rv-ok); } .rv.rv-wrong .rv-num { background: var(--rv-bad); }
+.rv-type { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--rv-muted); font-weight: 600; }
+.rv-controls { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .9rem; }
+.rv-feedback:empty { display: none; }
+.rv-feedback { margin-top: .7rem; padding: .5rem .75rem; border-radius: 8px; font-weight: 500; background: var(--rv-soft); }
+.rv-feedback.ok { background: var(--rv-ok-bg); color: var(--rv-ok); } .rv-feedback.bad { background: var(--rv-bad-bg); color: var(--rv-bad); }
+.rv-explain { margin-top: .9rem; padding: .8rem 1rem; border-radius: 8px; background: var(--rv-soft); }
+.rv-explain[hidden] { display: none; } .rv-explain p:last-child, .rv-explain ul:last-child { margin-bottom: 0; }
+/* lightning */
+.rv-stage .rv-big { font-size: 1.15rem; font-weight: 600; min-height: 3.2em; margin: .6rem 0; }
+.rv-timer { height: 8px; background: var(--rv-border); border-radius: 99px; overflow: hidden; margin: .4rem 0 .2rem; }
+.rv-timer span { display: block; height: 100%; background: #7c4dff; width: 100%; transition: width 1s linear; }
+.rv-meta { display: flex; justify-content: space-between; font-size: .85rem; color: var(--rv-muted); font-variant-numeric: tabular-nums; }
+.rv-tf { display: flex; gap: .6rem; margin-top: .5rem; }
+.rv-tf button { flex: 1; font-weight: 700; padding: .6rem; }
+.rv-review { margin: .6rem 0 0; padding-left: 1.2rem; } .rv-review li { margin: .45rem 0; }
+.rv-review .ok { color: var(--rv-ok); font-weight: 700; } .rv-review .bad { color: var(--rv-bad); font-weight: 700; }
+.rv-review .why { display: block; font-size: .9rem; color: var(--rv-muted); }
+.rv-items .why { display: none; }
+/* tick table */
+.tg-scroll { overflow-x: auto; }
+.tg-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 0; }
+.tg-table th, .tg-table td { border-bottom: 1px solid var(--rv-border); padding: 0; vertical-align: middle; }
+.tg-table thead th { font-weight: 700; text-align: center; padding: .55rem .4rem; border-bottom: 2px solid #7c4dff; }
+.tg-table th.tg-prop { text-align: left; font-weight: 500; padding: .55rem .75rem .55rem .25rem; width: 38%; }
+.tg-table thead th.tg-prop { font-weight: 700; }
+.tg-table tbody tr:nth-child(odd) { background: var(--rv-soft); }
+.tg-cell { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 2.75rem; border: 0; background: transparent; cursor: pointer; font-size: 1.3rem; line-height: 1; color: inherit; }
+.tg-cell:hover { background: rgba(124,77,255,.08); }
+.tg-cell .tg-box { display: inline-flex; align-items: center; justify-content: center; width: 1.7rem; height: 1.7rem; border: 2px solid var(--rv-border); border-radius: 6px; background: var(--bs-body-bg, #fff); font-weight: 700; }
+.tg-cell[aria-pressed="true"] .tg-box { border-color: #7c4dff; color: #7c4dff; }
+.tg-cell.is-ok .tg-box { border-color: var(--rv-ok); background: var(--rv-ok-bg); color: var(--rv-ok); }
+.tg-cell.is-bad .tg-box { border-color: var(--rv-bad); background: var(--rv-bad-bg); color: var(--rv-bad); }
+.tg-cell.is-miss .tg-box { border: 2px dashed var(--rv-miss); background: var(--rv-miss-bg); color: var(--rv-miss); }
+.tg-cell.is-miss .tg-box::after { content: "✔"; opacity: .6; }
+.tg-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .7rem; font-size: .85rem; color: var(--rv-muted); }
+.tg-legend[hidden] { display: none; }
+.tg-key { display: inline-flex; align-items: center; justify-content: center; width: 1.2rem; height: 1.2rem; border-radius: 4px; font-style: normal; font-size: .75rem; font-weight: 700; margin-right: .3rem; }
+.tg-key-ok { border: 2px solid var(--rv-ok); background: var(--rv-ok-bg); color: var(--rv-ok); }
+.tg-key-bad { border: 2px solid var(--rv-bad); background: var(--rv-bad-bg); color: var(--rv-bad); }
+.tg-key-miss { border: 2px dashed var(--rv-miss); background: var(--rv-miss-bg); color: var(--rv-miss); }
+.tg-ladder { padding: .5rem .7rem; border-left: 3px solid #7c4dff; background: var(--bs-body-bg, #fff); border-radius: 4px; }
+/* steps */
+.rv-step { display: none; align-items: center; flex-wrap: wrap; gap: .4rem; padding: .55rem .6rem; border-radius: 8px; margin: .35rem 0; border: 1px solid var(--rv-border); }
+.rv-step.is-open, .rv-step.is-done { display: flex; }
+.rv-step.is-done { background: var(--rv-ok-bg); border-color: transparent; }
+.rv-step-n { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: #7c4dff; color: #fff; font-weight: 700; font-size: .85rem; }
+.rv-step.is-done .rv-step-n { background: var(--rv-ok); }
+.rv-step input { width: 7rem; padding: .25rem .5rem; border: 1px solid var(--rv-border); border-radius: 6px; font: inherit; background: var(--bs-body-bg, #fff); color: inherit; }
+.rv-step.is-bad input { border-color: var(--rv-bad); background: var(--rv-bad-bg); }
+.rv-note { display: none; flex-basis: 100%; font-size: .92rem; color: var(--rv-muted); padding-left: 2rem; }
+.rv-step.is-done .rv-note { display: block; }
+/* spot the mistake */
+.rv-lines { padding-left: 0; list-style: none; counter-reset: ln; margin: .4rem 0 0; }
+.rv-lines li { counter-increment: ln; position: relative; padding: .5rem .7rem .5rem 2.6rem; margin: .3rem 0; border: 1px solid var(--rv-border); border-radius: 8px; cursor: pointer; }
+.rv-lines li::before { content: counter(ln); position: absolute; left: .7rem; top: .5rem; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--rv-soft); display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+.rv-lines li:hover { border-color: #7c4dff; }
+.rv-lines li.is-ok { border-color: var(--rv-ok); background: var(--rv-ok-bg); }
+.rv-lines li.is-bad { border-color: var(--rv-bad); background: var(--rv-bad-bg); text-decoration: none; }
+.rv-lines.locked li { cursor: default; }
+/* hotspot + slider svg */
+.rv-svg svg { width: 100%; max-width: 560px; height: auto; display: block; margin: .3rem auto; }
+.rv-svg .hs { cursor: pointer; transition: opacity .15s; }
+.rv-svg .hs:hover { opacity: .75; }
+.rv-svg .hs.is-ok { fill: #1a7f37 !important; stroke: #1a7f37 !important; }
+.rv-svg .hs.is-bad { fill: #c0392b !important; stroke: #c0392b !important; }
+.rv-slide { display: flex; align-items: center; gap: .6rem; max-width: 560px; margin: .4rem auto 0; font-variant-numeric: tabular-nums; }
+.rv-slide input { flex: 1; accent-color: #7c4dff; }
+.rv-slide output { font-weight: 700; min-width: 3.2rem; text-align: right; font-size: 1.1rem; }
+/* draw-the-chart */
+.rv-sliders { display: grid; gap: .35rem .9rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); max-width: 560px; margin: .2rem auto 0; }
+.rv-sliders label { display: flex; flex-direction: column; font-size: .88rem; font-weight: 600; }
+.rv-sliders label span { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.rv-sliders input { accent-color: #2a78d6; width: 100%; }
+.rv-sliders label.is-bad { color: var(--rv-bad); } .rv-sliders label.is-ok { color: var(--rv-ok); }
+/* checklist */
+.rv-list { list-style: none; padding: 0; margin: 0; }
+.rv-list li { padding: .3rem 0; }
+.rv-list label { display: flex; gap: .6rem; align-items: flex-start; cursor: pointer; }
+.rv-list input { margin-top: .35rem; width: 1.05rem; height: 1.05rem; accent-color: #1a7f37; flex: none; }
+@media (max-width: 600px) {
+  .rv { padding: .85rem .8rem 1rem; }
+  .tg-table th.tg-prop { width: auto; font-size: .88rem; padding-right: .4rem; }
+  .tg-table thead th { font-size: .74rem; padding: .5rem .1rem; }
+  .tg-cell { min-height: 2.5rem; } .tg-cell .tg-box { width: 1.45rem; height: 1.45rem; }
+  .rv-note { padding-left: 0; }
+}
+@media print { .rv-controls { display: none; } }
+</style>
+
+<script>
+(function () {
+  "use strict";
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function num(s) { s = String(s || "").trim().replace(/\s/g, "").replace(/%$/, ""); if (/^-?\d+,\d+$/.test(s)) s = s.replace(",", "."); return /^-?\d*\.?\d+$/.test(s) ? parseFloat(s) : null; }
+  function say(w, kind, msg) { var f = q(".rv-feedback", w); f.className = "rv-feedback " + (kind || ""); f.innerHTML = msg; }
+  function mark(w, ok) { w.classList.remove("rv-correct", "rv-wrong"); if (ok === true) w.classList.add("rv-correct"); if (ok === false) w.classList.add("rv-wrong"); }
+  function explain(w, on) { var e = q(".rv-explain", w); if (e) e.hidden = !on; }
+  function act(w, name, fn) { var b = q('[data-act="' + name + '"]', w); if (b) b.addEventListener("click", fn); }
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function randn() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  var NS = "http://www.w3.org/2000/svg";
+  function svgEl(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function txt(parent, x, y, t, anchor, size, weight) { var e = svgEl("text", { x: x, y: y, "text-anchor": anchor || "middle", "font-size": size || 13, fill: "currentColor", "font-weight": weight || "normal" }, parent); e.textContent = t; return e; }
+
+  function safe(name, fn) { try { fn(); } catch (err) { if (window.console) console.error("Review widget (" + name + ") failed:", err); } }
+  /* skip widgets that another copy of this code has already built (e.g. an old script left in the page) */
+  function fresh(w) {
+    if (w.getAttribute("data-rv-init")) return false;
+    if (w.querySelector(".rv-stage > *, .tg-cell, .rv-step.is-open, .rv-svg svg, .rv-list label, .rv-sliders label, .rv-lines li[tabindex]")) return false;
+    w.setAttribute("data-rv-init", "1"); return true;
+  }
+  /* numbering */
+  var n = 0;
+  qa(".rv").forEach(function (w) { if (w.classList.contains("rv-check")) return; n++; q(".rv-num", w).textContent = "Challenge " + n; });
+
+  /* ---------------- lightning round ---------------- */
+  safe("lightning round", function () {
+  qa(".rv-lightning").filter(fresh).forEach(function (w) {
+    var items = qa(".rv-items li", w).map(function (li) { var why = q(".why", li); return { t: li.childNodes[0].textContent.trim(), a: li.getAttribute("data-a"), why: why ? why.innerHTML : "" }; });
+    var T = +w.getAttribute("data-time") || 90, stage = q(".rv-stage", w), timer = null;
+    function start() {
+      var i = 0, left = T, ans = [];
+      stage.innerHTML = '<div class="rv-timer"><span></span></div><div class="rv-meta"><span class="rv-count"></span><span class="rv-left"></span></div><div class="rv-big"></div><div class="rv-tf"><button type="button" class="btn btn-outline-success" data-v="T">True</button><button type="button" class="btn btn-outline-danger" data-v="F">False</button></div>';
+      var bar = q(".rv-timer span", stage);
+      function show() { q(".rv-big", stage).textContent = items[i].t; q(".rv-count", stage).textContent = "Statement " + (i + 1) + " / " + items.length; }
+      function tick() { left--; q(".rv-left", stage).textContent = left + " s left"; bar.style.width = (100 * left / T) + "%"; if (left <= 0) finish(); }
+      function finish() {
+        clearInterval(timer); var right = 0;
+        var html = items.map(function (it, k) { var a = ans[k], ok = a === it.a; if (ok) right++;
+          return "<li><b>" + it.t + "</b><br>Answer: <b>" + (it.a === "T" ? "True" : "False") + "</b> · you: " + (a ? '<span class="' + (ok ? "ok" : "bad") + '">' + (a === "T" ? "True" : "False") + (ok ? " ✓" : " ✗") + "</span>" : '<span class="bad">no answer</span>') + '<span class="why">' + it.why + "</span></li>"; }).join("");
+        stage.innerHTML = '<p class="rv-big" style="min-height:0">' + right + " / " + items.length + " correct" + (left > 0 ? " in " + (T - left) + " seconds" : " (time is up)") + '</p><ol class="rv-review">' + html + '</ol><div class="rv-controls"><button type="button" class="btn btn-sm btn-primary" data-act="again">Try again</button></div>';
+        mark(w, right >= 10 ? true : right < 7 ? false : null);
+        q('[data-act="again"]', stage).addEventListener("click", start);
+      }
+      qa(".rv-tf button", stage).forEach(function (b) { b.addEventListener("click", function () { ans[i] = b.getAttribute("data-v"); i++; if (i >= items.length) finish(); else show(); }); });
+      q(".rv-left", stage).textContent = T + " s left"; show(); mark(w, null);
+      clearInterval(timer); timer = setInterval(tick, 1000);
+    }
+    stage.innerHTML = '<div class="rv-controls" style="margin-top:.2rem"><button type="button" class="btn btn-primary" data-act="start">⚡ Start (' + T + ' s)</button></div>';
+    q('[data-act="start"]', stage).addEventListener("click", start);
+  });
+  });
+
+  /* ---------------- tick table ---------------- */
+  safe("tick table", function () {
+  qa(".rv.tg").filter(fresh).forEach(function (w) {
+    var SC = ["Nominal", "Ordinal", "Interval", "Ratio"], cells = [], legend = q(".tg-legend", w);
+    var tbl = document.createElement("table"); tbl.className = "tg-table";
+    tbl.innerHTML = '<thead><tr><th scope="col" class="tg-prop">Provides:</th>' + SC.map(function (s) { return '<th scope="col">' + s + "</th>"; }).join("") + "</tr></thead><tbody></tbody>";
+    qa(".tg-data li", w).forEach(function (li) { var tr = document.createElement("tr"); tr.setAttribute("data-answer", li.getAttribute("data-answer")); tr.innerHTML = '<th scope="row" class="tg-prop">' + li.innerHTML + "</th>"; q("tbody", tbl).appendChild(tr); });
+    q(".tg-scroll", w).appendChild(tbl);
+    qa("tbody tr", tbl).forEach(function (tr) {
+      var ansr = tr.getAttribute("data-answer"), prop = q("th", tr).textContent.trim();
+      SC.forEach(function (s, j) { var td = document.createElement("td"), b = document.createElement("button"); b.type = "button"; b.className = "tg-cell"; b.setAttribute("aria-pressed", "false"); b.setAttribute("aria-label", s + ": " + prop); b.innerHTML = '<span class="tg-box"></span>';
+        b.addEventListener("click", function () { set(b, b.getAttribute("aria-pressed") !== "true"); clear(); }); td.appendChild(b); tr.appendChild(td); cells.push({ el: b, want: ansr.charAt(j) === "1" }); });
+    });
+    function set(b, on) { b.setAttribute("aria-pressed", on ? "true" : "false"); q(".tg-box", b).textContent = on ? "✔" : ""; }
+    function on(c) { return c.el.getAttribute("aria-pressed") === "true"; }
+    function clear() { cells.forEach(function (c) { c.el.classList.remove("is-ok", "is-bad", "is-miss"); }); mark(w, null); legend.hidden = true; say(w, "", ""); }
+    act(w, "check", function () {
+      clear(); var r = 0, wr = 0, mi = 0;
+      cells.forEach(function (c) { var o = on(c); if (o && c.want) { c.el.classList.add("is-ok"); r++; } else if (o) { c.el.classList.add("is-bad"); wr++; } else if (c.want) { c.el.classList.add("is-miss"); mi++; } });
+      var tot = cells.filter(function (c) { return c.want; }).length;
+      if (!r && !wr) { say(w, "", "Tick at least one cell first."); return; }
+      legend.hidden = false;
+      if (!wr && !mi) { say(w, "ok", "✓ Perfect! All " + tot + " ticks are correct."); mark(w, true); explain(w, true); }
+      else { say(w, "bad", r + " / " + tot + " correct ticks" + (wr ? " · " + wr + " wrong (red)" : "") + (mi ? " · " + mi + " missing (dashed)" : "") + ". Fix them and check again."); mark(w, false); }
+    });
+    act(w, "show", function () { cells.forEach(function (c) { set(c.el, c.want); }); clear(); cells.forEach(function (c) { if (c.want) c.el.classList.add("is-ok"); }); say(w, "", "Correct answer shown."); explain(w, true); });
+    act(w, "reset", function () { cells.forEach(function (c) { set(c.el, false); }); clear(); explain(w, false); });
+  });
+  });
+
+  /* ---------------- step by step ---------------- */
+  safe("step by step", function () {
+  qa(".rv-steps").filter(fresh).forEach(function (w) {
+    var steps = qa(".rv-step", w);
+    function open(k) { steps.forEach(function (s, j) { s.classList.toggle("is-open", j === k); }); if (steps[k]) q("input", steps[k]).focus({ preventScroll: true }); }
+    function done(s) { s.classList.remove("is-open", "is-bad"); s.classList.add("is-done"); q("input", s).disabled = true; var k = steps.indexOf(s) + 1;
+      if (k < steps.length) open(k); else { say(w, "ok", "✓ All " + steps.length + " steps done. This is exactly the order to use on the exam."); mark(w, true); } }
+    steps.forEach(function (s) {
+      var inp = q("input", s);
+      inp.addEventListener("keydown", function (e) { if (e.key !== "Enter") return; e.preventDefault();
+        var v = num(inp.value), a = parseFloat(s.getAttribute("data-answer")), tol = parseFloat(s.getAttribute("data-tol") || "0");
+        if (v === null) { say(w, "", "Type a number first."); return; }
+        if (Math.abs(v - a) <= tol + 1e-9) { say(w, "", ""); done(s); } else { s.classList.add("is-bad"); say(w, "bad", "Not quite. Check this step, or press <b>Show this step</b>."); } });
+    });
+    act(w, "hint", function () { var s = steps.filter(function (x) { return x.classList.contains("is-open"); })[0]; if (!s) return; q("input", s).value = s.getAttribute("data-answer"); done(s); });
+    act(w, "reset", function () { steps.forEach(function (s) { s.classList.remove("is-done", "is-bad", "is-open"); var i = q("input", s); i.disabled = false; i.value = ""; }); say(w, "", ""); mark(w, null); open(0); });
+    steps[0].classList.add("is-open");
+  });
+  });
+
+  /* ---------------- spot the mistake ---------------- */
+  safe("spot the mistake", function () {
+  qa(".rv-spot").filter(fresh).forEach(function (w) {
+    var list = q(".rv-lines", w), lines = qa("li", list), tries = 0;
+    lines.forEach(function (li, k) { li.tabIndex = 0; li.setAttribute("role", "button");
+      function pickIt() { if (list.classList.contains("locked")) return; tries++;
+        if (li.getAttribute("data-wrong")) { li.classList.add("is-ok"); list.classList.add("locked"); say(w, "ok", "✓ Found it" + (tries === 1 ? " on the first try!" : " (attempt " + tries + ").")); mark(w, tries === 1); explain(w, true); }
+        else { li.classList.add("is-bad"); say(w, "bad", "Line " + (k + 1) + " is correct. Keep looking."); } }
+      li.addEventListener("click", pickIt); li.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickIt(); } }); });
+    act(w, "show", function () { lines.forEach(function (li) { li.classList.remove("is-bad"); if (li.getAttribute("data-wrong")) li.classList.add("is-ok"); }); list.classList.add("locked"); say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { lines.forEach(function (li) { li.classList.remove("is-ok", "is-bad"); }); list.classList.remove("locked"); tries = 0; say(w, "", ""); mark(w, null); explain(w, false); });
+  });
+  });
+
+  /* ---------------- hotspots ---------------- */
+  safe("hotspots", function () {
+  function drawHist(box, w) {
+    var f = w.getAttribute("data-freq").split(",").map(Number), e = w.getAttribute("data-edges").split(",").map(Number);
+    var W = 520, H = 300, L = 50, R = 15, T = 15, B = 50, mx = Math.max.apply(null, f) * 1.12;
+    var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "histogram" }, box);
+    var X = function (v) { return L + (v - e[0]) / (e[e.length - 1] - e[0]) * (W - L - R); }, Y = function (v) { return H - B - v / mx * (H - T - B); };
+    for (var g = 0; g <= mx; g += 2) { svgEl("line", { x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: "rgba(127,127,127,.25)" }, s); txt(s, L - 7, Y(g) + 4, g, "end", 11); }
+    f.forEach(function (v, i) { var r = svgEl("rect", { x: X(e[i]) + 1, y: Y(v), width: X(e[i + 1]) - X(e[i]) - 2, height: Y(0) - Y(v), fill: "#5b8def", class: "hs", "data-id": String(i), tabindex: "0" }, s);
+      var lab = svgEl("title", {}, r); lab.textContent = e[i] + "–" + e[i + 1] + ": " + v; txt(s, (X(e[i]) + X(e[i + 1])) / 2, Y(v) - 5, v, "middle", 11, "bold"); });
+    e.forEach(function (v) { txt(s, X(v), H - B + 16, v, "middle", 11); });
+    svgEl("line", { x1: L, x2: W - R, y1: Y(0), y2: Y(0), stroke: "currentColor" }, s);
+    txt(s, (L + W - R) / 2, H - 10, w.getAttribute("data-x") || "", "middle", 12.5);
+    var yl = txt(s, 14, (T + H - B) / 2, "frequency", "middle", 12.5); yl.setAttribute("transform", "rotate(-90 14 " + ((T + H - B) / 2) + ")");
+  }
+  function drawViolin(box) {
+    var W = 420, H = 320, cx = 150, s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "violin plot" }, box);
+    var pts = [], L = [], Rr = [];
+    for (var i = 0; i <= 60; i++) { var t = i / 60, y = 290 - t * 260, d = Math.exp(-.5 * Math.pow((t - .3) / .09, 2)) + .85 * Math.exp(-.5 * Math.pow((t - .72) / .09, 2)); L.push((cx - d * 95) + "," + y); Rr.push((cx + d * 95) + "," + y); }
+    svgEl("polygon", { points: L.concat(Rr.reverse()).join(" "), fill: "#8fd3b6", stroke: "#2b6b52", "stroke-width": 2, class: "hs", "data-id": "outline", tabindex: "0" }, s);
+    svgEl("rect", { x: cx - 4, y: 62, width: 8, height: 280 - 62, fill: "#1d2733", class: "hs", "data-id": "ci", tabindex: "0" }, s);
+    svgEl("rect", { x: cx - 10, y: 115, width: 20, height: 245 - 115, fill: "#1d2733", class: "hs", "data-id": "iqr", tabindex: "0" }, s);
+    svgEl("circle", { cx: cx, cy: 185, r: 8, fill: "#ffffff", stroke: "#1d2733", "stroke-width": 2, class: "hs", "data-id": "median", tabindex: "0" }, s);
+    txt(s, 300, 60, "Which part is the IQR?", "middle", 14, "bold");
+    txt(s, 300, 84, "(click directly on it)", "middle", 12);
+  }
+  qa(".rv-hot").filter(fresh).forEach(function (w) {
+    var box = q(".rv-svg", w), ans = w.getAttribute("data-answer"), done = false;
+    if (w.getAttribute("data-draw") === "hist") drawHist(box, w); else drawViolin(box);
+    var parts = qa(".hs", box);
+    function pick(p) { if (done) return; parts.forEach(function (x) { x.classList.remove("is-bad"); });
+      if (p.getAttribute("data-id") === ans) { p.classList.add("is-ok"); done = true; say(w, "ok", "✓ Correct!"); mark(w, true); explain(w, true); }
+      else { p.classList.add("is-bad"); say(w, "bad", w.getAttribute("data-msg") || "Not this one. Try again."); mark(w, false); } }
+    parts.forEach(function (p) { p.addEventListener("click", function () { pick(p); }); p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(p); } }); });
+    act(w, "show", function () { parts.forEach(function (x) { x.classList.remove("is-bad"); if (x.getAttribute("data-id") === ans) x.classList.add("is-ok"); }); done = true; say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { parts.forEach(function (x) { x.classList.remove("is-ok", "is-bad"); }); done = false; say(w, "", ""); mark(w, null); explain(w, false); });
+  });
+  });
+
+  /* ---------------- slider estimate ---------------- */
+  safe("slider estimate", function () {
+  qa(".rv-slider").filter(fresh).forEach(function (w) {
+    var box = q(".rv-svg", w), inp = q("input", w), out = q("output", w), r = 0, first = true;
+    var targets = [-0.85, -0.5, -0.2, 0, 0.3, 0.6, 0.9];
+    function plot(target) {
+      box.innerHTML = ""; var n = 45, x = [], y = [], i;
+      for (i = 0; i < n; i++) { var a = randn(), b = randn(); x.push(a); y.push(target * a + Math.sqrt(1 - target * target) * b); }
+      var mx = x.reduce(function (p, c) { return p + c; }, 0) / n, my = y.reduce(function (p, c) { return p + c; }, 0) / n, sxy = 0, sxx = 0, syy = 0;
+      for (i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += Math.pow(x[i] - mx, 2); syy += Math.pow(y[i] - my, 2); }
+      r = sxy / Math.sqrt(sxx * syy);
+      var W = 420, H = 300, P = 30, xs = Math.min.apply(null, x), xe = Math.max.apply(null, x), ys = Math.min.apply(null, y), ye = Math.max.apply(null, y);
+      var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "scatter plot" }, box);
+      svgEl("rect", { x: P, y: 10, width: W - P - 10, height: H - P - 10, fill: "none", stroke: "rgba(127,127,127,.5)" }, s);
+      for (i = 0; i < n; i++) svgEl("circle", { cx: P + 8 + (x[i] - xs) / (xe - xs) * (W - P - 26), cy: H - P - 8 - (y[i] - ys) / (ye - ys) * (H - P - 26), r: 5, fill: "#5b8def", "fill-opacity": .8 }, s);
+      txt(s, (W + P) / 2, H - 8, "x", "middle", 13); txt(s, 14, H / 2, "y", "middle", 13);
+      inp.value = 0; out.textContent = "0.00"; say(w, "", ""); mark(w, null);
+    }
+    inp.addEventListener("input", function () { out.textContent = (+inp.value).toFixed(2); });
+    act(w, "check", function () { var g = +inp.value, d = Math.abs(g - r);
+      if (d <= 0.15) { say(w, "ok", "✓ Great estimate! Your guess " + g.toFixed(2) + ", actual r = " + r.toFixed(2) + "."); mark(w, true); }
+      else say(w, "bad", "Actual r = " + r.toFixed(2) + " (your guess " + g.toFixed(2) + "). " + (Math.sign(g) !== Math.sign(r) && Math.abs(r) > .15 ? "Check the <b>direction</b>: does y go up or down as x increases? " : "Check the <b>strength</b>: how tightly do the points follow a straight line? ") + "Press <b>New plot</b> to try another.");
+      w.setAttribute("data-r", r.toFixed(3)); });
+    act(w, "new", function () { plot(targets[Math.floor(Math.random() * targets.length)]); });
+    plot(parseFloat(w.getAttribute("data-target")) || 0.6);
+  });
+  });
+
+  /* ---------------- draw the chart ---------------- */
+  safe("draw the chart", function () {
+  qa(".rv-draw").filter(fresh).forEach(function (w) {
+    var cats = w.getAttribute("data-cats").split("|"), tgt = w.getAttribute("data-target").split(",").map(Number), tol = +w.getAttribute("data-tol") || 0.02;
+    var stack = w.getAttribute("data-mode") === "stack", box = q(".rv-svg", w), sl = q(".rv-sliders", w), vals = cats.map(function () { return stack ? 0.5 : 0.1; });
+    var W = 520, H = 300, L = 56, R = 15, T = 15, B = 40, n = cats.length;
+    sl.innerHTML = cats.map(function (c, i) { return '<label><span>' + c + '<output>0%</output></span><input type="range" min="0" max="1" step="0.01" value="' + vals[i] + '" aria-label="' + c + '"></label>'; }).join("");
+    var inputs = qa("input", sl), labels = qa("label", sl);
+    function draw() {
+      box.innerHTML = ""; var s = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "your bar chart" }, box);
+      var Y = function (v) { return H - B - v * (H - T - B); }, bw = (W - L - R) / n;
+      [0, .25, .5, .75, 1].forEach(function (g) { svgEl("line", { x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: "rgba(127,127,127,.25)" }, s); txt(s, L - 7, Y(g) + 4, Math.round(g * 100) + "%", "end", 11); });
+      cats.forEach(function (c, i) { var x = L + i * bw + bw * .18, ww = bw * .64, v = vals[i];
+        svgEl("rect", { x: x, y: Y(v), width: ww, height: Y(0) - Y(v), fill: "#2a78d6" }, s);
+        if (stack) svgEl("rect", { x: x, y: Y(1), width: ww, height: Y(v) - Y(1), fill: "#eb6834" }, s);
+        txt(s, x + ww / 2, stack ? Y(v / 2) + 5 : Y(v) - 6, Math.round(v * 100) + "%", "middle", 12, "bold").setAttribute("fill", stack ? "#fff" : "currentColor");
+        if (stack) { var t2 = txt(s, x + ww / 2, Y((1 + v) / 2) + 5, Math.round((1 - v) * 100) + "%", "middle", 12, "bold"); t2.setAttribute("fill", "#fff"); }
+        txt(s, x + ww / 2, H - B + 17, c, "middle", 12); });
+      svgEl("line", { x1: L, x2: W - R, y1: Y(0), y2: Y(0), stroke: "currentColor" }, s);
+      var yl = txt(s, 13, (T + H - B) / 2, w.getAttribute("data-ylabel") || "", "middle", 11.5); yl.setAttribute("transform", "rotate(-90 13 " + ((T + H - B) / 2) + ")");
+      inputs.forEach(function (inp, i) { q("output", labels[i]).textContent = Math.round(vals[i] * 100) + "%"; });
+    }
+    inputs.forEach(function (inp, i) { inp.addEventListener("input", function () { vals[i] = +inp.value; labels.forEach(function (l) { l.classList.remove("is-ok", "is-bad"); }); say(w, "", ""); mark(w, null); draw(); }); });
+    act(w, "check", function () { var bad = 0;
+      vals.forEach(function (v, i) { var ok = Math.abs(v - tgt[i]) <= tol + 1e-9; labels[i].classList.toggle("is-ok", ok); labels[i].classList.toggle("is-bad", !ok); if (!ok) bad++; });
+      if (!bad) { say(w, "ok", "✓ Correct chart!"); mark(w, true); explain(w, true); }
+      else { say(w, "bad", bad + " bar" + (bad > 1 ? "s are" : " is") + " not right yet (red). " + (stack ? "Divide each faculty's dorm count by that faculty's total." : "Divide each count by the total number of students, n = 300.")); mark(w, false); } });
+    act(w, "show", function () { tgt.forEach(function (t, i) { vals[i] = t; inputs[i].value = t; }); draw(); labels.forEach(function (l) { l.classList.add("is-ok"); }); say(w, "", "Answer shown."); explain(w, true); });
+    act(w, "reset", function () { vals = cats.map(function () { return stack ? 0.5 : 0.1; }); inputs.forEach(function (inp, i) { inp.value = vals[i]; }); labels.forEach(function (l) { l.classList.remove("is-ok", "is-bad"); }); say(w, "", ""); mark(w, null); explain(w, false); draw(); });
+    draw();
+  });
+  });
+
+  /* ---------------- readiness checklist ---------------- */
+  safe("readiness checklist", function () {
+  qa(".rv-check").filter(fresh).forEach(function (w) {
+    var KEY = "stat112-r5-ready", saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { saved = {}; }
+    var items = qa(".rv-list li", w);
+    items.forEach(function (li, k) { var t = li.innerHTML; li.innerHTML = '<label><input type="checkbox"' + (saved[k] ? " checked" : "") + "><span>" + t + "</span></label>"; q("input", li).addEventListener("change", update); });
+    function update() {
+      var st = {}, miss = [];
+      items.forEach(function (li, k) { var c = q("input", li).checked; st[k] = c; if (!c) miss.push(li); });
+      try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+      var done = items.length - miss.length;
+      if (!miss.length) say(w, "ok", "🎉 " + done + " / " + items.length + ": you are ready. Sleep well and good luck!");
+      else { var pages = {}; miss.forEach(function (li) { pages[li.getAttribute("data-href")] = 1; });
+        say(w, "", done + " / " + items.length + " ticked. Revise: " + Object.keys(pages).map(function (p) { return '<a href="' + p + '">' + p.replace("recitation-week", "Recitation ").replace(".html", "") + "</a>"; }).join(", ") + "."); }
+    }
+    update();
+  });
+  });
+
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/statserenay\.github\.io\/stat112-site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Made with ❤️ and Quarto · Emoji graphics: Twemoji (CC-BY 4.0)</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
